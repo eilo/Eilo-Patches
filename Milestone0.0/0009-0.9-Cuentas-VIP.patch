@@ -56,7 +56,7 @@ index e306c95..9c270cd 100755
                  }
  
 +                if(GetSession()->IsPremium())
-+                XP *= sWorld->getRate(RATE_XP_EXPLORE_PREMIUM);
++                    XP *= sWorld->getRate(RATE_XP_EXPLORE_PREMIUM);
 +
                  GiveXP(XP, NULL);
                  SendExplorationExperience(area, XP);
