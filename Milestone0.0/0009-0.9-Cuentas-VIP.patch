@@ -1,13 +1,13 @@
-From 66c59a31b80c81b96098a4296ace343a928e6f70 Mon Sep 17 00:00:00 2001
+From fbef2e65dae4d667e4d7aeea48cb550d662a15e7 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Fri, 20 Jan 2012 14:18:40 -0500
-Subject: [PATCH 09/29] 0.9 Cuentas VIP
+Date: Wed, 29 Feb 2012 22:03:10 -0500
+Subject: [PATCH 09/30] 0.9 Cuentas VIP
 
 ---
  .../reanemu/2011_10_14_100_auth_vipaccount.sql     |    8 ++++++++
  .../AuctionHouseBot/AuctionHouseBot.cpp            |    2 +-
  src/server/game/Entities/Player/Player.cpp         |    6 ++++++
- src/server/game/Miscellaneous/Formulas.h           |    4 +++-
+ src/server/game/Miscellaneous/Formulas.h           |    2 +-
  src/server/game/Server/WorldSession.cpp            |    4 ++--
  src/server/game/Server/WorldSession.h              |    4 +++-
  src/server/game/Server/WorldSocket.cpp             |   14 +++++++++++++-
@@ -16,7 +16,7 @@ Subject: [PATCH 09/29] 0.9 Cuentas VIP
  .../Database/Implementation/LoginDatabase.cpp      |    1 +
  .../shared/Database/Implementation/LoginDatabase.h |    1 +
  src/server/worldserver/worldserver.conf.dist       |    9 +++++++++
- 12 files changed, 53 insertions(+), 6 deletions(-)
+ 12 files changed, 51 insertions(+), 6 deletions(-)
  create mode 100644 sql/updates/auth/reanemu/2011_10_14_100_auth_vipaccount.sql
 
 diff --git a/sql/updates/auth/reanemu/2011_10_14_100_auth_vipaccount.sql b/sql/updates/auth/reanemu/2011_10_14_100_auth_vipaccount.sql
@@ -72,17 +72,15 @@ index e306c95..9c270cd 100755
      if (getLevel() < sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
          GiveXP(XP, NULL);
 diff --git a/src/server/game/Miscellaneous/Formulas.h b/src/server/game/Miscellaneous/Formulas.h
-index 4faacc1..d5bd221 100755
+index 4faacc1..f4a1071 100755
 --- a/src/server/game/Miscellaneous/Formulas.h
 +++ b/src/server/game/Miscellaneous/Formulas.h
-@@ -178,7 +178,9 @@ namespace Trinity
+@@ -178,7 +178,7 @@ namespace Trinity
                          gain *= 2;
                  }
  
 -                gain = uint32(gain * sWorld->getRate(RATE_XP_KILL));
-+                float premium_rate = player->GetSession()->IsPremium() ? sWorld->getRate(RATE_XP_KILL_PREMIUM) : 1.0f;
-+
-+                return uint32(gain*sWorld->getRate(RATE_XP_KILL)*premium_rate);
++                gain = uint32(gain * sWorld->getRate(RATE_XP_KILL) * (player->GetSession()->IsPremium() ? sWorld->getRate(RATE_XP_KILL_PREMIUM) : 1.0f));
              }
  
              sScriptMgr->OnGainCalculation(gain, player, u);
