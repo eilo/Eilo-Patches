@@ -1,7 +1,7 @@
-From 88f42c088a3841f14777f530f6bfff7bf88eca47 Mon Sep 17 00:00:00 2001
+From 4024b5fa7826507bb6c50bc8200e275941e07728 Mon Sep 17 00:00:00 2001
 From: Muzashi <santiago_rho_psi@hotmail.com>
 Date: Mon, 13 Feb 2012 03:02:12 -0500
-Subject: [PATCH 25/26] 1.25 Ahora el loot de prospectar jade funciona como
+Subject: [PATCH 25/27] 1.25 Ahora el loot de prospectar jade funciona como
  debe
 
 ---

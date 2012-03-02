@@ -1,7 +1,7 @@
-From 10bd67137e36f1382b5c7f0e2cd1f10b93b7a247 Mon Sep 17 00:00:00 2001
+From 6a6b24f1b06ddc96c02371d1cecd4bec6400fda1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 16:49:36 -0500
-Subject: [PATCH 06/26] =?UTF-8?q?1.6=20Apa=C3=B1o=20del=20Dodge=20formula=20?=
+Subject: [PATCH 06/27] =?UTF-8?q?1.6=20Apa=C3=B1o=20del=20Dodge=20formula=20?=
  =?UTF-8?q?y=20comportamiento?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -14,7 +14,7 @@ Content-Transfer-Encoding: 8bit
  3 files changed, 42 insertions(+), 49 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 200bcf1..e30ba9d 100755
+index dd72495..4276096 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -5849,37 +5849,35 @@ float Player::GetMeleeCritFromAgility()
@@ -105,7 +105,7 @@ index 200bcf1..e30ba9d 100755
  
  float Player::GetSpellCritFromIntellect()
 diff --git a/src/server/game/Entities/Player/Player.h b/src/server/game/Entities/Player/Player.h
-index 6a3741d..0a3f671 100755
+index 0b886d7..23f17d8 100755
 --- a/src/server/game/Entities/Player/Player.h
 +++ b/src/server/game/Entities/Player/Player.h
 @@ -1933,7 +1933,7 @@ class Player : public Unit, public GridObject<Player>
