@@ -1,6 +1,6 @@
-From bcf87f25d54488be4147d46f7fc9411eb7b86d1c Mon Sep 17 00:00:00 2001
+From 9134ee71a95bdfea24c76eee426fd555241384d7 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Wed, 29 Feb 2012 22:18:03 -0500
+Date: Fri, 2 Mar 2012 14:08:28 -0500
 Subject: [PATCH 10/30] 0.10 Rates Weekend
 
 ---
@@ -44,12 +44,12 @@ index a39bd8e..d097111 100755
      // rewarded honor points. Multiply with 10 to satisfy client
      data << 10 * Trinity::Honor::hk_honor_at_level(_session->GetPlayer()->getLevel(), quest->GetRewHonorMultiplier());
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 9c270cd..b0068ef 100755
+index 7d0586f..1fcb7c6 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -6858,6 +6858,8 @@ void Player::CheckAreaExploreAndOutdoor()
                  if(GetSession()->IsPremium())
-                 XP *= sWorld->getRate(RATE_XP_EXPLORE_PREMIUM);
+                     XP *= sWorld->getRate(RATE_XP_EXPLORE_PREMIUM);
  
 +                XP = uint32(XP * (IsEventActive(sWorld->getIntConfig(CONFIG_RATE_XP_WEEKEND_EVENTID)) ? sWorld->getRate(RATE_XP_WEEKEND) : 1.0f));
 +
@@ -66,25 +66,25 @@ index 9c270cd..b0068ef 100755
      // handle SPELL_AURA_MOD_XP_QUEST_PCT auras
      Unit::AuraEffectList const& ModXPPctAuras = GetAuraEffectsByType(SPELL_AURA_MOD_XP_QUEST_PCT);
 diff --git a/src/server/game/Miscellaneous/Formulas.h b/src/server/game/Miscellaneous/Formulas.h
-index f4a1071..95be52b 100755
+index bcffb33..1eee083 100755
 --- a/src/server/game/Miscellaneous/Formulas.h
 +++ b/src/server/game/Miscellaneous/Formulas.h
-@@ -179,6 +179,8 @@ namespace Trinity
-                 }
+@@ -182,6 +182,8 @@ namespace Trinity
  
-                 gain = uint32(gain * sWorld->getRate(RATE_XP_KILL) * (player->GetSession()->IsPremium() ? sWorld->getRate(RATE_XP_KILL_PREMIUM) : 1.0f));
+                 if(player->GetSession()->IsPremium())
+                     gain *= sWorld->getRate(RATE_XP_KILL_PREMIUM);
 +
 +                gain = uint32(gain * (IsEventActive(sWorld->getIntConfig(CONFIG_RATE_XP_WEEKEND_EVENTID)) ? sWorld->getRate(RATE_XP_WEEKEND) : 1.0f));
              }
  
              sScriptMgr->OnGainCalculation(gain, player, u);
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index d7bc7e2..df79fe6 100755
+index d6316a9..ac51975 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -467,6 +467,8 @@ void World::LoadConfigSettings(bool reload)
+     rate_values[RATE_XP_KILL_PREMIUM]    = ConfigMgr::GetFloatDefault("Rate.XP.Kill.Premium", 1.0f);
      rate_values[RATE_XP_QUEST_PREMIUM]   = ConfigMgr::GetFloatDefault("Rate.XP.Quest.Premium", 1.0f);
-     rate_values[RATE_XP_EXPLORE]  = ConfigMgr::GetFloatDefault("Rate.XP.Explore", 1.0f);
      rate_values[RATE_XP_EXPLORE_PREMIUM] = ConfigMgr::GetFloatDefault("Rate.XP.Explore.Premium", 1.0f);
 +    rate_values[RATE_XP_WEEKEND]  = ConfigMgr::GetFloatDefault("Rate.XP.Weekend", 1.5f);
 +    m_int_configs[CONFIG_RATE_XP_WEEKEND_EVENTID] = ConfigMgr::GetIntDefault("Rate.XP.Weekend.EVENTID", 65);
@@ -92,7 +92,7 @@ index d7bc7e2..df79fe6 100755
      if (rate_values[RATE_REPAIRCOST] < 0.0f)
      {
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index 0a4a95f..95f733a 100755
+index 194fab3..e4e0519 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
 @@ -246,6 +246,7 @@ enum WorldIntConfigs
@@ -104,8 +104,8 @@ index 0a4a95f..95f733a 100755
      CONFIG_EXPANSION,
      CONFIG_CHATFLOOD_MESSAGE_COUNT,
 @@ -360,6 +361,7 @@ enum Rates
+     RATE_XP_KILL_PREMIUM,
      RATE_XP_QUEST_PREMIUM,
-     RATE_XP_EXPLORE,
      RATE_XP_EXPLORE_PREMIUM,
 +    RATE_XP_WEEKEND,
      RATE_REPAIRCOST,

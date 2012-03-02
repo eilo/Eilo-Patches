@@ -1,4 +1,4 @@
-From e6bf28757529df783260654fd73cb90e9123aa2e Mon Sep 17 00:00:00 2001
+From 923433fb74001925ae6db6e01308be2f4ca90ba2 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Jan 2012 11:37:56 -0500
 Subject: [PATCH 12/30] =?UTF-8?q?0.12=20TrinityJail=20con=20ajuste=20a=20min?=
@@ -728,7 +728,7 @@ index 0a9051b..d89d8ef 100755
  {
      Player* SelectedPlayer = getSelectedPlayer();
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index b0068ef..b408543 100755
+index 1fcb7c6..99254b6 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -644,6 +644,21 @@ Player::Player(WorldSession* session): Unit(true), m_achievementMgr(this), m_rep
@@ -1203,7 +1203,7 @@ index eb27061..7715602 100755
      LANG_SELECT_CHAR_OR_CREATURE        = 1,
      LANG_SELECT_CREATURE                = 2,
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index df79fe6..7093837 100755
+index ac51975..74e2ccc 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -1660,6 +1660,10 @@ void World::SetInitialWorldSettings()

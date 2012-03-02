@@ -1,13 +1,13 @@
-From fbef2e65dae4d667e4d7aeea48cb550d662a15e7 Mon Sep 17 00:00:00 2001
+From f57aea5dc4a3a213503d8289d14f12616ac7e581 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Wed, 29 Feb 2012 22:03:10 -0500
+Date: Fri, 2 Mar 2012 13:59:35 -0500
 Subject: [PATCH 09/30] 0.9 Cuentas VIP
 
 ---
  .../reanemu/2011_10_14_100_auth_vipaccount.sql     |    8 ++++++++
  .../AuctionHouseBot/AuctionHouseBot.cpp            |    2 +-
  src/server/game/Entities/Player/Player.cpp         |    6 ++++++
- src/server/game/Miscellaneous/Formulas.h           |    2 +-
+ src/server/game/Miscellaneous/Formulas.h           |    3 +++
  src/server/game/Server/WorldSession.cpp            |    4 ++--
  src/server/game/Server/WorldSession.h              |    4 +++-
  src/server/game/Server/WorldSocket.cpp             |   14 +++++++++++++-
@@ -16,7 +16,7 @@ Subject: [PATCH 09/30] 0.9 Cuentas VIP
  .../Database/Implementation/LoginDatabase.cpp      |    1 +
  .../shared/Database/Implementation/LoginDatabase.h |    1 +
  src/server/worldserver/worldserver.conf.dist       |    9 +++++++++
- 12 files changed, 51 insertions(+), 6 deletions(-)
+ 12 files changed, 53 insertions(+), 5 deletions(-)
  create mode 100644 sql/updates/auth/reanemu/2011_10_14_100_auth_vipaccount.sql
 
 diff --git a/sql/updates/auth/reanemu/2011_10_14_100_auth_vipaccount.sql b/sql/updates/auth/reanemu/2011_10_14_100_auth_vipaccount.sql
@@ -48,7 +48,7 @@ index c0c64a3..5d770a9 100644
     _AHBplayer.Initialize(AHBplayerGUID);
     sObjectAccessor->AddObject(&_AHBplayer);
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index e306c95..9c270cd 100755
+index e306c95..7d0586f 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -6855,6 +6855,9 @@ void Player::CheckAreaExploreAndOutdoor()
@@ -72,15 +72,16 @@ index e306c95..9c270cd 100755
      if (getLevel() < sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
          GiveXP(XP, NULL);
 diff --git a/src/server/game/Miscellaneous/Formulas.h b/src/server/game/Miscellaneous/Formulas.h
-index 4faacc1..f4a1071 100755
+index 4faacc1..bcffb33 100755
 --- a/src/server/game/Miscellaneous/Formulas.h
 +++ b/src/server/game/Miscellaneous/Formulas.h
-@@ -178,7 +178,7 @@ namespace Trinity
-                         gain *= 2;
+@@ -179,6 +179,9 @@ namespace Trinity
                  }
  
--                gain = uint32(gain * sWorld->getRate(RATE_XP_KILL));
-+                gain = uint32(gain * sWorld->getRate(RATE_XP_KILL) * (player->GetSession()->IsPremium() ? sWorld->getRate(RATE_XP_KILL_PREMIUM) : 1.0f));
+                 gain = uint32(gain * sWorld->getRate(RATE_XP_KILL));
++
++                if(player->GetSession()->IsPremium())
++                    gain *= sWorld->getRate(RATE_XP_KILL_PREMIUM);
              }
  
              sScriptMgr->OnGainCalculation(gain, player, u);
@@ -169,33 +170,29 @@ index 2c6098f..d313ab4 100755
      m_Crypt.Init(&k);
  
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index 5b0a83a..d7bc7e2 100755
+index 5b0a83a..d6316a9 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
-@@ -462,8 +462,11 @@ void World::LoadConfigSettings(bool reload)
-     rate_values[RATE_DROP_ITEM_REFERENCED_AMOUNT] = ConfigMgr::GetFloatDefault("Rate.Drop.Item.ReferencedAmount", 1.0f);
-     rate_values[RATE_DROP_MONEY]  = ConfigMgr::GetFloatDefault("Rate.Drop.Money", 1.0f);
+@@ -464,6 +464,9 @@ void World::LoadConfigSettings(bool reload)
      rate_values[RATE_XP_KILL]     = ConfigMgr::GetFloatDefault("Rate.XP.Kill", 1.0f);
-+    rate_values[RATE_XP_KILL_PREMIUM]    = ConfigMgr::GetFloatDefault("Rate.XP.Kill.Premium", 1.0f);
      rate_values[RATE_XP_QUEST]    = ConfigMgr::GetFloatDefault("Rate.XP.Quest", 1.0f);
-+    rate_values[RATE_XP_QUEST_PREMIUM]   = ConfigMgr::GetFloatDefault("Rate.XP.Quest.Premium", 1.0f);
      rate_values[RATE_XP_EXPLORE]  = ConfigMgr::GetFloatDefault("Rate.XP.Explore", 1.0f);
++    rate_values[RATE_XP_KILL_PREMIUM]    = ConfigMgr::GetFloatDefault("Rate.XP.Kill.Premium", 1.0f);
++    rate_values[RATE_XP_QUEST_PREMIUM]   = ConfigMgr::GetFloatDefault("Rate.XP.Quest.Premium", 1.0f);
 +    rate_values[RATE_XP_EXPLORE_PREMIUM] = ConfigMgr::GetFloatDefault("Rate.XP.Explore.Premium", 1.0f);
      rate_values[RATE_REPAIRCOST]  = ConfigMgr::GetFloatDefault("Rate.RepairCost", 1.0f);
      if (rate_values[RATE_REPAIRCOST] < 0.0f)
      {
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index ed31d84..0a4a95f 100755
+index ed31d84..194fab3 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
-@@ -355,8 +355,11 @@ enum Rates
-     RATE_DROP_ITEM_REFERENCED_AMOUNT,
-     RATE_DROP_MONEY,
+@@ -357,6 +357,9 @@ enum Rates
      RATE_XP_KILL,
-+    RATE_XP_KILL_PREMIUM,
      RATE_XP_QUEST,
-+    RATE_XP_QUEST_PREMIUM,
      RATE_XP_EXPLORE,
++    RATE_XP_KILL_PREMIUM,
++    RATE_XP_QUEST_PREMIUM,
 +    RATE_XP_EXPLORE_PREMIUM,
      RATE_REPAIRCOST,
      RATE_REPUTATION_GAIN,

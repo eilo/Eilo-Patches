@@ -1,4 +1,4 @@
-From 2c0441c5fca8a8c8316dd1df70b968f227282944 Mon Sep 17 00:00:00 2001
+From 72a1315bbc67f6c1b1810d91c6a2034e659b4925 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 21:47:13 -0500
 Subject: [PATCH 16/30] 0.16 Unir al canal LFG desde cualquier ciudad y
@@ -9,7 +9,7 @@ Subject: [PATCH 16/30] 0.16 Unir al canal LFG desde cualquier ciudad y
  1 files changed, 4 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index b408543..496f4c1 100755
+index 99254b6..dfde0d0 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -5619,6 +5619,10 @@ void Player::RepopAtGraveyard()

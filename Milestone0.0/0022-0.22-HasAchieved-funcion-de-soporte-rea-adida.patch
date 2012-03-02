@@ -1,4 +1,4 @@
-From 11a2007127047423c3ed603ace2619c41512e83b Mon Sep 17 00:00:00 2001
+From 4c064f7d991d8c06c430eb33e2c86b91b1bce046 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 30 Dec 2011 17:22:54 -0500
 Subject: [PATCH 22/30] =?UTF-8?q?0.22=20HasAchieved=20funcion=20de=20soporte?=
@@ -13,7 +13,7 @@ Content-Transfer-Encoding: 8bit
  2 files changed, 8 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 496f4c1..dd72495 100755
+index dfde0d0..64a90fc 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -24121,6 +24121,13 @@ void Player::CompletedAchievement(AchievementEntry const* entry)
