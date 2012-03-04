@@ -1,14 +1,14 @@
-From d6bf3618a50b63d1d8a20d28baaa2cd1b42b9f5b Mon Sep 17 00:00:00 2001
+From 91bcaf96aff875f53301917fd48d7bfc6a48f744 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 3 Jan 2012 11:45:26 -0500
-Subject: [PATCH 22/22] Milestone3.0
+Subject: [PATCH 24/24] Milestone3.0
 
 ---
- WHAT_IS_INSIDE |   33 +++++++++++++++++++++++++++++++++
- 1 files changed, 33 insertions(+), 0 deletions(-)
+ WHAT_IS_INSIDE |   35 +++++++++++++++++++++++++++++++++++
+ 1 files changed, 35 insertions(+), 0 deletions(-)
 
 diff --git a/WHAT_IS_INSIDE b/WHAT_IS_INSIDE
-index 0257660..ca1504b 100644
+index cb853c9..907db2e 100644
 --- a/WHAT_IS_INSIDE
 +++ b/WHAT_IS_INSIDE
 @@ -19,6 +19,8 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
@@ -20,7 +20,7 @@ index 0257660..ca1504b 100644
  
  
  ##################################
-@@ -173,11 +175,42 @@ Milestone2.0: Mejoras en Instances y dungeons, escencialmente para darles funcio
+@@ -181,11 +183,44 @@ Milestone2.0: Mejoras en Instances y dungeons, escencialmente para darles funcio
  #######################
  # Hechizos y Talentos #
  #######################
@@ -35,7 +35,7 @@ index 0257660..ca1504b 100644
 +3.9  - 13/09/2011: Paladin: Bendición de Salvaguardia y Bendición de Reyes no stackean por Retriman
 +3.10 - 08/07/2011: DK: Gusanos de Sangre por KarlosHyD
 +3.12 - 02/09/2011: Guerrero: Reflejar efecto de Multi-Reflect por Retriman
-+3.13 - 08/08/2011: Cazador: Disparo de Quimera y picaduras mejorado por Retriman
++3.13 - 25/02/2012: Mago: Reflejo exacto (55342) ya no causará problemas de que no se vean visualmente las auras en el propietario de las copias por Souler
 +3.14 - 08/08/2011: Cazador: Separación no puede ser usado cuando se está en root por Retriman
 +3.15 - 20/08/2011: Paladin: Escudo Sacro añadir cooldown (cd) después de efecto de remover por Odyssey
 +3.16 - 28/10/2011: Paladin: Defensa recta por Chaplain
@@ -43,6 +43,8 @@ index 0257660..ca1504b 100644
 +3.18 - 05/11/2011: Cazador: Distraer ahora se interrumpen efectos de comer/beber por Kerhong
 +3.19 - 22/09/2011: Cazador: Pet Demosaurio Mordedura monstruosa fix efecto aplicado al target por Retriman
 +3.20 - 22/09/2011: Sacerdote: Rezo de Alivio (33076) ahora es afectado por Disciplinas gemelas (47588), Sanación espiritual (87336) y Divina providencia (47567) por Retriman
++3.22 - 28/02/2012: DK: Pesteador de Ébano (51161) ya no stackeará con diferentes casters por Hispano
++3.23 - 06/02/2012: Pets: Sistema de Escalamiento de pets de todas las clases por Vincent-Michael
  
  
  #################

@@ -1,0 +1,198 @@
+From 3e8042f33b10902a39a006867930740bb267d62b Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Thu, 1 Mar 2012 14:45:25 -0500
+Subject: [PATCH 23/24] 3.23 Sistema de Stats para Pets basado en spells
+
+---
+ ...012_02_06_100_world_spell_gen_pet_calculate.sql |   16 ++
+ src/server/scripts/Spells/spell_generic.cpp        |  145 ++++++++++++++++++++
+ 2 files changed, 161 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_02_06_100_world_spell_gen_pet_calculate.sql
+
+diff --git a/sql/updates/world/reanemu/2012_02_06_100_world_spell_gen_pet_calculate.sql b/sql/updates/world/reanemu/2012_02_06_100_world_spell_gen_pet_calculate.sql
+new file mode 100644
+index 0000000..06e753f
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_02_06_100_world_spell_gen_pet_calculate.sql
+@@ -0,0 +1,16 @@
++DELETE FROM `spell_script_names` WHERE `spell_id` IN (19591,35695,61013,61017,61697,61783);
++INSERT INTO `spell_script_names` (`spell_id` ,`ScriptName`) VALUES
++(19591, 'spell_gen_pet_calculate'),
++(35695, 'spell_gen_pet_calculate'),
++(61013, 'spell_gen_pet_calculate'),
++(61017, 'spell_gen_pet_calculate'),
++(61697, 'spell_gen_pet_calculate'),
++(61783, 'spell_gen_pet_calculate');
++
++DELETE FROM `creature_template_addon` WHERE `entry` = 29264;
++INSERT INTO `creature_template_addon` (`entry`,`path_id`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES
++(29264,0,0,0,1,0,'61783'); -- Spirit Wolf
++
++DELETE FROM `spell_linked_spell` WHERE `spell_trigger` =54566;
++INSERT INTO `spell_linked_spell` (`spell_trigger` ,`spell_effect` ,`type` ,`comment`) VALUES
++(54566,61697,0,'Death Knight Pet Scaling 03'); -- Risen Ghoul
+\ No newline at end of file
+diff --git a/src/server/scripts/Spells/spell_generic.cpp b/src/server/scripts/Spells/spell_generic.cpp
+index 6fc9373..209979a 100644
+--- a/src/server/scripts/Spells/spell_generic.cpp
++++ b/src/server/scripts/Spells/spell_generic.cpp
+@@ -2351,6 +2351,150 @@ class spell_gen_tournament_pennant : public SpellScriptLoader
+         }
+ };
+ 
++enum PetCalculate
++{
++     SPELL_HUNTER_PET_CRIT              = 19591,
++     SPELL_WARLOCK_PET_CRIT             = 35695,
++     SPELL_WARLOCK_PET_HIT_EXPERTISE    = 61013,
++     SPELL_HUNTER_PET_HIT_EXPERTISE     = 61017,
++     SPELL_DK_PET_HIT                   = 61697,
++     SPELL_SHAMAN_PET_HIT               = 61783,
++};
++
++class spell_gen_pet_calculate : public SpellScriptLoader
++{
++    public:
++        spell_gen_pet_calculate() : SpellScriptLoader("spell_gen_pet_calculate") { }
++
++        class spell_gen_pet_calculate_AuraScript : public AuraScript
++        {
++            PrepareAuraScript(spell_gen_pet_calculate_AuraScript);
++
++            bool Load()
++            {
++                if (!GetCaster() || !GetCaster()->GetOwner() || GetCaster()->GetOwner()->GetTypeId() != TYPEID_PLAYER)
++                    return false;
++                return true;
++            }
++
++            void CalculateAmountCritSpell(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
++            {
++                if (Player* owner = GetCaster()->GetOwner()->ToPlayer())
++                {
++                    // For others recalculate it from:
++                    float CritSpell = 0.0f;
++                    // Crit from Intellect
++                    CritSpell += owner->GetSpellCritFromIntellect();
++                    // Increase crit from SPELL_AURA_MOD_SPELL_CRIT_CHANCE
++                    CritSpell += owner->GetTotalAuraModifier(SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
++                    // Increase crit from SPELL_AURA_MOD_CRIT_PCT
++                    CritSpell += owner->GetTotalAuraModifier(SPELL_AURA_MOD_CRIT_PCT);
++                    // Increase crit spell from spell crit ratings
++                    CritSpell += owner->GetRatingBonusValue(CR_CRIT_SPELL);
++
++                    amount += int32(CritSpell);
++                }
++            }
++
++            void CalculateAmountCritMelee(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
++            {
++                if (Player* owner = GetCaster()->GetOwner()->ToPlayer())
++                {
++                    // For others recalculate it from:
++                    float CritMelee = 0.0f;
++                    // Crit from Agility
++                    CritMelee += owner->GetMeleeCritFromAgility();
++                    // Increase crit from SPELL_AURA_MOD_WEAPON_CRIT_PERCENT
++                    CritMelee += owner->GetTotalAuraModifier(SPELL_AURA_MOD_WEAPON_CRIT_PERCENT);
++                    // Increase crit from SPELL_AURA_MOD_CRIT_PCT
++                    CritMelee += owner->GetTotalAuraModifier(SPELL_AURA_MOD_CRIT_PCT);
++                    // Increase crit melee from melee crit ratings
++                    CritMelee += owner->GetRatingBonusValue(CR_CRIT_MELEE);
++
++                    amount += int32(CritMelee);
++                }
++            }
++
++            void CalculateAmountMeleeHit(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
++            {
++                if (Player* owner = GetCaster()->GetOwner()->ToPlayer())
++                {
++                    // For others recalculate it from:
++                    float HitMelee = 0.0f;
++                    // Increase hit from SPELL_AURA_MOD_HIT_CHANCE
++                    HitMelee += owner->GetTotalAuraModifier(SPELL_AURA_MOD_HIT_CHANCE);
++                    // Increase hit melee from meele hit ratings
++                    HitMelee += owner->GetRatingBonusValue(CR_HIT_MELEE);
++
++                    amount += int32(HitMelee);
++                }
++            }
++
++            void CalculateAmountSpellHit(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
++            {
++                if (Player* owner = GetCaster()->GetOwner()->ToPlayer())
++                {
++                    // For others recalculate it from:
++                    float HitSpell = 0.0f;
++                    // Increase hit from SPELL_AURA_MOD_SPELL_HIT_CHANCE
++                    HitSpell += owner->GetTotalAuraModifier(SPELL_AURA_MOD_SPELL_HIT_CHANCE);
++                    // Increase hit spell from spell hit ratings
++                    HitSpell += owner->GetRatingBonusValue(CR_HIT_SPELL);
++
++                    amount += int32(HitSpell);
++                }
++            }
++            
++            void CalculateAmountExpertise(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
++            {
++                if (Player* owner = GetCaster()->GetOwner()->ToPlayer())
++                {
++                    // For others recalculate it from:
++                    float Expertise = 0.0f;
++                    // Increase hit from SPELL_AURA_MOD_EXPERTISE
++                    Expertise += owner->GetTotalAuraModifier(SPELL_AURA_MOD_EXPERTISE);
++                    // Increase Expertise from Expertise ratings
++                    Expertise += owner->GetRatingBonusValue(CR_EXPERTISE);
++
++                    amount += int32(Expertise);
++                }
++            }
++
++            void Register()
++            {
++                switch (m_scriptSpellId)
++                {
++                    case SPELL_HUNTER_PET_CRIT:
++                        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_gen_pet_calculate_AuraScript::CalculateAmountCritMelee, EFFECT_0, SPELL_AURA_MOD_WEAPON_CRIT_PERCENT);
++                        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_gen_pet_calculate_AuraScript::CalculateAmountCritSpell, EFFECT_1, SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
++                        break;
++                    case SPELL_WARLOCK_PET_CRIT:
++                        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_gen_pet_calculate_AuraScript::CalculateAmountCritSpell, EFFECT_0, SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
++                        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_gen_pet_calculate_AuraScript::CalculateAmountCritMelee, EFFECT_1, SPELL_AURA_MOD_WEAPON_CRIT_PERCENT);
++                        break;
++                    case SPELL_WARLOCK_PET_HIT_EXPERTISE:
++                    case SPELL_HUNTER_PET_HIT_EXPERTISE:
++                        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_gen_pet_calculate_AuraScript::CalculateAmountMeleeHit, EFFECT_0, SPELL_AURA_MOD_HIT_CHANCE);
++                        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_gen_pet_calculate_AuraScript::CalculateAmountSpellHit, EFFECT_1, SPELL_AURA_MOD_SPELL_HIT_CHANCE);
++                        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_gen_pet_calculate_AuraScript::CalculateAmountExpertise, EFFECT_2, SPELL_AURA_MOD_EXPERTISE);
++                        break;
++                    case SPELL_DK_PET_HIT:
++                    case SPELL_SHAMAN_PET_HIT:
++                        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_gen_pet_calculate_AuraScript::CalculateAmountMeleeHit, EFFECT_0, SPELL_AURA_MOD_HIT_CHANCE);
++                        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_gen_pet_calculate_AuraScript::CalculateAmountSpellHit, EFFECT_1, SPELL_AURA_MOD_SPELL_HIT_CHANCE);
++                        break;
++                    default:
++                        break;
++                }
++            }
++        };
++
++        AuraScript* GetAuraScript() const
++        {
++            return new spell_gen_pet_calculate_AuraScript();
++        }
++};
++
+ void AddSC_generic_spell_scripts()
+ {
+     new spell_gen_absorb0_hitlimit1();
+@@ -2394,4 +2538,5 @@ void AddSC_generic_spell_scripts()
+     new spell_gen_summon_tournament_mount();
+     new spell_gen_on_tournament_mount();
+     new spell_gen_tournament_pennant();
++    new spell_gen_pet_calculate();
+ }
+-- 
+1.7.8.msysgit.0
+

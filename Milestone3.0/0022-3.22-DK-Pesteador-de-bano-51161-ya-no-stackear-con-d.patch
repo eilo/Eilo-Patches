@@ -1,0 +1,30 @@
+From c6059d369f2ebfe6b362fe808ffd19f7b51aebe4 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Tue, 28 Feb 2012 14:48:43 +0100
+Subject: [PATCH 22/24] =?UTF-8?q?3.22=20DK:=20Pesteador=20de=20=C3=89bano=20?=
+ =?UTF-8?q?(51161)=20ya=20no=20stackear=C3=A1=20con=20diferentes=20casters.?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+*Nota: Este commit es un hack ya que STACK_FOR_DIFF_CASTERS realmente debería estar ahí por lo que varios dks en una misma raid se irán quitando unos a otros el aura de Pesteador.
+---
+ src/server/game/Spells/SpellMgr.cpp |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
+index 341e878..9f68e60 100755
+--- a/src/server/game/Spells/SpellMgr.cpp
++++ b/src/server/game/Spells/SpellMgr.cpp
+@@ -3225,7 +3225,7 @@ void SpellMgr::LoadDbcDataCorrections()
+             case 51735: // Ebon Plague
+             case 51734:
+             case 51726:
+-                spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
++                //spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+                 spellInfo->SpellFamilyFlags[2] = 0x10;
+                 spellInfo->EffectApplyAuraName[1] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
+                 break;
+-- 
+1.7.8.msysgit.0
+

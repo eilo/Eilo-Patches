@@ -1,7 +1,7 @@
-From 8eac6aa87a07668adc2c5ba87ec7f852d7e2ab66 Mon Sep 17 00:00:00 2001
+From 2d6a3a06e538888be6d066fc59a50fd87481cc52 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Mon, 2 Jan 2012 00:08:52 +0100
-Subject: [PATCH 20/22] 3.20 Sacerdote: Rezo de Alivio(33076) ahora es
+Subject: [PATCH 20/24] 3.20 Sacerdote: Rezo de Alivio(33076) ahora es
  afectado por Disciplinas gemelas(47588), Sanacion
  espiritual(87336) y Divina providencia(47567)
 
@@ -10,10 +10,10 @@ Subject: [PATCH 20/22] 3.20 Sacerdote: Rezo de Alivio(33076) ahora es
  1 files changed, 13 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
-index 7853906..11a2772 100755
+index e959f11..341e878 100755
 --- a/src/server/game/Spells/SpellMgr.cpp
 +++ b/src/server/game/Spells/SpellMgr.cpp
-@@ -3588,6 +3588,19 @@ void SpellMgr::LoadDbcDataCorrections()
+@@ -3576,6 +3576,19 @@ void SpellMgr::LoadDbcDataCorrections()
                  else
                      break;
                  break;

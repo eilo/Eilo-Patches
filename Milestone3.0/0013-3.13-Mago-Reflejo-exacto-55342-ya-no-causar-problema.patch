@@ -1,0 +1,102 @@
+From 656a5df8b83ce506a23182916dbcb8ab04599a01 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Sun, 26 Feb 2012 00:01:46 +0100
+Subject: [PATCH 13/24] =?UTF-8?q?3.13=20Mago:=20Reflejo=20exacto=20(55342)=20?=
+ =?UTF-8?q?ya=20no=20causar=C3=A1=20problemas=20de=20que=20no=20se=20vean=20?=
+ =?UTF-8?q?visualmente=20las=20auras=20en=20el=20propietario=20de=20las=20co?=
+ =?UTF-8?q?pias?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/server/game/Spells/Auras/SpellAuras.cpp |    8 ++++
+ src/server/scripts/Spells/spell_mage.cpp    |   48 +++++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Spells/Auras/SpellAuras.cpp b/src/server/game/Spells/Auras/SpellAuras.cpp
+index d49ac82..ec50333 100755
+--- a/src/server/game/Spells/Auras/SpellAuras.cpp
++++ b/src/server/game/Spells/Auras/SpellAuras.cpp
+@@ -907,6 +907,14 @@ bool Aura::CanBeSaved() const
+     if (HasEffectType(SPELL_AURA_OPEN_STABLE))
+         return false;
+ 
++   // Copy weapon spells - they're creating conflicts when player gets too many of them saved, specially mages,
++   // making the affected player interface not showing the icon nor the visuals of the new auras he might get
++   // Note: all copy weapon spells share 40% proc chance and two server-side triggered spells for effect 1: 30023 or 69895
++    if (HasEffectType(SPELL_AURA_PROC_TRIGGER_SPELL) &&
++        GetSpellInfo()->ProcChance == 40 &&
++        (GetSpellInfo()->Effects[EFFECT_1].TriggerSpell == 30023 || GetSpellInfo()->Effects[EFFECT_1].TriggerSpell == 69895))
++        return false;
++
+     // Incanter's Absorbtion - considering the minimal duration and problems with aura stacking
+     // we skip saving this aura
+     if (GetId() == 44413)
+diff --git a/src/server/scripts/Spells/spell_mage.cpp b/src/server/scripts/Spells/spell_mage.cpp
+index b0b619c..e42a232 100644
+--- a/src/server/scripts/Spells/spell_mage.cpp
++++ b/src/server/scripts/Spells/spell_mage.cpp
+@@ -328,6 +328,53 @@ public:
+     }
+ };
+ 
++class spell_mage_mirror_image : public SpellScriptLoader
++{
++public:
++    spell_mage_mirror_image() : SpellScriptLoader("spell_mage_mirror_image") { }
++
++    class spell_mage_mirror_image_AuraScript : public AuraScript
++    {
++        PrepareAuraScript(spell_mage_mirror_image_AuraScript);
++
++        enum CopySpells
++        {
++            SPELL_COPY_MAIN_HAND_WEAPON = 41054,
++            SPELL_COPY_OFF_HAND_WEAPON  = 45205,
++        };
++
++        bool Validate(SpellInfo const* /*SpellEntry*/)
++        {
++            if (!sSpellMgr->GetSpellInfo(SPELL_COPY_MAIN_HAND_WEAPON))
++                return false;
++            if (!sSpellMgr->GetSpellInfo(SPELL_COPY_OFF_HAND_WEAPON))
++                return false;
++            return true;
++        }
++
++        void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
++        {
++            Unit* target = GetTarget();
++
++            if (!target)
++                return;
++            target->RemoveAurasDueToSpell(SPELL_COPY_MAIN_HAND_WEAPON);
++            target->RemoveAurasDueToSpell(SPELL_COPY_OFF_HAND_WEAPON);
++        }
++
++        void Register()
++        {
++            OnEffectRemove += AuraEffectRemoveFn(spell_mage_mirror_image_AuraScript::OnRemove, EFFECT_0, SPELL_AURA_MOD_TOTAL_THREAT, AURA_EFFECT_HANDLE_REAL_OR_REAPPLY_MASK);
++        }
++
++    };
++
++    AuraScript* GetAuraScript() const
++    {
++        return new spell_mage_mirror_image_AuraScript();
++    }
++};
++
+ void AddSC_mage_spell_scripts()
+ {
+     new spell_mage_blast_wave;
+@@ -337,4 +384,5 @@ void AddSC_mage_spell_scripts()
+     new spell_mage_incanters_absorbtion_manashield();
+     new spell_mage_polymorph_cast_visual;
+     new spell_mage_summon_water_elemental;
++    new spell_mage_mirror_image();
+ }
+-- 
+1.7.8.msysgit.0
+
