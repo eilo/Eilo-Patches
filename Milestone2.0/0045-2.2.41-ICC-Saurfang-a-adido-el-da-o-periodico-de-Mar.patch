@@ -1,6 +1,6 @@
-From 1a580d2a948add6fee102df90357d2b46d4a99ed Mon Sep 17 00:00:00 2001
+From 59f467fea55e2cf412a91e7b32b0d85924338c46 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Mon, 13 Feb 2012 04:10:49 -0500
+Date: Sun, 4 Mar 2012 09:20:18 -0500
 Subject: [PATCH 45/67] =?UTF-8?q?2.2.41=20ICC:=20Saurfang=20a=C3=B1adido=20e?=
  =?UTF-8?q?l=20da=C3=B1o=20periodico=20de=20Marca=20del=20Campeon=20Caido?=
 MIME-Version: 1.0
@@ -8,14 +8,22 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 ---
- .../IcecrownCitadel/boss_deathbringer_saurfang.cpp |   19 +++++++++++++++++++
- 1 files changed, 19 insertions(+), 0 deletions(-)
+ .../IcecrownCitadel/boss_deathbringer_saurfang.cpp |   20 ++++++++++++++++++++
+ 1 files changed, 20 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
-index a1e45a2..7a93452 100755
+index a1e45a2..eb7c0c4 100755
 --- a/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
-@@ -407,6 +407,25 @@ class boss_deathbringer_saurfang : public CreatureScript
+@@ -101,6 +101,7 @@ enum Spells
+     SPELL_BLOOD_LINK_POWER              = 72195,
+     SPELL_BLOOD_LINK_DUMMY              = 72202,
+     SPELL_MARK_OF_THE_FALLEN_CHAMPION   = 72293,
++    SPELL_EFFECT_MARK_DMG               = 69189,
+     SPELL_BOILING_BLOOD                 = 72385,
+     SPELL_RUNE_OF_BLOOD                 = 72410,
+ 
+@@ -407,6 +408,25 @@ class boss_deathbringer_saurfang : public CreatureScript
                  if (me->HasUnitState(UNIT_STATE_CASTING))
                      return;
  

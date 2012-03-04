@@ -1,4 +1,4 @@
-From 75c08e8608b9f02c8fbb49fca9460545fb7c3982 Mon Sep 17 00:00:00 2001
+From 32ecf1f1a9b22cd5759921403dbc0de14ae2c514 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 13 Feb 2012 06:07:28 -0500
 Subject: [PATCH 67/67] Milestone2.0
@@ -8,7 +8,7 @@ Subject: [PATCH 67/67] Milestone2.0
  1 files changed, 70 insertions(+), 0 deletions(-)
 
 diff --git a/WHAT_IS_INSIDE b/WHAT_IS_INSIDE
-index efb3293..cb853c9 100644
+index 7c4ad1a..4342a1e 100644
 --- a/WHAT_IS_INSIDE
 +++ b/WHAT_IS_INSIDE
 @@ -16,6 +16,9 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
@@ -21,7 +21,7 @@ index efb3293..cb853c9 100644
  
  
  ##################################
-@@ -91,21 +94,88 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
+@@ -92,21 +95,88 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
  ###############################
  # Dungeons e Instances Varias #
  ###############################

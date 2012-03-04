@@ -1,4 +1,4 @@
-From 9c702490d192b1e0e60a0b29ffc050b37921cf2e Mon Sep 17 00:00:00 2001
+From 1f49b91e39d5aac6ceae7474e1fc1c679aba35a9 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 20:19:08 -0500
 Subject: [PATCH 64/67] 2.20.1 TheOculus: Reimplementacion de scripts, logros
@@ -417,10 +417,10 @@ index cccb780..5f47382 100755
      if (!reward)
          return;
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index e74bc27..3b7905b 100755
+index dd6045f..98e4036 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -7870,6 +7870,13 @@ bool Unit::HandleAuraProc(Unit* victim, uint32 damage, Aura* triggeredByAura, Sp
+@@ -7875,6 +7875,13 @@ bool Unit::HandleAuraProc(Unit* victim, uint32 damage, Aura* triggeredByAura, Sp
          case SPELLFAMILY_GENERIC:
              switch (dummySpell->Id)
              {
@@ -434,7 +434,7 @@ index e74bc27..3b7905b 100755
                  // Nevermelting Ice Crystal
                  case 71564:
                      RemoveAuraFromStack(71564);
-@@ -8643,6 +8650,13 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
+@@ -8648,6 +8655,13 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
                  return false;
              break;
          }
@@ -448,7 +448,7 @@ index e74bc27..3b7905b 100755
          // Deflection
          case 52420:
          {
-@@ -9998,7 +10012,7 @@ Unit* Unit::SelectMagnetTarget(Unit* victim, SpellInfo const* spellInfo)
+@@ -10003,7 +10017,7 @@ Unit* Unit::SelectMagnetTarget(Unit* victim, SpellInfo const* spellInfo)
  
          Unit::AuraEffectList const& magnetAuras = victim->GetAuraEffectsByType(SPELL_AURA_SPELL_MAGNET);
          for (Unit::AuraEffectList::const_iterator itr = magnetAuras.begin(); itr != magnetAuras.end(); ++itr)
@@ -491,10 +491,10 @@ index 7628939..79a9b0b 100755
                      case 29142: // Eyesore Blaster
                      case 35139: // Throw Boom's Doom
 diff --git a/src/server/game/Spells/SpellInfo.cpp b/src/server/game/Spells/SpellInfo.cpp
-index ad46576..9067d74 100644
+index fb1e769..25add81 100644
 --- a/src/server/game/Spells/SpellInfo.cpp
 +++ b/src/server/game/Spells/SpellInfo.cpp
-@@ -1841,6 +1841,7 @@ AuraStateType SpellInfo::GetAuraState() const
+@@ -1842,6 +1842,7 @@ AuraStateType SpellInfo::GetAuraState() const
  
      switch (Id)
      {
@@ -503,10 +503,10 @@ index ad46576..9067d74 100644
              return AURA_STATE_UNKNOWN22;
          default:
 diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
-index 272e5c8..695990f 100755
+index 2ffa03b..f47240d 100755
 --- a/src/server/game/Spells/SpellMgr.cpp
 +++ b/src/server/game/Spells/SpellMgr.cpp
-@@ -3037,12 +3037,24 @@ void SpellMgr::LoadDbcDataCorrections()
+@@ -3035,12 +3035,24 @@ void SpellMgr::LoadDbcDataCorrections()
              case 62136: // Energize Cores
              case 54069: // Energize Cores
              case 56251: // Energize Cores

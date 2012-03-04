@@ -1,4 +1,4 @@
-From ea93483e88d6076a58c0327de06b872a1bf8244d Mon Sep 17 00:00:00 2001
+From 9bedfe22cf1f79f07996e4664b707b9d174fd104 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 3 Jan 2012 14:48:23 -0500
 Subject: [PATCH 60/67] =?UTF-8?q?2.16.1=20HallsOfReflection:=20Reimplementac?=
@@ -389,10 +389,10 @@ index 0000000..bc06c4b
 +36941,
 +37069);
 diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
-index 8c2a873..4e62f4d 100755
+index 1ca0506..de47d71 100755
 --- a/src/server/game/Scripting/ScriptLoader.cpp
 +++ b/src/server/game/Scripting/ScriptLoader.cpp
-@@ -470,6 +470,7 @@ void AddSC_instance_halls_of_reflection();   // Halls of Reflection
+@@ -471,6 +471,7 @@ void AddSC_instance_halls_of_reflection();   // Halls of Reflection
  void AddSC_halls_of_reflection();
  void AddSC_boss_falric();
  void AddSC_boss_marwyn();
@@ -400,7 +400,7 @@ index 8c2a873..4e62f4d 100755
  void AddSC_boss_lord_marrowgar();       // Icecrown Citadel
  void AddSC_boss_lady_deathwhisper();
  void AddSC_boss_gunship_battle_wowrean();
-@@ -1179,6 +1180,7 @@ void AddNorthrendScripts()
+@@ -1181,6 +1182,7 @@ void AddNorthrendScripts()
      AddSC_halls_of_reflection();
      AddSC_boss_falric();
      AddSC_boss_marwyn();

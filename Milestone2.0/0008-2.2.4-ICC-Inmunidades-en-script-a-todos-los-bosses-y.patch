@@ -1,4 +1,4 @@
-From c0165d92faab7203639c1e8bf85e8ef244ce4aad Mon Sep 17 00:00:00 2001
+From f796bd3aba4ed367affcaa13172871b9c415bedd Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 00:35:21 -0500
 Subject: [PATCH 08/67] 2.2.4 ICC: Inmunidades en script a todos los bosses y
@@ -199,7 +199,7 @@ index 3bca7ce..005f649 100644
  
              void Reset()
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
-index 9866d2a..711703c 100644
+index 2acd014..021212b 100644
 --- a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
 @@ -483,6 +483,8 @@ class boss_the_lich_king : public CreatureScript

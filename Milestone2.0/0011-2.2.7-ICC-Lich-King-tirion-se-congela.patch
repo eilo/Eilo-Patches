@@ -1,4 +1,4 @@
-From 3a9dd4f5318b96443ac730086387963e839c66bf Mon Sep 17 00:00:00 2001
+From b3dfaeff8f5a31e5539ef694c56bd1a9e547b3ba Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 01:36:40 -0500
 Subject: [PATCH 11/67] 2.2.7 ICC: Lich King, tirion se congela
@@ -8,7 +8,7 @@ Subject: [PATCH 11/67] 2.2.7 ICC: Lich King, tirion se congela
  1 files changed, 2 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
-index 711703c..118f1b6 100644
+index 021212b..74fccd9 100644
 --- a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
 @@ -899,7 +899,8 @@ class boss_the_lich_king : public CreatureScript

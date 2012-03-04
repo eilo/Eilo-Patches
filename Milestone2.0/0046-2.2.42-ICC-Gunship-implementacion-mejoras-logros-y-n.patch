@@ -1,4 +1,4 @@
-From 159770b65881be1f55563b301781aa66025e407a Mon Sep 17 00:00:00 2001
+From f439428fbf7c57c95d927425f538a3988349f903 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 13 Feb 2012 05:49:16 -0500
 Subject: [PATCH 46/67] 2.2.42 ICC: Gunship implementacion, mejoras, logros y
@@ -353,10 +353,10 @@ index 0000000..71366cc
 +-- Zafod Boombox (37184) giver of jetpack
 +UPDATE `creature_template` SET `npcflag`=1 WHERE `entry`=37184;
 diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
-index 7f805ca..2339d05 100755
+index 504f848..5f6359d 100755
 --- a/src/server/game/Scripting/ScriptLoader.cpp
 +++ b/src/server/game/Scripting/ScriptLoader.cpp
-@@ -471,6 +471,7 @@ void AddSC_boss_falric();
+@@ -472,6 +472,7 @@ void AddSC_boss_falric();
  void AddSC_boss_marwyn();
  void AddSC_boss_lord_marrowgar();       // Icecrown Citadel
  void AddSC_boss_lady_deathwhisper();
@@ -364,7 +364,7 @@ index 7f805ca..2339d05 100755
  void AddSC_boss_deathbringer_saurfang();
  void AddSC_boss_festergut();
  void AddSC_boss_rotface();
-@@ -1178,6 +1179,7 @@ void AddNorthrendScripts()
+@@ -1180,6 +1181,7 @@ void AddNorthrendScripts()
      AddSC_boss_marwyn();
      AddSC_boss_lord_marrowgar();        // Icecrown Citadel
      AddSC_boss_lady_deathwhisper();
@@ -373,10 +373,10 @@ index 7f805ca..2339d05 100755
      AddSC_boss_festergut();
      AddSC_boss_rotface();
 diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
-index 820a390..272e5c8 100755
+index 300a105..2ffa03b 100755
 --- a/src/server/game/Spells/SpellMgr.cpp
 +++ b/src/server/game/Spells/SpellMgr.cpp
-@@ -3098,6 +3098,11 @@ void SpellMgr::LoadDbcDataCorrections()
+@@ -3096,6 +3096,11 @@ void SpellMgr::LoadDbcDataCorrections()
              case 54171: // Divine Storm
                  spellInfo->MaxAffectedTargets = 3;
                  break;

@@ -1,4 +1,4 @@
-From 4980f8d0673cbdc739deae2cfb8a100970503215 Mon Sep 17 00:00:00 2001
+From 3c5363f1a5b2bea0512f889307573271bef5ee48 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 14:22:13 -0500
 Subject: [PATCH 49/67] 2.8.1 Obsidian Sanctum: Mejora de script e
@@ -47,10 +47,10 @@ index 0000000..51bd0f0
 +UPDATE `creature_template` SET `dmgschool`=1 WHERE `entry` IN (30643,31317);
 \ No newline at end of file
 diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
-index 2339d05..a2d042d 100755
+index 5f6359d..60f16b0 100755
 --- a/src/server/game/Scripting/ScriptLoader.cpp
 +++ b/src/server/game/Scripting/ScriptLoader.cpp
-@@ -404,6 +404,7 @@ void AddSC_boss_malygos();              // The Nexus: Eye of Eternity
+@@ -405,6 +405,7 @@ void AddSC_boss_malygos();              // The Nexus: Eye of Eternity
  void AddSC_instance_eye_of_eternity();
  void AddSC_boss_sartharion();            //Obsidian Sanctum
  void AddSC_instance_obsidian_sanctum();
@@ -58,7 +58,7 @@ index 2339d05..a2d042d 100755
  void AddSC_boss_bjarngrim();             //Ulduar Halls of Lightning
  void AddSC_boss_loken();
  void AddSC_boss_ionar();
-@@ -1112,6 +1113,7 @@ void AddNorthrendScripts()
+@@ -1114,6 +1115,7 @@ void AddNorthrendScripts()
      AddSC_instance_eye_of_eternity();
      AddSC_boss_sartharion();            //Obsidian Sanctum
      AddSC_instance_obsidian_sanctum();
@@ -79,7 +79,7 @@ index 6112579..6b1788a 100644
    Northrend/ChamberOfAspects/RubySanctum/ruby_sanctum.h
    Northrend/ChamberOfAspects/RubySanctum/ruby_sanctum.cpp
 diff --git a/src/server/scripts/Northrend/ChamberOfAspects/ObsidianSanctum/boss_sartharion.cpp b/src/server/scripts/Northrend/ChamberOfAspects/ObsidianSanctum/boss_sartharion.cpp
-index d01e266..82d2f34 100644
+index 3e9d814..3dee687 100644
 --- a/src/server/scripts/Northrend/ChamberOfAspects/ObsidianSanctum/boss_sartharion.cpp
 +++ b/src/server/scripts/Northrend/ChamberOfAspects/ObsidianSanctum/boss_sartharion.cpp
 @@ -51,7 +51,9 @@ enum eEnums
@@ -472,46 +472,49 @@ index d01e266..82d2f34 100644
  
              //if at least one of the dragons are alive and are being called
              bool bCanUseWill = false;
-@@ -425,10 +465,10 @@ public:
+@@ -425,11 +465,11 @@ public:
              if (pFetchTene && pFetchTene->isAlive() && !pFetchTene->getVictim())
              {
                  bCanUseWill = true;
 -                if (!pFetchTene->isInCombat())
 +                if(!pFetchTene->isInCombat())
                  {
+                     DoCast(me, SPELL_POWER_OF_TENEBRON);
                      AddDrakeLootMode();
 -                    ++drakeCount;
 +                    achievProgress++;
                  }
                  pFetchTene->GetMotionMaster()->MovePoint(POINT_ID_INIT, m_aTene[0].m_fX, m_aTene[0].m_fY, m_aTene[0].m_fZ);
  
-@@ -439,10 +479,10 @@ public:
+@@ -440,11 +480,11 @@ public:
              if (pFetchShad && pFetchShad->isAlive() && !pFetchShad->getVictim())
              {
                  bCanUseWill = true;
 -                if (!pFetchShad->isInCombat())
 +                if(!pFetchShad->isInCombat())
                  {
+                     DoCast(me, SPELL_POWER_OF_SHADRON);
                      AddDrakeLootMode();
 -                    ++drakeCount;
 +                    achievProgress++;
                  }
                  pFetchShad->GetMotionMaster()->MovePoint(POINT_ID_INIT, m_aShad[0].m_fX, m_aShad[0].m_fY, m_aShad[0].m_fZ);
  
-@@ -453,10 +493,10 @@ public:
+@@ -455,11 +495,11 @@ public:
              if (pFetchVesp && pFetchVesp->isAlive() && !pFetchVesp->getVictim())
              {
                  bCanUseWill = true;
 -                if (!pFetchVesp->isInCombat())
 +                if(!pFetchVesp->isInCombat())
                  {
+                     DoCast(me, SPELL_POWER_OF_VESPERON);
                      AddDrakeLootMode();
 -                    ++drakeCount;
 +                    achievProgress++;
                  }
                  pFetchVesp->GetMotionMaster()->MovePoint(POINT_ID_INIT, m_aVesp[0].m_fX, m_aVesp[0].m_fY, m_aVesp[0].m_fZ);
  
-@@ -470,9 +510,9 @@ public:
+@@ -473,9 +513,9 @@ public:
  
          void CallDragon(uint32 uiDataId)
          {
@@ -523,7 +526,7 @@ index d01e266..82d2f34 100644
                  {
                      if (temp->isAlive() && !temp->getVictim())
                      {
-@@ -484,6 +524,8 @@ public:
+@@ -487,6 +527,8 @@ public:
  
                          int32 iTextId = 0;
  
@@ -532,7 +535,7 @@ index d01e266..82d2f34 100644
                          switch (temp->GetEntry())
                          {
                              case NPC_TENEBRON:
-@@ -511,10 +553,10 @@ public:
+@@ -514,10 +556,10 @@ public:
  
          void SendFlameTsunami()
          {
@@ -546,7 +549,7 @@ index d01e266..82d2f34 100644
  
                      if (!PlayerList.isEmpty())
                          for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
-@@ -525,23 +567,35 @@ public:
+@@ -528,23 +570,35 @@ public:
  
          // Selects a random Fire Cyclone and makes it cast Lava Strike.
          // FIXME: Frequency of the casts reduced to compensate 100% chance of spawning a Lava Blaze add
@@ -594,7 +597,7 @@ index d01e266..82d2f34 100644
          }
  
          void UpdateAI(const uint32 uiDiff)
-@@ -550,9 +604,9 @@ public:
+@@ -553,9 +607,9 @@ public:
              if (!UpdateVictim())
                  return;
  
@@ -607,7 +610,7 @@ index d01e266..82d2f34 100644
  
              //spell will target dragons, if they are still alive at 35%
              if (!m_bIsBerserk && !HealthAbovePct(35)
-@@ -563,6 +617,8 @@ public:
+@@ -566,6 +620,8 @@ public:
                  m_bIsBerserk = true;
              }
  
@@ -616,7 +619,7 @@ index d01e266..82d2f34 100644
              //soft enrage
              if (!m_bIsSoftEnraged && HealthBelowPct(10))
              {
-@@ -586,24 +642,24 @@ public:
+@@ -589,24 +645,24 @@ public:
              if (m_uiFlameTsunamiTimer <= uiDiff)
              {
                  SendFlameTsunami();
@@ -652,7 +655,7 @@ index d01e266..82d2f34 100644
                          break;
                      }
                  }
-@@ -616,72 +672,86 @@ public:
+@@ -619,72 +675,86 @@ public:
              // flame breath
              if (m_uiFlameBreathTimer <= uiDiff)
              {
@@ -773,7 +776,7 @@ index d01e266..82d2f34 100644
  
              DoMeleeAttackIfReady();
  
-@@ -727,49 +797,54 @@ enum VespText
+@@ -730,49 +800,54 @@ enum VespText
      SAY_VESPERON_SPECIAL_2                  = -1615040
  };
  
@@ -840,7 +843,7 @@ index d01e266..82d2f34 100644
          {
              EnterEvadeMode();
              return;
-@@ -780,7 +855,7 @@ struct dummy_dragonAI : public ScriptedAI
+@@ -783,7 +858,7 @@ struct dummy_dragonAI : public ScriptedAI
          {
              me->GetMotionMaster()->Clear();
              me->SetInCombatWithZone();
@@ -849,7 +852,7 @@ index d01e266..82d2f34 100644
              {
                  me->AddThreat(target, 1.0f);
                  me->Attack(target, true);
-@@ -812,11 +887,11 @@ struct dummy_dragonAI : public ScriptedAI
+@@ -815,11 +890,11 @@ struct dummy_dragonAI : public ScriptedAI
      //used when open portal and spawn mobs in phase
      void DoRaidWhisper(int32 iTextId)
      {
@@ -864,7 +867,7 @@ index d01e266..82d2f34 100644
  
              if (!PlayerList.isEmpty())
              {
-@@ -826,6 +901,43 @@ struct dummy_dragonAI : public ScriptedAI
+@@ -829,6 +904,43 @@ struct dummy_dragonAI : public ScriptedAI
          }
      }
  
@@ -908,7 +911,7 @@ index d01e266..82d2f34 100644
      //"opens" the portal and does the "opening" whisper
      void OpenPortal()
      {
-@@ -835,58 +947,80 @@ struct dummy_dragonAI : public ScriptedAI
+@@ -838,58 +950,80 @@ struct dummy_dragonAI : public ScriptedAI
  
          //using a grid search here seem to be more efficient than caching all four guids
          //in instance script and calculate range to each.
@@ -1018,7 +1021,7 @@ index d01e266..82d2f34 100644
              }
          }
  
-@@ -894,35 +1028,48 @@ struct dummy_dragonAI : public ScriptedAI
+@@ -897,35 +1031,48 @@ struct dummy_dragonAI : public ScriptedAI
  
          //By using SetRespawnTime() we will actually "spawn" the object with our defined time.
          //Once time is up, portal will disappear again.
@@ -1078,7 +1081,7 @@ index d01e266..82d2f34 100644
                  {
                      pAcolyte->Kill(pAcolyte);
                  }
-@@ -930,9 +1077,9 @@ struct dummy_dragonAI : public ScriptedAI
+@@ -933,9 +1080,9 @@ struct dummy_dragonAI : public ScriptedAI
              case NPC_VESPERON:
                  iTextId = SAY_VESPERON_DEATH;
                  uiSpellId = SPELL_POWER_OF_VESPERON;
@@ -1091,7 +1094,7 @@ index d01e266..82d2f34 100644
                  {
                      pAcolyte->Kill(pAcolyte);
                  }
-@@ -943,16 +1090,19 @@ struct dummy_dragonAI : public ScriptedAI
+@@ -946,16 +1093,19 @@ struct dummy_dragonAI : public ScriptedAI
  
          me->RemoveAurasDueToSpell(uiSpellId);
  
@@ -1115,7 +1118,7 @@ index d01e266..82d2f34 100644
                  if (pSartharion->isAlive())
                  {
                      pSartharion->RemoveAurasDueToSpell(uiSpellId);
-@@ -967,7 +1117,7 @@ struct dummy_dragonAI : public ScriptedAI
+@@ -970,7 +1120,7 @@ struct dummy_dragonAI : public ScriptedAI
          {
              if (m_uiMoveNextTimer <= uiDiff)
              {
@@ -1124,7 +1127,7 @@ index d01e266..82d2f34 100644
                      me->GetMotionMaster()->MovePoint(m_uiWaypointId,
                          m_aDragonCommon[m_uiWaypointId].m_fX, m_aDragonCommon[m_uiWaypointId].m_fY, m_aDragonCommon[m_uiWaypointId].m_fZ);
  
-@@ -989,14 +1139,14 @@ class mob_tenebron : public CreatureScript
+@@ -992,14 +1142,14 @@ class mob_tenebron : public CreatureScript
  public:
      mob_tenebron() : CreatureScript("mob_tenebron") { }
  
@@ -1142,7 +1145,7 @@ index d01e266..82d2f34 100644
  
          uint32 m_uiShadowBreathTimer;
          uint32 m_uiShadowFissureTimer;
-@@ -1013,16 +1163,27 @@ public:
+@@ -1016,15 +1166,26 @@ public:
              m_bHasPortalOpen = false;
          }
  
@@ -1151,7 +1154,6 @@ index d01e266..82d2f34 100644
          {
              DoScriptText(SAY_TENEBRON_AGGRO, me);
              DoZoneInCombat();
-             DoCast(me, SPELL_POWER_OF_TENEBRON);
          }
  
 -        void KilledUnit(Unit* /*victim*/)
@@ -1173,7 +1175,7 @@ index d01e266..82d2f34 100644
          }
  
          void UpdateAI(const uint32 uiDiff)
-@@ -1037,10 +1198,13 @@ public:
+@@ -1039,10 +1200,13 @@ public:
              // shadow fissure
              if (m_uiShadowFissureTimer <= uiDiff)
              {
@@ -1190,7 +1192,7 @@ index d01e266..82d2f34 100644
              }
              else
                  m_uiShadowFissureTimer -= uiDiff;
-@@ -1057,13 +1221,20 @@ public:
+@@ -1059,13 +1223,20 @@ public:
              // shadow breath
              if (m_uiShadowBreathTimer <= uiDiff)
              {
@@ -1214,7 +1216,7 @@ index d01e266..82d2f34 100644
              DoMeleeAttackIfReady();
          }
      };
-@@ -1079,14 +1250,14 @@ class mob_shadron : public CreatureScript
+@@ -1081,14 +1252,14 @@ class mob_shadron : public CreatureScript
  public:
      mob_shadron() : CreatureScript("mob_shadron") { }
  
@@ -1232,7 +1234,7 @@ index d01e266..82d2f34 100644
  
          uint32 m_uiShadowBreathTimer;
          uint32 m_uiShadowFissureTimer;
-@@ -1098,7 +1269,7 @@ public:
+@@ -1100,7 +1271,7 @@ public:
          {
              m_uiShadowBreathTimer = 20000;
              m_uiShadowFissureTimer = 5000;
@@ -1241,7 +1243,7 @@ index d01e266..82d2f34 100644
  
              if (me->HasAura(SPELL_TWILIGHT_TORMENT_VESP))
                  me->RemoveAurasDueToSpell(SPELL_TWILIGHT_TORMENT_VESP);
-@@ -1109,16 +1280,27 @@ public:
+@@ -1111,15 +1282,26 @@ public:
              m_bHasPortalOpen = false;
          }
  
@@ -1251,7 +1253,6 @@ index d01e266..82d2f34 100644
 -            DoScriptText(SAY_SHADRON_AGGRO, me);
 +            DoScriptText(SAY_SHADRON_AGGRO,me);
              DoZoneInCombat();
-             DoCast(me, SPELL_POWER_OF_SHADRON);
          }
  
 -        void KilledUnit(Unit* /*victim*/)
@@ -1273,7 +1274,7 @@ index d01e266..82d2f34 100644
          }
  
          void UpdateAI(const uint32 uiDiff)
-@@ -1133,10 +1315,13 @@ public:
+@@ -1134,10 +1316,13 @@ public:
              // shadow fissure
              if (m_uiShadowFissureTimer <= uiDiff)
              {
@@ -1290,7 +1291,7 @@ index d01e266..82d2f34 100644
              }
              else
                  m_uiShadowFissureTimer -= uiDiff;
-@@ -1144,7 +1329,7 @@ public:
+@@ -1145,7 +1330,7 @@ public:
              // Portal Event
              if (m_uiAcolyteShadronTimer <= uiDiff)
              {
@@ -1299,7 +1300,7 @@ index d01e266..82d2f34 100644
                      m_uiAcolyteShadronTimer = 10000;
                  else
                  {
-@@ -1153,7 +1338,7 @@ public:
+@@ -1154,7 +1339,7 @@ public:
  
                      OpenPortal();
                      m_bHasPortalOpen = true;
@@ -1308,7 +1309,7 @@ index d01e266..82d2f34 100644
                  }
              }
              else
-@@ -1162,13 +1347,20 @@ public:
+@@ -1163,13 +1348,20 @@ public:
              // shadow breath
              if (m_uiShadowBreathTimer <= uiDiff)
              {
@@ -1332,7 +1333,7 @@ index d01e266..82d2f34 100644
              DoMeleeAttackIfReady();
          }
      };
-@@ -1184,14 +1376,14 @@ class mob_vesperon : public CreatureScript
+@@ -1185,14 +1377,14 @@ class mob_vesperon : public CreatureScript
  public:
      mob_vesperon() : CreatureScript("mob_vesperon") { }
  
@@ -1350,7 +1351,7 @@ index d01e266..82d2f34 100644
  
          uint32 m_uiShadowBreathTimer;
          uint32 m_uiShadowFissureTimer;
-@@ -1203,21 +1395,32 @@ public:
+@@ -1204,20 +1396,31 @@ public:
          {
              m_uiShadowBreathTimer = 20000;
              m_uiShadowFissureTimer = 5000;
@@ -1366,7 +1367,6 @@ index d01e266..82d2f34 100644
 -            DoScriptText(SAY_VESPERON_AGGRO, me);
 +            DoScriptText(SAY_VESPERON_AGGRO,me);
              DoZoneInCombat();
-             DoCast(me, SPELL_POWER_OF_VESPERON);
          }
  
 -        void KilledUnit(Unit* /*victim*/)

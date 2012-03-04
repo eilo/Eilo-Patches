@@ -1,4 +1,4 @@
-From 4f380e1e8e28388ccf3ac99d8a192c5e8e13c0c4 Mon Sep 17 00:00:00 2001
+From a5080ea04af3a56371841fa0ecab00d6e67136a5 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 11:44:26 -0500
 Subject: [PATCH 28/67] 2.2.24 ICC: LichKing aggrea apenas termina el dialogo
@@ -9,7 +9,7 @@ Subject: [PATCH 28/67] 2.2.24 ICC: LichKing aggrea apenas termina el dialogo
  1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
-index 118f1b6..ba22572 100644
+index 74fccd9..a1e0f88 100644
 --- a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
 @@ -490,7 +490,6 @@ class boss_the_lich_king : public CreatureScript
