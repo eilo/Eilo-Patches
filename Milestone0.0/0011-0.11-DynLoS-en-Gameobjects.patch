@@ -1,4 +1,4 @@
-From 2683ba863fe62b888c75bf1d539a4ed88f8f179d Mon Sep 17 00:00:00 2001
+From fb7ba4c368f2f5d2b7ac2bedbe146ddf5acc7ee5 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 14:13:11 -0500
 Subject: [PATCH 11/30] 0.11 DynLoS en Gameobjects
@@ -10,7 +10,7 @@ Subject: [PATCH 11/30] 0.11 DynLoS en Gameobjects
  3 files changed, 201 insertions(+), 2 deletions(-)
 
 diff --git a/src/server/game/Entities/Object/Object.cpp b/src/server/game/Entities/Object/Object.cpp
-index 1a8eb8f..6baa432 100755
+index c9b25b6..eafefb0 100755
 --- a/src/server/game/Entities/Object/Object.cpp
 +++ b/src/server/game/Entities/Object/Object.cpp
 @@ -1300,7 +1300,7 @@ bool WorldObject::IsWithinLOSInMap(const WorldObject* obj) const
@@ -31,7 +31,7 @@ index 1a8eb8f..6baa432 100755
  }
  
  bool WorldObject::GetDistanceOrder(WorldObject const* obj1, WorldObject const* obj2, bool is3D /* = true */) const
-@@ -2671,6 +2671,13 @@ void WorldObject::MovePositionToFirstCollision(Position &pos, float dist, float
+@@ -2675,6 +2675,13 @@ void WorldObject::MovePositionToFirstCollision(Position &pos, float dist, float
  
      bool col = VMAP::VMapFactory::createOrGetVMapManager()->getObjectHitPos(GetMapId(), pos.m_positionX, pos.m_positionY, pos.m_positionZ+0.5f, destx, desty, destz+0.5f, destx, desty, destz, -0.5f);
  

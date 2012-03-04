@@ -1,4 +1,4 @@
-From f9f06f9adc6817e70b08b0f531983be99026aeea Mon Sep 17 00:00:00 2001
+From bb3a260d00017ed407bacfcccdacccfebe7c636b Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 30 Dec 2011 17:26:37 -0500
 Subject: [PATCH 23/30] =?UTF-8?q?0.23=20FindNearestPlayer=20y=20GetNearestPl?=
@@ -13,10 +13,10 @@ Content-Transfer-Encoding: 8bit
  2 files changed, 20 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Object/Object.cpp b/src/server/game/Entities/Object/Object.cpp
-index 6baa432..205b691 100755
+index eafefb0..7e6d007 100755
 --- a/src/server/game/Entities/Object/Object.cpp
 +++ b/src/server/game/Entities/Object/Object.cpp
-@@ -2777,6 +2777,23 @@ void WorldObject::UpdateObjectVisibility(bool /*forced*/)
+@@ -2781,6 +2781,23 @@ void WorldObject::UpdateObjectVisibility(bool /*forced*/)
      VisitNearbyWorldObject(GetVisibilityRange(), notifier);
  }
  

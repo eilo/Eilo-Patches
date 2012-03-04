@@ -1,4 +1,4 @@
-From 00624b922d0f7b73c5d2d96330fcb3b5a3c49177 Mon Sep 17 00:00:00 2001
+From eef31ffa9074f0ca5e793f610ed3376e91916d1a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 02:13:22 -0500
 Subject: [PATCH 10/30] 0.10 Rates Weekend
@@ -87,7 +87,7 @@ index bcffb33..018dbfc 100755
  
              sScriptMgr->OnGainCalculation(gain, player, u);
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index d6316a9..ac51975 100755
+index c265731..234eb6b 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -467,6 +467,8 @@ void World::LoadConfigSettings(bool reload)
@@ -100,10 +100,10 @@ index d6316a9..ac51975 100755
      if (rate_values[RATE_REPAIRCOST] < 0.0f)
      {
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index 194fab3..e4e0519 100755
+index c22516b..cf3fa9e 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
-@@ -246,6 +246,7 @@ enum WorldIntConfigs
+@@ -248,6 +248,7 @@ enum WorldIntConfigs
      CONFIG_SKILL_GAIN_DEFENSE,
      CONFIG_SKILL_GAIN_GATHERING,
      CONFIG_SKILL_GAIN_WEAPON,
@@ -111,7 +111,7 @@ index 194fab3..e4e0519 100755
      CONFIG_MAX_OVERSPEED_PINGS,
      CONFIG_EXPANSION,
      CONFIG_CHATFLOOD_MESSAGE_COUNT,
-@@ -360,6 +361,7 @@ enum Rates
+@@ -362,6 +363,7 @@ enum Rates
      RATE_XP_KILL_PREMIUM,
      RATE_XP_QUEST_PREMIUM,
      RATE_XP_EXPLORE_PREMIUM,
@@ -120,10 +120,10 @@ index 194fab3..e4e0519 100755
      RATE_REPUTATION_GAIN,
      RATE_REPUTATION_LOWLEVEL_KILL,
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index 04ccb6c..1d3fdba 100644
+index 7c51a96..bd9c213 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
-@@ -2138,6 +2138,15 @@ Rate.XP.Kill.Premium    = 1
+@@ -2154,6 +2154,15 @@ Rate.XP.Kill.Premium    = 1
  Rate.XP.Quest.Premium   = 1
  Rate.XP.Explore.Premium = 1
  

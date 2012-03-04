@@ -1,4 +1,4 @@
-From e235e7c82568fe9675c86eea4872a3268a532e39 Mon Sep 17 00:00:00 2001
+From 2c5f253f1b28334a7e58f0a4784581a8414c68d1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 17:48:38 -0500
 Subject: [PATCH 05/30] =?UTF-8?q?0.5=20AHBot=20para=20subastas=20a=C3=B1adid?=
@@ -3899,7 +3899,7 @@ index 3c3888e..e6b3c49 100755
  
      //expire time if COD 3 days, if no COD 30 days, if auction sale pending 1 hour
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index 84b3a4a..8e25a95 100755
+index a5de212..6e640e1 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -71,6 +71,7 @@
@@ -3910,7 +3910,7 @@ index 84b3a4a..8e25a95 100755
  #include "CreatureTextMgr.h"
  #include "SmartAI.h"
  #include "Channel.h"
-@@ -1758,6 +1759,9 @@ void World::SetInitialWorldSettings()
+@@ -1760,6 +1761,9 @@ void World::SetInitialWorldSettings()
      InitRandomBGResetTime();
  
      LoadCharacterNameData();
@@ -3920,7 +3920,7 @@ index 84b3a4a..8e25a95 100755
  
      // possibly enable db logging; avoid massive startup spam by doing it here.
      if (sLog->GetLogDBLater())
-@@ -1925,6 +1929,7 @@ void World::Update(uint32 diff)
+@@ -1927,6 +1931,7 @@ void World::Update(uint32 diff)
      /// <ul><li> Handle auctions when the timer has passed
      if (m_timers[WUPDATE_AUCTIONS].Passed())
      {
@@ -3929,10 +3929,10 @@ index 84b3a4a..8e25a95 100755
  
          ///- Update mails (return old mails with item, or delete them)
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index dcc7412..1b21baa 100644
+index cca47e7..b7ea11a 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
-@@ -2594,6 +2594,272 @@ Network.TcpNodelay = 1
+@@ -2610,6 +2610,272 @@ Network.TcpNodelay = 1
  #
  ###################################################################################################
  

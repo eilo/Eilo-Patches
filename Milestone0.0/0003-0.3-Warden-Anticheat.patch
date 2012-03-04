@@ -1,6 +1,6 @@
-From 25ceeacbea4024546e40b33d12613c7f7c9a5ce5 Mon Sep 17 00:00:00 2001
+From c36f2f66ebfc6915769ed84ab0cc4c4dc1680ecb Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Sun, 5 Feb 2012 23:37:28 -0500
+Date: Sun, 4 Mar 2012 07:35:24 -0500
 Subject: [PATCH 03/30] 0.3 Warden Anticheat
 
 ---
@@ -4683,7 +4683,7 @@ index 0000000..bc46fa6
 +
 +#endif
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index 426a93f..e7707b3 100755
+index 2450b9e..21fb1d7 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -74,6 +74,8 @@
@@ -4695,7 +4695,7 @@ index 426a93f..e7707b3 100755
  
  volatile bool World::m_stopEvent = false;
  uint8 World::m_ExitCode = SHUTDOWN_EXIT_CODE;
-@@ -1168,6 +1170,15 @@ void World::LoadConfigSettings(bool reload)
+@@ -1170,6 +1172,15 @@ void World::LoadConfigSettings(bool reload)
      m_bool_configs[CONFIG_CHATLOG_ADDON] = ConfigMgr::GetBoolDefault("ChatLogs.Addon", false);
      m_bool_configs[CONFIG_CHATLOG_BGROUND] = ConfigMgr::GetBoolDefault("ChatLogs.Battleground", false);
  
@@ -4711,7 +4711,7 @@ index 426a93f..e7707b3 100755
      // Dungeon finder
      m_bool_configs[CONFIG_DUNGEON_FINDER_ENABLE] = ConfigMgr::GetBoolDefault("DungeonFinder.Enable", false);
  
-@@ -1717,6 +1728,10 @@ void World::SetInitialWorldSettings()
+@@ -1719,6 +1730,10 @@ void World::SetInitialWorldSettings()
      sLog->outString("Loading Transport NPCs...");
      sMapMgr->LoadTransportNPCs();
  
@@ -4723,7 +4723,7 @@ index 426a93f..e7707b3 100755
      LoginDatabase.Execute("DELETE FROM ip_banned WHERE unbandate <= UNIX_TIMESTAMP() AND unbandate<>bandate");
  
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index bedd8a8..284a698 100755
+index 18d3200..234b792 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
 @@ -160,6 +160,7 @@ enum WorldBoolConfigs
@@ -4731,10 +4731,10 @@ index bedd8a8..284a698 100755
      CONFIG_PDUMP_NO_PATHS,
      CONFIG_PDUMP_NO_OVERWRITE,
 +    CONFIG_WARDEN_ENABLED,
+     CONFIG_QUEST_IGNORE_AUTO_ACCEPT,
+     CONFIG_QUEST_IGNORE_AUTO_COMPLETE,
      BOOL_CONFIG_VALUE_COUNT
- };
- 
-@@ -307,6 +308,12 @@ enum WorldIntConfigs
+@@ -309,6 +310,12 @@ enum WorldIntConfigs
      CONFIG_PRESERVE_CUSTOM_CHANNEL_DURATION,
      CONFIG_PERSISTENT_CHARACTER_CLEAN_FLAGS,
      CONFIG_MAX_INSTANCES_PER_HOUR,
@@ -4761,7 +4761,7 @@ index 56e63af..519778a 100644
    ${CMAKE_SOURCE_DIR}/src/server/game/World
    ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders
 diff --git a/src/server/scripts/Commands/cs_reload.cpp b/src/server/scripts/Commands/cs_reload.cpp
-index 363f764..a9ab420 100644
+index 17c819f..95dd638 100644
 --- a/src/server/scripts/Commands/cs_reload.cpp
 +++ b/src/server/scripts/Commands/cs_reload.cpp
 @@ -27,6 +27,7 @@ EndScriptData */
@@ -5030,7 +5030,7 @@ index 191bbbf..6c9dbc6 100644
    ${CMAKE_SOURCE_DIR}/src/server/game/World
    ${CMAKE_SOURCE_DIR}/src/server/authserver/Server
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index 93f6793..dcc7412 100644
+index a5e7404..cca47e7 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
 @@ -11,6 +11,7 @@
@@ -5041,7 +5041,7 @@ index 93f6793..dcc7412 100644
  #    PLAYER INTERACTION
  #    CREATURE SETTINGS
  #    CHAT SETTINGS
-@@ -1415,6 +1416,81 @@ AccountInstancesPerHour = 5
+@@ -1431,6 +1432,81 @@ AccountInstancesPerHour = 5
  ###################################################################################################
  
  ###################################################################################################

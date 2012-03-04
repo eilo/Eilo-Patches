@@ -1,4 +1,4 @@
-From 64e8278f552780db8ad99c8d9bf518c8b8ce78b0 Mon Sep 17 00:00:00 2001
+From 25acdfda43974449895519de222fc7673dd3832b Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 20:38:02 -0500
 Subject: [PATCH 04/30] 0.4 PvpRanks y titulos
@@ -158,7 +158,7 @@ index 489b4ea..0dd0e59 100755
          //End of PvP System
  
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index e7707b3..84b3a4a 100755
+index 21fb1d7..a5de212 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -851,6 +851,19 @@ void World::LoadConfigSettings(bool reload)
@@ -182,10 +182,10 @@ index e7707b3..84b3a4a 100755
      m_int_configs[CONFIG_GM_VISIBLE_STATE]      = ConfigMgr::GetIntDefault("GM.Visible", 2);
      m_int_configs[CONFIG_GM_CHAT]               = ConfigMgr::GetIntDefault("GM.Chat", 2);
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index 284a698..b641fff 100755
+index 234b792..26209b8 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
-@@ -382,10 +382,31 @@ enum Rates
+@@ -384,10 +384,31 @@ enum Rates
      RATE_DURABILITY_LOSS_PARRY,
      RATE_DURABILITY_LOSS_ABSORB,
      RATE_DURABILITY_LOSS_BLOCK,
@@ -217,7 +217,7 @@ index 284a698..b641fff 100755
  /// Can be used in SMSG_AUTH_RESPONSE packet
  enum BillingPlanFlags
  {
-@@ -640,6 +661,8 @@ class World
+@@ -642,6 +663,8 @@ class World
          void SendZoneText(uint32 zone, const char *text, WorldSession* self = 0, uint32 team = 0);
          void SendServerMessage(ServerMessageType type, const char *text = "", Player* player = NULL);
  

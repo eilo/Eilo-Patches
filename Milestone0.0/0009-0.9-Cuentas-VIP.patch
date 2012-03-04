@@ -1,4 +1,4 @@
-From f57aea5dc4a3a213503d8289d14f12616ac7e581 Mon Sep 17 00:00:00 2001
+From 2efca2401f929173bbfd6a53290706b13467b2fb Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 2 Mar 2012 13:59:35 -0500
 Subject: [PATCH 09/30] 0.9 Cuentas VIP
@@ -170,7 +170,7 @@ index 2c6098f..d313ab4 100755
      m_Crypt.Init(&k);
  
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index 5b0a83a..d6316a9 100755
+index e5f54b8..c265731 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -464,6 +464,9 @@ void World::LoadConfigSettings(bool reload)
@@ -184,10 +184,10 @@ index 5b0a83a..d6316a9 100755
      if (rate_values[RATE_REPAIRCOST] < 0.0f)
      {
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index ed31d84..194fab3 100755
+index 45102b3..c22516b 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
-@@ -357,6 +357,9 @@ enum Rates
+@@ -359,6 +359,9 @@ enum Rates
      RATE_XP_KILL,
      RATE_XP_QUEST,
      RATE_XP_EXPLORE,
@@ -220,10 +220,10 @@ index afb1880..da279ae 100755
      MAX_LOGINDATABASE_STATEMENTS,
  };
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index bcc885a..04ccb6c 100644
+index 0587b50..7c51a96 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
-@@ -2120,14 +2120,23 @@ Rate.Drop.Item.ReferencedAmount = 1
+@@ -2136,14 +2136,23 @@ Rate.Drop.Item.ReferencedAmount = 1
  #    Rate.XP.Kill
  #    Rate.XP.Quest
  #    Rate.XP.Explore

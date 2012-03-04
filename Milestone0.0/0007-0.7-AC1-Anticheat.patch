@@ -1,10 +1,10 @@
-From f590d052c3bc1ffd327c4aa8f52249b591363cbd Mon Sep 17 00:00:00 2001
+From 80c97bf5943351d735a4e8cf7059a86bfe84548e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Thu, 15 Dec 2011 16:06:42 -0500
+Date: Sun, 4 Mar 2012 07:38:14 -0500
 Subject: [PATCH 07/30] 0.7 AC1 Anticheat
 
 ---
- .../reanemu/2011_11_09_100_characters_ac1.sql      |   87 +++++
+ .../reanemu/2011_11_09_100_characters_ac1.sql      |   71 ++++
  src/server/game/Entities/Player/Player.cpp         |   21 ++
  src/server/game/Entities/Player/Player.h           |   15 +
  src/server/game/Handlers/MovementHandler.cpp       |  335 ++++++++++++++++++++
@@ -14,15 +14,15 @@ Subject: [PATCH 07/30] 0.7 AC1 Anticheat
  src/server/game/World/World.h                      |   26 ++
  src/server/scripts/Commands/cs_gm.cpp              |    6 +
  src/server/worldserver/worldserver.conf.dist       |   63 ++++
- 10 files changed, 585 insertions(+), 0 deletions(-)
+ 10 files changed, 569 insertions(+), 0 deletions(-)
  create mode 100644 sql/updates/characters/reanemu/2011_11_09_100_characters_ac1.sql
 
 diff --git a/sql/updates/characters/reanemu/2011_11_09_100_characters_ac1.sql b/sql/updates/characters/reanemu/2011_11_09_100_characters_ac1.sql
 new file mode 100644
-index 0000000..34529cc
+index 0000000..a393ea0
 --- /dev/null
 +++ b/sql/updates/characters/reanemu/2011_11_09_100_characters_ac1.sql
-@@ -0,0 +1,87 @@
+@@ -0,0 +1,71 @@
 +CREATE TABLE `cheaters` (
 +  `entry` bigint(20) NOT NULL AUTO_INCREMENT,
 +  `player` varchar(255) NOT NULL,
@@ -54,22 +54,6 @@ index 0000000..34529cc
 +  PRIMARY KEY (`entry`),
 +  KEY `idx_Count` (`count`)
 +) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
-+
-+ALTER TABLE `cheaters`
-+   ADD COLUMN `zone_id` SMALLINT(5) NOT NULL DEFAULT '0' AFTER `Map`,
-+   ADD COLUMN `area_id` SMALLINT(5) NOT NULL DEFAULT '0' AFTER `zone_id`,
-+   ADD COLUMN `mapEntry` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `Map`,
-+   ADD COLUMN `zoneEntry` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `zone_id`,
-+   ADD COLUMN `areaEntry` VARCHAR(255) NOT NULL DEFAULT '0' AFTER `area_id`,
-+   ADD COLUMN `startX` FLOAT NOT NULL AFTER `Op`,
-+   ADD COLUMN `startY` FLOAT NOT NULL AFTER `startX`,
-+   ADD COLUMN `startZ` FLOAT NOT NULL AFTER `startY`,
-+   ADD COLUMN `endX` FLOAT NOT NULL AFTER `startZ`,
-+   ADD COLUMN `endY` FLOAT NOT NULL AFTER `endX`,
-+   ADD COLUMN `endZ` FLOAT NOT NULL AFTER `endY`,
-+   ADD COLUMN `t_guid` INT(11) NOT NULL DEFAULT '0' AFTER `endZ`,
-+   ADD COLUMN `flags` INT(11) NOT NULL DEFAULT '0' AFTER `t_guid`,
-+   ADD COLUMN `falltime` SMALLINT(5) NOT NULL DEFAULT '0' AFTER `flags`;
 +
 +-- Procedure to import pos data to new columns thx to Spp.
 +DELIMITER //
@@ -614,7 +598,7 @@ index 0dd8eb6..86c52cd 100755
  }
  
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index 8e25a95..918aa34 100755
+index 6e640e1..71d4c10 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -569,6 +569,18 @@ void World::LoadConfigSettings(bool reload)
@@ -637,10 +621,10 @@ index 8e25a95..918aa34 100755
      if (m_int_configs[CONFIG_COMPRESSION] < 1 || m_int_configs[CONFIG_COMPRESSION] > 9)
      {
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index b641fff..77fe361 100755
+index 26209b8..a26df19 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
-@@ -744,6 +744,19 @@ class World
+@@ -746,6 +746,19 @@ class World
          static int32 GetVisibilityNotifyPeriodInInstances() { return m_visibility_notify_periodInInstances;  }
          static int32 GetVisibilityNotifyPeriodInBGArenas()  { return m_visibility_notify_periodInBGArenas;   }
  
@@ -660,7 +644,7 @@ index b641fff..77fe361 100755
          void ProcessCliCommands();
          void QueueCliCommand(CliCommandHolder* commandHolder) { cliCmdQueue.add(commandHolder); }
  
-@@ -841,6 +854,19 @@ class World
+@@ -843,6 +856,19 @@ class World
          static int32 m_visibility_notify_periodInInstances;
          static int32 m_visibility_notify_periodInBGArenas;
  
@@ -701,10 +685,10 @@ index 9b9d1cf..5a157bf 100644
          {
              handler->SendSysMessage(LANG_USE_BOL);
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index 1b21baa..f8a2700 100644
+index b7ea11a..e5b8bf1 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
-@@ -2955,6 +2955,69 @@ CharDelete.KeepDays = 30
+@@ -2971,6 +2971,69 @@ CharDelete.KeepDays = 30
  ###################################################################################################
  
  ###################################################################################################

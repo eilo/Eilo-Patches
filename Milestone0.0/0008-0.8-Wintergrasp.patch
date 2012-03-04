@@ -1,4 +1,4 @@
-From 7039bfaaa8bb7919c3f78507e14442c52ef035af Mon Sep 17 00:00:00 2001
+From 3fb130157d80676066358cc2e11cae9d26ae5e1b Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 30 Dec 2011 17:17:46 -0500
 Subject: [PATCH 08/30] 0.8 Wintergrasp
@@ -640,7 +640,7 @@ index 68961b9..933a20a 100755
  {
      if (!*args)
 diff --git a/src/server/game/Entities/GameObject/GameObject.cpp b/src/server/game/Entities/GameObject/GameObject.cpp
-index 3548ef3..512eb69 100755
+index e26c671..91b0638 100755
 --- a/src/server/game/Entities/GameObject/GameObject.cpp
 +++ b/src/server/game/Entities/GameObject/GameObject.cpp
 @@ -447,6 +447,11 @@ void GameObject::Update(uint32 diff)
@@ -655,7 +655,7 @@ index 3548ef3..512eb69 100755
                          m_cooldownTime = time(NULL) + (goInfo->trap.cooldown ? goInfo->trap.cooldown :  uint32(4));   // template or 4 seconds
  
                          if (goInfo->trap.type == 1)
-@@ -1801,6 +1806,8 @@ void GameObject::SetDestructibleState(GameObjectDestructibleState state, Player*
+@@ -1815,6 +1820,8 @@ void GameObject::SetDestructibleState(GameObjectDestructibleState state, Player*
              if (DestructibleModelDataEntry const* modelData = sDestructibleModelDataStore.LookupEntry(m_goInfo->building.destructibleData))
                  if (modelData->DamagedDisplayId)
                      modelId = modelData->DamagedDisplayId;
@@ -852,10 +852,10 @@ index 6ea13d3..78bb1a8 100755
  enum ObjectiveStates
  {
 diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
-index c46721d..7f805ca 100755
+index cdec6bb..504f848 100755
 --- a/src/server/game/Scripting/ScriptLoader.cpp
 +++ b/src/server/game/Scripting/ScriptLoader.cpp
-@@ -593,6 +593,8 @@ void AddSC_outdoorpvp_na();
+@@ -594,6 +594,8 @@ void AddSC_outdoorpvp_na();
  void AddSC_outdoorpvp_si();
  void AddSC_outdoorpvp_tf();
  void AddSC_outdoorpvp_zm();
@@ -864,7 +864,7 @@ index c46721d..7f805ca 100755
  
  // player
  void AddSC_chat_log();
-@@ -1205,6 +1207,7 @@ void AddNorthrendScripts()
+@@ -1207,6 +1209,7 @@ void AddNorthrendScripts()
      AddSC_zuldrak();
      AddSC_crystalsong_forest();
      AddSC_isle_of_conquest();
@@ -872,7 +872,7 @@ index c46721d..7f805ca 100755
  #endif
  }
  
-@@ -1217,6 +1220,7 @@ void AddOutdoorPvPScripts()
+@@ -1219,6 +1222,7 @@ void AddOutdoorPvPScripts()
      AddSC_outdoorpvp_si();
      AddSC_outdoorpvp_tf();
      AddSC_outdoorpvp_zm();
@@ -893,7 +893,7 @@ index 54b39b3..9a23961 100755
                                  target->CastSpell(target, 58601, true);
                              break;
 diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
-index dc804d7..d0c7155 100755
+index 67d4c54..a19eaf7 100755
 --- a/src/server/game/Spells/Spell.cpp
 +++ b/src/server/game/Spells/Spell.cpp
 @@ -53,6 +53,8 @@
@@ -905,7 +905,7 @@ index dc804d7..d0c7155 100755
  
  extern pEffect SpellEffects[TOTAL_SPELL_EFFECTS];
  
-@@ -5398,8 +5400,17 @@ SpellCastResult Spell::CheckCast(bool strict)
+@@ -5402,8 +5404,17 @@ SpellCastResult Spell::CheckCast(bool strict)
                  if (m_originalCaster && m_originalCaster->GetTypeId() == TYPEID_PLAYER && m_originalCaster->isAlive())
                  {
                      if (AreaTableEntry const* pArea = GetAreaEntryByAreaID(m_originalCaster->GetAreaId()))
@@ -960,7 +960,7 @@ index 86c52cd..22df4ee 100755
                  case 63975:
                  {
 diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
-index 171382b..820a390 100755
+index ff4eaae..300a105 100755
 --- a/src/server/game/Spells/SpellMgr.cpp
 +++ b/src/server/game/Spells/SpellMgr.cpp
 @@ -30,6 +30,8 @@
@@ -972,7 +972,7 @@ index 171382b..820a390 100755
  
  bool IsPrimaryProfessionSkill(uint32 skill)
  {
-@@ -1131,6 +1133,26 @@ bool SpellArea::IsFitToRequirements(Player const* player, uint32 newZone, uint32
+@@ -1128,6 +1130,26 @@ bool SpellArea::IsFitToRequirements(Player const* player, uint32 newZone, uint32
                  return false;
              break;
          }
@@ -1000,7 +1000,7 @@ index 171382b..820a390 100755
          case 68720: // Quarry - Isle of Conquest.
          {
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index 918aa34..5b0a83a 100755
+index 71d4c10..e5f54b8 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -77,6 +77,7 @@
@@ -1011,7 +1011,7 @@ index 918aa34..5b0a83a 100755
  
  volatile bool World::m_stopEvent = false;
  uint8 World::m_ExitCode = SHUTDOWN_EXIT_CODE;
-@@ -1226,6 +1227,23 @@ void World::LoadConfigSettings(bool reload)
+@@ -1228,6 +1229,23 @@ void World::LoadConfigSettings(bool reload)
      m_bool_configs[CONFIG_PDUMP_NO_PATHS] = ConfigMgr::GetBoolDefault("PlayerDump.DisallowPaths", true);
      m_bool_configs[CONFIG_PDUMP_NO_OVERWRITE] = ConfigMgr::GetBoolDefault("PlayerDump.DisallowOverwrite", true);
  
@@ -1035,7 +1035,7 @@ index 918aa34..5b0a83a 100755
      sScriptMgr->OnConfigLoad(reload);
  }
  
-@@ -2940,6 +2958,32 @@ void World::ProcessQueryCallbacks()
+@@ -2942,6 +2960,32 @@ void World::ProcessQueryCallbacks()
      }
  }
  
@@ -1069,7 +1069,7 @@ index 918aa34..5b0a83a 100755
  {
      sLog->outString("Loading character name data");
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index 77fe361..ed31d84 100755
+index a26df19..45102b3 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
 @@ -158,6 +158,9 @@ enum WorldBoolConfigs
@@ -1082,7 +1082,7 @@ index 77fe361..ed31d84 100755
      CONFIG_PDUMP_NO_PATHS,
      CONFIG_PDUMP_NO_OVERWRITE,
      CONFIG_WARDEN_ENABLED,
-@@ -308,6 +311,18 @@ enum WorldIntConfigs
+@@ -310,6 +313,18 @@ enum WorldIntConfigs
      CONFIG_PRESERVE_CUSTOM_CHANNEL_DURATION,
      CONFIG_PERSISTENT_CHARACTER_CLEAN_FLAGS,
      CONFIG_MAX_INSTANCES_PER_HOUR,
@@ -1101,7 +1101,7 @@ index 77fe361..ed31d84 100755
      CONFIG_WARDEN_CLIENT_RESPONSE_DELAY,
      CONFIG_WARDEN_CLIENT_CHECK_HOLDOFF,
      CONFIG_WARDEN_CLIENT_FAIL_ACTION,
-@@ -782,6 +797,18 @@ class World
+@@ -784,6 +799,18 @@ class World
  
          bool isEventKillStart;
  
@@ -4191,7 +4191,7 @@ index 0000000..f6e6e3c
 +#endif
 \ No newline at end of file
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index f8a2700..bcc885a 100644
+index e5b8bf1..0587b50 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
 @@ -22,9 +22,11 @@
@@ -4206,7 +4206,7 @@ index f8a2700..bcc885a 100644
  #
  ###################################################################################################
  
-@@ -3191,3 +3193,117 @@ PlayerDump.DisallowOverwrite = 1
+@@ -3207,3 +3209,117 @@ PlayerDump.DisallowOverwrite = 1
  
  #
  ###################################################################################################

@@ -1,4 +1,4 @@
-From 7a523043ef5ec94842f01fc3ca7c8c947d97098d Mon Sep 17 00:00:00 2001
+From f6ec3a7a89843ed95ce7d73dd158d360bf803ed0 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Jan 2012 11:37:56 -0500
 Subject: [PATCH 12/30] =?UTF-8?q?0.12=20TrinityJail=20con=20ajuste=20a=20min?=
@@ -1203,10 +1203,10 @@ index eb27061..7715602 100755
      LANG_SELECT_CHAR_OR_CREATURE        = 1,
      LANG_SELECT_CREATURE                = 2,
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index ac51975..74e2ccc 100755
+index 234eb6b..9f00793 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
-@@ -1660,6 +1660,10 @@ void World::SetInitialWorldSettings()
+@@ -1662,6 +1662,10 @@ void World::SetInitialWorldSettings()
      sLog->outString("Returning old mails...");
      sObjectMgr->ReturnOrDeleteOldMails(false);
  
