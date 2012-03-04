@@ -1,17 +1,17 @@
-From 9134ee71a95bdfea24c76eee426fd555241384d7 Mon Sep 17 00:00:00 2001
+From 00624b922d0f7b73c5d2d96330fcb3b5a3c49177 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Fri, 2 Mar 2012 14:08:28 -0500
+Date: Sun, 4 Mar 2012 02:13:22 -0500
 Subject: [PATCH 10/30] 0.10 Rates Weekend
 
 ---
  .../reanemu/2012_02_11_100_world_rates_weekend.sql |    1 +
  src/server/game/Entities/Creature/GossipDef.cpp    |    4 ++--
  src/server/game/Entities/Player/Player.cpp         |    4 +++-
- src/server/game/Miscellaneous/Formulas.h           |    2 ++
+ src/server/game/Miscellaneous/Formulas.h           |    3 +++
  src/server/game/World/World.cpp                    |    2 ++
  src/server/game/World/World.h                      |    2 ++
  src/server/worldserver/worldserver.conf.dist       |    9 +++++++++
- 7 files changed, 21 insertions(+), 3 deletions(-)
+ 7 files changed, 22 insertions(+), 3 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2012_02_11_100_world_rates_weekend.sql
 
 diff --git a/sql/updates/world/reanemu/2012_02_11_100_world_rates_weekend.sql b/sql/updates/world/reanemu/2012_02_11_100_world_rates_weekend.sql
@@ -66,10 +66,18 @@ index 7d0586f..1fcb7c6 100755
      // handle SPELL_AURA_MOD_XP_QUEST_PCT auras
      Unit::AuraEffectList const& ModXPPctAuras = GetAuraEffectsByType(SPELL_AURA_MOD_XP_QUEST_PCT);
 diff --git a/src/server/game/Miscellaneous/Formulas.h b/src/server/game/Miscellaneous/Formulas.h
-index bcffb33..1eee083 100755
+index bcffb33..018dbfc 100755
 --- a/src/server/game/Miscellaneous/Formulas.h
 +++ b/src/server/game/Miscellaneous/Formulas.h
-@@ -182,6 +182,8 @@ namespace Trinity
+@@ -22,6 +22,7 @@
+ #include "World.h"
+ #include "SharedDefines.h"
+ #include "ScriptMgr.h"
++#include "GameEventMgr.h"
+ 
+ namespace Trinity
+ {
+@@ -182,6 +183,8 @@ namespace Trinity
  
                  if(player->GetSession()->IsPremium())
                      gain *= sWorld->getRate(RATE_XP_KILL_PREMIUM);
