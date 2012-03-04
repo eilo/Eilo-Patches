@@ -1,0 +1,244 @@
+From 7ca1d2975a057ed72a177815a36fb3f5fd5fe77e Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Sun, 4 Mar 2012 07:31:03 -0500
+Subject: [PATCH 2/3] --- ReanEmu WHAT_IS_INSIDE y PLANIFICACION ---
+
+---
+ PLANIFICACION  |  145 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ WHAT_IS_INSIDE |   71 +++++++++++++++++++++++++++
+ 2 files changed, 216 insertions(+), 0 deletions(-)
+ create mode 100644 PLANIFICACION
+ create mode 100644 WHAT_IS_INSIDE
+
+diff --git a/PLANIFICACION b/PLANIFICACION
+new file mode 100644
+index 0000000..e7c9019
+--- /dev/null
++++ b/PLANIFICACION
+@@ -0,0 +1,145 @@
++== ReanEmu ==
++#####################################################################
++##  Planificación de repositorios y de Avances del nuevo emulador  ##
++#####################################################################
++La planificación y organización adecuada de la información como del
++equipo y repositorios es uno de los aspectos mas importantes para
++lograr el objetivo con este proyecto de manera que:
++
++ -----------
++| Milestones |
++ -----------
++El repositorio no puede ser un desorden por lo que se fijarán metas 
++concretas en 5 MILESTONES:
++
++Milestone0.0 -- Características principales y adicionales para el emulador
++tales como ahbot, wintergrasp, warden, ac1, reset duel, etc.
++Milestone1.0 -- Jugabilidad en general, adecuaciones de código vario en mapas
++comportamiento de bgs, arenas, players-units-pets y mejoras.
++Milestone2.0 -- Principales arreglos a dungeons e instances, sobre todo las
++raids de ICC, Sagrario Rubi, Ulduar y Prueba del Cruazado.
++Milestone3.0 -- Arreglos a Spells, sobre todo para estabilidad del pve y del
++pvp dentro de los reinos.
++Milestone4.0 -- Arreglos en quests, y cadenas de misión, esto incluye scripts
++en c++ y SmartAI.
++Milestone5.0 -- Traducciones, e inclusión de varios dentro de tablas y strings
++del emulador, ya sea en c++ o en sqls.
++
++ ---------
++| Commits |
++ ---------
++Cada COMMIT se escribirá por cada una de los cambios mínimos que hagan 
++referentes al mismo tema y se clasificarán también con una estructura para 
++que asemeje a un solo tópico en concreto:
++
++Nombre: Descripción
++------ -----------
++Spell: texto e ID
++Script: texto
++Instance: texto
++Quest: texto script ID y sql
++Reputacion: texto script ID y sql
++SQL: dependiendo e ID
++
++Todos los commits serán en ESPAÑOl, excepto los nombres referentes a cosas 
++del emulador como tal, spells, nombres de las mismas, nombres de archivos, 
++dependencias, etc. Los nombres de archivos que describan los cambios en sql,
++serán en ESPAÑOL sin Ñ y se ajustarán a la cronología de tc en la carpeta 
++sql/update, ya sea en world, characters o auth de acuerdo a lo que corresponda 
++cada query o grupo en concreto asi:
++
++año-mes-dia-numero mayor a 100_carpeta_texto_explicativo.sql
++--- --- --- ------------------ ---------------------------------------
++2011_09_01_100_world_wintergrasp_torretas.sql
++
++Ojo, siempre igual a cien, para no pisar cualquier commit de tc. 
++
++ ------------
++| Desarrollo |
++ ------------
++Otra cosa que hay que tomar en cuenta es el hecho de que si algo es de código 
++de otra persona o equipo de personas en concreto hay que mencionarlo por los 
++copyrights, y si nosotros hacemos algo que no lo haya hecho nadie, añadir el 
++copyright respectivamente de cada uno individualmente y el de ReanEmu, sobre 
++todo si en una script se le ha hecho mejoras notables y de peso.
++
++* Copyright (C) ReanEmu 2011 
++
++Esto tambien nos servirá para añadirlo al What_Is_Inside del repo
++
++ ----------
++| Workflow |
++ ----------
++Nos basaremos en el juego que nos dan las branches para organizar adecuadamente el desarrollo y en las pull requests,
++cuando sea necesario, provenientes de los forks privados del equipo.
++Siempre habrá 2 branchs fijas en el repositorio: Master y Experimental. 
++
++ --------------
++| Branch Master |
++ --------------
++Master es considerada un retail. Ahí estarán todos los commits que se hayan seleccionado para entrar a Thalassa. Será
++una branch que se tocará sólo cuando se va a actualizar Thalassa siguiendo este proceso: 
++Se hace el reset necesario para poder actualizar tc hasta la revisión base, elegida en función de estos tres 
++parámetros: | usabilidad | <---> | estabilidad | <---> | jugabilidad | 
++Se hace pull de tc. 
++Se aplican los parches de los commits seleccionados de Rean y serán aplicados 1 a 1 siguiendo el orden de las 
++milestones prefijadas. 
++Finalmente, se indicará el uptime medio alcanzado con la última rev así como el número de pjs. 
++
++De esta manera tendremos una branch siempre limpia y organizada de manera que sea fácil consultar todo lo que contiene 
++actualmente Thalassa. 
++
++ --------------------
++| Branch Experimental |
++ --------------------
++La branch Experimental será donde el equipo de desarrollo trabajará de forma oficial. Ahí se pushearan todos los 
++commits que posteriormente entrarán a formar parte de Master. Esta branch debe estar lo más limpia posible, evitando 
++reverts y typos innecesarios (para guarrear están los forks). Además esta branch siempre debe ser funcional para los 
++testeos lo que significa que debe ser compilable todo el tiempo. Esencialmente es una branch de trabajo donde se irá
++progresando en el desarrollo del emulador a lo largo del tiempo entre cada actualización.
++
++ ----------------------
++| Forks y Otras Branchs |
++ ----------------------
++Los forks se usarán como cada uno quiera. Su principal función será la de hacer pull request de una determinada 
++feature/commit para que así los demás miembros del equipo de desarrollo puedan opinar sobre éste y si es necesario 
++hacer las correcciones pertinentes antes de ser mergeado a Experimental. 
++
++Si es necesario se pueden crear branchs para desarrollar determinadas features o que aún están demasiado verdes como 
++para entrar a Thalassa. Por ej. se podría crear una branch para contener los mmaps y según Venugh lo vaya desarrollando 
++ir haciendo merge y testeando. 
++
++ --------------------------
++| Actualización de Thalassa |
++ --------------------------
++Para que el proceso de actualización de Thalassa sea satisfactorio se dispondrá de una branch llamada 
++Experimental_actualización con base a experimental y que tendrá la rev base de TC elegida. Las semanas previas a la 
++actualización se organizarán testeos exhaustivos de todo lo trabajado y se verá el comportamiento general del core así 
++como posibles circunstancias adversas tras actualizar con TC. Para la eficaz realización de estos testeos se proveerá 
++de una lista donde el equipo de desarrollo indicará todo aquello que quiere que sea revisado.
++
++ -----------------------------------
++| Consideraciones a tener en cuenta |
++ -----------------------------------
++1. Siempre se commiteará cada acción con un commit individual por mas pequeño que sea. 
++Dado que en algún momento se necesita revertir, por que no funcione bien o porque 
++tc lo arreglase en algún momento. 
++
++2. Se mantendrá el codestyling de espacios en blanco con espaciadora, nunca con tabs 
++en el código o el emulador pierde condescendencia y también porque tc mantiene estas
++reglas básicas para coding. 
++
++3. Siempre se comunicara al resto de devs que es lo que se esta haciendo y se tendrá 
++claro siempre los repos que a cada uno se le ha asignado. Si algún commit tiene 
++referencia a alguno de los repos de otro dev, es imprescindible comunicarlo. 
++
++4. Se depreca el cherry pick por razones de conflictos anteriores, y se lo permitirá 
++únicamente con un commit contemporáneo, es decir que no supere 1 día atrás de la
++revisión punta (head) que tengamos nosotros.
++
++
++El proceso en general se lograra hacer mas llevadero y sobre todo nos ayudara para alcanzar 
++esta meta inmensa como equipo de desarrollo de ReanEmu.
++
++Saludos
++Staff Developers WoWRean
+\ No newline at end of file
+diff --git a/WHAT_IS_INSIDE b/WHAT_IS_INSIDE
+new file mode 100644
+index 0000000..8362a13
+--- /dev/null
++++ b/WHAT_IS_INSIDE
+@@ -0,0 +1,71 @@
++== ReanEmu ==
++
++What is inside: (que hay dentro)
++
++ReanEmu posee muchos fixes y mejoras a base de algunos repos y autores muy 
++conocidos además de los nuestros propios, este documento detalla los componentes,
++parches y/o código que contiene dentro este emulador de manera resumida:
++
++#########
++#ReanEmu#
++#########
++
++
++##################################
++# Trintitycore hasta esta fecha: #
++##################################
++
++
++###############
++# Adicionales #
++###############
++
++
++###############
++# Jugabilidad #
++###############
++
++
++###############################
++# Dungeons e Instances Varias #
++###############################
++
++
++#################
++# Sagrario Rubí #
++#################
++
++
++#######
++# ICC #
++#######
++
++
++##########
++# Ulduar #
++##########
++
++
++#######################
++# Hechizos y Talentos #
++#######################
++
++
++#################
++# Items y Bonus #
++#################
++
++
++############################
++# Soporte Quests y Eventos #
++############################
++
++
++#################
++# Traducciones: #
++#################
++
++
++##########
++# Custom #
++##########
+-- 
+1.7.8.msysgit.0
+

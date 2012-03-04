@@ -1,26 +1,26 @@
-From 55cba72cc90d19cbe8eb708e032156bd731ce25e Mon Sep 17 00:00:00 2001
+From b32037518edf73911fa3b141bd3922e252a500fb Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 29 Dec 2011 14:13:49 -0500
 Subject: [PATCH 1/3] --- ReanEmu contenidos iniciales ---
 
 ---
  CMakeLists.txt                                     |    2 +-
- README                                             |   37 +++++++++++++++++++-
- cmake/showoptions.cmake                            |    6 +-
- src/server/authserver/Main.cpp                     |   29 ++++++++++----
+ README                                             |   37 ++++++++++++++++++-
+ cmake/showoptions.cmake                            |    6 ++--
+ src/server/authserver/Main.cpp                     |   29 +++++++++++----
  src/server/authserver/Realms/RealmList.cpp         |    4 +-
- src/server/authserver/authserver.conf.dist         |    6 +-
+ src/server/authserver/authserver.conf.dist         |    6 ++--
  src/server/authserver/authserver.rc                |    4 +-
  src/server/shared/SystemConfig.h                   |    2 +-
- src/server/worldserver/CommandLine/CliRunnable.cpp |   10 ++--
- src/server/worldserver/Main.cpp                    |   10 ++--
- src/server/worldserver/Master.cpp                  |   38 ++++++++++--------
+ src/server/worldserver/CommandLine/CliRunnable.cpp |   10 +++---
+ src/server/worldserver/Main.cpp                    |   10 +++---
+ src/server/worldserver/Master.cpp                  |   38 +++++++++++---------
  src/server/worldserver/worldserver.conf.dist       |    2 +-
  src/server/worldserver/worldserver.rc              |    4 +-
  13 files changed, 103 insertions(+), 51 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index dfa6488..0e70a77 100644
+index 49f0c31..9a1dc79 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -9,7 +9,7 @@
@@ -33,7 +33,7 @@ index dfa6488..0e70a77 100644
  # CMake policies (can not be handled elsewhere)
  cmake_minimum_required(VERSION 2.6)
 diff --git a/README b/README
-index f2ae18f..60f2df7 100644
+index f2ae18f..be7aea8 100644
 --- a/README
 +++ b/README
 @@ -1,6 +1,41 @@
@@ -97,7 +97,7 @@ index 31e1b41..4fbd0dd 100644
  message("")
  
 diff --git a/src/server/authserver/Main.cpp b/src/server/authserver/Main.cpp
-index 8226868..5c40f0f 100755
+index 01a33d8..cfbf9d6 100755
 --- a/src/server/authserver/Main.cpp
 +++ b/src/server/authserver/Main.cpp
 @@ -100,10 +100,23 @@ extern int main(int argc, char **argv)
@@ -165,7 +165,7 @@ index 8226868..5c40f0f 100755
  }
  
 diff --git a/src/server/authserver/Realms/RealmList.cpp b/src/server/authserver/Realms/RealmList.cpp
-index c81af80..918cacc 100755
+index 245b9c7..100740e 100755
 --- a/src/server/authserver/Realms/RealmList.cpp
 +++ b/src/server/authserver/Realms/RealmList.cpp
 @@ -68,7 +68,7 @@ void RealmList::UpdateIfNeed()
@@ -175,7 +175,7 @@ index c81af80..918cacc 100755
 -    sLog->outDetail("Updating Realm List...");
 +    sLog->outDetail("Actualizando Lista de Reinos..");
  
-     PreparedStatement *stmt = LoginDatabase.GetPreparedStatement(LOGIN_GET_REALMLIST);
+     PreparedStatement *stmt = LoginDatabase.GetPreparedStatement(LOGIN_SEL_REALMLIST);
      PreparedQueryResult result = LoginDatabase.Query(stmt);
 @@ -93,7 +93,7 @@ void RealmList::UpdateRealms(bool init)
              UpdateRealm(realmId, name, address, port, icon, color, timezone, (allowedSecurityLevel <= SEC_ADMINISTRATOR ? AccountTypes(allowedSecurityLevel) : SEC_ADMINISTRATOR), pop, build);
@@ -201,7 +201,7 @@ index 86423d5..6db18b4 100644
  
  ###################################################################################################
 diff --git a/src/server/authserver/authserver.rc b/src/server/authserver/authserver.rc
-index 850fa60..7a02d99 100755
+index 97de894..3e77aba 100755
 --- a/src/server/authserver/authserver.rc
 +++ b/src/server/authserver/authserver.rc
 @@ -76,12 +76,12 @@ BEGIN
@@ -220,7 +220,7 @@ index 850fa60..7a02d99 100755
          END
      END
 diff --git a/src/server/shared/SystemConfig.h b/src/server/shared/SystemConfig.h
-index 18acc73..b3308fb 100755
+index 2431ebb..a3df7cf 100755
 --- a/src/server/shared/SystemConfig.h
 +++ b/src/server/shared/SystemConfig.h
 @@ -24,7 +24,7 @@
@@ -233,7 +233,7 @@ index 18acc73..b3308fb 100755
  #if TRINITY_ENDIAN == TRINITY_BIGENDIAN
  # define _ENDIAN_STRING "big-endian"
 diff --git a/src/server/worldserver/CommandLine/CliRunnable.cpp b/src/server/worldserver/CommandLine/CliRunnable.cpp
-index 6135252..4fea858 100755
+index 8e04a9c..f20b69f 100755
 --- a/src/server/worldserver/CommandLine/CliRunnable.cpp
 +++ b/src/server/worldserver/CommandLine/CliRunnable.cpp
 @@ -112,7 +112,7 @@ void utf8print(void* /*arg*/, const char* str)
@@ -245,7 +245,7 @@ index 6135252..4fea858 100755
      fflush(stdout);
  }
  
-@@ -573,7 +573,7 @@ void CliRunnable::run()
+@@ -578,7 +578,7 @@ void CliRunnable::run()
  
      // print this here the first time
      // later it will be printed after command queue updates
@@ -254,7 +254,7 @@ index 6135252..4fea858 100755
  
      ///- As long as the World is running (no World::m_stopEvent), get the command line and handle it
      while (!World::IsStopped())
-@@ -586,7 +586,7 @@ void CliRunnable::run()
+@@ -591,7 +591,7 @@ void CliRunnable::run()
          char commandbuf[256];
          command_str = fgets(commandbuf, sizeof(commandbuf), stdin);
  #else
@@ -263,7 +263,7 @@ index 6135252..4fea858 100755
          rl_bind_key('\t', rl_complete);
  #endif
  
-@@ -602,7 +602,7 @@ void CliRunnable::run()
+@@ -607,7 +607,7 @@ void CliRunnable::run()
              if (!*command_str)
              {
  #if PLATFORM == PLATFORM_WINDOWS
@@ -272,7 +272,7 @@ index 6135252..4fea858 100755
  #endif
                  continue;
              }
-@@ -611,7 +611,7 @@ void CliRunnable::run()
+@@ -616,7 +616,7 @@ void CliRunnable::run()
              if (!consoleToUtf8(command_str, command))         // convert from console encoding to utf8
              {
  #if PLATFORM == PLATFORM_WINDOWS
@@ -282,7 +282,7 @@ index 6135252..4fea858 100755
                  continue;
              }
 diff --git a/src/server/worldserver/Main.cpp b/src/server/worldserver/Main.cpp
-index 1ce247d..e85d05c 100755
+index 23f925d..e34f302 100755
 --- a/src/server/worldserver/Main.cpp
 +++ b/src/server/worldserver/Main.cpp
 @@ -38,8 +38,8 @@
@@ -311,7 +311,7 @@ index 1ce247d..e85d05c 100755
      ///- and run the 'Master'
      /// \todo Why do we need this 'Master'? Can't all of this be in the Main as for Realmd?
 diff --git a/src/server/worldserver/Master.cpp b/src/server/worldserver/Master.cpp
-index 42d72aa..8c7320c 100755
+index d84cfc1..5eededf 100755
 --- a/src/server/worldserver/Master.cpp
 +++ b/src/server/worldserver/Master.cpp
 @@ -124,17 +124,21 @@ int Master::Run()
@@ -402,7 +402,7 @@ index 42d72aa..8c7320c 100755
  }
  
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index 1e37f50..93f6793 100644
+index df46ccc..a5e7404 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
 @@ -1,5 +1,5 @@
@@ -413,7 +413,7 @@ index 1e37f50..93f6793 100644
  [worldserver]
  
 diff --git a/src/server/worldserver/worldserver.rc b/src/server/worldserver/worldserver.rc
-index 7712a50..055429e 100755
+index 2f778e5..901928d 100755
 --- a/src/server/worldserver/worldserver.rc
 +++ b/src/server/worldserver/worldserver.rc
 @@ -76,12 +76,12 @@ BEGIN
@@ -432,5 +432,5 @@ index 7712a50..055429e 100755
          END
      END
 -- 
-1.7.6.msysgit.0
+1.7.8.msysgit.0
 
