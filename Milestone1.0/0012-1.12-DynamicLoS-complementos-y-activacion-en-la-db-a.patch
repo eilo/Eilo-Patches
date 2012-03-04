@@ -1,4 +1,4 @@
-From 6c8dd01ff935370c116fa613f07650511d9c5242 Mon Sep 17 00:00:00 2001
+From 3e6b99f15fb46342195374bcd772af176e3b23bc Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 18:16:33 -0500
 Subject: [PATCH 12/27] 1.12 DynamicLoS complementos y activacion en la db,

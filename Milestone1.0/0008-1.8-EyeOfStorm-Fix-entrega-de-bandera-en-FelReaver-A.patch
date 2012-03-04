@@ -1,4 +1,4 @@
-From deb0001a18a22132129568b3d426fa8447a554da Mon Sep 17 00:00:00 2001
+From 48d4c7e8472ffbd16b191c6eaba17913656f955f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 17:47:11 -0500
 Subject: [PATCH 08/27] 1.8 EyeOfStorm: Fix entrega de bandera en

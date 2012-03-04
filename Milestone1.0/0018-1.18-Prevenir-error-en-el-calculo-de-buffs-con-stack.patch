@@ -1,4 +1,4 @@
-From 19a3954e4beaaabd06b1a0c4cc53bdd9c9e0faa7 Mon Sep 17 00:00:00 2001
+From 1c7d3778ed97fd1311ecef799e2d02f000c34a4c Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 19:06:26 -0500
 Subject: [PATCH 18/27] 1.18 Prevenir error en el calculo de buffs con stacks

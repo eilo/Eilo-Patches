@@ -1,4 +1,4 @@
-From d9887c9ff79041b13382f4975069931b05b0a37b Mon Sep 17 00:00:00 2001
+From 01a11025937571740bcf5966e2e01c749191a623 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 18:08:27 -0500
 Subject: [PATCH 10/27] 1.10 DynamicLoS en DalaranSewers
@@ -174,7 +174,7 @@ index f2ba2ce..0b61b2b 100755
  };
  #endif
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index b2441ff..9e61645 100755
+index a393e39..80466de 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -2415,6 +2415,22 @@ bool Player::TeleportTo(uint32 mapid, float x, float y, float z, float orientati

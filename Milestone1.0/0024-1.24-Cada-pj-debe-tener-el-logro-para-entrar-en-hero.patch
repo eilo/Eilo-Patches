@@ -1,4 +1,4 @@
-From 35f34f8cdf39caa248370a17aa805f1f5ceb2148 Mon Sep 17 00:00:00 2001
+From c410c12c6560bef527348108a6b4d88684cb5a53 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 10 Feb 2012 02:13:30 -0500
 Subject: [PATCH 24/27] 1.24 Cada pj debe tener el logro para entrar en
@@ -9,7 +9,7 @@ Subject: [PATCH 24/27] 1.24 Cada pj debe tener el logro para entrar en
  1 files changed, 2 insertions(+), 8 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 6d3cae1..cfc71ee 100755
+index 1261218..369f03d 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -18586,14 +18586,8 @@ bool Player::Satisfy(AccessRequirement const* ar, uint32 target_map, bool report
