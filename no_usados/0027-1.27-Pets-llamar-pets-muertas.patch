@@ -1,0 +1,26 @@
+From b8b65c97c357c7d5003ba0e4d6d13a1a2a35c941 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Sat, 3 Mar 2012 20:24:06 -0500
+Subject: [PATCH 27/28] 1.27 Pets llamar pets muertas
+
+---
+ src/server/game/Entities/Unit/Unit.cpp |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
+index e74bc27..8015904 100755
+--- a/src/server/game/Entities/Unit/Unit.cpp
++++ b/src/server/game/Entities/Unit/Unit.cpp
+@@ -244,6 +244,9 @@ m_vehicleKit(NULL), m_unitTypeMask(UNIT_MASK_NONE), m_HostileRefManager(this), m
+ 
+     _focusSpell = NULL;
+     _targetLocked = false;
++
++    // Prevent crash when loading dead pets or using call pet on dead pets
++    i_motionMaster.Initialize();
+ }
+ 
+ ////////////////////////////////////////////////////////////
+-- 
+1.7.8.msysgit.0
+
