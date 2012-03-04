@@ -1,7 +1,7 @@
-From b10845f42826b18a30ce3304498d5df0a5f42835 Mon Sep 17 00:00:00 2001
+From 98ae3fbd05e8f0f853919e89f65609814371b1f4 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 25 Dec 2011 13:03:55 -0500
-Subject: [PATCH 19/27] 1.19 IsleOfConquest: Script evitando que puedan matar
+Subject: [PATCH 19/28] 1.19 IsleOfConquest: Script evitando que puedan matar
  a los bosses con exploit
 
 ---

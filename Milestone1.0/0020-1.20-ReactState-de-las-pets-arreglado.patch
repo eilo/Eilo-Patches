@@ -1,7 +1,7 @@
-From 6adc1ddc2f27210012ef7c5e3c62df8311445b1c Mon Sep 17 00:00:00 2001
+From 5cef7bcd83b658cb60a18b93fe8d58969b8a4f03 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 1 Mar 2012 12:43:09 -0500
-Subject: [PATCH 20/27] 1.20 ReactState de las pets arreglado
+Subject: [PATCH 20/28] 1.20 ReactState de las pets arreglado
 
 ---
  src/server/game/Entities/Unit/Unit.cpp             |   18 ++++++++++--------
@@ -9,10 +9,10 @@ Subject: [PATCH 20/27] 1.20 ReactState de las pets arreglado
  2 files changed, 22 insertions(+), 16 deletions(-)
 
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index 96e8978..3339619 100755
+index 5b18713..dd6045f 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -15310,14 +15310,6 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
+@@ -15315,14 +15315,6 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
      if (!victim->GetHealth())
          return;
  
@@ -27,7 +27,7 @@ index 96e8978..3339619 100755
      // find player: owner of controlled `this` or `this` itself maybe
      Player* player = GetCharmerOrOwnerPlayerOrPlayerItself();
      Creature* creature = victim->ToCreature();
-@@ -15446,6 +15438,16 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
+@@ -15451,6 +15443,16 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
          victim->setDeathState(JUST_DIED);
      }
  
