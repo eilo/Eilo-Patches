@@ -1,7 +1,7 @@
-From 6cd72595f6f2bc3f49ed11dab6eb820432863358 Mon Sep 17 00:00:00 2001
+From e0f7b67ae6b399a894798f7730554164b1a98229 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Fri, 6 Jan 2012 23:59:29 +0100
-Subject: [PATCH 2/6] 4.2 Hodir: Un cambio de escenario (12921): Spawn npc
+Subject: [PATCH 2/9] 4.2 Hodir: Un cambio de escenario (12921): Spawn npc
  Lok'lira (29975)
 
 ---

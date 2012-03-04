@@ -1,7 +1,7 @@
-From 8ec1a9c8fea9dbf9ed2edb0508b926ad2c881b7d Mon Sep 17 00:00:00 2001
+From e9040a22bc658c591bd48d91205573d4599d0823 Mon Sep 17 00:00:00 2001
 From: strolch <sebeche@gmail.com>
 Date: Mon, 6 Feb 2012 21:40:25 -0500
-Subject: [PATCH 1/6] 4.1 Queldelar: Un disfraz apropiado A(20438) H(24556)
+Subject: [PATCH 1/9] 4.1 Queldelar: Un disfraz apropiado A(20438) H(24556)
 
 ---
  .../2012_01_24_100_world_un_disfraz_apropiado.sql  |  216 ++++++++++++++++++++
