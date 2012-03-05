@@ -1,14 +1,14 @@
-From 07307ffeb475658beac6c2c364ec2fd84f1aa8bd Mon Sep 17 00:00:00 2001
+From 7a0b622ff884c1c0d82cf053116cecc40527c437 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Mon, 13 Feb 2012 06:00:20 -0500
-Subject: [PATCH 50/67] =?UTF-8?q?2.9.1=20TheRubySanctum:=20A=C3=B1adida=20sc?=
- =?UTF-8?q?ript=20mejorada=20para=20Halion=20y=20trashmobs?=
+Date: Mon, 5 Mar 2012 11:49:37 -0500
+Subject: [PATCH] =?UTF-8?q?2.9.1=20TheRubySanctum:=20A=C3=B1adida=20script=20?=
+ =?UTF-8?q?mejorada=20para=20Halion=20y=20trashmobs?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 ---
- .../reanemu/2011_12_27_100_world_ruby_sanctum.sql  |  335 ++++
+ .../reanemu/2011_12_27_100_world_ruby_sanctum.sql  |  336 ++++
  src/server/game/Scripting/ScriptLoader.cpp         |    4 +-
  src/server/scripts/Northrend/CMakeLists.txt        |    2 +-
  .../RubySanctum/boss_baltharus_the_warborn.cpp     |  750 ++++++---
@@ -17,16 +17,16 @@ Content-Transfer-Encoding: 8bit
  .../RubySanctum/boss_saviana_ragefire.cpp          |  522 ++++--
  .../RubySanctum/instance_ruby_sanctum.cpp          |  926 ++++++++---
  .../ChamberOfAspects/RubySanctum/ruby_sanctum.h    |  168 +--
- 9 files changed, 3934 insertions(+), 1019 deletions(-)
+ 9 files changed, 3935 insertions(+), 1019 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2011_12_27_100_world_ruby_sanctum.sql
  create mode 100644 src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_halion.cpp
 
 diff --git a/sql/updates/world/reanemu/2011_12_27_100_world_ruby_sanctum.sql b/sql/updates/world/reanemu/2011_12_27_100_world_ruby_sanctum.sql
 new file mode 100644
-index 0000000..ceefc2e
+index 0000000..11b88d1
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_12_27_100_world_ruby_sanctum.sql
-@@ -0,0 +1,335 @@
+@@ -0,0 +1,336 @@
 +-- ------------- Script name Instance fix Eilo ----------------
 +-- ------------------------------------------------------------
 +UPDATE `instance_template` SET `Script`='instance_ruby_sanctum' WHERE `map`=724;
@@ -60,7 +60,7 @@ index 0000000..ceefc2e
 +UPDATE `creature` SET `spawntimesecs`=1209600 WHERE `map`=724 AND `id` NOT IN (39751,39746,39747);
 +-- --------- Dragones fin evento (custom) fix ws --------------
 +-- ------------------------------------------------------------
-+INSERT INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`, `faction_A`, `faction_H`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `mindmg`, `maxdmg`, `dmgschool`, `attackpower`, `dmg_multiplier`, `baseattacktime`, `rangeattacktime`, `unit_class`, `unit_flags`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `minrangedmg`, `maxrangedmg`, `rangedattackpower`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `Health_mod`, `Mana_mod`, `Armor_mod`, `RacialLeader`, `questItem1`, `questItem2`, `questItem3`, `questItem4`, `questItem5`, `questItem6`, `movementId`, `RegenHealth`, `equipment_id`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`, `WDBVerified`) VALUES
++REPLACE INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`, `faction_A`, `faction_H`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `mindmg`, `maxdmg`, `dmgschool`, `attackpower`, `dmg_multiplier`, `baseattacktime`, `rangeattacktime`, `unit_class`, `unit_flags`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `minrangedmg`, `maxrangedmg`, `rangedattackpower`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `Health_mod`, `Mana_mod`, `Armor_mod`, `RacialLeader`, `questItem1`, `questItem2`, `questItem3`, `questItem4`, `questItem5`, `questItem6`, `movementId`, `RegenHealth`, `equipment_id`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`, `WDBVerified`) VALUES
 +(3470008, 0, 0, 0, 0, 0, 2718, 0, 0, 0, 'Ruby Dragon', 'WS-CORE', 'WS-CORE', 0, 80, 80, 0, 2010, 2010, 0, 3, 3, 1.4, 0, 420, 630, 0, 158, 1, 2000, 2000, 1, 0, 0, 0, 0, 0, 0, 0, 336, 504, 126, 2, 4096, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 3, 378.538, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 'npc_D_ws2', 0);
 +-- --------- Script name objetos fix ws -----------------------
 +-- ------------------------------------------------------------
@@ -75,7 +75,7 @@ index 0000000..ceefc2e
 +DELETE FROM `spell_script_names` WHERE `spell_id`=74792 AND `ScriptName`='spell_halion_soul_consumption';
 +INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES (74792,'spell_halion_soul_consumption');
 +-- spell_twilight_cutter 74768
-+DELETE FROM `spell_script_names` WHERE `spell_id`=74562 AND `ScriptName`='spell_twilight_cutter';
++DELETE FROM `spell_script_names` WHERE `spell_id`=74768 AND `ScriptName`='spell_twilight_cutter';
 +INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES (74768,'spell_twilight_cutter');
 +-- ---------- Ws core Traduccion de Rubi event ---------------
 +-- -------- Textos añadidos por Eilo y retoques --------------
@@ -124,6 +124,7 @@ index 0000000..ceefc2e
 +-- ---------- Spawn del Anillo de fuego fix Eilo --------------
 +-- ------------------------------------------------------------
 +SET @OGUID = 152192; -- Need 1 (Set by TDB team)
++DELETE FROM `gameobject` WHERE `guid`=@OGUID;
 +INSERT INTO `gameobject` (`guid`,`id`, `map`, `spawnMask`, `phaseMask`, `position_x`, `position_y`, `position_z`, `orientation`, `rotation0`, `rotation1`, `rotation2`, `rotation3`, `spawntimesecs`, `animprogress`, `state`) VALUES
 +(@OGUID,203624,724,15,1,3154.99,535.637,72.887,3.14159,0,0,0,0,120,0,0); -- GO_TWILIGHT_FLAME_RING
 +-- ---------------- Spawn hero y otros fix ws -----------------
@@ -363,10 +364,10 @@ index 0000000..ceefc2e
 +VALUES
 +   (203007, 0, 9482, 'Ruby Sanctum Halion Flame Ring', '', '', '', 0, 48, 1.6, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 12340);
 diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
-index 60f16b0..1ca0506 100755
+index 10b8e7f..bccaa6b 100755
 --- a/src/server/game/Scripting/ScriptLoader.cpp
 +++ b/src/server/game/Scripting/ScriptLoader.cpp
-@@ -487,7 +487,7 @@ void AddSC_icecrown_citadel_teleport();
+@@ -486,7 +486,7 @@ void AddSC_icecrown_citadel_teleport();
  void AddSC_instance_icecrown_citadel();
  void AddSC_icecrown_citadel();
  void AddSC_instance_ruby_sanctum();      // Ruby Sanctum
@@ -375,7 +376,7 @@ index 60f16b0..1ca0506 100755
  void AddSC_boss_baltharus_the_warborn();
  void AddSC_boss_saviana_ragefire();
  void AddSC_boss_general_zarithrian();
-@@ -1197,7 +1197,7 @@ void AddNorthrendScripts()
+@@ -1195,7 +1195,7 @@ void AddNorthrendScripts()
      AddSC_instance_icecrown_citadel();
      AddSC_icecrown_citadel();
      AddSC_instance_ruby_sanctum();      // Ruby Sanctum
@@ -385,7 +386,7 @@ index 60f16b0..1ca0506 100755
      AddSC_boss_saviana_ragefire();
      AddSC_boss_general_zarithrian();
 diff --git a/src/server/scripts/Northrend/CMakeLists.txt b/src/server/scripts/Northrend/CMakeLists.txt
-index 6b1788a..e8c0849 100644
+index 25eb8a6..c91fc01 100644
 --- a/src/server/scripts/Northrend/CMakeLists.txt
 +++ b/src/server/scripts/Northrend/CMakeLists.txt
 @@ -47,7 +47,7 @@ set(scripts_STAT_SRCS
