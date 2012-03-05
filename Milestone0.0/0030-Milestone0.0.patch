@@ -23,7 +23,7 @@ index 8362a13..c5e8c9b 100644
  
  
  ##################################
-@@ -19,6 +24,35 @@ parches y/o c
+@@ -19,6 +24,32 @@ parches y/o c
  ###############
  # Adicionales #
  ###############
@@ -40,22 +40,19 @@ index 8362a13..c5e8c9b 100644
 +0.11 - 07/10/2011: DynamicLoS para gameobjects por Odyssey, ajustes por Eilo
 +0.12 - 29/11/2011: TrinityJail original de Warhead, añadido por Hispano, ajustes por Eilo
 +0.13 - 20/01/2012: Autenticacion con cata 4.2.2 y 4.3.0 por Eilo
-+0.14 - 02/12/2011: Lista de who maximo 50 pj por Eilo
-+0.15 - 09/10/2011: Desactivado avisos Join/Leave en canales por Odyssey
-+0.16 - 05/10/2011: Permitiendo unirse al canal LFG sin estar en ciudad principal por Opcode187
-+0.17 - 01/11/2011: DoCompleteAchievement reañadida al nucleo como funcion activa por Eilo
-+0.18 - 04/11/2011: DoAttackerAreaInCombat reañadida al nucleo para soporte por Eilo
-+0.19 - 17/11/2011: DoAttackerGroupInCombat reañadida al nucleo para soporte por Eilo
-+0.20 - 17/11/2011: _DoAggroPulse funcion y inFightAggroCheck_Timer reañadida para soporte por Eilo
-+0.21 - 21/11/2011: UnsummonSpecificCreaturesNearby funcion de soporte añadida por Eilo
-+0.22 - 30/12/2011: HasAchieved funcion de soporte reañadida por Eilo
-+0.23 - 30/12/2011: FindNearestPlayer y GetNearestPlayersList reañadidas por Eilo
-+0.24 - 30/12/2011: setRegeneratingHealth funcion de soporte reañadida por Eilo
-+0.25 - 30/12/2011: SetImmuneToPushPullEffects funcion de soporte reañadida por Eilo
-+0.25 - 04/02/2012: BuildWaitMovePacket funcion de soporte añadida por Eilo
-+0.26 - 04/02/2012: AddNPCPassengerInInstance funcion de soporte añadida por Eilo
-+0.27 - 04/02/2012: UpdatePlayerPosition funcion de soporte añadida por Eilo
-+0.28 - 04/02/2012: LoadTransportForMap, UnloadTransportFromMap, LoadTransportForPlayers y UnloadTransportForPlayers funciones de soporte añadidas por Eilo
++0.14 - 01/11/2011: DoCompleteAchievement reañadida al nucleo como funcion activa por Eilo
++0.15 - 04/11/2011: DoAttackerAreaInCombat reañadida al nucleo para soporte por Eilo
++0.16 - 17/11/2011: DoAttackerGroupInCombat reañadida al nucleo para soporte por Eilo
++0.17 - 17/11/2011: _DoAggroPulse funcion y inFightAggroCheck_Timer reañadida para soporte por Eilo
++0.18 - 21/11/2011: UnsummonSpecificCreaturesNearby funcion de soporte añadida por Eilo
++0.19 - 30/12/2011: HasAchieved funcion de soporte reañadida por Eilo
++0.20 - 30/12/2011: FindNearestPlayer y GetNearestPlayersList reañadidas por Eilo
++0.21 - 30/12/2011: setRegeneratingHealth funcion de soporte reañadida por Eilo
++0.22 - 30/12/2011: SetImmuneToPushPullEffects funcion de soporte reañadida por Eilo
++0.23 - 04/02/2012: BuildWaitMovePacket funcion de soporte añadida por Eilo
++0.24 - 04/02/2012: AddNPCPassengerInInstance funcion de soporte añadida por Eilo
++0.25 - 04/02/2012: UpdatePlayerPosition funcion de soporte añadida por Eilo
++0.26 - 04/02/2012: LoadTransportForMap, UnloadTransportFromMap, LoadTransportForPlayers y UnloadTransportForPlayers funciones de soporte añadidas por Eilo
  
  
  ###############
