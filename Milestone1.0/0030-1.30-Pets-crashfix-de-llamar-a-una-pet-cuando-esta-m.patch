@@ -1,0 +1,36 @@
+From 02e4dbed0152d42179dc56ccf654a9f170ca75a4 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Sun, 4 Mar 2012 21:18:32 -0500
+Subject: [PATCH 30/31] 1.30 Pets: crashfix de llamar a una pet cuando esta
+ muerta
+
+---
+ src/server/game/Entities/Unit/Unit.cpp |   12 ++++++++++--
+ 1 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
+index dd6045f..2766df8 100755
+--- a/src/server/game/Entities/Unit/Unit.cpp
++++ b/src/server/game/Entities/Unit/Unit.cpp
+@@ -12690,8 +12690,16 @@ void Unit::setDeathState(DeathState s)
+         // remove aurastates allowing special moves
+         ClearAllReactives();
+         ClearDiminishings();
+-        GetMotionMaster()->Clear(false);
+-        GetMotionMaster()->MoveIdle();
++        if (!isPet() || (isPet() && IsInWorld()))
++        {
++            // Only clear MotionMaster for non-pet entities OR if pet and in world
++            // Fixes crash when:
++            //  * Using 'call pet' on dead pets
++            //  * Using 'call stabled pet'
++            //  * Logging in with dead pets
++            GetMotionMaster()->Clear(false);
++            GetMotionMaster()->MoveIdle();
++        }
+         StopMoving();
+         // without this when removing IncreaseMaxHealth aura player may stuck with 1 hp
+         // do not why since in IncreaseMaxHealth currenthealth is checked
+-- 
+1.7.8.msysgit.0
+

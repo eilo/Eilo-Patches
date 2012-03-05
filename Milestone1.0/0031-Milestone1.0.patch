@@ -1,14 +1,14 @@
-From 8c1e3681156b334ec850d060776fe609be37d996 Mon Sep 17 00:00:00 2001
+From b6ca2d06480455d8b689961dfca1cff304dfe68f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 2 Jan 2012 12:01:22 -0500
-Subject: [PATCH 28/28] Milestone1.0
+Subject: [PATCH 31/31] Milestone1.0
 
 ---
- WHAT_IS_INSIDE |   29 +++++++++++++++++++++++++++++
- 1 files changed, 29 insertions(+), 0 deletions(-)
+ WHAT_IS_INSIDE |   32 ++++++++++++++++++++++++++++++++
+ 1 files changed, 32 insertions(+), 0 deletions(-)
 
 diff --git a/WHAT_IS_INSIDE b/WHAT_IS_INSIDE
-index c5e8c9b..7c4ad1a 100644
+index c5e8c9b..114a6de 100644
 --- a/WHAT_IS_INSIDE
 +++ b/WHAT_IS_INSIDE
 @@ -14,6 +14,8 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
@@ -20,7 +20,7 @@ index c5e8c9b..7c4ad1a 100644
  
  
  ##################################
-@@ -58,6 +60,33 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
+@@ -58,6 +60,36 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
  ###############
  # Jugabilidad #
  ###############
@@ -51,6 +51,9 @@ index c5e8c9b..7c4ad1a 100644
 +1.25 - 11/02/2012: Ahora el loot de prospectar jade funciona como debe por Muzashi
 +1.26 - 08/02/2012: Pets focus regen apañado por MrSmite
 +1.27 - 02/01/2012: EyeOfStorm: Evitando que salgan de la burbuja antes de comenzar la bg por Rat
++1.28 - 25/02/2012: Arpen: fixeada aplicación del Arpen obtenido de non-scaling items para Druida Feral por Shauren
++1.29 - 15/02/2012: Spline: crashfix cuando un jugador se desconecta en un área hostil por Kaelima
++1.30 - 04/03/2012: Pets: crashfix de llamar a una pet cuando esta muerta por MrSmite
  
  
  ###############################
