@@ -1,7 +1,7 @@
 From 77e3b799ea5acfbf5cce0f59a3a1becdd1231ae1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 08:35:54 -0500
-Subject: [PATCH 30/38] 1.30 EyeOfStorm: Evitando que salgan de la burbuja
+Subject: [PATCH 30/39] 1.30 EyeOfStorm: Evitando que salgan de la burbuja
  antes de comenzar la bg
 
 ---

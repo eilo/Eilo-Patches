@@ -1,7 +1,7 @@
 From ccf650fd2e19928b9ed131bea5bcc9b57478c7c6 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 18:08:27 -0500
-Subject: [PATCH 13/38] 1.13 DynamicLoS en DalaranSewers
+Subject: [PATCH 13/39] 1.13 DynamicLoS en DalaranSewers
 
 ---
  .../game/Battlegrounds/Zones/BattlegroundDS.cpp    |   90 ++++++++++++++++---

@@ -1,7 +1,7 @@
 From ef86c5516897f3d55a41f567ac2149d9eca74965 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 9 Mar 2012 22:18:16 -0500
-Subject: [PATCH 37/38] 1.37 Eliminando un stored procedure de tc que evita el
+Subject: [PATCH 37/39] 1.37 Eliminando un stored procedure de tc que evita el
  importar el sql completo
 
 ---

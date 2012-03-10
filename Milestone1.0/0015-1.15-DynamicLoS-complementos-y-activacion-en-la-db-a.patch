@@ -1,7 +1,7 @@
 From eb12e1cdae44ffea8edecff7d971e8716baf04ed Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 18:16:33 -0500
-Subject: [PATCH 15/38] 1.15 DynamicLoS complementos y activacion en la db,
+Subject: [PATCH 15/39] 1.15 DynamicLoS complementos y activacion en la db,
  ajuste circulo demoniaco en estas 2 arenas
 
 ---
