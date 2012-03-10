@@ -1,7 +1,7 @@
-From 4cb0c868a4cf2d1fbec53e8cdbe265b7e105f040 Mon Sep 17 00:00:00 2001
+From 4bb3dfd497718b3c1fa13a3a19431c42d2ca690e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 21:18:32 -0500
-Subject: [PATCH 31/34] 1.31 Pets: crashfix de llamar a una pet cuando esta
+Subject: [PATCH 31/36] 1.31 Pets: crashfix de llamar a una pet cuando esta
  muerta
 
 ---

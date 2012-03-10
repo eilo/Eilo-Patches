@@ -1,7 +1,7 @@
-From 8cebcf44c8334905937db3f7785d9b87cf1d9389 Mon Sep 17 00:00:00 2001
+From f774bd9acb23a70c8755a55eb9f38ce36e693076 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 16:52:19 -0500
-Subject: [PATCH 10/34] 1.10 Guardado de Spells, evitando bugs especialmente
+Subject: [PATCH 10/36] 1.10 Guardado de Spells, evitando bugs especialmente
  del dk
 
 ---
