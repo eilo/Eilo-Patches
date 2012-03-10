@@ -1,7 +1,7 @@
 From 3482baaea803ca5f2e7426aa5a2b25cab9b363da Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 4 Mar 2012 17:38:02 +0100
-Subject: [PATCH 32/39] =?UTF-8?q?1.32=20Spline=20Subsystem:=20fix=20un=20cra?=
+Subject: [PATCH 32/40] =?UTF-8?q?1.32=20Spline=20Subsystem:=20fix=20un=20cra?=
  =?UTF-8?q?sh=20cuando=20un=20jugador=20se=20desconecta=20en=20un=20=C3=A1re?=
  =?UTF-8?q?a=20hostil.=20El=20spell=20de=20honorless=20deber=C3=ADa=20y=20ya?=
  =?UTF-8?q?=20esta=20casteado=20despu=C3=A9s=20de=20haber=20recibido=20CMSG=5F?=

@@ -1,7 +1,7 @@
 From a8efcc8bdea5f1350de977214417ae8a655fe263 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 18:36:12 -0500
-Subject: [PATCH 19/39] 1.19 Evitando que puedan poner totems dentro de las
+Subject: [PATCH 19/40] 1.19 Evitando que puedan poner totems dentro de las
  paredes
 
 ---

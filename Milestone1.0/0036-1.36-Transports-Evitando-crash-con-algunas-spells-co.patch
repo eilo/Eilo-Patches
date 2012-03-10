@@ -1,7 +1,7 @@
 From ee459dcd5f9da60dfd745bcdc812d2964dfd0280 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 9 Mar 2012 22:11:22 -0500
-Subject: [PATCH 36/39] 1.36 Transports: Evitando crash con algunas spells
+Subject: [PATCH 36/40] 1.36 Transports: Evitando crash con algunas spells
  como blink o teleport
 
 ---

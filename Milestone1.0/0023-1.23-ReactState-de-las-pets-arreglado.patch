@@ -1,7 +1,7 @@
 From 8fa37b8d361fc6fcf8d6c6547e237c0fbb1a1b96 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 1 Mar 2012 12:43:09 -0500
-Subject: [PATCH 23/39] 1.23 ReactState de las pets arreglado
+Subject: [PATCH 23/40] 1.23 ReactState de las pets arreglado
 
 ---
  src/server/game/Entities/Unit/Unit.cpp             |   18 ++++++++++--------
