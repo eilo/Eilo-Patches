@@ -1,7 +1,7 @@
-From 2d48987d94c0c7c998759907b9d5cc1b12204bc8 Mon Sep 17 00:00:00 2001
+From 00604c825b8330475bc85159e1c48666a5012c69 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 00:40:26 -0500
-Subject: [PATCH 13/30] 0.13 Autenticacion con cata 4.0.6a, 4.2.2 y 4.3.3
+Subject: [PATCH 13/27] 0.13 Autenticacion con cata 4.0.6a, 4.2.2 y 4.3.3
 
 ---
  src/server/authserver/Authentication/AuthCodes.h |    2 +-

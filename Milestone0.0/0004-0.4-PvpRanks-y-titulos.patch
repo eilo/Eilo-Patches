@@ -1,7 +1,7 @@
-From 25acdfda43974449895519de222fc7673dd3832b Mon Sep 17 00:00:00 2001
+From 466bbc8c755644c7336ec11be13f7080bdb19ed3 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 20:38:02 -0500
-Subject: [PATCH 04/30] 0.4 PvpRanks y titulos
+Subject: [PATCH 04/27] 0.4 PvpRanks y titulos
 
 ---
  src/server/game/Entities/Player/Player.cpp |   64 ++++++++++++++++++++++++++-

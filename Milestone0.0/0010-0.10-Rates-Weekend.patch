@@ -1,7 +1,7 @@
-From eef31ffa9074f0ca5e793f610ed3376e91916d1a Mon Sep 17 00:00:00 2001
+From 0bae68058defcddc0054aba8be15a73654c09ffd Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 02:13:22 -0500
-Subject: [PATCH 10/30] 0.10 Rates Weekend
+Subject: [PATCH 10/27] 0.10 Rates Weekend
 
 ---
  .../reanemu/2012_02_11_100_world_rates_weekend.sql |    1 +
@@ -16,7 +16,7 @@ Subject: [PATCH 10/30] 0.10 Rates Weekend
 
 diff --git a/sql/updates/world/reanemu/2012_02_11_100_world_rates_weekend.sql b/sql/updates/world/reanemu/2012_02_11_100_world_rates_weekend.sql
 new file mode 100644
-index 0000000..b588d7e
+index 0000000..206f35b
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_02_11_100_world_rates_weekend.sql
 @@ -0,0 +1 @@

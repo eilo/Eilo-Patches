@@ -1,7 +1,7 @@
-From 3fb130157d80676066358cc2e11cae9d26ae5e1b Mon Sep 17 00:00:00 2001
+From 527982746ae965b619f8e3029ada3b7b8c025560 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 30 Dec 2011 17:17:46 -0500
-Subject: [PATCH 08/30] 0.8 Wintergrasp
+Subject: [PATCH 08/27] 0.8 Wintergrasp
 
 ---
  .../2011_10_13_100_characters_wintergrasp.sql      |    6 +
