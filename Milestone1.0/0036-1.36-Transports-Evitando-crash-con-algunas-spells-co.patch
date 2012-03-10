@@ -1,0 +1,26 @@
+From ee459dcd5f9da60dfd745bcdc812d2964dfd0280 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 9 Mar 2012 22:11:22 -0500
+Subject: [PATCH 36/38] 1.36 Transports: Evitando crash con algunas spells
+ como blink o teleport
+
+---
+ src/server/game/Entities/Player/Player.cpp |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
+index 8febb0c..5aad1d5 100755
+--- a/src/server/game/Entities/Player/Player.cpp
++++ b/src/server/game/Entities/Player/Player.cpp
+@@ -2238,7 +2238,7 @@ bool Player::TeleportTo(uint32 mapid, float x, float y, float z, float orientati
+     if (duel && GetMapId() != mapid && GetMap()->GetGameObject(GetUInt64Value(PLAYER_DUEL_ARBITER)))
+         DuelComplete(DUEL_FLED);
+ 
+-    if ((GetMapId() == mapid && !m_transport) || (GetTransport() && GetMapId() == 628))
++    if ((GetMapId() == mapid && !m_transport) || (GetTransport() && GetMapId() == 628) || (GetTransport() && GetMapId() == 631))
+     {
+         //lets reset far teleport flag if it wasn't reset during chained teleports
+         SetSemaphoreTeleportFar(false);
+-- 
+1.7.8.msysgit.0
+

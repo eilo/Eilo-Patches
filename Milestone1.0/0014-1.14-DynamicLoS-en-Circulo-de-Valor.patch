@@ -1,7 +1,7 @@
 From 0fd31fa1df02f4aece28e95df11bc71f049052c4 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 18:09:51 -0500
-Subject: [PATCH 14/36] 1.14 DynamicLoS en Circulo de Valor
+Subject: [PATCH 14/38] 1.14 DynamicLoS en Circulo de Valor
 
 ---
  .../game/Battlegrounds/Zones/BattlegroundRV.cpp    |   36 ++++++++++++++++++++
