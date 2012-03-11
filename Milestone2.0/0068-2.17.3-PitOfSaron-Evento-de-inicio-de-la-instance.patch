@@ -1,4 +1,4 @@
-From eea7e6855da86c4fb98d1df6d1ebdb2b8e4e78ae Mon Sep 17 00:00:00 2001
+From c86883fe0b90f60e37a0b70d4a6cda8290142e7a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 10 Mar 2012 17:38:13 -0500
 Subject: [PATCH 68/74] 2.17.3 PitOfSaron: Evento de inicio de la instance
@@ -468,7 +468,7 @@ index 25cd292..901f0f9 100644
 +                                if (sChampions->isAlive())
 +                                {
 +                                    sChampions->AttackStop();
-+                                    sChampions->GetMotionMaster()->MoveFall(476.96f, 0);
++                                    sChampions->GetMotionMaster()->MoveFall(476.96f);
 +                                }
 +                            }
 +
@@ -481,7 +481,7 @@ index 25cd292..901f0f9 100644
 +                                if (sChampions->isAlive())
 +                                {
 +                                    sChampions->AttackStop();
-+                                    sChampions->GetMotionMaster()->MoveFall(497.59f, 0);
++                                    sChampions->GetMotionMaster()->MoveFall(497.59f);
 +                                }
 +                            }
 +
@@ -494,7 +494,7 @@ index 25cd292..901f0f9 100644
 +                                if (sChampions->isAlive())
 +                                {
 +                                    sChampions->AttackStop();
-+                                    sChampions->GetMotionMaster()->MoveFall(497.59f, 0);
++                                    sChampions->GetMotionMaster()->MoveFall(497.59f);
 +                                }
 +                            }
 +                            ++StartPhase;

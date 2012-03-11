@@ -1,4 +1,4 @@
-From 787d27070dbc3021a40fd9475ff29e637de8cfb9 Mon Sep 17 00:00:00 2001
+From ae9e39cae355000148d200fef2a7627dc378006e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 11 Mar 2012 01:12:43 -0500
 Subject: [PATCH 50/74] =?UTF-8?q?2.2.46=20ICC:=20Saurfang=20a=C3=B1adido=20A?=
@@ -23,7 +23,7 @@ index 0000000..2f321e2
 +-- Scriptnames de las blood beasts:
 +UPDATE `creature_template` SET `scriptname`='npc_bloodbeast' WHERE `entry`=38508;
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
-index 84143db..7db43d0 100755
+index f63ca15..d696fd7 100755
 --- a/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
 @@ -111,10 +111,17 @@ enum Spells
