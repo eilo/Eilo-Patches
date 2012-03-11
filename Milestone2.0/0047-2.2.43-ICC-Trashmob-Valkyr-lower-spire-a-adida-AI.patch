@@ -596,7 +596,7 @@ index 1f56568..d9045cc 100644
 +
 +        void UpdateAI(const uint32 diff)
 +        {
-+            if (me->HasUnitState(UNIT_STAT_CASTING))
++            if (me->HasUnitState(UNIT_STATE_CASTING))
 +                return;
 +            
 +            //me->MonsterSay("SE: Enter Combat", LANG_UNIVERSAL, 0);
@@ -706,7 +706,7 @@ index 1f56568..d9045cc 100644
 +                    summons.DespawnAll();
 +                    return;
 +                }
-+                if (me->HasUnitState(UNIT_STAT_CASTING))
++                if (me->HasUnitState(UNIT_STATE_CASTING))
 +                    return;
 +                events.Update(diff);
 +                

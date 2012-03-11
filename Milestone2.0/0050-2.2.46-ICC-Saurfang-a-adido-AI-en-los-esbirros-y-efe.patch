@@ -130,7 +130,7 @@ index 84143db..7db43d0 100755
 +
 +                Events.Update(diff);
 +
-+                if (me->HasUnitState(UNIT_STAT_CASTING))
++                if (me->HasUnitState(UNIT_STATE_CASTING))
 +                    return;
 +
 +                while (uint32 eventId = Events.ExecuteEvent())

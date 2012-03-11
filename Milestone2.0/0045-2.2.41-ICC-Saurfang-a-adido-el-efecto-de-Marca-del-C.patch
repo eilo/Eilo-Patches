@@ -46,7 +46,7 @@ index a1e45a2..84143db 100755
 +                            if (player->isAlive())
 +                                if (player->HasAura(SPELL_MARK_OF_THE_FALLEN_CHAMPION))
 +                                {
-+                                    uint32 _dmg;
++                                    int32 _dmg;
 +                                    if(IsHeroic())
 +                                        _dmg = urand(6175,6825);
 +                                    else
