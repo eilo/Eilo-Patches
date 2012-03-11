@@ -1,7 +1,7 @@
-From f13c32adb88e13025fbc319951dee3e4d87e8dab Mon Sep 17 00:00:00 2001
+From f51fa05dfe18b3aa47cc85b380729f8778c9f3a1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 14:22:13 -0500
-Subject: [PATCH 49/70] 2.8.1 Obsidian Sanctum: Mejora de script e
+Subject: [PATCH 53/74] 2.8.1 Obsidian Sanctum: Mejora de script e
  implementacion de trash mob
 
 ---
@@ -47,7 +47,7 @@ index 0000000..51bd0f0
 +UPDATE `creature_template` SET `dmgschool`=1 WHERE `entry` IN (30643,31317);
 \ No newline at end of file
 diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
-index 5f6359d..60f16b0 100755
+index 504f848..10b8e7f 100755
 --- a/src/server/game/Scripting/ScriptLoader.cpp
 +++ b/src/server/game/Scripting/ScriptLoader.cpp
 @@ -405,6 +405,7 @@ void AddSC_boss_malygos();              // The Nexus: Eye of Eternity
@@ -58,7 +58,7 @@ index 5f6359d..60f16b0 100755
  void AddSC_boss_bjarngrim();             //Ulduar Halls of Lightning
  void AddSC_boss_loken();
  void AddSC_boss_ionar();
-@@ -1114,6 +1115,7 @@ void AddNorthrendScripts()
+@@ -1113,6 +1114,7 @@ void AddNorthrendScripts()
      AddSC_instance_eye_of_eternity();
      AddSC_boss_sartharion();            //Obsidian Sanctum
      AddSC_instance_obsidian_sanctum();
@@ -67,7 +67,7 @@ index 5f6359d..60f16b0 100755
      AddSC_boss_loken();
      AddSC_boss_ionar();
 diff --git a/src/server/scripts/Northrend/CMakeLists.txt b/src/server/scripts/Northrend/CMakeLists.txt
-index 6112579..6b1788a 100644
+index 26b1cfa..25eb8a6 100644
 --- a/src/server/scripts/Northrend/CMakeLists.txt
 +++ b/src/server/scripts/Northrend/CMakeLists.txt
 @@ -44,6 +44,7 @@ set(scripts_STAT_SRCS

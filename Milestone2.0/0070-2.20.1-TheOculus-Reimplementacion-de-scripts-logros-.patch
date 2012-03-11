@@ -1,7 +1,7 @@
-From 050d4255f3f93bca5c11adea9e0f5ba9ecd4a452 Mon Sep 17 00:00:00 2001
+From 4752092d60746443573fcf9de7adbaea42043a85 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 20:19:08 -0500
-Subject: [PATCH 66/70] 2.20.1 TheOculus: Reimplementacion de scripts, logros
+Subject: [PATCH 70/74] 2.20.1 TheOculus: Reimplementacion de scripts, logros
  y adecuacones de spells y loot
 
 ---
@@ -503,7 +503,7 @@ index fb1e769..25add81 100644
              return AURA_STATE_UNKNOWN22;
          default:
 diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
-index 2ffa03b..f47240d 100755
+index 300a105..838858a 100755
 --- a/src/server/game/Spells/SpellMgr.cpp
 +++ b/src/server/game/Spells/SpellMgr.cpp
 @@ -3035,12 +3035,24 @@ void SpellMgr::LoadDbcDataCorrections()

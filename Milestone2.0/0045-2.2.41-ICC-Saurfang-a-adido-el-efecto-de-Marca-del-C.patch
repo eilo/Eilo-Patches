@@ -1,39 +1,41 @@
-From 4d6cde5d1ee7074aeecb85b919ba63b33463ebd6 Mon Sep 17 00:00:00 2001
+From 570a70417892be8b861afa700ea165f97700d0e8 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Sun, 4 Mar 2012 09:20:18 -0500
-Subject: [PATCH 45/70] =?UTF-8?q?2.2.41=20ICC:=20Saurfang=20a=C3=B1adido=20e?=
- =?UTF-8?q?l=20da=C3=B1o=20periodico=20de=20Marca=20del=20Campeon=20Caido?=
+Date: Sun, 11 Mar 2012 00:30:11 -0500
+Subject: [PATCH 45/74] =?UTF-8?q?2.2.41=20ICC:=20Saurfang=20a=C3=B1adido=20e?=
+ =?UTF-8?q?l=20efecto=20de=20Marca=20del=20Campeon=20Caido=20(Da=C3=B1o)?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 ---
- .../IcecrownCitadel/boss_deathbringer_saurfang.cpp |   20 ++++++++++++++++++++
- 1 files changed, 20 insertions(+), 0 deletions(-)
+ .../IcecrownCitadel/boss_deathbringer_saurfang.cpp |   31 ++++++++++++++++++++
+ 1 files changed, 31 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
-index a1e45a2..eb7c0c4 100755
+index a1e45a2..84143db 100755
 --- a/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
-@@ -101,6 +101,7 @@ enum Spells
+@@ -101,6 +101,13 @@ enum Spells
      SPELL_BLOOD_LINK_POWER              = 72195,
      SPELL_BLOOD_LINK_DUMMY              = 72202,
      SPELL_MARK_OF_THE_FALLEN_CHAMPION   = 72293,
-+    SPELL_EFFECT_MARK_DMG               = 69189,
++
++    // Saurfang Mark efecto de daño
++    SPELL_EFFECT_MARK_DMG_10N           = 72255,
++    SPELL_EFFECT_MARK_DMG_10H           = 72445,
++    SPELL_EFFECT_MARK_DMG_25N           = 72444,
++    SPELL_EFFECT_MARK_DMG_25H           = 72446,
++
      SPELL_BOILING_BLOOD                 = 72385,
      SPELL_RUNE_OF_BLOOD                 = 72410,
  
-@@ -407,6 +408,25 @@ class boss_deathbringer_saurfang : public CreatureScript
+@@ -407,6 +414,30 @@ class boss_deathbringer_saurfang : public CreatureScript
                  if (me->HasUnitState(UNIT_STATE_CASTING))
                      return;
  
 +                // Daño periodico de la Marca del Campeon Caido a los players
 +                if(me->isAttackReady())
 +                {
-+                    uint32 Markdmg;
-+                    Markdmg =  urand(5700,6300);
-+                    int Markdamage = Markdmg;
-+
 +                    Map::PlayerList const &pList = me->GetMap()->GetPlayers();
 +
 +                    if (pList.isEmpty())
@@ -43,7 +45,16 @@ index a1e45a2..eb7c0c4 100755
 +                        if (Player* player = i->getSource())
 +                            if (player->isAlive())
 +                                if (player->HasAura(SPELL_MARK_OF_THE_FALLEN_CHAMPION))
-+                                    me->CastCustomSpell(player, SPELL_EFFECT_MARK_DMG,&Markdamage, 0, 0, true);
++                                {
++                                    uint32 _dmg;
++                                    if(IsHeroic())
++                                        _dmg = urand(6175,6825);
++                                    else
++                                        _dmg = urand(4275,4725);
++
++                                    SpellInfo const* markDmg = sSpellMgr->GetSpellInfo(RAID_MODE(SPELL_EFFECT_MARK_HEAL_10N,SPELL_EFFECT_MARK_HEAL_10H,SPELL_EFFECT_MARK_HEAL_25N,SPELL_EFFECT_MARK_HEAL_25H));
++                                    me->CastCustomSpell(player, markDmg->Id, &_dmg, 0, 0, true);
++                                }
 +                }
 +
                  while (uint32 eventId = events.ExecuteEvent())

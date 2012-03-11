@@ -1,7 +1,7 @@
-From 9d78993b14db1329672baf1b791251fe7c30c144 Mon Sep 17 00:00:00 2001
+From eea7e6855da86c4fb98d1df6d1ebdb2b8e4e78ae Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 10 Mar 2012 17:38:13 -0500
-Subject: [PATCH 64/70] 2.17.3 PitOfSaron: Evento de inicio de la instance
+Subject: [PATCH 68/74] 2.17.3 PitOfSaron: Evento de inicio de la instance
 
 ---
  .../reanemu/2012_01_08_100_world_pit_of_saron.sql  |  154 +++++

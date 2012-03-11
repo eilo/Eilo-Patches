@@ -1,7 +1,7 @@
-From cd7839a80a6e5f64a257282a9d1c0d301c105f62 Mon Sep 17 00:00:00 2001
+From 39da4b70bcd96c82f9ddc89af56425730c65d50c Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 17 Dec 2011 16:19:47 -0500
-Subject: [PATCH 59/70] 2.15.1 Gundrak: Colossus desactiva el aura de
+Subject: [PATCH 63/74] 2.15.1 Gundrak: Colossus desactiva el aura de
  MojoVolley al morir
 
 ---

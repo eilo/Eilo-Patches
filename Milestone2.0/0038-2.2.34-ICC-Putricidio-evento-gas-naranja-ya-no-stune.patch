@@ -1,7 +1,7 @@
-From 473259a9c687df687c9a3a7c5ef37f4a045c1914 Mon Sep 17 00:00:00 2001
+From bf2acc160f29d0194ba36cae020356be417e65cf Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 12:46:54 -0500
-Subject: [PATCH 38/70] 2.2.34 ICC: Putricidio evento gas naranja ya no stunea
+Subject: [PATCH 38/74] 2.2.34 ICC: Putricidio evento gas naranja ya no stunea
  a putricidio
 
 ---

@@ -1,7 +1,7 @@
-From 3f879b45abfbe3781dabdd6d033a64b804c5873f Mon Sep 17 00:00:00 2001
+From 5b15f14976c19d35c4093683df4bd88432464423 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 17 Dec 2011 14:42:52 -0500
-Subject: [PATCH 57/70] 2.14.2 Drak'Tharon: Novos permitir reinicio boss
+Subject: [PATCH 61/74] 2.14.2 Drak'Tharon: Novos permitir reinicio boss
 
 ---
  .../Northrend/DraktharonKeep/boss_novos.cpp        |    3 +++

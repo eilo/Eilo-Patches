@@ -1,7 +1,7 @@
-From 46fb4c3c9972b956df559da5adc545be0d63a608 Mon Sep 17 00:00:00 2001
+From 800715c106c2ac5d308f0e8fda4bf083025b364e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 3 Jan 2012 14:48:23 -0500
-Subject: [PATCH 60/70] =?UTF-8?q?2.16.1=20HallsOfReflection:=20Reimplementac?=
+Subject: [PATCH 64/74] =?UTF-8?q?2.16.1=20HallsOfReflection:=20Reimplementac?=
  =?UTF-8?q?ion,=20flags=20y=20a=C3=B1adido=20segunda=20fase?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -389,7 +389,7 @@ index 0000000..bc06c4b
 +36941,
 +37069);
 diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
-index 1ca0506..de47d71 100755
+index bccaa6b..8884391 100755
 --- a/src/server/game/Scripting/ScriptLoader.cpp
 +++ b/src/server/game/Scripting/ScriptLoader.cpp
 @@ -471,6 +471,7 @@ void AddSC_instance_halls_of_reflection();   // Halls of Reflection
@@ -399,17 +399,17 @@ index 1ca0506..de47d71 100755
 +void AddSC_boss_lich_king_hr();
  void AddSC_boss_lord_marrowgar();       // Icecrown Citadel
  void AddSC_boss_lady_deathwhisper();
- void AddSC_boss_gunship_battle_wowrean();
-@@ -1181,6 +1182,7 @@ void AddNorthrendScripts()
+ void AddSC_boss_deathbringer_saurfang();
+@@ -1180,6 +1181,7 @@ void AddNorthrendScripts()
      AddSC_halls_of_reflection();
      AddSC_boss_falric();
      AddSC_boss_marwyn();
 +    AddSC_boss_lich_king_hr();
      AddSC_boss_lord_marrowgar();        // Icecrown Citadel
      AddSC_boss_lady_deathwhisper();
-     AddSC_boss_gunship_battle_wowrean();
+     AddSC_boss_deathbringer_saurfang();
 diff --git a/src/server/scripts/Northrend/CMakeLists.txt b/src/server/scripts/Northrend/CMakeLists.txt
-index e8c0849..38c8b9b 100644
+index c91fc01..4ec13db 100644
 --- a/src/server/scripts/Northrend/CMakeLists.txt
 +++ b/src/server/scripts/Northrend/CMakeLists.txt
 @@ -56,6 +56,7 @@ set(scripts_STAT_SRCS

@@ -1,7 +1,7 @@
-From 7ef5b80f3ebde8b330cc7f77b16129c14b565513 Mon Sep 17 00:00:00 2001
+From b4df2f465c30fd4e148d010ae1f86a05fc9bedf2 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 12:52:38 -0500
-Subject: [PATCH 40/70] 2.2.36 ICC: Sindragosa arreglo para no perder target
+Subject: [PATCH 40/74] 2.2.36 ICC: Sindragosa arreglo para no perder target
  apenas baje
 
 ---

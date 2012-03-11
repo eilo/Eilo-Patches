@@ -1,20 +1,20 @@
-From 48ed663f2e6701d16ee1c854360cc4406c9cd584 Mon Sep 17 00:00:00 2001
+From fa9afa5ba4bebacb89a915c330e21f931a8a1f42 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 04:23:26 -0500
-Subject: [PATCH 34/70] 2.2.30 ICC: Trashmob implementacion completa por
+Subject: [PATCH 34/74] 2.2.30 ICC: Trashmob implementacion completa por
  WowRean
 
 ---
- .../reanemu/2011_11_25_100_world_trashmobs_icc.sql |  209 ++++++++++++++++++++
- 1 files changed, 209 insertions(+), 0 deletions(-)
+ .../reanemu/2011_11_25_100_world_trashmobs_icc.sql |  205 ++++++++++++++++++++
+ 1 files changed, 205 insertions(+), 0 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2011_11_25_100_world_trashmobs_icc.sql
 
 diff --git a/sql/updates/world/reanemu/2011_11_25_100_world_trashmobs_icc.sql b/sql/updates/world/reanemu/2011_11_25_100_world_trashmobs_icc.sql
 new file mode 100644
-index 0000000..c7048f9
+index 0000000..70c870c
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_11_25_100_world_trashmobs_icc.sql
-@@ -0,0 +1,209 @@
+@@ -0,0 +1,205 @@
 +-- Eilo (https://github.com/eilo)  -- Muzashi https://github.com/Muzashi
 +-- Trashmobs icc 
 +-- En desarrollo ReanEmu https://github.com/ComunidadRean/ReanEmu
@@ -41,8 +41,8 @@ index 0000000..c7048f9
 +UPDATE `creature_template` SET `dmg_multiplier` = '14.7' WHERE `entry` =38058;
 +
 +/*-------------- SAI traducido de mi C++ original al SmartAI por Muzashi https://github.com/Muzashi ----------------*/
-+DELETE FROM `smart_scripts` WHERE `entryorguid` IN (37011, 37007, 36724, 37012, 36725, 36805, 36808, 36807, 3681, 36829, 37098, 37022, 37038, 10404, 37023, 36880, 37664, 37595, 37663, 37901, 37571, 37662, 37666, 37665, 38125, 37127, 37132, 37134,36811,37133) AND `source_type`=0;
-+UPDATE `creature_template` SET `AIName` = 'SmartAI', `ScriptName`='' WHERE `entry` IN (37011, 37007, 36724, 37012, 36725, 36805, 36808, 36807, 3681, 36829, 37098, 37022, 37038, 10404, 37023, 36880, 37664, 37595, 37663, 37901, 37571, 37662, 37666, 37665, 38125, 37127, 37132, 37134,36811,37133);
++DELETE FROM `smart_scripts` WHERE `entryorguid` IN (37011, 37007, 36724, 37012, 36725, 36805, 36808, 36807, 3681, 36829, 37022, 37038, 10404, 37023, 36880, 37664, 37595, 37663, 37901, 37571, 37662, 37666, 37665, 38125, 37127, 37132, 37134,36811,37133) AND `source_type`=0;
++UPDATE `creature_template` SET `AIName` = 'SmartAI', `ScriptName`='' WHERE `entry` IN (37011, 37007, 36724, 37012, 36725, 36805, 36808, 36807, 3681, 36829, 37022, 37038, 10404, 37023, 36880, 37664, 37595, 37663, 37901, 37571, 37662, 37666, 37665, 38125, 37127, 37132, 37134,36811,37133);
 +INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
 +/*-----Trash de Martillo de la Luz-----*/
 +--  SAI
@@ -83,10 +83,6 @@ index 0000000..c7048f9
 +(36829, 0, 1, 0, 0, 0, 100, 0, 2000, 2000, 10000, 12000, 11, 69483, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Deathspeaker High Priest - Dark Reckoning'),
 +(36829, 0, 2, 0, 0, 0, 100, 1, 0, 0, 0, 0, 28, 69491, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Deathspeaker High Priest - Remove Aura of Darkness OOC'),
 +(36829, 0, 3, 0, 6, 0, 100, 1, 0, 0, 0, 0, 11, 71203, 0, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'On Creature Kill - Cast Soul Feast'),
-+/*---------Trash de La Espiral---------*/
-+(37098, 0, 0, 0, 0, 0, 100, 10, 1000, 1000, 2000, 8000, 11, 71906, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Valkyr Herald - Severed Essence'),
-+(37098, 0, 1, 0, 0, 0, 100, 20, 1000, 1000, 2000, 8000, 11, 71942, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Valkyr Herald - Severed Essence'),
-+(37098, 0, 2, 0, 6, 0, 100, 1, 0, 0, 0, 0, 11, 71203, 0, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'On Creature Kill - Cast Soul Feast'),
 +/*----Trash de Talleres de la Peste----*/
 +(37022, 0, 0, 0, 0, 0, 100, 0, 4000, 4000, 6000, 6000, 11, 40504, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Blighted Abomination - Cleave'),
 +(37022, 0, 1, 0, 0, 0, 100, 0, 10000, 10000, 20000, 20000, 11, 71150, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Blighted Abomination - Plague Cloud'),

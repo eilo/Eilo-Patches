@@ -1,7 +1,7 @@
-From 419cd7dba23b4ebe2385dc705834fcaf4143133e Mon Sep 17 00:00:00 2001
+From 44da1fd374283e12d25be76f81793fa7ab12d45d Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 3 Jan 2012 11:31:06 -0500
-Subject: [PATCH 65/70] 2.19.1 TheNexus: Correccion de trashmob y varias flags
+Subject: [PATCH 69/74] 2.19.1 TheNexus: Correccion de trashmob y varias flags
 
 ---
  .../world/reanemu/2011_12_05_100_world_nexus.sql   |   36 ++++++++++++++++++++

@@ -1,7 +1,7 @@
 From 23531cf5eec1fb002b63d79fece78047e3aa9c15 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 02:20:22 -0500
-Subject: [PATCH 18/70] 2.2.14 ICC: Sindragosa LoS para tumbas y Mystic Buffet
+Subject: [PATCH 18/74] 2.2.14 ICC: Sindragosa LoS para tumbas y Mystic Buffet
 
 ---
  .../Northrend/IcecrownCitadel/boss_sindragosa.cpp  |  205 ++++++++++++++++---

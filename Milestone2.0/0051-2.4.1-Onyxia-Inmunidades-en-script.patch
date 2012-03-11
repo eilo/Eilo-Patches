@@ -1,7 +1,7 @@
-From 93e0fee8bfdb3d5393bccffddda77112aa274bb2 Mon Sep 17 00:00:00 2001
+From 46c6c28b34a21b847a5f2198d0f7a28d3c4323dd Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 13:01:13 -0500
-Subject: [PATCH 47/70] 2.4.1 Onyxia: Inmunidades en script
+Subject: [PATCH 51/74] 2.4.1 Onyxia: Inmunidades en script
 
 ---
  .../scripts/Kalimdor/OnyxiasLair/boss_onyxia.cpp   |    8 ++++++--

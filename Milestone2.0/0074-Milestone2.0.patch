@@ -1,14 +1,14 @@
-From 8c4e703f673915ff61946003d896b37d17b029f4 Mon Sep 17 00:00:00 2001
+From 6eba035a0e8eea661f6cd1ea4a01a05f9541419f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 13 Feb 2012 06:07:28 -0500
-Subject: [PATCH 70/70] Milestone2.0
+Subject: [PATCH 74/74] Milestone2.0
 
 ---
- WHAT_IS_INSIDE |   73 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 files changed, 73 insertions(+), 0 deletions(-)
+ WHAT_IS_INSIDE |   77 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 77 insertions(+), 0 deletions(-)
 
 diff --git a/WHAT_IS_INSIDE b/WHAT_IS_INSIDE
-index bb46700..67fe22b 100644
+index bb46700..34f2771 100644
 --- a/WHAT_IS_INSIDE
 +++ b/WHAT_IS_INSIDE
 @@ -16,6 +16,9 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
@@ -21,7 +21,7 @@ index bb46700..67fe22b 100644
  
  
  ##################################
-@@ -101,21 +104,91 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
+@@ -101,21 +104,95 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
  ###############################
  # Dungeons e Instances Varias #
  ###############################
@@ -102,8 +102,12 @@ index bb46700..67fe22b 100644
 +2.2.38 - 11/12/2011: Saurfang kickear al que intente robar el loot dejando la raid por Aios
 +2.2.39 - 28/12/2011: Sindragosa no mete al tank en tumba por Eilo
 +2.2.40 - 13/01/2012: LichKing inmune a taunt en cambio de fase por Odyssey
-+2.2.41 - 09/01/2012: Saurfang añadido el daño periodico de Marca del Campeon Caido por AliveShiro
-+2.2.42 - 06/02/2012: GunshipBattle implementacion, mejoras, logros y novedades por Eilo Hispano y Ws
++2.2.41 - 09/01/2012: Saurfang añadido el efecto de Marca del Campeon Caido (Daño) por Eilo
++2.2.42 - 09/11/2011: Sindragosa tomar target que no esten en tumbas por Macavity
++2.2.43 - 09/11/2011: Trashmob Valkyr lower spire añadida AI por Macavity
++2.2.44 - 06/02/2012: LadyDeathwhisper añadiendo dificultades de la spell Death&Decay por AliveShiro
++2.2.45 - 14/02/2012: LadyDeathwhisper dos espiritus mas en la segunda fase para 25N y 25H por Macavity
++2.2.46 - 14/02/2012: Saurfang añadido AI en los esbirros y efecto de la Marca de los Caidos (Curacion) por Macavity
  
  
  ##########

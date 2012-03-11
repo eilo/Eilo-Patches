@@ -1,7 +1,7 @@
-From 66533fe9f65ea96642c02882b95e204ef0dfcd78 Mon Sep 17 00:00:00 2001
+From 7670de196e920de97fd654564b77f42c7b544f7b Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 18:06:58 -0500
-Subject: [PATCH 51/70] 2.10.1 Ahn'Kahet: Taldaram combate en invisible
+Subject: [PATCH 55/74] 2.10.1 Ahn'Kahet: Taldaram combate en invisible
 
 ---
  .../AzjolNerub/Ahnkahet/boss_prince_taldaram.cpp   |    1 +

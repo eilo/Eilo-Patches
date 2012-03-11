@@ -1,7 +1,7 @@
 From 7605813460fa4b15ad8960e84c45b5d72cd677e9 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 11:36:29 -0500
-Subject: [PATCH 25/70] 2.2.21 ICC: Sindragosa prevencion para que tenga
+Subject: [PATCH 25/74] 2.2.21 ICC: Sindragosa prevencion para que tenga
  target cuando baja
 
 ---
