@@ -1,7 +1,7 @@
-From f796bd3aba4ed367affcaa13172871b9c415bedd Mon Sep 17 00:00:00 2001
+From d602f72ba46f827edb1a55548fe2c9567b93401d Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 00:35:21 -0500
-Subject: [PATCH 08/67] 2.2.4 ICC: Inmunidades en script a todos los bosses y
+Subject: [PATCH 08/70] 2.2.4 ICC: Inmunidades en script a todos los bosses y
  mini bosses
 
 ---

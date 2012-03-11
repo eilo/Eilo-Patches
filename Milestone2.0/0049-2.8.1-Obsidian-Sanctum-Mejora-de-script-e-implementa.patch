@@ -1,7 +1,7 @@
-From 3c5363f1a5b2bea0512f889307573271bef5ee48 Mon Sep 17 00:00:00 2001
+From f13c32adb88e13025fbc319951dee3e4d87e8dab Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 14:22:13 -0500
-Subject: [PATCH 49/67] 2.8.1 Obsidian Sanctum: Mejora de script e
+Subject: [PATCH 49/70] 2.8.1 Obsidian Sanctum: Mejora de script e
  implementacion de trash mob
 
 ---

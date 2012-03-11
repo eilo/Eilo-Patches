@@ -1,7 +1,7 @@
-From 1f49b91e39d5aac6ceae7474e1fc1c679aba35a9 Mon Sep 17 00:00:00 2001
+From 050d4255f3f93bca5c11adea9e0f5ba9ecd4a452 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 20:19:08 -0500
-Subject: [PATCH 64/67] 2.20.1 TheOculus: Reimplementacion de scripts, logros
+Subject: [PATCH 66/70] 2.20.1 TheOculus: Reimplementacion de scripts, logros
  y adecuacones de spells y loot
 
 ---
@@ -417,10 +417,10 @@ index cccb780..5f47382 100755
      if (!reward)
          return;
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index dd6045f..98e4036 100755
+index 9d351a3..7d614b1 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -7875,6 +7875,13 @@ bool Unit::HandleAuraProc(Unit* victim, uint32 damage, Aura* triggeredByAura, Sp
+@@ -7879,6 +7879,13 @@ bool Unit::HandleAuraProc(Unit* victim, uint32 damage, Aura* triggeredByAura, Sp
          case SPELLFAMILY_GENERIC:
              switch (dummySpell->Id)
              {
@@ -434,7 +434,7 @@ index dd6045f..98e4036 100755
                  // Nevermelting Ice Crystal
                  case 71564:
                      RemoveAuraFromStack(71564);
-@@ -8648,6 +8655,13 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
+@@ -8652,6 +8659,13 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
                  return false;
              break;
          }
@@ -448,7 +448,7 @@ index dd6045f..98e4036 100755
          // Deflection
          case 52420:
          {
-@@ -10003,7 +10017,7 @@ Unit* Unit::SelectMagnetTarget(Unit* victim, SpellInfo const* spellInfo)
+@@ -10007,7 +10021,7 @@ Unit* Unit::SelectMagnetTarget(Unit* victim, SpellInfo const* spellInfo)
  
          Unit::AuraEffectList const& magnetAuras = victim->GetAuraEffectsByType(SPELL_AURA_SPELL_MAGNET);
          for (Unit::AuraEffectList::const_iterator itr = magnetAuras.begin(); itr != magnetAuras.end(); ++itr)

@@ -1,8 +1,8 @@
-From 7a0b622ff884c1c0d82cf053116cecc40527c437 Mon Sep 17 00:00:00 2001
+From 63dd11d057370b3f92b9d94dca04a43fc1a632fa Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 5 Mar 2012 11:49:37 -0500
-Subject: [PATCH] =?UTF-8?q?2.9.1=20TheRubySanctum:=20A=C3=B1adida=20script=20?=
- =?UTF-8?q?mejorada=20para=20Halion=20y=20trashmobs?=
+Subject: [PATCH 50/70] =?UTF-8?q?2.9.1=20TheRubySanctum:=20A=C3=B1adida=20sc?=
+ =?UTF-8?q?ript=20mejorada=20para=20Halion=20y=20trashmobs?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -364,10 +364,10 @@ index 0000000..11b88d1
 +VALUES
 +   (203007, 0, 9482, 'Ruby Sanctum Halion Flame Ring', '', '', '', 0, 48, 1.6, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 12340);
 diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
-index 10b8e7f..bccaa6b 100755
+index 60f16b0..1ca0506 100755
 --- a/src/server/game/Scripting/ScriptLoader.cpp
 +++ b/src/server/game/Scripting/ScriptLoader.cpp
-@@ -486,7 +486,7 @@ void AddSC_icecrown_citadel_teleport();
+@@ -487,7 +487,7 @@ void AddSC_icecrown_citadel_teleport();
  void AddSC_instance_icecrown_citadel();
  void AddSC_icecrown_citadel();
  void AddSC_instance_ruby_sanctum();      // Ruby Sanctum
@@ -376,7 +376,7 @@ index 10b8e7f..bccaa6b 100755
  void AddSC_boss_baltharus_the_warborn();
  void AddSC_boss_saviana_ragefire();
  void AddSC_boss_general_zarithrian();
-@@ -1195,7 +1195,7 @@ void AddNorthrendScripts()
+@@ -1197,7 +1197,7 @@ void AddNorthrendScripts()
      AddSC_instance_icecrown_citadel();
      AddSC_icecrown_citadel();
      AddSC_instance_ruby_sanctum();      // Ruby Sanctum
@@ -386,7 +386,7 @@ index 10b8e7f..bccaa6b 100755
      AddSC_boss_saviana_ragefire();
      AddSC_boss_general_zarithrian();
 diff --git a/src/server/scripts/Northrend/CMakeLists.txt b/src/server/scripts/Northrend/CMakeLists.txt
-index 25eb8a6..c91fc01 100644
+index 6b1788a..e8c0849 100644
 --- a/src/server/scripts/Northrend/CMakeLists.txt
 +++ b/src/server/scripts/Northrend/CMakeLists.txt
 @@ -47,7 +47,7 @@ set(scripts_STAT_SRCS

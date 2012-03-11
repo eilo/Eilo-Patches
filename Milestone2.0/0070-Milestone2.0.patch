@@ -1,14 +1,14 @@
-From 32ecf1f1a9b22cd5759921403dbc0de14ae2c514 Mon Sep 17 00:00:00 2001
+From 8c4e703f673915ff61946003d896b37d17b029f4 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 13 Feb 2012 06:07:28 -0500
-Subject: [PATCH 67/67] Milestone2.0
+Subject: [PATCH 70/70] Milestone2.0
 
 ---
- WHAT_IS_INSIDE |   70 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 files changed, 70 insertions(+), 0 deletions(-)
+ WHAT_IS_INSIDE |   73 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 73 insertions(+), 0 deletions(-)
 
 diff --git a/WHAT_IS_INSIDE b/WHAT_IS_INSIDE
-index 7c4ad1a..4342a1e 100644
+index bb46700..67fe22b 100644
 --- a/WHAT_IS_INSIDE
 +++ b/WHAT_IS_INSIDE
 @@ -16,6 +16,9 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
@@ -21,7 +21,7 @@ index 7c4ad1a..4342a1e 100644
  
  
  ##################################
-@@ -92,21 +95,88 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
+@@ -101,21 +104,91 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
  ###############################
  # Dungeons e Instances Varias #
  ###############################
@@ -43,10 +43,13 @@ index 7c4ad1a..4342a1e 100644
 +2.15.1 - 09/08/2011: Gundrak: Colossus desactiva el aura de MojoVolley al morir por Odyssey
 +2.16.1 - 08/10/2011: HallsOfReflection: Reimplementacion y añadido LichKing por Odyssey, editada por Eilo
 +2.17.1 - 24/12/2011: PitOfSaron: Correccion de varios mobs por Eilo
++2.17.2 - 25/10/2011: PitOfSaron: Añadido script para el manejo de la pared de hielo por Plangcoder
++2.17.3 - 08/01/2011: PitOfSaron: Evento de inicio de la instance por Cemak
 +2.19.1 - 05/12/2011: TheNexus: Correccion de trash mob y varias flags por Treak
 +2.20.1 - 19/12/2011: ThOculus: Reimplementacion de scripts, logros y adecuaciones de spells por Zwerg
 +2.24.1 - 01/10/2011: UtgardeKeep: Ingvar permitiendo que se le pueda atacar en el reseteo por Eilo
 +2.25.1 - 25/12/2011: UtgardePinnacle: Svala ahora es atacable con normalidad por Eilo
++2.25.2 - 19/08/2011: UtgardePinnacle: Skadi apaño para poder atacarle por Lavitz
  
  
  #################

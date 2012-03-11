@@ -1,7 +1,7 @@
-From a9c1d43121e2dd64d7042269d6b2d7248d37c7df Mon Sep 17 00:00:00 2001
+From 03f3a5b70b4ce7f592bce380ed6102e65d35738f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 12:42:11 -0500
-Subject: [PATCH 37/67] 2.2.33 ICC: LichKing Valkyrs ajuste velocidad en
+Subject: [PATCH 37/70] 2.2.33 ICC: LichKing Valkyrs ajuste velocidad en
  script
 
 ---

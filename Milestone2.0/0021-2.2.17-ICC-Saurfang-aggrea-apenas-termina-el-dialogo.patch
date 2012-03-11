@@ -1,7 +1,7 @@
-From 074ba432432fd2e8882a6d3ca07c4fea35090c9f Mon Sep 17 00:00:00 2001
+From a57791a4798696fb36e61e42e3bacbb0e1c8f710 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 18:08:14 -0500
-Subject: [PATCH 21/67] 2.2.17 ICC: Saurfang aggrea apenas termina el dialogo
+Subject: [PATCH 21/70] 2.2.17 ICC: Saurfang aggrea apenas termina el dialogo
  y en reseteo
 
 ---
