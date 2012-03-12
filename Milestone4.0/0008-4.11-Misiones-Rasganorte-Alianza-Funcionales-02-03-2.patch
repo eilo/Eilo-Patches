@@ -13,196 +13,144 @@ new file mode 100644
 index 0000000..8f4b37b
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_03_02_100_world_misiones_rasganorte_alianza.sql
-@@ -0,0 +1,190 @@
+@@ -0,0 +1,136 @@
 +-- Misiones de Rasganorte Alianza Por Winnie 2 Marzo 2012
 +-- Testeo realizado por Revant
 +-- Fiordo Alquilonal
 +-- ¡Tengo una máquina voladora! ID: 11390
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11390;
++UPDATE quest_template SET method=0 WHERE id=11390;
 +-- Dales un susto Guano ID: 11154 (Testeo realizado por Annasophia 03/02/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11154;
++UPDATE quest_template SET method=0 WHERE id=11154;
 +-- Patrulla las puertas de acero ID: 11391
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11391;
++UPDATE quest_template SET method=0 WHERE id=11391;
 +-- Mision echar pestes ID: 11332
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11332;
++UPDATE quest_template SET method=0 WHERE id=11332;
 +-- Acehando a los débiles ID: 11292
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11292;
++UPDATE quest_template SET method=0 WHERE id=11292;
 +-- El Yeti de al lado ID:11284
-+UPDATE `creature_loot_template` SET `ChanceOrQuestChance`=-100 WHERE `entry`=23740 AND `item`=33352;
++-- UPDATE `creature_loot_template` SET `ChanceOrQuestChance`=-100 WHERE `entry`=23740 AND `item`=33352;
 +-- La Limpieza ID: 11322 (Testeo realizado por Annasophia 02/02/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11322;
++UPDATE quest_template SET method=0 WHERE id=11322;
 +-- Reliquias imbuidas de relámpagos ID: 11494
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11494;
++UPDATE quest_template SET method=0 WHERE id=11494;
 +-- El delicado sonido del trueno ID: 11495
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11495;
++UPDATE quest_template SET method=0 WHERE id=11495;
 +-- Una derrota asombrosa en el círculo ID: 11300
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11300;
++UPDATE quest_template SET method=0 WHERE id=11300;
 +-- No hay honor entre los pájaros ID: 11470
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11470;
++UPDATE quest_template SET method=0 WHERE id=11470;
 +-- El Eco de Ymiron ID: 11343
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11343;
++UPDATE quest_template SET method=0 WHERE id=11343;
 +-- Ensamblajes runaferrea y tu salto con cohete ID: 11485
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11485;
++UPDATE quest_template SET method=0 WHERE id=11485;
 +-- Ensamblajes runaferrea y tu recopilación de datos ID: 11489
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11489;
++UPDATE quest_template SET method=0 WHERE id=11489;
 +-- Ensamblajes runaferrea y tu el engaño ID:11491
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11491;
++UPDATE quest_template SET method=0 WHERE id=11491;
 +-- Estos llegan hasa el 11 ID:11421
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11421;
++UPDATE quest_template SET method=0 WHERE id=11421;
 +-- ¡Vamos a hacer Surf! ID:11436
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11436;
++UPDATE quest_template SET method=0 WHERE id=11436;
 +
 +-- Colinas Pardas
 +-- Relá'hatee, coleega ID: 12137
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12137;
++UPDATE quest_template SET method=0 WHERE id=12137;
 +-- El senor feudal ferreo y su Yunque ID: 12153
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12153;
++UPDATE quest_template SET method=0 WHERE id=12153;
 +-- Ponte tu mejor cara para Loken ID: 12185
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12185;
++UPDATE quest_template SET method=0 WHERE id=12185;
 +-- Reparación de trituradoras ID: 12244 (Testeo por Annasophia 05/02/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12244;
++UPDATE quest_template SET method=0 WHERE id=12244;
 +--Huye de Arroyoplata ID: 12308
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12308;
++UPDATE quest_template SET method=0 WHERE id=12308;
 +-- Una experiencia extracorporal ID: 12327 (Testeo por Annasophia 06/02/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12327;
++UPDATE quest_template SET method=0 WHERE id=12327;
 +-- ¿Tregua? ID: 11989
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11989;
++UPDATE quest_template SET method=0 WHERE id=11989;
 +-- Requiere interpretacion ID: 11991 (Testeo por Genzai 06/01/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11991;
++UPDATE quest_template SET method=0 WHERE id=11991;
 +-- Es necesario hacer sacrificios ID: 12007
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12007;
++UPDATE quest_template SET method=0 WHERE id=12007;
 +-- Mi corazón está en tus manos ID: 12802
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12802;
++UPDATE quest_template SET method=0 WHERE id=12802;
 +-- Voces entre las Ruinas ID: 12068
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12068;
++UPDATE quest_template SET method=0 WHERE id=12068;
 +-- Limpiar Drak'Tharon ID: 12238
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12238;
++UPDATE quest_template SET method=0 WHERE id=12238;
 +
 +-- Zuldrak
 +-- La venganza del Rey de la Tormenta ID: 12919 (Testeo por Annasophia 06/02/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12919;
++UPDATE quest_template SET method=0 WHERE id=12919;
 +-- Patadas a Nass para muestras ID: 12630 (Testeo por Annasophia 06/02/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12630;
++UPDATE quest_template SET method=0 WHERE id=12630;
 +-- Da'd de comedd a ezoz necrófagoz ID: 12652
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12652;
++UPDATE quest_template SET method=0 WHERE id=12652;
 +-- Donde hay patrón ID: 12673
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12673;
++UPDATE quest_template SET method=0 WHERE id=12673;
 +-- Sabotaje ID: 12676
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12676;
++UPDATE quest_template SET method=0 WHERE id=12676;
 +-- Revelacion ID: 12710
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12710;
++UPDATE quest_template SET method=0 WHERE id=12710;
 +-- Traicion ID: 12713
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12713;
++UPDATE quest_template SET method=0 WHERE id=12713;
 +-- Rondadores Glotones ID: 12527
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12572;
++UPDATE quest_template SET method=0 WHERE id=12572;
 +-- Arriba la cola ID: 13549 (Testeo por Annasophia 06/02/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=13549;
++UPDATE quest_template SET method=0 WHERE id=13549;
 +-- Los líderes de Jin'Alai ID: 12622 (Testeo por Annasophia 06/02/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12622;
++UPDATE quest_template SET method=0 WHERE id=12622;
 +-- El peso de la justicia ID: 12707
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12707;
++UPDATE quest_template SET method=0 WHERE id=12707;
 +-- Convocatoria en Zol'Heb ID: 12730
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12730;
++UPDATE quest_template SET method=0 WHERE id=12730;
 +
 +-- Cementerio de dragones
 +-- El Final de la linea ID: 12107
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12107;
++UPDATE quest_template SET method=0 WHERE id=12107;
 +-- El Foco de la playa ID: 12065 (Testeo por Montecristho 08/01/2012)
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12065;
++UPDATE quest_template SET method=0 WHERE id=12065;
 +-- En lo alto del bosque ID:12083
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12083;
++UPDATE quest_template SET method=0 WHERE id=12083;
 +-- La ametralladora y tú ID:12457
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12457;
++UPDATE quest_template SET method=0 WHERE id=12457;
 +-- La historia olvidada ID:12291
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12291;
++UPDATE quest_template SET method=0 WHERE id=12291;
 +-- La verdad nos hara libres ID:12301
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12301;
++UPDATE quest_template SET method=0 WHERE id=12301;
 +-- Proyecciones y planos ID:12060
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12060;
++UPDATE quest_template SET method=0 WHERE id=12060;
 +-- La Caverna Agonía de Escarcha ID: 12478
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12478;
++UPDATE quest_template SET method=0 WHERE id=12478;
 +-- Persiguiendo a Tormenta de Hielo: la filacteria de Thel'zan ID: 12467
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12467;
++UPDATE quest_template SET method=0 WHERE id=12467;
 +-- ¡Mas madera! ID:12050
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12050;
++UPDATE quest_template SET method=0 WHERE id=12050;
 +-- El misterio del infinito ID:12470
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12470;
++UPDATE quest_template SET method=0 WHERE id=12470;
 +-- El misterio del Infinito, Vuelta atrás ID: 13343
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=13343;
++UPDATE quest_template SET method=0 WHERE id=13343;
 +
 +-- Tundra Boreal
 +-- Caza de Dracos ID: 11919
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11919;
++UPDATE quest_template SET method=0 WHERE id=11919;
 +-- Posponiendo lo inevitable ID: 11905
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11905;
++UPDATE quest_template SET method=0 WHERE id=11905;
 +-- Un frente unido ID: 13126
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=13126;
++UPDATE quest_template SET method=0 WHERE id=13126;
 +-- Kaw el Destructor de Mamuts ID: 11879
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=11879;
++UPDATE quest_template SET method=0 WHERE id=11879;
 +
 +-- Cumbres Tormentosas
 +-- Amarga partida ID: 12832
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12832;
++UPDATE quest_template SET method=0 WHERE id=12832;
 +-- Amplia inspiracion ID: 12832
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12828;
++UPDATE quest_template SET method=0 WHERE id=12828;
 +-- Alcanzar a Brann ID: 12920
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12920;
++UPDATE quest_template SET method=0 WHERE id=12920;
 +-- Valkyrion debe arder ID: 12953
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=12953;
++UPDATE quest_template SET method=0 WHERE id=12953;
 +-- Violacion territorial ID: 13051
-+UPDATE quest_template SET method=2,sourceitemid=0,sourceitemcount=0,sourcespellid=0,requirednpcorgo1=0,requirednpcorgocount1=0,requireditemid2=0,requireditemcount2=0 WHERE id=13051;
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
-+
++UPDATE quest_template SET method=0 WHERE id=13051;
 +
 -- 
 1.7.8.msysgit.0
