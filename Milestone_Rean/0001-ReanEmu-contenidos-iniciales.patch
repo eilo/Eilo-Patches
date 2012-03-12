@@ -36,7 +36,7 @@ diff --git a/README b/README
 index f2ae18f..be7aea8 100644
 --- a/README
 +++ b/README
-@@ -1,6 +1,41 @@
+@@ -1,6 +1,39 @@
 -= TrinityCore -- General information =
 +== ReanEmu ==
 +
@@ -58,8 +58,6 @@ index f2ae18f..be7aea8 100644
  Copyright (C) TrinityCore (http://www.trinitycore.org)
 +Copyright (C) Eilo (https://github.com/eilo)
 +Copyright (C) Hispano (https://github.com/Hispano)
-+Copyright (C) Ws (https://github.com/wsrean)
-+Copyright (C) Andron (https://github.com/Andron-Juanka)
 +Copyright (C) Muzashi (https://github.com/Muzashi)
 +Copyright (C) Eilo-Patches (https://github.com/eilo/Eilo-Patches)
 +Copyright (C) ReanEmu (https://github.com/ComunidadRean/ReanEmu)
