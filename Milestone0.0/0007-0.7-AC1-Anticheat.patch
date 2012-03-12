@@ -53,7 +53,7 @@ index 0000000..a393ea0
 +  `falltime` smallint(5) NOT NULL,
 +  PRIMARY KEY (`entry`),
 +  KEY `idx_Count` (`count`)
-+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
++) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 +
 +-- Procedure to import pos data to new columns thx to Spp.
 +DELIMITER //
