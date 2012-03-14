@@ -1,4 +1,4 @@
-From 0bae68058defcddc0054aba8be15a73654c09ffd Mon Sep 17 00:00:00 2001
+From 10d142ee99fb0438add6fb3fcc020374718653f2 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 02:13:22 -0500
 Subject: [PATCH 10/27] 0.10 Rates Weekend
@@ -44,10 +44,10 @@ index a39bd8e..d097111 100755
      // rewarded honor points. Multiply with 10 to satisfy client
      data << 10 * Trinity::Honor::hk_honor_at_level(_session->GetPlayer()->getLevel(), quest->GetRewHonorMultiplier());
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 7d0586f..1fcb7c6 100755
+index 0117d0b..6739a77 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
-@@ -6858,6 +6858,8 @@ void Player::CheckAreaExploreAndOutdoor()
+@@ -6881,6 +6881,8 @@ void Player::CheckAreaExploreAndOutdoor()
                  if(GetSession()->IsPremium())
                      XP *= sWorld->getRate(RATE_XP_EXPLORE_PREMIUM);
  
@@ -56,7 +56,7 @@ index 7d0586f..1fcb7c6 100755
                  GiveXP(XP, NULL);
                  SendExplorationExperience(area, XP);
              }
-@@ -15071,7 +15073,7 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver,
+@@ -14985,7 +14987,7 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver,
      bool rewarded = (m_RewardedQuests.find(quest_id) != m_RewardedQuests.end());
  
      // Not give XP in case already completed once repeatable quest
@@ -87,7 +87,7 @@ index bcffb33..018dbfc 100755
  
              sScriptMgr->OnGainCalculation(gain, player, u);
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index c265731..234eb6b 100755
+index d6316a9..ac51975 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -467,6 +467,8 @@ void World::LoadConfigSettings(bool reload)
@@ -100,10 +100,10 @@ index c265731..234eb6b 100755
      if (rate_values[RATE_REPAIRCOST] < 0.0f)
      {
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index c22516b..cf3fa9e 100755
+index 194fab3..e4e0519 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
-@@ -248,6 +248,7 @@ enum WorldIntConfigs
+@@ -246,6 +246,7 @@ enum WorldIntConfigs
      CONFIG_SKILL_GAIN_DEFENSE,
      CONFIG_SKILL_GAIN_GATHERING,
      CONFIG_SKILL_GAIN_WEAPON,
@@ -111,7 +111,7 @@ index c22516b..cf3fa9e 100755
      CONFIG_MAX_OVERSPEED_PINGS,
      CONFIG_EXPANSION,
      CONFIG_CHATFLOOD_MESSAGE_COUNT,
-@@ -362,6 +363,7 @@ enum Rates
+@@ -360,6 +361,7 @@ enum Rates
      RATE_XP_KILL_PREMIUM,
      RATE_XP_QUEST_PREMIUM,
      RATE_XP_EXPLORE_PREMIUM,
@@ -120,10 +120,10 @@ index c22516b..cf3fa9e 100755
      RATE_REPUTATION_GAIN,
      RATE_REPUTATION_LOWLEVEL_KILL,
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index 7c51a96..bd9c213 100644
+index 04ccb6c..1d3fdba 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
-@@ -2154,6 +2154,15 @@ Rate.XP.Kill.Premium    = 1
+@@ -2138,6 +2138,15 @@ Rate.XP.Kill.Premium    = 1
  Rate.XP.Quest.Premium   = 1
  Rate.XP.Explore.Premium = 1
  

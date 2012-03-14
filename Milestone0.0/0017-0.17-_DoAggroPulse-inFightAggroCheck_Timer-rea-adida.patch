@@ -1,4 +1,4 @@
-From e2f5f5a1bb6314930cbaa13dc6e538b95944e51d Mon Sep 17 00:00:00 2001
+From 6e9bf37912d3cacab5c490388dee4758bd5e1465 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 22:28:27 -0500
 Subject: [PATCH 17/27] =?UTF-8?q?0.17=20=5FDoAggroPulse,=20inFightAggroCheck?=
@@ -13,10 +13,10 @@ Content-Transfer-Encoding: 8bit
  2 files changed, 17 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/AI/ScriptedAI/ScriptedCreature.cpp b/src/server/game/AI/ScriptedAI/ScriptedCreature.cpp
-index bd6c901..9a15029 100644
+index e3518cb..a64c3b4 100644
 --- a/src/server/game/AI/ScriptedAI/ScriptedCreature.cpp
 +++ b/src/server/game/AI/ScriptedAI/ScriptedCreature.cpp
-@@ -487,6 +487,20 @@ void BossAI::_Reset()
+@@ -486,6 +486,20 @@ void BossAI::_Reset()
      summons.DespawnAll();
      if (instance)
          instance->SetBossState(_bossId, NOT_STARTED);

@@ -1,4 +1,4 @@
-From 585c065479246eb9fc964249ab560ec6ecf97d49 Mon Sep 17 00:00:00 2001
+From 9a8dd3f4aa15845ccb4719edcc8e79bbc2b88605 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 30 Dec 2011 17:33:30 -0500
 Subject: [PATCH 22/27] =?UTF-8?q?0.22=20SetImmuneToPushPullEffects=20funcion?=
@@ -13,10 +13,10 @@ Content-Transfer-Encoding: 8bit
  2 files changed, 11 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/AI/ScriptedAI/ScriptedCreature.cpp b/src/server/game/AI/ScriptedAI/ScriptedCreature.cpp
-index 9a15029..8dae11d 100644
+index a64c3b4..6c9016f 100644
 --- a/src/server/game/AI/ScriptedAI/ScriptedCreature.cpp
 +++ b/src/server/game/AI/ScriptedAI/ScriptedCreature.cpp
-@@ -475,6 +475,7 @@ BossAI::BossAI(Creature* creature, uint32 bossId) : ScriptedAI(creature),
+@@ -474,6 +474,7 @@ BossAI::BossAI(Creature* creature, uint32 bossId) : ScriptedAI(creature),
      _boundary(instance ? instance->GetBossBoundary(bossId) : NULL),
      _bossId(bossId)
  {

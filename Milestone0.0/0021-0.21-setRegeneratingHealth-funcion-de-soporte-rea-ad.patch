@@ -1,4 +1,4 @@
-From 37e83051707abfdde67ef5cc32cef6ac4078a791 Mon Sep 17 00:00:00 2001
+From aa1b5c172281ab94f9c29c23e51bedbec64a78a1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 30 Dec 2011 17:28:30 -0500
 Subject: [PATCH 21/27] =?UTF-8?q?0.21=20setRegeneratingHealth=20funcion=20de?=
@@ -12,10 +12,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 1 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Creature/Creature.h b/src/server/game/Entities/Creature/Creature.h
-index e622c48..dc4f287 100755
+index adad026..22366cb 100755
 --- a/src/server/game/Entities/Creature/Creature.h
 +++ b/src/server/game/Entities/Creature/Creature.h
-@@ -658,6 +658,7 @@ class Creature : public Unit, public GridObject<Creature>, public MapCreature
+@@ -656,6 +656,7 @@ class Creature : public Unit, public GridObject<Creature>, public MapCreature
          bool hasInvolvedQuest(uint32 quest_id)  const;
  
          bool isRegeneratingHealth() { return m_regenHealth; }

@@ -1,4 +1,4 @@
-From f230fa3f3f52ccf66355f6868e6849088af1a4ab Mon Sep 17 00:00:00 2001
+From 97f2aa8afc1a939d23866f56ed228aafb623e74e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 2 Mar 2012 13:59:35 -0500
 Subject: [PATCH 09/27] 0.9 Cuentas VIP
@@ -48,10 +48,10 @@ index c0c64a3..5d770a9 100644
     _AHBplayer.Initialize(AHBplayerGUID);
     sObjectAccessor->AddObject(&_AHBplayer);
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index e306c95..7d0586f 100755
+index 81d6ae3..0117d0b 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
-@@ -6855,6 +6855,9 @@ void Player::CheckAreaExploreAndOutdoor()
+@@ -6878,6 +6878,9 @@ void Player::CheckAreaExploreAndOutdoor()
                      XP = uint32(sObjectMgr->GetBaseXP(p->area_level)*sWorld->getRate(RATE_XP_EXPLORE));
                  }
  
@@ -61,7 +61,7 @@ index e306c95..7d0586f 100755
                  GiveXP(XP, NULL);
                  SendExplorationExperience(area, XP);
              }
-@@ -15075,6 +15078,9 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver,
+@@ -14989,6 +14992,9 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver,
      for (Unit::AuraEffectList::const_iterator i = ModXPPctAuras.begin(); i != ModXPPctAuras.end(); ++i)
          AddPctN(XP, (*i)->GetAmount());
  
@@ -170,7 +170,7 @@ index 2c6098f..d313ab4 100755
      m_Crypt.Init(&k);
  
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index e5f54b8..c265731 100755
+index 5b0a83a..d6316a9 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -464,6 +464,9 @@ void World::LoadConfigSettings(bool reload)
@@ -184,10 +184,10 @@ index e5f54b8..c265731 100755
      if (rate_values[RATE_REPAIRCOST] < 0.0f)
      {
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index 45102b3..c22516b 100755
+index ed31d84..194fab3 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
-@@ -359,6 +359,9 @@ enum Rates
+@@ -357,6 +357,9 @@ enum Rates
      RATE_XP_KILL,
      RATE_XP_QUEST,
      RATE_XP_EXPLORE,
@@ -220,10 +220,10 @@ index afb1880..da279ae 100755
      MAX_LOGINDATABASE_STATEMENTS,
  };
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index 0587b50..7c51a96 100644
+index bcc885a..04ccb6c 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
-@@ -2136,14 +2136,23 @@ Rate.Drop.Item.ReferencedAmount = 1
+@@ -2120,14 +2120,23 @@ Rate.Drop.Item.ReferencedAmount = 1
  #    Rate.XP.Kill
  #    Rate.XP.Quest
  #    Rate.XP.Explore

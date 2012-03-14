@@ -1,4 +1,4 @@
-From 570ea8fef83fc84cc1d8fd9f8711c766467838f4 Mon Sep 17 00:00:00 2001
+From d74d0811df4d5489eb3d28a38cb3607b00f11fd1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 17:48:38 -0500
 Subject: [PATCH 05/27] =?UTF-8?q?0.5=20AHBot=20para=20subastas=20a=C3=B1adid?=
@@ -17,8 +17,8 @@ Content-Transfer-Encoding: 8bit
  src/server/game/Chat/Chat.cpp                      |    1 +
  src/server/game/Chat/Chat.h                        |    1 +
  src/server/game/Chat/Commands/Level3.cpp           |  490 +++++
- src/server/game/Handlers/AuctionHouseHandler.cpp   |    1 +
  src/server/game/Mails/Mail.cpp                     |    8 +
+ .../Protocol/Handlers/AuctionHouseHandler.cpp      |    1 +
  src/server/game/World/World.cpp                    |    5 +
  src/server/worldserver/worldserver.conf.dist       |  266 +++
  13 files changed, 3988 insertions(+), 3 deletions(-)
@@ -3308,7 +3308,7 @@ index f81393b..21d880a 100644
  class Player;
  class WorldPacket;
 diff --git a/src/server/game/CMakeLists.txt b/src/server/game/CMakeLists.txt
-index 4350cff..807fdc0 100644
+index c038222..c6427fb 100644
 --- a/src/server/game/CMakeLists.txt
 +++ b/src/server/game/CMakeLists.txt
 @@ -17,6 +17,7 @@ file(GLOB_RECURSE sources_Achievements Achievements/*.cpp Achievements/*.h)
@@ -3319,7 +3319,7 @@ index 4350cff..807fdc0 100644
  file(GLOB_RECURSE sources_Battlegrounds Battlegrounds/*.cpp Battlegrounds/*.h)
  file(GLOB_RECURSE sources_Calendar Calendar/*.cpp Calendar/*.h)
  file(GLOB_RECURSE sources_Chat Chat/*.cpp Chat/*.h)
-@@ -68,6 +69,7 @@ set(game_STAT_SRCS
+@@ -67,6 +68,7 @@ set(game_STAT_SRCS
    ${sources_Addons}
    ${sources_AI}
    ${sources_AuctionHouse}
@@ -3327,7 +3327,7 @@ index 4350cff..807fdc0 100644
    ${sources_Battlegrounds}
    ${sources_Calendar}
    ${sources_Chat}
-@@ -135,6 +137,7 @@ include_directories(
+@@ -134,6 +136,7 @@ include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}/AI/ScriptedAI
    ${CMAKE_CURRENT_SOURCE_DIR}/AI/SmartScripts
    ${CMAKE_CURRENT_SOURCE_DIR}/AuctionHouse
@@ -3360,7 +3360,7 @@ index 2311f4b..436a3ff 100755
          bool HandleGMNameAnnounceCommand(const char* args);
          bool HandleGMAnnounceCommand(const char* args);
 diff --git a/src/server/game/Chat/Commands/Level3.cpp b/src/server/game/Chat/Commands/Level3.cpp
-index cb3eb82..0a9051b 100755
+index d23a429..221f9d3 100755
 --- a/src/server/game/Chat/Commands/Level3.cpp
 +++ b/src/server/game/Chat/Commands/Level3.cpp
 @@ -64,6 +64,496 @@
@@ -3860,18 +3860,6 @@ index cb3eb82..0a9051b 100755
  bool ChatHandler::HandleMaxSkillCommand(const char* /*args*/)
  {
      Player* SelectedPlayer = getSelectedPlayer();
-diff --git a/src/server/game/Handlers/AuctionHouseHandler.cpp b/src/server/game/Handlers/AuctionHouseHandler.cpp
-index 8a98b03..d6b137c 100755
---- a/src/server/game/Handlers/AuctionHouseHandler.cpp
-+++ b/src/server/game/Handlers/AuctionHouseHandler.cpp
-@@ -22,6 +22,7 @@
- #include "WorldPacket.h"
- #include "WorldSession.h"
- 
-+#include "AuctionHouseBot.h"
- #include "AuctionHouseMgr.h"
- #include "Log.h"
- #include "Opcodes.h"
 diff --git a/src/server/game/Mails/Mail.cpp b/src/server/game/Mails/Mail.cpp
 index 3c3888e..e6b3c49 100755
 --- a/src/server/game/Mails/Mail.cpp
@@ -3898,8 +3886,20 @@ index 3c3888e..e6b3c49 100755
      time_t deliver_time = time(NULL) + deliver_delay;
  
      //expire time if COD 3 days, if no COD 30 days, if auction sale pending 1 hour
+diff --git a/src/server/game/Server/Protocol/Handlers/AuctionHouseHandler.cpp b/src/server/game/Server/Protocol/Handlers/AuctionHouseHandler.cpp
+index aaafb09..243f460 100755
+--- a/src/server/game/Server/Protocol/Handlers/AuctionHouseHandler.cpp
++++ b/src/server/game/Server/Protocol/Handlers/AuctionHouseHandler.cpp
+@@ -22,6 +22,7 @@
+ #include "WorldPacket.h"
+ #include "WorldSession.h"
+ 
++#include "AuctionHouseBot.h"
+ #include "AuctionHouseMgr.h"
+ #include "Log.h"
+ #include "Opcodes.h"
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index a5de212..6e640e1 100755
+index 84b3a4a..8e25a95 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -71,6 +71,7 @@
@@ -3910,7 +3910,7 @@ index a5de212..6e640e1 100755
  #include "CreatureTextMgr.h"
  #include "SmartAI.h"
  #include "Channel.h"
-@@ -1760,6 +1761,9 @@ void World::SetInitialWorldSettings()
+@@ -1758,6 +1759,9 @@ void World::SetInitialWorldSettings()
      InitRandomBGResetTime();
  
      LoadCharacterNameData();
@@ -3920,7 +3920,7 @@ index a5de212..6e640e1 100755
  
      // possibly enable db logging; avoid massive startup spam by doing it here.
      if (sLog->GetLogDBLater())
-@@ -1927,6 +1931,7 @@ void World::Update(uint32 diff)
+@@ -1925,6 +1929,7 @@ void World::Update(uint32 diff)
      /// <ul><li> Handle auctions when the timer has passed
      if (m_timers[WUPDATE_AUCTIONS].Passed())
      {
@@ -3929,10 +3929,10 @@ index a5de212..6e640e1 100755
  
          ///- Update mails (return old mails with item, or delete them)
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index cca47e7..b7ea11a 100644
+index dcc7412..1b21baa 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
-@@ -2610,6 +2610,272 @@ Network.TcpNodelay = 1
+@@ -2594,6 +2594,272 @@ Network.TcpNodelay = 1
  #
  ###################################################################################################
  

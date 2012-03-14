@@ -1,4 +1,4 @@
-From 527982746ae965b619f8e3029ada3b7b8c025560 Mon Sep 17 00:00:00 2001
+From a73abb69c92018f4d0b712a58f50dba47abc5240 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 30 Dec 2011 17:17:46 -0500
 Subject: [PATCH 08/27] 0.8 Wintergrasp
@@ -10,14 +10,14 @@ Subject: [PATCH 08/27] 0.8 Wintergrasp
  src/server/game/Chat/Chat.cpp                      |   12 +
  src/server/game/Chat/Chat.h                        |    8 +
  src/server/game/Chat/Commands/Level2.cpp           |  146 ++
- src/server/game/Entities/GameObject/GameObject.cpp |    7 +
+ src/server/game/Entities/GameObject/GameObject.cpp |    9 +-
  src/server/game/Entities/Vehicle/Vehicle.cpp       |   26 +
  src/server/game/Entities/Vehicle/Vehicle.h         |    2 +
- src/server/game/Handlers/BattleGroundHandler.cpp   |   21 +
- src/server/game/Handlers/CharacterHandler.cpp      |   20 +
  src/server/game/Miscellaneous/Language.h           |   22 +
  src/server/game/OutdoorPvP/OutdoorPvP.h            |    3 +-
  src/server/game/Scripting/ScriptLoader.cpp         |    4 +
+ .../Protocol/Handlers/BattleGroundHandler.cpp      |   21 +
+ .../Server/Protocol/Handlers/CharacterHandler.cpp  |   20 +
  src/server/game/Spells/Auras/SpellAuraEffects.cpp  |    1 +
  src/server/game/Spells/Spell.cpp                   |   11 +
  src/server/game/Spells/SpellEffects.cpp            |   18 +
@@ -32,7 +32,7 @@ Subject: [PATCH 08/27] 0.8 Wintergrasp
  src/server/scripts/OutdoorPvP/OutdoorPvPWG.cpp     | 2198 ++++++++++++++++++++
  src/server/scripts/OutdoorPvP/OutdoorPvPWG.h       |  344 +++
  src/server/worldserver/worldserver.conf.dist       |  116 +
- 28 files changed, 3871 insertions(+), 1 deletions(-)
+ 28 files changed, 3872 insertions(+), 2 deletions(-)
  create mode 100644 sql/updates/characters/reanemu/2011_10_13_100_characters_wintergrasp.sql
  create mode 100644 sql/updates/world/reanemu/2011_10_13_100_world_wintergrasp.sql
  create mode 100644 src/server/scripts/Northrend/wintergrasp.cpp
@@ -415,10 +415,10 @@ index 0000000..f952261
 +INSERT INTO `creature` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`) VALUES (0, 28366, 571, 1, 1, 0, 0, 5163.06, 2959.52, 439.846, 1.47258, 600, 0, 0, 50000, 0, 0, 0, 0, 0);
 +UPDATE `creature_template` SET `unit_flags`=16384 WHERE `entry`=28366;
 diff --git a/src/server/game/CMakeLists.txt b/src/server/game/CMakeLists.txt
-index 807fdc0..48da6d4 100644
+index c6427fb..0c68c6d 100644
 --- a/src/server/game/CMakeLists.txt
 +++ b/src/server/game/CMakeLists.txt
-@@ -199,6 +199,7 @@ include_directories(
+@@ -197,6 +197,7 @@ include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}/Weather
    ${CMAKE_CURRENT_SOURCE_DIR}/World
    ${CMAKE_SOURCE_DIR}/src/server/scripts/PrecompiledHeaders
@@ -476,7 +476,7 @@ index 436a3ff..fe8ee6e 100755
          struct DeletedInfo
          {
 diff --git a/src/server/game/Chat/Commands/Level2.cpp b/src/server/game/Chat/Commands/Level2.cpp
-index 68961b9..933a20a 100755
+index 31942d9..dd7af68 100755
 --- a/src/server/game/Chat/Commands/Level2.cpp
 +++ b/src/server/game/Chat/Commands/Level2.cpp
 @@ -42,6 +42,7 @@
@@ -640,7 +640,7 @@ index 68961b9..933a20a 100755
  {
      if (!*args)
 diff --git a/src/server/game/Entities/GameObject/GameObject.cpp b/src/server/game/Entities/GameObject/GameObject.cpp
-index e26c671..91b0638 100755
+index 22f001d..afc8911 100755
 --- a/src/server/game/Entities/GameObject/GameObject.cpp
 +++ b/src/server/game/Entities/GameObject/GameObject.cpp
 @@ -447,6 +447,11 @@ void GameObject::Update(uint32 diff)
@@ -655,7 +655,7 @@ index e26c671..91b0638 100755
                          m_cooldownTime = time(NULL) + (goInfo->trap.cooldown ? goInfo->trap.cooldown :  uint32(4));   // template or 4 seconds
  
                          if (goInfo->trap.type == 1)
-@@ -1815,6 +1820,8 @@ void GameObject::SetDestructibleState(GameObjectDestructibleState state, Player*
+@@ -1801,6 +1806,8 @@ void GameObject::SetDestructibleState(GameObjectDestructibleState state, Player*
              if (DestructibleModelDataEntry const* modelData = sDestructibleModelDataStore.LookupEntry(m_goInfo->building.destructibleData))
                  if (modelData->DamagedDisplayId)
                      modelId = modelData->DamagedDisplayId;
@@ -664,11 +664,18 @@ index e26c671..91b0638 100755
              SetUInt32Value(GAMEOBJECT_DISPLAYID, modelId);
  
              if (setHealth)
+@@ -1869,4 +1876,4 @@ void GameObject::SetLootState(LootState s)
+ {
+     m_lootState = s;
+     AI()->OnStateChanged(s);
+-}
+\ No newline at end of file
++}
 diff --git a/src/server/game/Entities/Vehicle/Vehicle.cpp b/src/server/game/Entities/Vehicle/Vehicle.cpp
-index fc6c6cb..7d678a1 100755
+index b3531d5..53295ef 100755
 --- a/src/server/game/Entities/Vehicle/Vehicle.cpp
 +++ b/src/server/game/Entities/Vehicle/Vehicle.cpp
-@@ -508,3 +508,29 @@ uint8 Vehicle::GetAvailableSeatCount() const
+@@ -512,3 +512,29 @@ uint8 Vehicle::GetAvailableSeatCount() const
  
      return ret;
  }
@@ -718,92 +725,8 @@ index 213be5a..a31c317 100755
  
          SeatMap Seats;
  
-diff --git a/src/server/game/Handlers/BattleGroundHandler.cpp b/src/server/game/Handlers/BattleGroundHandler.cpp
-index d1aa002..47e26a1 100755
---- a/src/server/game/Handlers/BattleGroundHandler.cpp
-+++ b/src/server/game/Handlers/BattleGroundHandler.cpp
-@@ -35,6 +35,9 @@
- #include "DisableMgr.h"
- #include "Group.h"
- 
-+#include "OutdoorPvPWG.h"
-+#include "OutdoorPvPMgr.h"
-+
- void WorldSession::HandleBattlemasterHelloOpcode(WorldPacket & recv_data)
- {
-     uint64 guid;
-@@ -582,6 +585,15 @@ void WorldSession::HandleAreaSpiritHealerQueryOpcode(WorldPacket & recv_data)
- 
-     if (bg)
-         sBattlegroundMgr->SendAreaSpiritHealerQueryOpcode(_player, bg, guid);
-+    else
-+    {  // Wintergrasp Hack till 3.3.5 and it's implemented as BG
-+        if (GetPlayer()->GetZoneId() == 4197)
-+        {
-+            OutdoorPvPWG *pvpWG = (OutdoorPvPWG*)sOutdoorPvPMgr->GetOutdoorPvPToZoneId(4197);
-+            if (pvpWG && pvpWG->isWarTime())
-+                pvpWG->SendAreaSpiritHealerQueryOpcode(_player, guid);
-+        }
-+    }
- }
- 
- void WorldSession::HandleAreaSpiritHealerQueueOpcode(WorldPacket & recv_data)
-@@ -602,6 +614,15 @@ void WorldSession::HandleAreaSpiritHealerQueueOpcode(WorldPacket & recv_data)
- 
-     if (bg)
-         bg->AddPlayerToResurrectQueue(guid, _player->GetGUID());
-+    else
-+    {  // Wintergrasp Hack till 3.3.5 and it's implemented as BG
-+        if (GetPlayer()->GetZoneId() == 4197)
-+        {
-+            OutdoorPvPWG *pvpWG = (OutdoorPvPWG*)sOutdoorPvPMgr->GetOutdoorPvPToZoneId(4197);
-+            if (pvpWG && pvpWG->isWarTime())
-+                pvpWG->AddPlayerToResurrectQueue(guid, _player->GetGUID());
-+        }
-+    }
- }
- 
- void WorldSession::HandleBattlemasterJoinArena(WorldPacket & recv_data)
-diff --git a/src/server/game/Handlers/CharacterHandler.cpp b/src/server/game/Handlers/CharacterHandler.cpp
-index 0094c20..5587c71 100644
---- a/src/server/game/Handlers/CharacterHandler.cpp
-+++ b/src/server/game/Handlers/CharacterHandler.cpp
-@@ -45,6 +45,9 @@
- #include "AccountMgr.h"
- #include "LFGMgr.h"
- 
-+#include "OutdoorPvPWG.h"
-+#include "OutdoorPvPMgr.h"
-+
- class LoginQueryHolder : public SQLQueryHolder
- {
-     private:
-@@ -916,6 +919,23 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
-     sObjectAccessor->AddObject(pCurrChar);
-     //sLog->outDebug("Player %s added to Map.", pCurrChar->GetName());
- 
-+    //Send WG timer to player at login 
-+	if (sWorld->getBoolConfig(CONFIG_OUTDOORPVP_WINTERGRASP_ENABLED))
-+	{
-+	    if (OutdoorPvPWG *pvpWG = (OutdoorPvPWG*)sOutdoorPvPMgr->GetOutdoorPvPToZoneId(4197))
-+	    {
-+            if (pvpWG->isWarTime()) // "Battle in progress"
-+            {
-+                pCurrChar->SendUpdateWorldState(ClockWorldState[1], uint32(time(NULL)));
-+            } 
-+            else // Time to next battle
-+            {
-+                pvpWG->SendInitWorldStatesTo(pCurrChar);
-+                pCurrChar->SendUpdateWorldState(ClockWorldState[1], uint32(time(NULL) + pvpWG->GetTimer()));
-+            }
-+	    }
-+	}
-+
-     pCurrChar->SendInitialPacketsAfterAddToMap();
- 
-     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_CHAR_ONLINE);
 diff --git a/src/server/game/Miscellaneous/Language.h b/src/server/game/Miscellaneous/Language.h
-index e751dbf..eb27061 100755
+index 66610ad..e60d606 100755
 --- a/src/server/game/Miscellaneous/Language.h
 +++ b/src/server/game/Miscellaneous/Language.h
 @@ -705,6 +705,28 @@ enum TrinityStrings
@@ -852,10 +775,10 @@ index 6ea13d3..78bb1a8 100755
  enum ObjectiveStates
  {
 diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
-index cdec6bb..504f848 100755
+index c46721d..7f805ca 100755
 --- a/src/server/game/Scripting/ScriptLoader.cpp
 +++ b/src/server/game/Scripting/ScriptLoader.cpp
-@@ -594,6 +594,8 @@ void AddSC_outdoorpvp_na();
+@@ -593,6 +593,8 @@ void AddSC_outdoorpvp_na();
  void AddSC_outdoorpvp_si();
  void AddSC_outdoorpvp_tf();
  void AddSC_outdoorpvp_zm();
@@ -864,7 +787,7 @@ index cdec6bb..504f848 100755
  
  // player
  void AddSC_chat_log();
-@@ -1207,6 +1209,7 @@ void AddNorthrendScripts()
+@@ -1205,6 +1207,7 @@ void AddNorthrendScripts()
      AddSC_zuldrak();
      AddSC_crystalsong_forest();
      AddSC_isle_of_conquest();
@@ -872,7 +795,7 @@ index cdec6bb..504f848 100755
  #endif
  }
  
-@@ -1219,6 +1222,7 @@ void AddOutdoorPvPScripts()
+@@ -1217,6 +1220,7 @@ void AddOutdoorPvPScripts()
      AddSC_outdoorpvp_si();
      AddSC_outdoorpvp_tf();
      AddSC_outdoorpvp_zm();
@@ -880,11 +803,95 @@ index cdec6bb..504f848 100755
  #endif
  }
  
+diff --git a/src/server/game/Server/Protocol/Handlers/BattleGroundHandler.cpp b/src/server/game/Server/Protocol/Handlers/BattleGroundHandler.cpp
+index d1aa002..47e26a1 100755
+--- a/src/server/game/Server/Protocol/Handlers/BattleGroundHandler.cpp
++++ b/src/server/game/Server/Protocol/Handlers/BattleGroundHandler.cpp
+@@ -35,6 +35,9 @@
+ #include "DisableMgr.h"
+ #include "Group.h"
+ 
++#include "OutdoorPvPWG.h"
++#include "OutdoorPvPMgr.h"
++
+ void WorldSession::HandleBattlemasterHelloOpcode(WorldPacket & recv_data)
+ {
+     uint64 guid;
+@@ -582,6 +585,15 @@ void WorldSession::HandleAreaSpiritHealerQueryOpcode(WorldPacket & recv_data)
+ 
+     if (bg)
+         sBattlegroundMgr->SendAreaSpiritHealerQueryOpcode(_player, bg, guid);
++    else
++    {  // Wintergrasp Hack till 3.3.5 and it's implemented as BG
++        if (GetPlayer()->GetZoneId() == 4197)
++        {
++            OutdoorPvPWG *pvpWG = (OutdoorPvPWG*)sOutdoorPvPMgr->GetOutdoorPvPToZoneId(4197);
++            if (pvpWG && pvpWG->isWarTime())
++                pvpWG->SendAreaSpiritHealerQueryOpcode(_player, guid);
++        }
++    }
+ }
+ 
+ void WorldSession::HandleAreaSpiritHealerQueueOpcode(WorldPacket & recv_data)
+@@ -602,6 +614,15 @@ void WorldSession::HandleAreaSpiritHealerQueueOpcode(WorldPacket & recv_data)
+ 
+     if (bg)
+         bg->AddPlayerToResurrectQueue(guid, _player->GetGUID());
++    else
++    {  // Wintergrasp Hack till 3.3.5 and it's implemented as BG
++        if (GetPlayer()->GetZoneId() == 4197)
++        {
++            OutdoorPvPWG *pvpWG = (OutdoorPvPWG*)sOutdoorPvPMgr->GetOutdoorPvPToZoneId(4197);
++            if (pvpWG && pvpWG->isWarTime())
++                pvpWG->AddPlayerToResurrectQueue(guid, _player->GetGUID());
++        }
++    }
+ }
+ 
+ void WorldSession::HandleBattlemasterJoinArena(WorldPacket & recv_data)
+diff --git a/src/server/game/Server/Protocol/Handlers/CharacterHandler.cpp b/src/server/game/Server/Protocol/Handlers/CharacterHandler.cpp
+index 35276bb..1c15f86 100644
+--- a/src/server/game/Server/Protocol/Handlers/CharacterHandler.cpp
++++ b/src/server/game/Server/Protocol/Handlers/CharacterHandler.cpp
+@@ -44,6 +44,9 @@
+ #include "Battleground.h"
+ #include "AccountMgr.h"
+ 
++#include "OutdoorPvPWG.h"
++#include "OutdoorPvPMgr.h"
++
+ class LoginQueryHolder : public SQLQueryHolder
+ {
+     private:
+@@ -904,6 +907,23 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
+     sObjectAccessor->AddObject(pCurrChar);
+     //sLog->outDebug("Player %s added to Map.", pCurrChar->GetName());
+ 
++    //Send WG timer to player at login 
++	if (sWorld->getBoolConfig(CONFIG_OUTDOORPVP_WINTERGRASP_ENABLED))
++	{
++	    if (OutdoorPvPWG *pvpWG = (OutdoorPvPWG*)sOutdoorPvPMgr->GetOutdoorPvPToZoneId(4197))
++	    {
++            if (pvpWG->isWarTime()) // "Battle in progress"
++            {
++                pCurrChar->SendUpdateWorldState(ClockWorldState[1], uint32(time(NULL)));
++            } 
++            else // Time to next battle
++            {
++                pvpWG->SendInitWorldStatesTo(pCurrChar);
++                pCurrChar->SendUpdateWorldState(ClockWorldState[1], uint32(time(NULL) + pvpWG->GetTimer()));
++            }
++	    }
++	}
++
+     pCurrChar->SendInitialPacketsAfterAddToMap();
+ 
+     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_CHAR_ONLINE);
 diff --git a/src/server/game/Spells/Auras/SpellAuraEffects.cpp b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
-index 54b39b3..9a23961 100755
+index 6a8854a..59002b8 100755
 --- a/src/server/game/Spells/Auras/SpellAuraEffects.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
-@@ -4904,6 +4904,7 @@ void AuraEffect::HandleAuraDummy(AuraApplication const* aurApp, uint8 mode, bool
+@@ -4918,6 +4918,7 @@ void AuraEffect::HandleAuraDummy(AuraApplication const* aurApp, uint8 mode, bool
                              target->CastSpell((Unit*)NULL, GetAmount(), true, NULL, this);
                              break;
                          case 58600: // Restricted Flight Area
@@ -893,7 +900,7 @@ index 54b39b3..9a23961 100755
                                  target->CastSpell(target, 58601, true);
                              break;
 diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
-index 67d4c54..a19eaf7 100755
+index c8e4c55..69cd675 100755
 --- a/src/server/game/Spells/Spell.cpp
 +++ b/src/server/game/Spells/Spell.cpp
 @@ -53,6 +53,8 @@
@@ -905,7 +912,7 @@ index 67d4c54..a19eaf7 100755
  
  extern pEffect SpellEffects[TOTAL_SPELL_EFFECTS];
  
-@@ -5402,8 +5404,17 @@ SpellCastResult Spell::CheckCast(bool strict)
+@@ -5394,8 +5396,17 @@ SpellCastResult Spell::CheckCast(bool strict)
                  if (m_originalCaster && m_originalCaster->GetTypeId() == TYPEID_PLAYER && m_originalCaster->isAlive())
                  {
                      if (AreaTableEntry const* pArea = GetAreaEntryByAreaID(m_originalCaster->GetAreaId()))
@@ -924,7 +931,7 @@ index 67d4c54..a19eaf7 100755
                  break;
              }
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 86c52cd..22df4ee 100755
+index 9bdf088..d8277e0 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
 @@ -63,6 +63,7 @@
@@ -935,7 +942,7 @@ index 86c52cd..22df4ee 100755
  
  pEffect SpellEffects[TOTAL_SPELL_EFFECTS]=
  {
-@@ -4436,6 +4437,23 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
+@@ -4447,6 +4448,23 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
          {
              switch (m_spellInfo->Id)
              {
@@ -960,7 +967,7 @@ index 86c52cd..22df4ee 100755
                  case 63975:
                  {
 diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
-index ff4eaae..300a105 100755
+index f3d5697..ea24590 100755
 --- a/src/server/game/Spells/SpellMgr.cpp
 +++ b/src/server/game/Spells/SpellMgr.cpp
 @@ -30,6 +30,8 @@
@@ -972,7 +979,7 @@ index ff4eaae..300a105 100755
  
  bool IsPrimaryProfessionSkill(uint32 skill)
  {
-@@ -1128,6 +1130,26 @@ bool SpellArea::IsFitToRequirements(Player const* player, uint32 newZone, uint32
+@@ -1131,6 +1133,26 @@ bool SpellArea::IsFitToRequirements(Player const* player, uint32 newZone, uint32
                  return false;
              break;
          }
@@ -1000,7 +1007,7 @@ index ff4eaae..300a105 100755
          case 68720: // Quarry - Isle of Conquest.
          {
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
-index 71d4c10..e5f54b8 100755
+index 918aa34..5b0a83a 100755
 --- a/src/server/game/World/World.cpp
 +++ b/src/server/game/World/World.cpp
 @@ -77,6 +77,7 @@
@@ -1011,7 +1018,7 @@ index 71d4c10..e5f54b8 100755
  
  volatile bool World::m_stopEvent = false;
  uint8 World::m_ExitCode = SHUTDOWN_EXIT_CODE;
-@@ -1228,6 +1229,23 @@ void World::LoadConfigSettings(bool reload)
+@@ -1226,6 +1227,23 @@ void World::LoadConfigSettings(bool reload)
      m_bool_configs[CONFIG_PDUMP_NO_PATHS] = ConfigMgr::GetBoolDefault("PlayerDump.DisallowPaths", true);
      m_bool_configs[CONFIG_PDUMP_NO_OVERWRITE] = ConfigMgr::GetBoolDefault("PlayerDump.DisallowOverwrite", true);
  
@@ -1035,7 +1042,7 @@ index 71d4c10..e5f54b8 100755
      sScriptMgr->OnConfigLoad(reload);
  }
  
-@@ -2942,6 +2960,32 @@ void World::ProcessQueryCallbacks()
+@@ -2940,6 +2958,32 @@ void World::ProcessQueryCallbacks()
      }
  }
  
@@ -1069,7 +1076,7 @@ index 71d4c10..e5f54b8 100755
  {
      sLog->outString("Loading character name data");
 diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
-index a26df19..45102b3 100755
+index 77fe361..ed31d84 100755
 --- a/src/server/game/World/World.h
 +++ b/src/server/game/World/World.h
 @@ -158,6 +158,9 @@ enum WorldBoolConfigs
@@ -1082,7 +1089,7 @@ index a26df19..45102b3 100755
      CONFIG_PDUMP_NO_PATHS,
      CONFIG_PDUMP_NO_OVERWRITE,
      CONFIG_WARDEN_ENABLED,
-@@ -310,6 +313,18 @@ enum WorldIntConfigs
+@@ -308,6 +311,18 @@ enum WorldIntConfigs
      CONFIG_PRESERVE_CUSTOM_CHANNEL_DURATION,
      CONFIG_PERSISTENT_CHARACTER_CLEAN_FLAGS,
      CONFIG_MAX_INSTANCES_PER_HOUR,
@@ -1101,7 +1108,7 @@ index a26df19..45102b3 100755
      CONFIG_WARDEN_CLIENT_RESPONSE_DELAY,
      CONFIG_WARDEN_CLIENT_CHECK_HOLDOFF,
      CONFIG_WARDEN_CLIENT_FAIL_ACTION,
-@@ -784,6 +799,18 @@ class World
+@@ -782,6 +797,18 @@ class World
  
          bool isEventKillStart;
  
@@ -1121,10 +1128,10 @@ index a26df19..45102b3 100755
          void AddCharacterNameData(uint32 guid, std::string const& name, uint8 gender, uint8 race, uint8 playerClass);
          void UpdateCharacterNameData(uint32 guid, std::string const& name, uint8 gender = GENDER_NONE, uint8 race = RACE_NONE);
 diff --git a/src/server/scripts/CMakeLists.txt b/src/server/scripts/CMakeLists.txt
-index 519778a..be5e11d 100644
+index 3295e2f..69263f4 100644
 --- a/src/server/scripts/CMakeLists.txt
 +++ b/src/server/scripts/CMakeLists.txt
-@@ -122,6 +122,7 @@ include_directories(
+@@ -123,6 +123,7 @@ include_directories(
    ${CMAKE_SOURCE_DIR}/src/server/game/Movement/Waypoints
    ${CMAKE_SOURCE_DIR}/src/server/game/Opcodes
    ${CMAKE_SOURCE_DIR}/src/server/game/OutdoorPvP
@@ -4191,7 +4198,7 @@ index 0000000..f6e6e3c
 +#endif
 \ No newline at end of file
 diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
-index e5b8bf1..0587b50 100644
+index f8a2700..bcc885a 100644
 --- a/src/server/worldserver/worldserver.conf.dist
 +++ b/src/server/worldserver/worldserver.conf.dist
 @@ -22,9 +22,11 @@
@@ -4206,7 +4213,7 @@ index e5b8bf1..0587b50 100644
  #
  ###################################################################################################
  
-@@ -3207,3 +3209,117 @@ PlayerDump.DisallowOverwrite = 1
+@@ -3191,3 +3193,117 @@ PlayerDump.DisallowOverwrite = 1
  
  #
  ###################################################################################################

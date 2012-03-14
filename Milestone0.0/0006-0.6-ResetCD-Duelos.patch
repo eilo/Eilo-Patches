@@ -1,16 +1,16 @@
-From 59aa28156902b7ddec7b8e8854a78c0745307ffa Mon Sep 17 00:00:00 2001
+From 3a7960ecb253c6fc1b27e4b2e1ce2224e290b066 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 13:49:09 -0500
 Subject: [PATCH 06/27] 0.6 ResetCD Duelos
 
 ---
- src/server/game/Handlers/DuelHandler.cpp |    8 ++++++++
+ .../game/Server/Protocol/Handlers/DuelHandler.cpp  |    8 ++++++++
  1 files changed, 8 insertions(+), 0 deletions(-)
 
-diff --git a/src/server/game/Handlers/DuelHandler.cpp b/src/server/game/Handlers/DuelHandler.cpp
+diff --git a/src/server/game/Server/Protocol/Handlers/DuelHandler.cpp b/src/server/game/Server/Protocol/Handlers/DuelHandler.cpp
 index 8afd9f3..389ccf8 100755
---- a/src/server/game/Handlers/DuelHandler.cpp
-+++ b/src/server/game/Handlers/DuelHandler.cpp
+--- a/src/server/game/Server/Protocol/Handlers/DuelHandler.cpp
++++ b/src/server/game/Server/Protocol/Handlers/DuelHandler.cpp
 @@ -51,6 +51,14 @@ void WorldSession::HandleDuelAcceptedOpcode(WorldPacket& recvPacket)
  
      player->SendDuelCountdown(3000);
