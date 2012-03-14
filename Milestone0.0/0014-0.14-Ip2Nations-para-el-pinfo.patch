@@ -1,7 +1,7 @@
 From db44c7fe67e783b108aaea140afab1018697d2aa Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 14 Mar 2012 03:49:51 -0500
-Subject: [PATCH 14/26] 0.14 Ip2Nations para el pinfo
+Subject: [PATCH 14/27] 0.14 Ip2Nations para el pinfo
 
 ---
  .../reanemu/2012_01_03_100_world_ip2nation.sql     |   21 ++++++++++++++++++++

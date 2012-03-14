@@ -1,7 +1,7 @@
 From 6d971d588eb7ea237970304a5c37a7759ee93061 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 13 Mar 2012 13:22:32 -0500
-Subject: [PATCH 03/26] 0.3 Warden Anticheat
+Subject: [PATCH 03/27] 0.3 Warden Anticheat
 
 ---
  sql/updates/auth/reanemu/auth_warden.sql           |    2 +
@@ -920,7 +920,7 @@ index 1f85cb6..b656986 100755
      Field* fields = result->Fetch();
      uint8 secLevel = fields[2].GetUInt8();
 diff --git a/src/server/authserver/Server/AuthSocket.h b/src/server/authserver/Server/AuthSocket.h
-index 490b0db2..9d59a9f 100755
+index 490b0db..9d59a9f 100755
 --- a/src/server/authserver/Server/AuthSocket.h
 +++ b/src/server/authserver/Server/AuthSocket.h
 @@ -81,6 +81,7 @@ private:

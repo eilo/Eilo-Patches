@@ -1,7 +1,7 @@
 From 6ecae66fed0432d3fbc5c65039a5ceafcc4f44ee Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 02:13:22 -0500
-Subject: [PATCH 10/26] 0.10 Rates Weekend
+Subject: [PATCH 10/27] 0.10 Rates Weekend
 
 ---
  .../reanemu/2012_02_11_100_world_rates_weekend.sql |    1 +

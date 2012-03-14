@@ -1,7 +1,7 @@
 From c9156729ef7d683aaf35f55e4ebec424da95a97f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 14 Mar 2012 05:22:33 -0500
-Subject: [PATCH 15/26] 0.15 AuctionHouse caracteristicas adicionales
+Subject: [PATCH 15/27] 0.15 AuctionHouse caracteristicas adicionales
 
 ---
  src/server/game/AuctionHouse/AuctionHouseMgr.h     |    1 +
