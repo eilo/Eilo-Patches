@@ -1,7 +1,7 @@
-From 3a7960ecb253c6fc1b27e4b2e1ce2224e290b066 Mon Sep 17 00:00:00 2001
+From fc18d6cc18a276d41589385b095d5ec9a4ec7e3d Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 13:49:09 -0500
-Subject: [PATCH 06/27] 0.6 ResetCD Duelos
+Subject: [PATCH 06/26] 0.6 ResetCD Duelos
 
 ---
  .../game/Server/Protocol/Handlers/DuelHandler.cpp  |    8 ++++++++

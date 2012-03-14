@@ -1,14 +1,14 @@
-From d74d0811df4d5489eb3d28a38cb3607b00f11fd1 Mon Sep 17 00:00:00 2001
+From cf529846478ef1018679a89269769b055f2889a1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Thu, 15 Dec 2011 17:48:38 -0500
-Subject: [PATCH 05/27] =?UTF-8?q?0.5=20AHBot=20para=20subastas=20a=C3=B1adid?=
+Date: Wed, 14 Mar 2012 03:28:49 -0500
+Subject: [PATCH 05/26] =?UTF-8?q?0.5=20AHBot=20para=20subastas=20a=C3=B1adid?=
  =?UTF-8?q?o?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 ---
- .../reanemu/2011_10_13_100_characters_ahbot.sql    |   72 +
+ .../reanemu/2011_10_13_100_characters_ahbot.sql    |   73 +
  .../AuctionHouseBot/AuctionHouseBot.cpp            | 1884 ++++++++++++++++++++
  .../AuctionHouse/AuctionHouseBot/AuctionHouseBot.h | 1247 +++++++++++++
  src/server/game/AuctionHouse/AuctionHouseMgr.cpp   |   11 +-
@@ -21,17 +21,18 @@ Content-Transfer-Encoding: 8bit
  .../Protocol/Handlers/AuctionHouseHandler.cpp      |    1 +
  src/server/game/World/World.cpp                    |    5 +
  src/server/worldserver/worldserver.conf.dist       |  266 +++
- 13 files changed, 3988 insertions(+), 3 deletions(-)
+ 13 files changed, 3989 insertions(+), 3 deletions(-)
  create mode 100644 sql/updates/characters/reanemu/2011_10_13_100_characters_ahbot.sql
  create mode 100644 src/server/game/AuctionHouse/AuctionHouseBot/AuctionHouseBot.cpp
  create mode 100644 src/server/game/AuctionHouse/AuctionHouseBot/AuctionHouseBot.h
 
 diff --git a/sql/updates/characters/reanemu/2011_10_13_100_characters_ahbot.sql b/sql/updates/characters/reanemu/2011_10_13_100_characters_ahbot.sql
 new file mode 100644
-index 0000000..2438668
+index 0000000..84b3a45
 --- /dev/null
 +++ b/sql/updates/characters/reanemu/2011_10_13_100_characters_ahbot.sql
-@@ -0,0 +1,72 @@
+@@ -0,0 +1,73 @@
++DROP TABLE IF EXISTS `auctionhousebot`;
 +CREATE TABLE `auctionhousebot` (
 +   `auctionhouse` INT(11) NOT NULL DEFAULT '0' COMMENT 'mapID of the auctionhouse.',
 +   `name` CHAR(25) NULL DEFAULT NULL COMMENT 'Text name of the auctionhouse.',

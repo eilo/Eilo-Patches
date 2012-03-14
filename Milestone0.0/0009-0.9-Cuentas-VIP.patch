@@ -1,7 +1,7 @@
-From 97f2aa8afc1a939d23866f56ed228aafb623e74e Mon Sep 17 00:00:00 2001
+From 1b972e12d2e290569029f93f0d268771a4bb575a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 2 Mar 2012 13:59:35 -0500
-Subject: [PATCH 09/27] 0.9 Cuentas VIP
+Subject: [PATCH 09/26] 0.9 Cuentas VIP
 
 ---
  .../reanemu/2011_10_14_100_auth_vipaccount.sql     |    8 ++++++++

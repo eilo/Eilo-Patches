@@ -1,7 +1,7 @@
-From ce99e1c38522a73cac6338e684a91a6029c1ff5a Mon Sep 17 00:00:00 2001
+From 86c843c7b6d7a13c239d1b2df32b7d9b63deccb4 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 13 Mar 2012 22:39:32 -0500
-Subject: [PATCH 11/27] 0.11 DynLoS en Gameobjects
+Subject: [PATCH 11/26] 0.11 DynLoS en Gameobjects
 
 ---
  src/server/game/Entities/Object/Object.cpp |   11 ++-

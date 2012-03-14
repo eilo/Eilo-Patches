@@ -1,0 +1,128 @@
+From db44c7fe67e783b108aaea140afab1018697d2aa Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Wed, 14 Mar 2012 03:49:51 -0500
+Subject: [PATCH 14/26] 0.14 Ip2Nations para el pinfo
+
+---
+ .../reanemu/2012_01_03_100_world_ip2nation.sql     |   21 ++++++++++++++++++++
+ src/server/game/Chat/Commands/Level2.cpp           |   15 ++++++++++++++
+ src/server/game/World/World.cpp                    |   20 +++++++++++++++++++
+ src/server/game/World/World.h                      |    2 +
+ 4 files changed, 58 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_01_03_100_world_ip2nation.sql
+
+diff --git a/sql/updates/world/reanemu/2012_01_03_100_world_ip2nation.sql b/sql/updates/world/reanemu/2012_01_03_100_world_ip2nation.sql
+new file mode 100644
+index 0000000..c1eb8e0
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_01_03_100_world_ip2nation.sql
+@@ -0,0 +1,21 @@
++DROP TABLE IF EXISTS ip2nation;
++
++CREATE TABLE ip2nation (
++  ip int(11) unsigned NOT NULL default '0',
++  country char(2) NOT NULL default '',
++  KEY ip (ip)
++);
++
++DROP TABLE IF EXISTS ip2nationCountries;
++
++CREATE TABLE ip2nationCountries (
++  code varchar(4) NOT NULL default '',
++  iso_code_2 varchar(2) NOT NULL default '',
++  iso_code_3 varchar(3) default '',
++  iso_country varchar(255) NOT NULL default '',
++  country varchar(255) NOT NULL default '',
++  lat float NOT NULL default '0',
++  lon float NOT NULL default '0',
++  PRIMARY KEY  (code),
++  KEY code (code)
++);
+\ No newline at end of file
+diff --git a/src/server/game/Chat/Commands/Level2.cpp b/src/server/game/Chat/Commands/Level2.cpp
+index 8daf131..9f46f3d 100755
+--- a/src/server/game/Chat/Commands/Level2.cpp
++++ b/src/server/game/Chat/Commands/Level2.cpp
+@@ -45,6 +45,7 @@
+ #include "TargetedMovementGenerator.h"                      // for HandleNpcUnFollowCommand
+ #include "CreatureGroups.h"
+ #include "OutdoorPvPWG.h"
++#include "ace/INET_Addr.h"
+ 
+ //mute player for some times
+ bool ChatHandler::HandleMuteCommand(const char* args)
+@@ -403,6 +404,20 @@ bool ChatHandler::HandlePInfoCommand(const char* args)
+         {
+             last_ip = fields[3].GetString();
+             last_login = fields[4].GetString();
++
++            uint32 ip = inet_addr(last_ip.c_str());
++#if TRINITY_ENDIAN == BIGENDIAN
++            EndianConvertReverse(ip);
++#endif
++
++            if (QueryResult result2 = WorldDatabase.PQuery("SELECT c.country FROM ip2nationCountries c, ip2nation i WHERE "
++                                                         "i.ip < %u AND c.code = i.country ORDER BY i.ip DESC LIMIT 0,1", ip))
++            {
++                Field* fields2 = result2->Fetch();
++                last_ip.append(" (");
++                last_ip.append(fields2[0].GetString());
++                last_ip.append(")");
++            }
+         }
+         else
+         {
+diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
+index 74e2ccc..751a89d 100755
+--- a/src/server/game/World/World.cpp
++++ b/src/server/game/World/World.cpp
+@@ -1667,6 +1667,9 @@ void World::SetInitialWorldSettings()
+     sLog->outString("Loading Autobroadcasts...");
+     LoadAutobroadcasts();
+ 
++    sLog->outString("Loading Ip2nation...");
++    LoadIp2nation();
++
+     ///- Load and initialize scripts
+     sObjectMgr->LoadQuestStartScripts();                         // must be after load Creature/Gameobject(Template/Data) and QuestTemplate
+     sObjectMgr->LoadQuestEndScripts();                           // must be after load Creature/Gameobject(Template/Data) and QuestTemplate
+@@ -1920,6 +1923,23 @@ void World::LoadAutobroadcasts()
+     sLog->outString();
+ }
+ 
++void World::LoadIp2nation()
++{
++    uint32 oldMSTime = getMSTime();
++
++    QueryResult result = WorldDatabase.Query("SELECT count(c.code) FROM ip2nationCountries c, ip2nation i WHERE c.code = i.country");
++    uint32 count = 0;
++
++    if (result)
++    {
++        Field* fields = result->Fetch();
++        count = fields[0].GetUInt32();
++    }
++
++    sLog->outString(">> Loaded %u ip2nation definitions in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
++    sLog->outString();
++}
++
+ /// Update the World !
+ void World::Update(uint32 diff)
+ {
+diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
+index e4e0519..1a1f9f9 100755
+--- a/src/server/game/World/World.h
++++ b/src/server/game/World/World.h
+@@ -794,6 +794,8 @@ class World
+ 
+         void LoadAutobroadcasts();
+ 
++        void LoadIp2nation();
++
+         void UpdateAreaDependentAuras();
+ 
+         void ProcessStartEvent();
+-- 
+1.7.8.msysgit.0
+

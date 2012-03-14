@@ -1,10 +1,10 @@
-From 7808dfc59ae0f0d220fbef86b229742c8dfd4eae Mon Sep 17 00:00:00 2001
+From d4101c6aff8536433279f5b326471d0ac0ed1683 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Sun, 4 Mar 2012 07:38:14 -0500
-Subject: [PATCH 07/27] 0.7 AC1 Anticheat
+Date: Wed, 14 Mar 2012 03:37:42 -0500
+Subject: [PATCH 07/26] 0.7 AC1 Anticheat
 
 ---
- .../reanemu/2011_11_09_100_characters_ac1.sql      |   71 ++++
+ .../reanemu/2011_11_09_100_characters_ac1.sql      |   70 ++++
  src/server/game/Entities/Player/Player.cpp         |   21 ++
  src/server/game/Entities/Player/Player.h           |   15 +
  .../Server/Protocol/Handlers/MovementHandler.cpp   |  335 ++++++++++++++++++++
@@ -14,15 +14,16 @@ Subject: [PATCH 07/27] 0.7 AC1 Anticheat
  src/server/game/World/World.h                      |   26 ++
  src/server/scripts/Commands/cs_gm.cpp              |    6 +
  src/server/worldserver/worldserver.conf.dist       |   63 ++++
- 10 files changed, 569 insertions(+), 0 deletions(-)
+ 10 files changed, 568 insertions(+), 0 deletions(-)
  create mode 100644 sql/updates/characters/reanemu/2011_11_09_100_characters_ac1.sql
 
 diff --git a/sql/updates/characters/reanemu/2011_11_09_100_characters_ac1.sql b/sql/updates/characters/reanemu/2011_11_09_100_characters_ac1.sql
 new file mode 100644
-index 0000000..5685a6c
+index 0000000..b3435c2
 --- /dev/null
 +++ b/sql/updates/characters/reanemu/2011_11_09_100_characters_ac1.sql
-@@ -0,0 +1,71 @@
+@@ -0,0 +1,70 @@
++DROP TABLE IF EXISTS `cheaters`;
 +CREATE TABLE `cheaters` (
 +  `entry` bigint(20) NOT NULL AUTO_INCREMENT,
 +  `player` varchar(255) NOT NULL,
@@ -92,9 +93,6 @@ index 0000000..5685a6c
 +
 +DELIMITER ;
 +call ac1Update();
-+
-+ALTER TABLE `cheaters` DROP COLUMN `Pos`;
-\ No newline at end of file
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
 index e09c2d0..81d6ae3 100755
 --- a/src/server/game/Entities/Player/Player.cpp
