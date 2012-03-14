@@ -1,7 +1,7 @@
-From 4647e105d4fa6f2d7a27fbb9f3cca3afc3937724 Mon Sep 17 00:00:00 2001
+From 5f073694120ba350defaacc30b39d9ed1f157389 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 4 Mar 2012 17:15:39 +0100
-Subject: [PATCH 32/37] =?UTF-8?q?1.32=20Arpen:=20fixeada=20aplicaci=C3=B3n=20?=
+Subject: [PATCH 32/38] =?UTF-8?q?1.32=20Arpen:=20fixeada=20aplicaci=C3=B3n=20?=
  =?UTF-8?q?del=20Arpen=20obtenido=20de=20non-scaling=20items=20para=20Druida?=
  =?UTF-8?q?=20Feral?=
 MIME-Version: 1.0
@@ -13,10 +13,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 14 insertions(+), 3 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 0c8ac36..b8115a6 100755
+index 13feae25..d2aa729 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
-@@ -8137,10 +8137,21 @@ void Player::_ApplyItemBonuses(ItemTemplate const* proto, uint8 slot, bool apply
+@@ -8136,10 +8136,21 @@ void Player::_ApplyItemBonuses(ItemTemplate const* proto, uint8 slot, bool apply
      if (CanUseAttackType(attType))
          _ApplyWeaponDamage(slot, proto, ssv, apply);
  

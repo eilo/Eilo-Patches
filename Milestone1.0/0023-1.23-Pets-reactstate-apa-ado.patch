@@ -1,7 +1,7 @@
-From c8919fe29ddf27ef278d8b375d343879d95b8a33 Mon Sep 17 00:00:00 2001
+From 9b8aea08aaefd566190879769c0925437e7c0cb2 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 13 Mar 2012 23:06:00 -0500
-Subject: [PATCH 23/37] =?UTF-8?q?1.23=20Pets=20reactstate=20apa=C3=B1ado?=
+Subject: [PATCH 23/38] =?UTF-8?q?1.23=20Pets=20reactstate=20apa=C3=B1ado?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -11,10 +11,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 10 insertions(+), 8 deletions(-)
 
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index 2d6e8f1..e79e739 100755
+index 75d579a..05ff6c9 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -15366,14 +15366,6 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
+@@ -15458,14 +15458,6 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
      if (!victim->GetHealth())
          return;
  
@@ -29,7 +29,7 @@ index 2d6e8f1..e79e739 100755
      // find player: owner of controlled `this` or `this` itself maybe
      Player* player = GetCharmerOrOwnerPlayerOrPlayerItself();
      Creature* creature = victim->ToCreature();
-@@ -15502,6 +15494,16 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
+@@ -15594,6 +15586,16 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
          victim->setDeathState(JUST_DIED);
      }
  

@@ -1,7 +1,7 @@
-From 9f7635760d76fc26689cc3b4211a5aad4a1f3196 Mon Sep 17 00:00:00 2001
+From b8be80877be0ff629f0815961340cfd3688c38c5 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 16:43:12 -0500
-Subject: [PATCH 07/37] 1.7 Bindeo instance players que se salen y lotean
+Subject: [PATCH 07/38] 1.7 Bindeo instance players que se salen y lotean
 
 ---
  src/server/game/Loot/LootMgr.cpp |    6 ++++++

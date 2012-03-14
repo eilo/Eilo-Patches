@@ -1,7 +1,7 @@
-From 43966103c748478e920539d149c05b3769bc431f Mon Sep 17 00:00:00 2001
+From e0ba42a2651ef5cd375e379d0e94a07896480579 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 10 Mar 2012 15:34:40 -0500
-Subject: [PATCH 36/37] 1.36 Vehiculos removiendo algunas flags que estaban
+Subject: [PATCH 36/38] 1.36 Vehiculos removiendo algunas flags que estaban
  demas y permitian exploit
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 36/37] 1.36 Vehiculos removiendo algunas flags que estaban
  1 files changed, 6 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Vehicle/Vehicle.cpp b/src/server/game/Entities/Vehicle/Vehicle.cpp
-index 87f638e..a381fcd 100755
+index 86f5265..a58d440 100755
 --- a/src/server/game/Entities/Vehicle/Vehicle.cpp
 +++ b/src/server/game/Entities/Vehicle/Vehicle.cpp
 @@ -452,6 +452,12 @@ void Vehicle::RemovePassenger(Unit* unit)

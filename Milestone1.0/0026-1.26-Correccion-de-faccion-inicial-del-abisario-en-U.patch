@@ -1,7 +1,7 @@
-From 4d9002403f2c55ad637cb173d7f1e39158a69bfd Mon Sep 17 00:00:00 2001
+From 128a9b13f33e66f50b96e88091c3ad5148da164d Mon Sep 17 00:00:00 2001
 From: Muzashi <santiago_rho_psi@hotmail.com>
 Date: Tue, 7 Feb 2012 00:09:58 -0500
-Subject: [PATCH 26/37] 1.26 Correccion de faccion inicial del abisario en
+Subject: [PATCH 26/38] 1.26 Correccion de faccion inicial del abisario en
  Undercity
 
 ---

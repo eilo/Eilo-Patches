@@ -1,0 +1,27 @@
+From 5288457dc15434b84194a36c0018c0a3e293c99a Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Wed, 14 Mar 2012 13:40:16 -0500
+Subject: [PATCH 37/38] 1.37 Low lvl no ganaran exp en Northrend
+
+---
+ src/server/game/Entities/Player/Player.cpp |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
+index 2f82adf..2f6555b 100755
+--- a/src/server/game/Entities/Player/Player.cpp
++++ b/src/server/game/Entities/Player/Player.cpp
+@@ -3061,6 +3061,10 @@ void Player::GiveXP(uint32 xp, Unit* victim, float group_rate)
+ 
+     sScriptMgr->OnGivePlayerXP(this, xp, victim);
+ 
++    if(level < 66 && GetMapId() == 571)
++        return;
++
++
+     // Favored experience increase START
+     uint32 zone = GetZoneId();
+     float favored_exp_mult = 0;
+-- 
+1.7.8.msysgit.0
+

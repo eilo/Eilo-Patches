@@ -1,7 +1,7 @@
-From 4ec98acc0fefae0dde61ed487e4ab0feef9e8f7b Mon Sep 17 00:00:00 2001
+From 5e4145c1aa11a729131db5bd35960c5f092e078c Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 9 Mar 2012 22:11:22 -0500
-Subject: [PATCH 34/37] 1.34 Transports: Evitando crash con algunas spells
+Subject: [PATCH 34/38] 1.34 Transports: Evitando crash con algunas spells
  como blink o teleport
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 34/37] 1.34 Transports: Evitando crash con algunas spells
  1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index b8115a6..6421c52 100755
+index d2aa729..2f82adf 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -2228,7 +2228,7 @@ bool Player::TeleportTo(uint32 mapid, float x, float y, float z, float orientati

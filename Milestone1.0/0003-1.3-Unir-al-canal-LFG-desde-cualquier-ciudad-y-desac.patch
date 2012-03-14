@@ -1,7 +1,7 @@
-From 7b2f13f46e3f8a0483b251a4286aa1c7dce309b6 Mon Sep 17 00:00:00 2001
+From bab3beeda944a2afe67980907d8c65b29f8e8d8e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 21:47:13 -0500
-Subject: [PATCH 03/37] 1.3 Unir al canal LFG desde cualquier ciudad y
+Subject: [PATCH 03/38] 1.3 Unir al canal LFG desde cualquier ciudad y
  desactivado avisos de Join/Leave
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 03/37] 1.3 Unir al canal LFG desde cualquier ciudad y
  1 files changed, 4 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 6515e5e..076d738 100755
+index d01abaa..980cc00 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -5642,6 +5642,10 @@ void Player::RepopAtGraveyard()

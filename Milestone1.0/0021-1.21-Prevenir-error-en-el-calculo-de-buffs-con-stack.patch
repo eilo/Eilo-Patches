@@ -1,7 +1,7 @@
-From 70d55bc9f7ccff5a5a55e6d9cc676dff9c0feacc Mon Sep 17 00:00:00 2001
+From 6479314f8c514d684c4bb2dc6fa7553655379c97 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 19:06:26 -0500
-Subject: [PATCH 21/37] 1.21 Prevenir error en el calculo de buffs con stacks
+Subject: [PATCH 21/38] 1.21 Prevenir error en el calculo de buffs con stacks
 
 ---
  src/server/game/Spells/SpellEffects.cpp |    9 +++++++++
