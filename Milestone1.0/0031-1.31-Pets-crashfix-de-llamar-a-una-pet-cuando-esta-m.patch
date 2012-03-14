@@ -1,7 +1,7 @@
-From 4bb3dfd497718b3c1fa13a3a19431c42d2ca690e Mon Sep 17 00:00:00 2001
+From 7675b2c5c86a484827d2bba1cf9bcf084b433e97 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Sun, 4 Mar 2012 21:18:32 -0500
-Subject: [PATCH 31/40] 1.31 Pets: crashfix de llamar a una pet cuando esta
+Date: Tue, 13 Mar 2012 23:10:44 -0500
+Subject: [PATCH 31/37] 1.31 Pets crashfix de llamar a una pet cuando esta
  muerta
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 31/40] 1.31 Pets: crashfix de llamar a una pet cuando esta
  1 files changed, 10 insertions(+), 2 deletions(-)
 
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index dd6045f..2766df8 100755
+index e79e739..416c972 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -12690,8 +12690,16 @@ void Unit::setDeathState(DeathState s)
+@@ -12742,8 +12742,16 @@ void Unit::setDeathState(DeathState s)
          // remove aurastates allowing special moves
          ClearAllReactives();
          ClearDiminishings();
@@ -28,7 +28,7 @@ index dd6045f..2766df8 100755
 +            GetMotionMaster()->Clear(false);
 +            GetMotionMaster()->MoveIdle();
 +        }
-         StopMoving();
+         SendMonsterStop(true);
          // without this when removing IncreaseMaxHealth aura player may stuck with 1 hp
          // do not why since in IncreaseMaxHealth currenthealth is checked
 -- 

@@ -1,7 +1,7 @@
-From 77e3b799ea5acfbf5cce0f59a3a1becdd1231ae1 Mon Sep 17 00:00:00 2001
+From 5de5a18696d6c53f9c812ae363450acc31ddcfcd Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 08:35:54 -0500
-Subject: [PATCH 30/40] 1.30 EyeOfStorm: Evitando que salgan de la burbuja
+Subject: [PATCH 30/37] 1.30 EyeOfStorm: Evitando que salgan de la burbuja
  antes de comenzar la bg
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 30/40] 1.30 EyeOfStorm: Evitando que salgan de la burbuja
  1 files changed, 21 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Battlegrounds/Battleground.cpp b/src/server/game/Battlegrounds/Battleground.cpp
-index 08ca406..a57b35d 100755
+index 6a75869..5c7a46c 100755
 --- a/src/server/game/Battlegrounds/Battleground.cpp
 +++ b/src/server/game/Battlegrounds/Battleground.cpp
 @@ -479,6 +479,27 @@ inline void Battleground::_ProcessJoin(uint32 diff)

@@ -1,7 +1,7 @@
-From b1b2426672ae77f4c8fec859954afaa88573e4f1 Mon Sep 17 00:00:00 2001
+From 8c335f40b96f94d9bb0c8eb2725cafa013f61e6b Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 25 Dec 2011 13:03:55 -0500
-Subject: [PATCH 22/40] 1.22 IsleOfConquest: Script evitando que puedan matar
+Subject: [PATCH 22/37] 1.22 IsleOfConquest: Script evitando que puedan matar
  a los bosses con exploit
 
 ---
@@ -24,7 +24,7 @@ index 0000000..cc822cc
 +UPDATE `creature_template` SET `faction_A` = 35, `faction_H` = 35 WHERE `entry` in (34922,35405);
 +UPDATE `creature_template` SET `ScriptName`='bosses_isle_of_conquest' WHERE `entry` IN (34924,34922);
 diff --git a/src/server/game/Battlegrounds/Zones/BattlegroundIC.cpp b/src/server/game/Battlegrounds/Zones/BattlegroundIC.cpp
-index 40f31ce..4beb980 100755
+index e3eefd4..9049d37 100755
 --- a/src/server/game/Battlegrounds/Zones/BattlegroundIC.cpp
 +++ b/src/server/game/Battlegrounds/Zones/BattlegroundIC.cpp
 @@ -836,25 +836,53 @@ void BattlegroundIC::DestroyGate(Player* player, GameObject* go)

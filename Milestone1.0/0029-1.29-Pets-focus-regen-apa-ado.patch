@@ -1,7 +1,7 @@
-From 82dd85d6b332dd48934649bc2d2f20f50530a12f Mon Sep 17 00:00:00 2001
+From 18c8dc31563410a417fca0a9b266767a970a8cba Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 2 Mar 2012 14:18:15 -0500
-Subject: [PATCH 29/40] =?UTF-8?q?1.29=20Pets=20focus=20regen=20apa=C3=B1ado?=
+Subject: [PATCH 29/37] =?UTF-8?q?1.29=20Pets=20focus=20regen=20apa=C3=B1ado?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -11,7 +11,7 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 5 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Pet/Pet.cpp b/src/server/game/Entities/Pet/Pet.cpp
-index bf6dc3b..8df4743 100755
+index 6075085..9d059dc 100755
 --- a/src/server/game/Entities/Pet/Pet.cpp
 +++ b/src/server/game/Entities/Pet/Pet.cpp
 @@ -537,6 +537,11 @@ void Pet::Update(uint32 diff)

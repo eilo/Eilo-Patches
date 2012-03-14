@@ -1,7 +1,7 @@
-From 799b9cafca5bb9cb760faed46804fac01497e14e Mon Sep 17 00:00:00 2001
+From 43966103c748478e920539d149c05b3769bc431f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 10 Mar 2012 15:34:40 -0500
-Subject: [PATCH 39/40] 1.39 Vehiculos removiendo algunas flags que estaban
+Subject: [PATCH 36/37] 1.36 Vehiculos removiendo algunas flags que estaban
  demas y permitian exploit
 
 ---
@@ -9,12 +9,12 @@ Subject: [PATCH 39/40] 1.39 Vehiculos removiendo algunas flags que estaban
  1 files changed, 6 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Vehicle/Vehicle.cpp b/src/server/game/Entities/Vehicle/Vehicle.cpp
-index d3d1eb1..75dd68a 100755
+index 87f638e..a381fcd 100755
 --- a/src/server/game/Entities/Vehicle/Vehicle.cpp
 +++ b/src/server/game/Entities/Vehicle/Vehicle.cpp
-@@ -451,6 +451,12 @@ void Vehicle::RemovePassenger(Unit* unit)
+@@ -452,6 +452,12 @@ void Vehicle::RemovePassenger(Unit* unit)
  
-     unit->ClearUnitState(UNIT_STATE_ONVEHICLE);
+     unit->ClearUnitState(UNIT_STAT_ONVEHICLE);
      unit->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, false);
 +    // removiendo algunas flags que estaban demas
 +    unit->RemoveExtraUnitMovementFlag(MOVEMENTFLAG2_NO_STRAFE);
@@ -24,7 +24,7 @@ index d3d1eb1..75dd68a 100755
 +    unit->RemoveExtraUnitMovementFlag(MOVEMENTFLAG2_FULL_SPEED_PITCHING);
  
      if (_me->GetTypeId() == TYPEID_UNIT && unit->GetTypeId() == TYPEID_PLAYER && seat->first == 0 && seat->second.SeatInfo->m_flags & VEHICLE_SEAT_FLAG_CAN_CONTROL)
-         _me->RemoveCharmedBy(unit);
+     {
 -- 
 1.7.8.msysgit.0
 

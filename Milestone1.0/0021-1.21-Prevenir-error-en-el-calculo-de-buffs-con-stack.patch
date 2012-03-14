@@ -1,14 +1,14 @@
-From a4ef7c6750e4cc28f7b858b8f887691730f7f30b Mon Sep 17 00:00:00 2001
+From 70d55bc9f7ccff5a5a55e6d9cc676dff9c0feacc Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 19:06:26 -0500
-Subject: [PATCH 21/40] 1.21 Prevenir error en el calculo de buffs con stacks
+Subject: [PATCH 21/37] 1.21 Prevenir error en el calculo de buffs con stacks
 
 ---
  src/server/game/Spells/SpellEffects.cpp |    9 +++++++++
  1 files changed, 9 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 22df4ee..c3a52e7 100755
+index d8277e0..be1de8d 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
 @@ -3212,6 +3212,8 @@ void Spell::EffectDispel(SpellEffIndex effIndex)

@@ -1,17 +1,17 @@
-From 030af07063f69a4eeda59a8b52d012d299dcb38a Mon Sep 17 00:00:00 2001
+From 2a1124d58265c7c07ad39396259b2dff0e44b4d1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 9 Mar 2012 22:00:46 -0500
-Subject: [PATCH 35/40] 1.35 Pet cooldowns de algunas spells internas
+Subject: [PATCH 33/37] 1.33 Pet cooldowns de algunas spells internas
 
 ---
  src/server/game/AI/CoreAI/PetAI.cpp |    5 ++---
  1 files changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/src/server/game/AI/CoreAI/PetAI.cpp b/src/server/game/AI/CoreAI/PetAI.cpp
-index 30ebd06..41078bb 100755
+index 60151e4..18319fd 100755
 --- a/src/server/game/AI/CoreAI/PetAI.cpp
 +++ b/src/server/game/AI/CoreAI/PetAI.cpp
-@@ -155,9 +155,8 @@ void PetAI::UpdateAI(const uint32 diff)
+@@ -153,9 +153,8 @@ void PetAI::UpdateAI(const uint32 diff)
                      if ((spellInfo->ManaCost || spellInfo->ManaCostPercentage || spellInfo->ManaPerSecond) && duration > 0)
                          continue;
  

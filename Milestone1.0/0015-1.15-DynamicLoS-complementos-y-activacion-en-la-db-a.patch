@@ -1,13 +1,13 @@
-From eb12e1cdae44ffea8edecff7d971e8716baf04ed Mon Sep 17 00:00:00 2001
+From 01a7be113433bb54356967d83dbe5cf5f1451921 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 18:16:33 -0500
-Subject: [PATCH 15/40] 1.15 DynamicLoS complementos y activacion en la db,
+Subject: [PATCH 15/37] 1.15 DynamicLoS complementos y activacion en la db,
  ajuste circulo demoniaco en estas 2 arenas
 
 ---
  ...11_10_10_100_world_dynlos_circulo_demoniaco.sql |    4 ++
  .../game/Battlegrounds/Zones/BattlegroundRV.cpp    |    7 +++
- src/server/game/Handlers/MovementHandler.cpp       |   11 ++++-
+ .../Server/Protocol/Handlers/MovementHandler.cpp   |   11 ++++-
  src/server/scripts/Spells/spell_warlock.cpp        |   45 ++++++++++++++++++++
  4 files changed, 66 insertions(+), 1 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2011_10_10_100_world_dynlos_circulo_demoniaco.sql
@@ -48,10 +48,10 @@ index 671f5a7..77c6aee 100755
      player->TeleportTo(GetMapId(), 763.5f, -284, 28.276f, 2.422f, false);
      return true;
  }
-diff --git a/src/server/game/Handlers/MovementHandler.cpp b/src/server/game/Handlers/MovementHandler.cpp
+diff --git a/src/server/game/Server/Protocol/Handlers/MovementHandler.cpp b/src/server/game/Server/Protocol/Handlers/MovementHandler.cpp
 index e568da9..967f1aa 100755
---- a/src/server/game/Handlers/MovementHandler.cpp
-+++ b/src/server/game/Handlers/MovementHandler.cpp
+--- a/src/server/game/Server/Protocol/Handlers/MovementHandler.cpp
++++ b/src/server/game/Server/Protocol/Handlers/MovementHandler.cpp
 @@ -696,7 +696,16 @@ void WorldSession::HandleMovementOpcodes(WorldPacket & recv_data)
      {
          plMover->UpdateFallInformationIfNeed(movementInfo, opcode);

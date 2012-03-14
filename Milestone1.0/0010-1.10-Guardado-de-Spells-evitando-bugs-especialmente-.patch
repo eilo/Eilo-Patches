@@ -1,7 +1,7 @@
-From f774bd9acb23a70c8755a55eb9f38ce36e693076 Mon Sep 17 00:00:00 2001
+From e9ca3b2ca5f6b4a0b78ff7b6893a45c1fe4165c4 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 16:52:19 -0500
-Subject: [PATCH 10/40] 1.10 Guardado de Spells, evitando bugs especialmente
+Subject: [PATCH 10/37] 1.10 Guardado de Spells, evitando bugs especialmente
  del dk
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 10/40] 1.10 Guardado de Spells, evitando bugs especialmente
  1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index d4c43d8..a393e39 100755
+index 5449cc2..a7fcb78 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
-@@ -19415,7 +19415,7 @@ void Player::_SaveSpells(SQLTransaction& trans)
+@@ -19329,7 +19329,7 @@ void Player::_SaveSpells(SQLTransaction& trans)
  
          // add only changed/new not dependent spells
          if (!itr->second->dependent && (itr->second->state == PLAYERSPELL_NEW || itr->second->state == PLAYERSPELL_CHANGED))

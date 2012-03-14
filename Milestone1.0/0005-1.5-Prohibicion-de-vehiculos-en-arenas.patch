@@ -1,14 +1,14 @@
-From e3c052125395565af219c6291ddced9cfe76a9b3 Mon Sep 17 00:00:00 2001
+From 79d341b9acbab91d0b91bde7e94564d7eb72e051 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 16:32:40 -0500
-Subject: [PATCH 05/40] 1.5 Prohibicion de vehiculos en arenas
+Subject: [PATCH 05/37] 1.5 Prohibicion de vehiculos en arenas
 
 ---
  src/server/game/Entities/Vehicle/Vehicle.cpp |    4 ++++
  1 files changed, 4 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Vehicle/Vehicle.cpp b/src/server/game/Entities/Vehicle/Vehicle.cpp
-index 5ba120e..d3d1eb1 100755
+index 9c20b6c..87f638e 100755
 --- a/src/server/game/Entities/Vehicle/Vehicle.cpp
 +++ b/src/server/game/Entities/Vehicle/Vehicle.cpp
 @@ -335,6 +335,10 @@ bool Vehicle::AddPassenger(Unit* unit, int8 seatId)

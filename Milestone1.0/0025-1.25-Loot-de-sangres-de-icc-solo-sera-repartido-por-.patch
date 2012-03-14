@@ -1,7 +1,7 @@
-From c7fbe9ae41626d9d8ac48087888abd6edf4463f5 Mon Sep 17 00:00:00 2001
+From 672aabf559058abb201cdab75696eb20a05d7d33 Mon Sep 17 00:00:00 2001
 From: strolch <sebeche@gmail.com>
 Date: Tue, 7 Feb 2012 00:09:00 -0500
-Subject: [PATCH 25/40] 1.25 Loot de sangres de icc solo sera repartido por el
+Subject: [PATCH 25/37] 1.25 Loot de sangres de icc solo sera repartido por el
  Master Looter
 
 ---

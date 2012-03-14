@@ -1,7 +1,7 @@
-From ccf650fd2e19928b9ed131bea5bcc9b57478c7c6 Mon Sep 17 00:00:00 2001
+From 02f015e6abd47fb6a24f6dfdb8ea37efbc2a1a5a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 18:08:27 -0500
-Subject: [PATCH 13/40] 1.13 DynamicLoS en DalaranSewers
+Subject: [PATCH 13/37] 1.13 DynamicLoS en DalaranSewers
 
 ---
  .../game/Battlegrounds/Zones/BattlegroundDS.cpp    |   90 ++++++++++++++++---
@@ -174,10 +174,10 @@ index f2ba2ce..0b61b2b 100755
  };
  #endif
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index a393e39..80466de 100755
+index a7fcb78..b7cfb81 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
-@@ -2415,6 +2415,22 @@ bool Player::TeleportTo(uint32 mapid, float x, float y, float z, float orientati
+@@ -2405,6 +2405,22 @@ bool Player::TeleportTo(uint32 mapid, float x, float y, float z, float orientati
      return true;
  }
  
@@ -201,10 +201,10 @@ index a393e39..80466de 100755
  {
      if (m_bgData.joinPos.m_mapId == MAPID_INVALID)
 diff --git a/src/server/game/Entities/Player/Player.h b/src/server/game/Entities/Player/Player.h
-index 23f17d8..c47dee0 100755
+index bd36e84..00d98b9 100755
 --- a/src/server/game/Entities/Player/Player.h
 +++ b/src/server/game/Entities/Player/Player.h
-@@ -1131,6 +1131,8 @@ class Player : public Unit, public GridObject<Player>
+@@ -1128,6 +1128,8 @@ class Player : public Unit, public GridObject<Player>
          void RemoveFromWorld();
  
          bool TeleportTo(uint32 mapid, float x, float y, float z, float orientation, uint32 options = 0);

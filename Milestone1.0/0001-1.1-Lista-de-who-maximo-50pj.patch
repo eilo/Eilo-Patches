@@ -1,16 +1,16 @@
-From 85c4b20da0a5b503ae5cbfa7f3be19db2a514582 Mon Sep 17 00:00:00 2001
+From a54ae638ee90e2e4f952ebfaa2876286e7da547f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 21:22:54 -0500
-Subject: [PATCH 01/40] 1.1 Lista de who maximo 50pj
+Subject: [PATCH 01/37] 1.1 Lista de who maximo 50pj
 
 ---
- src/server/game/Handlers/MiscHandler.cpp |    2 +-
+ .../game/Server/Protocol/Handlers/MiscHandler.cpp  |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/src/server/game/Handlers/MiscHandler.cpp b/src/server/game/Handlers/MiscHandler.cpp
-index 7e85f11..6b5c73a 100755
---- a/src/server/game/Handlers/MiscHandler.cpp
-+++ b/src/server/game/Handlers/MiscHandler.cpp
+diff --git a/src/server/game/Server/Protocol/Handlers/MiscHandler.cpp b/src/server/game/Server/Protocol/Handlers/MiscHandler.cpp
+index aefcc3e..ee5172e 100755
+--- a/src/server/game/Server/Protocol/Handlers/MiscHandler.cpp
++++ b/src/server/game/Server/Protocol/Handlers/MiscHandler.cpp
 @@ -357,7 +357,7 @@ void WorldSession::HandleWhoOpcode(WorldPacket & recv_data)
      }
  
