@@ -101,8 +101,8 @@ index 0000000..73a911b
 +/*---Trash de Camaras de Alaescarcha---*/
 +UPDATE `creature_template` SET `ScriptName` = 'npc_ymirjar_deathbringer_10man_icc' WHERE `entry`=38125;
 +UPDATE `creature_template` SET `ScriptName` = 'npc_ymirjar_deathbringer_25man_icc' WHERE `entry`=38130;
-+-- UPDATE `creature_template` SET `ScriptName` = 'npc_ymirjar_frostbinder_icc' WHERE `entry`=37127;
-+-- UPDATE `creature_template` SET `ScriptName` = 'npc_ymirjar_frostbinder_icc' WHERE `entry`=38126;
++UPDATE `creature_template` SET `ScriptName` = 'npc_ymirjar_frostbinder_icc' WHERE `entry`=37127;
++UPDATE `creature_template` SET `ScriptName` = 'npc_ymirjar_frostbinder_icc' WHERE `entry`=38126;
 +UPDATE `creature_template` SET `ScriptName` = 'npc_ymirjar_battlemaiden_icc' WHERE `entry`=37132;
 +UPDATE `creature_template` SET `ScriptName` = 'npc_ymirjar_battlemaiden_icc' WHERE `entry`=38132;
 +UPDATE `creature_template` SET `ScriptName` = 'npc_ymirjar_huntress_icc' WHERE `entry`=37134;
@@ -2688,7 +2688,7 @@ index 0000000..5208c6b
 +            return new npc_ymirjar_deathbringer_25man_iccAI(creature);
 +        }
 +};
-+/*
++
 +//#########  Ymirjar Frostbinder ##############
 +class npc_ymirjar_frostbinder_icc : public CreatureScript
 +{
@@ -2734,7 +2734,7 @@ index 0000000..5208c6b
 +            return new npc_ymirjar_frostbinder_iccAI(creature);
 +        }
 +};
-+*/
++
 +//#########  Ymirjar Battle-Maiden ##############
 +class npc_ymirjar_battlemaiden_icc : public CreatureScript
 +{
@@ -2966,7 +2966,7 @@ index 0000000..5208c6b
 +        new npc_darkfallen_tactician_icc();
 +        new npc_ymirjar_deathbringer_10man_icc();
 +        new npc_ymirjar_deathbringer_25man_icc();
-+        // new npc_ymirjar_frostbinder_icc();
++        new npc_ymirjar_frostbinder_icc();
 +        new npc_ymirjar_battlemaiden_icc();
 +        new npc_ymirjar_huntress_icc();
 +        new npc_ymirjar_warlord_icc();
