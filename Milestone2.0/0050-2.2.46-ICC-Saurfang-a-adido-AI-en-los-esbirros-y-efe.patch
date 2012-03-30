@@ -130,7 +130,7 @@ index f63ca15..d696fd7 100755
 +
 +                Events.Update(diff);
 +
-+                if (me->HasUnitState(UNIT_STATE_CASTING))
++                if (me->HasUnitState(UNIT_STAT_CASTING))
 +                    return;
 +
 +                while (uint32 eventId = Events.ExecuteEvent())
