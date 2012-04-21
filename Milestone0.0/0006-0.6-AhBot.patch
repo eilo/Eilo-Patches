@@ -1,7 +1,7 @@
 From b151d640381e93590a2adf90e5478c8362aed0c8 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Apr 2012 16:20:37 -0500
-Subject: [PATCH 06/19] 0.6 AhBot
+Subject: [PATCH 06/20] 0.6 AhBot
 
 ---
  .../reanemu/2012_04_10_100_characters_ahbot.sql    |   72 +

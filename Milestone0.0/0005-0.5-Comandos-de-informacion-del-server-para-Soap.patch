@@ -1,7 +1,7 @@
 From 07da1a7e01c8c33a0648e7a1b4996a50e7136d2f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 19 Apr 2012 19:50:55 -0500
-Subject: [PATCH 05/19] 0.5 Comandos de informacion del server para Soap
+Subject: [PATCH 05/20] 0.5 Comandos de informacion del server para Soap
 
 ---
  .../reanemu/2012_04_19_100_world_soap_commands.sql |    9 ++++
