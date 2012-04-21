@@ -1,0 +1,117 @@
+From 07da1a7e01c8c33a0648e7a1b4996a50e7136d2f Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Thu, 19 Apr 2012 19:50:55 -0500
+Subject: [PATCH 05/19] 0.5 Comandos de informacion del server para Soap
+
+---
+ .../reanemu/2012_04_19_100_world_soap_commands.sql |    9 ++++
+ src/server/game/Chat/Chat.cpp                      |    6 +++
+ src/server/game/Chat/Chat.h                        |    6 +++
+ src/server/game/Chat/Commands/Level0.cpp           |   44 ++++++++++++++++++++
+ 4 files changed, 65 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_19_100_world_soap_commands.sql
+
+diff --git a/sql/updates/world/reanemu/2012_04_19_100_world_soap_commands.sql b/sql/updates/world/reanemu/2012_04_19_100_world_soap_commands.sql
+new file mode 100644
+index 0000000..93bc872
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_19_100_world_soap_commands.sql
+@@ -0,0 +1,9 @@
++-- Comandos para Soap, desglosando aguna info del .server info en varias partes para presentar en la web
++DELETE FROM `command` WHERE `name` IN ('server version','server dbversion','server players','server users','server diff','server uptime');
++INSERT INTO `command` VALUES
++('server version',1,'Syntax: .server version\r\n\r\nMuestra la version del server.'),
++('server dbversion',1,'Syntax: .server dbversion\r\n\r\nMuestra la version de la DB.'),
++('server players',1,'Syntax: .server playercount\r\n\r\nMuestra los players online y la maxima.'),
++('server users',1,'Syntax: .server players\r\n\r\nMuestra los usuarios actuales y maxima.'),
++('server diff',1,'Syntax: .server players\r\n\r\nMuestra el tiempo de actualizacion del server.'),
++('server uptime',1,'Syntax: .server uptime\r\n\r\nMuestra el tiempo online del server.');
+diff --git a/src/server/game/Chat/Chat.cpp b/src/server/game/Chat/Chat.cpp
+index 042f16b..52b3bc2 100755
+--- a/src/server/game/Chat/Chat.cpp
++++ b/src/server/game/Chat/Chat.cpp
+@@ -283,6 +283,12 @@ ChatCommand* ChatHandler::getCommandTable()
+         { "idlerestart",    SEC_ADMINISTRATOR,  true,  NULL,                                                     "", serverIdleRestartCommandTable },
+         { "idleshutdown",   SEC_ADMINISTRATOR,  true,  NULL,                                                     "", serverIdleShutdownCommandTable },
+         { "info",           SEC_PLAYER,         true,  OldHandler<&ChatHandler::HandleServerInfoCommand>,        "", NULL },
++        { "version",        SEC_PLAYER,         true,  OldHandler<&ChatHandler::HandleServerVersionCommand>,     "", NULL },
++        { "dbversion",      SEC_PLAYER,         true,  OldHandler<&ChatHandler::HandleServerDBVersionCommand>,   "", NULL },
++        { "uptime",         SEC_PLAYER,         true,  OldHandler<&ChatHandler::HandleServerUptimeCommand>,      "", NULL },
++        { "players",        SEC_PLAYER,         true,  OldHandler<&ChatHandler::HandleServerPlayersCommand>,     "", NULL },
++        { "users",          SEC_PLAYER,         true,  OldHandler<&ChatHandler::HandleServerUsersCommand>,       "", NULL },
++        { "diff",           SEC_PLAYER,         true,  OldHandler<&ChatHandler::HandleServerDiffCommand>,        "", NULL },
+         { "motd",           SEC_PLAYER,         true,  OldHandler<&ChatHandler::HandleServerMotdCommand>,        "", NULL },
+         { "plimit",         SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleServerPLimitCommand>,      "", NULL },
+         { "restart",        SEC_ADMINISTRATOR,  true,  NULL,                                                     "", serverRestartCommandTable },
+diff --git a/src/server/game/Chat/Chat.h b/src/server/game/Chat/Chat.h
+index e88914a..8df3564 100755
+--- a/src/server/game/Chat/Chat.h
++++ b/src/server/game/Chat/Chat.h
+@@ -229,6 +229,12 @@ class ChatHandler
+         bool HandleServerIdleRestartCommand(const char* args);
+         bool HandleServerIdleShutDownCommand(const char* args);
+         bool HandleServerInfoCommand(const char* args);
++        bool HandleServerVersionCommand(const char* args);
++        bool HandleServerDBVersionCommand(const char* args);
++        bool HandleServerUptimeCommand(const char* args);
++        bool HandleServerPlayersCommand(const char* args);
++        bool HandleServerUsersCommand(const char* args);
++        bool HandleServerDiffCommand(const char* args);
+         bool HandleServerMotdCommand(const char* args);
+         bool HandleServerPLimitCommand(const char* args);
+         bool HandleServerRestartCommand(const char* args);
+diff --git a/src/server/game/Chat/Commands/Level0.cpp b/src/server/game/Chat/Commands/Level0.cpp
+index b2ac090..dd4af27 100755
+--- a/src/server/game/Chat/Commands/Level0.cpp
++++ b/src/server/game/Chat/Commands/Level0.cpp
+@@ -157,3 +157,47 @@ bool ChatHandler::HandleServerMotdCommand(const char* /*args*/)
+     return true;
+ }
+ 
++// Aqui vienen los comandos de soap para informacion externa
++bool ChatHandler::HandleServerVersionCommand(const char* /*args*/)
++{
++    PSendSysMessage(_FULLVERSION);
++    return true;
++}
++
++bool ChatHandler::HandleServerDBVersionCommand(const char* /*args*/)
++{
++    PSendSysMessage(LANG_USING_WORLD_DB,sWorld->GetDBVersion());
++    return true;
++}
++
++bool ChatHandler::HandleServerUptimeCommand(const char* /*args*/)
++{
++    std::string uptime = secsToTimeString(sWorld->GetUptime());
++    PSendSysMessage(LANG_UPTIME, uptime.c_str());
++    return true;
++}
++
++bool ChatHandler::HandleServerPlayersCommand(const char* /*args*/)
++{
++    uint32 playersNum = sWorld->GetPlayerCount();
++    uint32 maxPlayersNum = sWorld->GetMaxPlayerCount();
++    PSendSysMessage(LANG_CONNECTED_PLAYERS, playersNum, maxPlayersNum);
++    return true;
++}
++
++bool ChatHandler::HandleServerUsersCommand(const char* /*args*/)
++{
++    uint32 activeClientsNum = sWorld->GetActiveSessionCount();
++    uint32 queuedClientsNum = sWorld->GetQueuedSessionCount();
++    uint32 maxActiveClientsNum = sWorld->GetMaxActiveSessionCount();
++    uint32 maxQueuedClientsNum = sWorld->GetMaxQueuedSessionCount();
++    PSendSysMessage(LANG_CONNECTED_USERS, activeClientsNum, maxActiveClientsNum, queuedClientsNum, maxQueuedClientsNum);
++    return true;
++}
++
++bool ChatHandler::HandleServerDiffCommand(const char* /*args*/)
++{
++    uint32 updateTime = sWorld->GetUpdateTime();
++    PSendSysMessage(LANG_UPDATE_DIFF, updateTime);
++    return true;
++}
+-- 
+1.7.8.msysgit.0
+

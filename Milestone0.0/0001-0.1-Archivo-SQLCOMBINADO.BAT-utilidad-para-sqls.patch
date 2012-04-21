@@ -1,7 +1,7 @@
-From aa5c3a2b0180abb87dc7bc2eb679d5c9cfd1a0fe Mon Sep 17 00:00:00 2001
+From 2d9d1a35c1414e67e1f6428e69f129019b0e0c6e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 17 Dec 2011 13:31:46 -0500
-Subject: [PATCH 01/27] 0.1 Archivo SQLCOMBINADO.BAT utilidad para sqls
+Subject: [PATCH 01/19] 0.1 Archivo SQLCOMBINADO.BAT utilidad para sqls
 
 ---
  sql/sqlcombinado.bat |  103 ++++++++++++++++++++++++++++++++++++++++++++++++++
