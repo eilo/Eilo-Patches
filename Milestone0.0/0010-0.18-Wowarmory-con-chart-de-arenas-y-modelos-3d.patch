@@ -1,7 +1,7 @@
-From f3932443e72d5d4991dec9c5fd01605854093b65 Mon Sep 17 00:00:00 2001
+From 68a2d814498bd80f3d067267f402e36e91b8bd91 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Apr 2012 11:31:10 -0500
-Subject: [PATCH 03/20] 0.3 Wowarmory con chart de arenas y modelos 3d
+Subject: [PATCH 10/11] 0.18 Wowarmory con chart de arenas y modelos 3d
 
 ---
  .../2012_04_11_100_characters_wowarmory.sql        |   39 +++++++++++
@@ -184,10 +184,10 @@ index f2b8938..86edfc5 100755
  }
  
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 141902f..2f8e8a3 100755
+index 28de3d2..01db71f 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
-@@ -5066,6 +5066,9 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
+@@ -5162,6 +5162,9 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
              stmt->setUInt32(0, guid);
              trans->Append(stmt);
  
@@ -197,7 +197,7 @@ index 141902f..2f8e8a3 100755
              CharacterDatabase.CommitTransaction(trans);
              break;
          }
-@@ -16798,6 +16801,8 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
+@@ -16973,6 +16976,8 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
  
          return false;
      }
@@ -206,7 +206,7 @@ index 141902f..2f8e8a3 100755
  
      // overwrite possible wrong/corrupted guid
      SetUInt64Value(OBJECT_FIELD_GUID, MAKE_NEW_GUID(guid, 0, HIGHGUID_PLAYER));
-@@ -18915,6 +18920,30 @@ void Player::SaveToDB(bool create /*=false*/)
+@@ -19169,6 +19174,30 @@ void Player::SaveToDB(bool create /*=false*/)
  
      CharacterDatabase.CommitTransaction(trans);
  
@@ -237,7 +237,7 @@ index 141902f..2f8e8a3 100755
      // save pet (hunter pet level and experience and all type pets health/mana).
      if (Pet* pet = GetPet())
          pet->SavePetToDB(PET_SAVE_AS_CURRENT);
-@@ -25575,3 +25604,44 @@ void Player::SendMovementSetFeatherFall(bool apply)
+@@ -25830,3 +25859,44 @@ void Player::SendMovementSetFeatherFall(bool apply)
      data << uint32(0);          //! movement counter
      SendDirectMessage(&data);
  }
@@ -283,10 +283,10 @@ index 141902f..2f8e8a3 100755
 +    m_wowarmory_feeds.push_back(feed);
 +}
 diff --git a/src/server/game/Entities/Player/Player.h b/src/server/game/Entities/Player/Player.h
-index ed88799..dedf89c 100755
+index ef74267..f261f76 100755
 --- a/src/server/game/Entities/Player/Player.h
 +++ b/src/server/game/Entities/Player/Player.h
-@@ -1057,6 +1057,21 @@ private:
+@@ -1078,6 +1078,21 @@ private:
      bool _isPvP;
  };
  
@@ -308,7 +308,7 @@ index ed88799..dedf89c 100755
  class Player : public Unit, public GridObject<Player>
  {
      friend class WorldSession;
-@@ -2357,6 +2372,12 @@ class Player : public Unit, public GridObject<Player>
+@@ -2399,6 +2414,12 @@ class Player : public Unit, public GridObject<Player>
          void SendCinematicStart(uint32 CinematicSequenceId);
          void SendMovieStart(uint32 MovieId);
  
@@ -321,7 +321,7 @@ index ed88799..dedf89c 100755
          /*********************************************************/
          /***                 INSTANCE SYSTEM                   ***/
          /*********************************************************/
-@@ -2855,6 +2876,8 @@ class Player : public Unit, public GridObject<Player>
+@@ -2897,6 +2918,8 @@ class Player : public Unit, public GridObject<Player>
          uint32 m_timeSyncTimer;
          uint32 m_timeSyncClient;
          uint32 m_timeSyncServer;

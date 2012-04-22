@@ -1,7 +1,7 @@
-From 2238c99eeb2e2ad4760d6adc66479c5c084c43bf Mon Sep 17 00:00:00 2001
+From 0f208b0652fe478b72583b364bc08b8bd295a8b6 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Apr 2012 14:07:44 -0500
-Subject: [PATCH 04/20] =?UTF-8?q?0.4=20PvpRanks,=20honor=20y=20t=C3=ADtulos?=
+Subject: [PATCH 03/11] =?UTF-8?q?0.4=20PvpRanks,=20honor=20y=20t=C3=ADtulos?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -15,10 +15,10 @@ Content-Transfer-Encoding: 8bit
  5 files changed, 142 insertions(+), 3 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 2f8e8a3..7a82661 100755
+index 7c70fe9..8c7321a 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
-@@ -7158,6 +7158,30 @@ void Player::RewardReputation(Quest const* quest)
+@@ -7155,6 +7155,30 @@ void Player::RewardReputation(Quest const* quest)
      }
  }
  
@@ -49,7 +49,7 @@ index 2f8e8a3..7a82661 100755
  void Player::UpdateHonorFields()
  {
      /// called when rewarding honor and at each save
-@@ -7213,6 +7237,7 @@ bool Player::RewardHonor(Unit* uVictim, uint32 groupsize, int32 honor, bool pvpt
+@@ -7210,6 +7234,7 @@ bool Player::RewardHonor(Unit* uVictim, uint32 groupsize, int32 honor, bool pvpt
  
      uint64 victim_guid = 0;
      uint32 victim_rank = 0;
@@ -57,7 +57,7 @@ index 2f8e8a3..7a82661 100755
  
      // need call before fields update to have chance move yesterday data to appropriate fields before today data change.
      UpdateHonorFields();
-@@ -7253,20 +7278,52 @@ bool Player::RewardHonor(Unit* uVictim, uint32 groupsize, int32 honor, bool pvpt
+@@ -7250,20 +7275,52 @@ bool Player::RewardHonor(Unit* uVictim, uint32 groupsize, int32 honor, bool pvpt
              //  [39+]    Nothing
              uint32 victim_title = victim->GetUInt32Value(PLAYER_CHOSEN_TITLE);
                                                          // Get Killer titles, CharTitlesEntry::bit_index
@@ -113,7 +113,7 @@ index 2f8e8a3..7a82661 100755
  
              // count the number of playerkills in one day
              ApplyModUInt32Value(PLAYER_FIELD_KILLS, 1, true);
-@@ -7277,6 +7334,7 @@ bool Player::RewardHonor(Unit* uVictim, uint32 groupsize, int32 honor, bool pvpt
+@@ -7274,6 +7331,7 @@ bool Player::RewardHonor(Unit* uVictim, uint32 groupsize, int32 honor, bool pvpt
              UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_HK_RACE, victim->getRace());
              UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_HONORABLE_KILL_AT_AREA, GetAreaId());
              UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_HONORABLE_KILL, 1, 0, victim);
@@ -122,7 +122,7 @@ index 2f8e8a3..7a82661 100755
          else
          {
 diff --git a/src/server/game/Entities/Player/Player.h b/src/server/game/Entities/Player/Player.h
-index dedf89c..53ba06a 100755
+index ed88799..9c70fc9 100755
 --- a/src/server/game/Entities/Player/Player.h
 +++ b/src/server/game/Entities/Player/Player.h
 @@ -402,6 +402,27 @@ enum PlayerFlags
@@ -153,7 +153,7 @@ index dedf89c..53ba06a 100755
  // used for PLAYER__FIELD_KNOWN_TITLES field (uint64), (1<<bit_index) without (-1)
  // can't use enum for uint64 values
  #define PLAYER_TITLE_DISABLED              UI64LIT(0x0000000000000000)
-@@ -2061,6 +2082,7 @@ class Player : public Unit, public GridObject<Player>
+@@ -2046,6 +2067,7 @@ class Player : public Unit, public GridObject<Player>
          uint32 GetMaxPersonalArenaRatingRequirement(uint32 minarenaslot) const;
          void SetHonorPoints(uint32 value);
          void SetArenaPoints(uint32 value);

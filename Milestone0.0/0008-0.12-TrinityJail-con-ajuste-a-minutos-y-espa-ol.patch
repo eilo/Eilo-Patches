@@ -1,7 +1,7 @@
-From 4c8aa7492e9a902999e0d24e55e553e94bec6916 Mon Sep 17 00:00:00 2001
+From 8efceaf5ce6c95a0d3bb5ad0ba89d6ef6aa3ddb0 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 21 Apr 2012 13:06:24 -0500
-Subject: [PATCH 09/20] =?UTF-8?q?0.12=20TrinityJail=20con=20ajuste=20a=20min?=
+Subject: [PATCH 08/11] =?UTF-8?q?0.12=20TrinityJail=20con=20ajuste=20a=20min?=
  =?UTF-8?q?utos=20y=20espa=C3=B1ol?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -730,7 +730,7 @@ index 919acfb..48048b7 100755
  {
      Player* SelectedPlayer = getSelectedPlayer();
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 2b9639b..7e9041e 100755
+index a3617ac..28de3d2 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -643,6 +643,21 @@ Player::Player(WorldSession* session): Unit(true), m_achievementMgr(this), m_rep
@@ -855,7 +855,7 @@ index 2b9639b..7e9041e 100755
      {
          if (p_time >= m_nextSave)
          {
-@@ -17454,10 +17550,77 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
+@@ -17462,10 +17558,77 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
      m_achievementMgr.CheckAllAchievementCriteria();
  
      _LoadEquipmentSets(holder->GetPreparedResult(PLAYER_LOGIN_QUERY_LOADEQUIPMENTSETS));
@@ -933,7 +933,7 @@ index 2b9639b..7e9041e 100755
  bool Player::isAllowedToLoot(const Creature* creature)
  {
      if (!creature->isDead() || !creature->IsDamageEnoughForLootingAndReward())
-@@ -18716,11 +18879,23 @@ bool Player::_LoadHomeBind(PreparedQueryResult result)
+@@ -18724,11 +18887,23 @@ bool Player::_LoadHomeBind(PreparedQueryResult result)
  /***                   SAVE SYSTEM                     ***/
  /*********************************************************/
  
@@ -958,7 +958,7 @@ index 2b9639b..7e9041e 100755
      //lets allow only players in world to be saved
      if (IsBeingTeleportedFar())
      {
-@@ -24113,6 +24288,7 @@ void Player::_LoadSkills(PreparedQueryResult result)
+@@ -24097,6 +24272,7 @@ void Player::_LoadSkills(PreparedQueryResult result)
  
                  CharacterDatabase.Execute(stmt);
  
@@ -967,10 +967,10 @@ index 2b9639b..7e9041e 100755
              }
  
 diff --git a/src/server/game/Entities/Player/Player.h b/src/server/game/Entities/Player/Player.h
-index 53ba06a..f261f76 100755
+index 9c70fc9..ef74267 100755
 --- a/src/server/game/Entities/Player/Player.h
 +++ b/src/server/game/Entities/Player/Player.h
-@@ -2292,6 +2292,26 @@ class Player : public Unit, public GridObject<Player>
+@@ -2277,6 +2277,26 @@ class Player : public Unit, public GridObject<Player>
          bool IsImmuneToEnvironmentalDamage();
          uint32 EnvironmentalDamage(EnviromentalDamage type, uint32 damage);
  

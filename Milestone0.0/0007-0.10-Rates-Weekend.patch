@@ -1,7 +1,7 @@
-From 577a4fcb56bb49c9791458cb45f0ea769f630192 Mon Sep 17 00:00:00 2001
+From cd7c783bead3b89d8b269e525f0e3b22ead2b42a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 02:13:22 -0500
-Subject: [PATCH 08/20] 0.10 Rates Weekend
+Subject: [PATCH 07/11] 0.10 Rates Weekend
 
 ---
  .../reanemu/2012_02_11_100_world_rates_weekend.sql |    1 +
@@ -44,10 +44,10 @@ index 836fbe8..2263ef8 100755
      // rewarded honor points. Multiply with 10 to satisfy client
      data << 10 * Trinity::Honor::hk_honor_at_level(_session->GetPlayer()->getLevel(), quest->GetRewHonorMultiplier());
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 74e33f6..2b9639b 100755
+index 0e13375..a3617ac 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
-@@ -6970,6 +6970,8 @@ void Player::CheckAreaExploreAndOutdoor()
+@@ -6967,6 +6967,8 @@ void Player::CheckAreaExploreAndOutdoor()
                  if(GetSession()->IsPremium())
                      XP *= sWorld->getRate(RATE_XP_EXPLORE_PREMIUM);
  
@@ -56,7 +56,7 @@ index 74e33f6..2b9639b 100755
                  GiveXP(XP, NULL);
                  SendExplorationExperience(area, XP);
              }
-@@ -15241,7 +15243,7 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver,
+@@ -15251,7 +15253,7 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver,
      bool rewarded = (m_RewardedQuests.find(quest_id) != m_RewardedQuests.end());
  
      // Not give XP in case already completed once repeatable quest

@@ -1,7 +1,7 @@
-From 07da1a7e01c8c33a0648e7a1b4996a50e7136d2f Mon Sep 17 00:00:00 2001
+From 589c03b37ca05313452f0c56e325c418126db1f2 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 19 Apr 2012 19:50:55 -0500
-Subject: [PATCH 05/20] 0.5 Comandos de informacion del server para Soap
+Subject: [PATCH 05/11] 0.6 Comandos de informacion del server para Soap
 
 ---
  .../reanemu/2012_04_19_100_world_soap_commands.sql |    9 ++++
@@ -27,7 +27,7 @@ index 0000000..93bc872
 +('server diff',1,'Syntax: .server players\r\n\r\nMuestra el tiempo de actualizacion del server.'),
 +('server uptime',1,'Syntax: .server uptime\r\n\r\nMuestra el tiempo online del server.');
 diff --git a/src/server/game/Chat/Chat.cpp b/src/server/game/Chat/Chat.cpp
-index 042f16b..52b3bc2 100755
+index 9b0a2b3..297680b 100755
 --- a/src/server/game/Chat/Chat.cpp
 +++ b/src/server/game/Chat/Chat.cpp
 @@ -283,6 +283,12 @@ ChatCommand* ChatHandler::getCommandTable()
@@ -44,10 +44,10 @@ index 042f16b..52b3bc2 100755
          { "plimit",         SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleServerPLimitCommand>,      "", NULL },
          { "restart",        SEC_ADMINISTRATOR,  true,  NULL,                                                     "", serverRestartCommandTable },
 diff --git a/src/server/game/Chat/Chat.h b/src/server/game/Chat/Chat.h
-index e88914a..8df3564 100755
+index 08a5d42..cebb1fc 100755
 --- a/src/server/game/Chat/Chat.h
 +++ b/src/server/game/Chat/Chat.h
-@@ -229,6 +229,12 @@ class ChatHandler
+@@ -230,6 +230,12 @@ class ChatHandler
          bool HandleServerIdleRestartCommand(const char* args);
          bool HandleServerIdleShutDownCommand(const char* args);
          bool HandleServerInfoCommand(const char* args);
