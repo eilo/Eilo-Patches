@@ -24,7 +24,7 @@ index 4ce05ff..da833cd 100755
 +        case 452:
 +        case 453:
 +        case 510:
-+            _me->SetControlled(true, UNIT_STAT_ROOT);
++            _me->SetControlled(true, UNIT_STATE_ROOT);
 +            _me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
 +            _me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK_DEST, true);
 +       case 117:

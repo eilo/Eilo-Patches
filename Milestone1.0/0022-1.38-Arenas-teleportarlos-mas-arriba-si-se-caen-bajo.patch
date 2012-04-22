@@ -41,10 +41,10 @@ index c7eddbb..59ee938 100755
  
 +bool BattlegroundBE::IsPlayerUnderMap(Player* player, float x, float y, float z)
 +{
-+	if (z < 0.5)
-+		return true;
-+	else
-+		return false;
++    if (z < 0.5)
++        return true;
++    else
++        return false;
 +}
 +
  void BattlegroundBE::HandleAreaTrigger(Player* Source, uint32 Trigger)
@@ -72,10 +72,10 @@ index 8a11edf..3836d58 100644
  
 +bool BattlegroundDS::IsPlayerUnderMap(Player* player, float x, float y, float z)
 +{
-+	if (z < 3)
-+		return true;
-+	else
-+		return false;
++    if (z < 3)
++        return true;
++    else
++        return false;
 +}
 +
  void BattlegroundDS::FillInitialWorldStates(WorldPacket &data)
@@ -101,12 +101,12 @@ index 0974c96..7fbd858 100755
      return true;
  }
  
-+bool BattlegroundDS::IsPlayerUnderMap(Player* player, float x, float y, float z)
++bool BattlegroundNA::IsPlayerUnderMap(Player* player, float x, float y, float z)
 +{
-+	if (z < 11)
-+		return true;
-+	else
-+		return false;
++    if (z < 11)
++        return true;
++    else
++        return false;
 +}
 +
  void BattlegroundNA::HandleAreaTrigger(Player* Source, uint32 Trigger)
@@ -131,12 +131,12 @@ index 6a62621..cccf751 100755
      return true;
  }
  
-+bool BattlegroundDS::IsPlayerUnderMap(Player* player, float x, float y, float z)
++bool BattlegroundRL::IsPlayerUnderMap(Player* player, float x, float y, float z)
 +{
-+	if (z < 31)
-+		return true;
-+	else
-+		return false;
++    if (z < 31)
++        return true;
++    else
++        return false;
 +}
 +
  void BattlegroundRL::HandleAreaTrigger(Player* Source, uint32 Trigger)
@@ -168,40 +168,40 @@ index 6869a89..3aaa2b6 100755
  
 +bool BattlegroundRV::IsPlayerUnderMap(Player* player, float x, float y, float z)
 +{
-+		bool inCage = false;
++        bool inCage = false;
 +
-+		if (z < 28.27)			
-+		{
++        if (z < 28.27)            
++        {
 +
-+			{
++            {
 +
-+			// starting
-+			if (player->HasAura(32727))
-+				inCage = true;
++            // starting
++            if (player->HasAura(32727))
++                inCage = true;
 +
-+			// Going up with the elevator in the western cage
-+			else if (x > 755 && x < 771 && y < -265 && y > -282 && z > 2.78)
-+				inCage = true;
++            // Going up with the elevator in the western cage
++            else if (x > 755 && x < 771 && y < -265 && y > -282 && z > 2.78)
++                inCage = true;
 +
-+			// Going up with the elevator in the eastern cage
-+			else if (x > 755 && x < 771 && y < -286 && y > -302 && z > 2.78)
-+				inCage = true;
++            // Going up with the elevator in the eastern cage
++            else if (x > 755 && x < 771 && y < -286 && y > -302 && z > 2.78)
++                inCage = true;
 +
-+			else
-+				inCage = false;
-+			}
++            else
++                inCage = false;
++            }
 +
-+			if (inCage == false)
-+				return true;
++            if (inCage == false)
++                return true;
 +
-+			else
-+				return false;
++            else
++                return false;
 +
 +
 +
-+		}
-+		else
-+			return false;
++        }
++        else
++            return false;
 +}
 +
  void BattlegroundRV::HandleAreaTrigger(Player* Source, uint32 Trigger)
@@ -228,13 +228,13 @@ index f1217e5..5b2708c 100755
              }
          }
 +                // new port up system
-+		if (plMover->InBattleground())
-+		{
-+			if (plMover->GetBattleground()->IsPlayerUnderMap(_player, movementInfo.pos.GetPositionX(), movementInfo.pos.GetPositionY(), movementInfo.pos.GetPositionZ()))
-+			{
-+				plMover->GetBattleground()->HandlePlayerUnderMap(_player);
-+			}
-+		}
++        if (plMover->InBattleground())
++        {
++            if (plMover->GetBattleground()->IsPlayerUnderMap(_player, movementInfo.pos.GetPositionX(), movementInfo.pos.GetPositionY(), movementInfo.pos.GetPositionZ()))
++            {
++                plMover->GetBattleground()->HandlePlayerUnderMap(_player);
++            }
++        }
      }
  }
  
