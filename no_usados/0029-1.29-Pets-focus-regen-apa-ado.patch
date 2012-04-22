@@ -1,0 +1,31 @@
+From 9f24a41400b4b271acbb230ea8bf4a5e8d7cbbdf Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 2 Mar 2012 14:18:15 -0500
+Subject: [PATCH 29/38] =?UTF-8?q?1.29=20Pets=20focus=20regen=20apa=C3=B1ado?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/server/game/Entities/Pet/Pet.cpp |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Entities/Pet/Pet.cpp b/src/server/game/Entities/Pet/Pet.cpp
+index 6075085..9d059dc 100755
+--- a/src/server/game/Entities/Pet/Pet.cpp
++++ b/src/server/game/Entities/Pet/Pet.cpp
+@@ -537,6 +537,11 @@ void Pet::Update(uint32 diff)
+                             Regenerate(POWER_FOCUS);
+                             m_regenTimer += PET_FOCUS_REGEN_INTERVAL - diff;
+                             if (!m_regenTimer) ++m_regenTimer;
++
++                            //  Fix for focus regen getting stuck
++                            if (m_regenTimer > PET_FOCUS_REGEN_INTERVAL)
++                                m_regenTimer = PET_FOCUS_REGEN_INTERVAL;
++
+                             break;
+                         // in creature::update
+                         //case POWER_ENERGY:
+-- 
+1.7.8.msysgit.0
+

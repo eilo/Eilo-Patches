@@ -1,0 +1,28 @@
+From 12fbc939ec107a4dd0415f949675a9286321d77a Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 9 Mar 2012 23:13:05 -0500
+Subject: [PATCH 35/38] =?UTF-8?q?1.35=20Creacion=20de=20characters=20apa=C3=B1?=
+ =?UTF-8?q?ada?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../Server/Protocol/Handlers/CharacterHandler.cpp  |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Server/Protocol/Handlers/CharacterHandler.cpp b/src/server/game/Server/Protocol/Handlers/CharacterHandler.cpp
+index 1c15f86..bf73675 100644
+--- a/src/server/game/Server/Protocol/Handlers/CharacterHandler.cpp
++++ b/src/server/game/Server/Protocol/Handlers/CharacterHandler.cpp
+@@ -617,6 +617,7 @@ void WorldSession::HandleCharCreateCallback(PreparedQueryResult result, Characte
+             }
+ 
+             Player newChar(this);
++            newChar.GetMotionMaster()->Initialize();
+             if (!newChar.Create(sObjectMgr->GenerateLowGuid(HIGHGUID_PLAYER), createInfo))
+             {
+                 // Player not create (race/class/etc problem?)
+-- 
+1.7.8.msysgit.0
+
