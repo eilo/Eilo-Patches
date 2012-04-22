@@ -1,0 +1,37 @@
+From 450064bf68cf7f666b8c1610afc13cfaca298f17 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Sun, 22 Apr 2012 00:05:08 -0500
+Subject: [PATCH 24/25] 1.40 No permitir doble stackeo de auras
+
+---
+ src/server/game/Spells/Auras/SpellAuras.cpp |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Spells/Auras/SpellAuras.cpp b/src/server/game/Spells/Auras/SpellAuras.cpp
+index 0bf91b1..5299c9c 100755
+--- a/src/server/game/Spells/Auras/SpellAuras.cpp
++++ b/src/server/game/Spells/Auras/SpellAuras.cpp
+@@ -556,6 +556,20 @@ void Aura::UpdateTargetMap(Unit* caster, bool apply)
+                         }
+                     }
+                 }
++                // Prevent exploiting with doubling auras
++                else if (caster)
++                {
++                    // check if not stacking aura already on target and remove not own aura
++                    for (Unit::AuraApplicationMap::iterator iter = itr->first->GetAppliedAuras().begin(); iter != itr->first->GetAppliedAuras().end(); ++iter)
++                    {
++                        Aura const * aura = iter->second->GetBase();
++                        if (aura->GetCasterGUID() != GetCasterGUID() && !CanStackWith(aura))
++                        {
++                            caster->RemoveAurasDueToSpell(aura->GetId(), aura->GetCasterGUID());
++                            break;
++                        }
++                    }
++                }
+             }
+         }
+         if (!addUnit)
+-- 
+1.7.8.msysgit.0
+

@@ -1,15 +1,15 @@
-From 5e8bac2c63403bd199c097ebbcde4835ae0164d9 Mon Sep 17 00:00:00 2001
+From ffb7aa7af29799be4e278f3f4827250b95971a8e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 25 Dec 2011 13:03:55 -0500
-Subject: [PATCH 22/38] 1.22 IsleOfConquest: Script evitando que puedan matar
+Subject: [PATCH 14/25] 1.22 IsleOfConquest: Script evitando que puedan matar
  a los bosses con exploit
 
 ---
  ...11_12_17_100_world_isle_of_conquest_exploit.sql |    5 +
- .../game/Battlegrounds/Zones/BattlegroundIC.cpp    |   32 +++++-
+ .../game/Battlegrounds/Zones/BattlegroundIC.cpp    |   31 +++++-
  .../game/Battlegrounds/Zones/BattlegroundIC.h      |    1 +
  src/server/scripts/Northrend/isle_of_conquest.cpp  |  133 ++++++++++++++++++++
- 4 files changed, 169 insertions(+), 2 deletions(-)
+ 4 files changed, 168 insertions(+), 2 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2011_12_17_100_world_isle_of_conquest_exploit.sql
 
 diff --git a/sql/updates/world/reanemu/2011_12_17_100_world_isle_of_conquest_exploit.sql b/sql/updates/world/reanemu/2011_12_17_100_world_isle_of_conquest_exploit.sql
@@ -24,16 +24,16 @@ index 0000000..cc822cc
 +UPDATE `creature_template` SET `faction_A` = 35, `faction_H` = 35 WHERE `entry` in (34922,35405);
 +UPDATE `creature_template` SET `ScriptName`='bosses_isle_of_conquest' WHERE `entry` IN (34924,34922);
 diff --git a/src/server/game/Battlegrounds/Zones/BattlegroundIC.cpp b/src/server/game/Battlegrounds/Zones/BattlegroundIC.cpp
-index e3eefd4..9049d37 100755
+index 45335ae..c5dbec8 100755
 --- a/src/server/game/Battlegrounds/Zones/BattlegroundIC.cpp
 +++ b/src/server/game/Battlegrounds/Zones/BattlegroundIC.cpp
-@@ -836,25 +836,53 @@ void BattlegroundIC::DestroyGate(Player* player, GameObject* go)
+@@ -836,26 +836,53 @@ void BattlegroundIC::DestroyGate(Player* player, GameObject* go)
      switch (go->GetEntry())
      {
          case GO_HORDE_GATE_1:
 +            ActivateBoss(TEAM_ALLIANCE);
              lang_entry = LANG_BG_IC_NORTH_GATE_DESTROYED;
-+            break;
+             break;
          case GO_HORDE_GATE_2:
 +            ActivateBoss(TEAM_ALLIANCE);
 +            lang_entry = LANG_BG_IC_WEST_GATE_DESTROYED;

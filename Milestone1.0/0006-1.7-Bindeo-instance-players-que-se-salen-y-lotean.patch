@@ -1,17 +1,17 @@
-From b8be80877be0ff629f0815961340cfd3688c38c5 Mon Sep 17 00:00:00 2001
+From 92f602a82728127751f519bc432493bb223e0d03 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 16:43:12 -0500
-Subject: [PATCH 07/38] 1.7 Bindeo instance players que se salen y lotean
+Subject: [PATCH 06/25] 1.7 Bindeo instance players que se salen y lotean
 
 ---
  src/server/game/Loot/LootMgr.cpp |    6 ++++++
  1 files changed, 6 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Loot/LootMgr.cpp b/src/server/game/Loot/LootMgr.cpp
-index c9e8f68..9e472d0 100755
+index 7506515..6c811c6 100755
 --- a/src/server/game/Loot/LootMgr.cpp
 +++ b/src/server/game/Loot/LootMgr.cpp
-@@ -718,6 +718,12 @@ LootItem* Loot::LootItemInSlot(uint32 lootSlot, Player* player, QuestItem* *qite
+@@ -717,6 +717,12 @@ LootItem* Loot::LootItemInSlot(uint32 lootSlot, Player* player, QuestItem* *qite
          }
      }
  

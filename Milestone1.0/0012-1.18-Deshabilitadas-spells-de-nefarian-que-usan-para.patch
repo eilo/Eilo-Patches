@@ -1,7 +1,7 @@
-From 54b506a7c6a18034c3f2a0975059e5e9ede357cb Mon Sep 17 00:00:00 2001
+From 0e39c6b0f741f2d708b9937625490318b2e71464 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 18:28:52 -0500
-Subject: [PATCH 18/38] 1.18 Deshabilitadas spells de nefarian que usan para
+Subject: [PATCH 12/25] 1.18 Deshabilitadas spells de nefarian que usan para
  exploit
 
 ---

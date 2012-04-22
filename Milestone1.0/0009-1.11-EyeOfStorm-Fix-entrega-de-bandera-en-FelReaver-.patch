@@ -1,7 +1,7 @@
-From 9b944a2f6870062b48b24a71434ddaedec87508f Mon Sep 17 00:00:00 2001
+From 554e6c1bdf32349b02a2f10bb119b7e996d6fe45 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 17:47:11 -0500
-Subject: [PATCH 11/38] 1.11 EyeOfStorm: Fix entrega de bandera en
+Subject: [PATCH 09/25] 1.11 EyeOfStorm: Fix entrega de bandera en
  FelReaver(AtracadorVil)
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 11/38] 1.11 EyeOfStorm: Fix entrega de bandera en
  1 files changed, 5 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Battlegrounds/Zones/BattlegroundEY.cpp b/src/server/game/Battlegrounds/Zones/BattlegroundEY.cpp
-index 4595a06..e0a892c 100755
+index 8269a04..9836ac3 100755
 --- a/src/server/game/Battlegrounds/Zones/BattlegroundEY.cpp
 +++ b/src/server/game/Battlegrounds/Zones/BattlegroundEY.cpp
-@@ -256,6 +256,11 @@ void BattlegroundEY::UpdatePointStatuses()
+@@ -259,6 +259,11 @@ void BattlegroundEY::UpdatePointStatuses()
                      if (m_PointState[point] == EY_POINT_UNDER_CONTROL && player->GetTeam() != m_PointOwnedByTeam[point])
                          this->EventTeamLostPoint(player, point);
                  }
