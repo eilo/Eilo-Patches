@@ -111,7 +111,7 @@ index 01a33d8..cfbf9d6 100755
 +    sLog->outString( "        \\/_______/    \\/_____/       Auth" );
 +    sLog->outString( "" );
 +    sLog->outString( "   * Basado en TrinityCore *" );
-+    sLog->outString( "       Comunidad WoWRean       " );
++    sLog->outString( "         ComunidadRean" );
 +
 +    sLog->outDetail("%s (Libreria: %s)", OPENSSL_VERSION_TEXT, SSLeay_version(SSLEAY_VERSION));
  
@@ -331,7 +331,7 @@ index 03b2859..4a35252 100755
 +    sLog->outString( "        \\/_______/    \\/_____/       World" );
 +    sLog->outString( "" );
 +    sLog->outString( "   * Basado en TrinityCore *" );
-+    sLog->outString( "       Comunidad WoWRean       " );
++    sLog->outString( "         ComunidadRean" );
 +
  
      /// worldserver PID file creation
