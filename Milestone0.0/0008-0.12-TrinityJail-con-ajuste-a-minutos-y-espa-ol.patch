@@ -815,19 +815,19 @@ index a3617ac..28de3d2 100755
 +        }
 +                return;
 +    }
-+if (m_jail_amnestie == true && sObjectMgr->m_jailconf_amnestie > 0)
-+{
-+    m_jail_amnestie =false;
-+    time_t localtime;
-+    localtime    = time(NULL);
-+
-+    if (localtime >  m_jail_amnestietime)
++    if (m_jail_amnestie == true && sObjectMgr->m_jailconf_amnestie > 0)
 +    {
-+        CharacterDatabase.PExecute("DELETE FROM `jail` WHERE `guid` = '%u'",GetGUIDLow());
-+        ChatHandler(this).PSendSysMessage(LANG_JAIL_AMNESTII);
++        m_jail_amnestie =false;
++        time_t localtime;
++        localtime    = time(NULL);
++
++        if (localtime >  m_jail_amnestietime)
++        {
++            CharacterDatabase.PExecute("DELETE FROM `jail` WHERE `guid` = '%u'",GetGUIDLow());
++            ChatHandler(this).PSendSysMessage(LANG_JAIL_AMNESTII);
++        }
++        return;
 +    }
-+    return;
-+}
 +
      time_t now = time(NULL);
  
