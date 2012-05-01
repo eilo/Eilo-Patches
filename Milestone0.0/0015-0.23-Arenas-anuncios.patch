@@ -4,20 +4,20 @@ Date: Fri, 27 Apr 2012 00:29:29 -0500
 Subject: [PATCH 15/19] 0.23 Arenas anuncios
 
 ---
- .../reanemu/2012_04_07_100_world_arena_queue.txt   |    3 +++
+ .../reanemu/2012_04_07_100_world_arena_queue.sql   |    3 +++
  .../game/Battlegrounds/BattlegroundQueue.cpp       |   11 +++++++----
  src/server/game/Miscellaneous/Language.h           |    1 +
  src/server/game/World/World.cpp                    |    2 ++
  src/server/game/World/World.h                      |    2 ++
  src/server/worldserver/worldserver.conf.dist       |   18 ++++++++++++++++++
  6 files changed, 33 insertions(+), 4 deletions(-)
- create mode 100644 sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.txt
+ create mode 100644 sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.sql
 
-diff --git a/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.txt b/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.txt
+diff --git a/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.sql b/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.sql
 new file mode 100644
 index 0000000..c2115be
 --- /dev/null
-+++ b/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.txt
++++ b/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.sql
 @@ -0,0 +1,3 @@
 +DELETE FROM `trinity_string` WHERE `entry` = 11002;
 +INSERT INTO `trinity_string` (`entry`, `content_default`) VALUES ('11002', '|cffff0000[Arena Queue Announcer]:|r A team has joined : %ux%u : %u|r');
