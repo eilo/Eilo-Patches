@@ -1,8 +1,8 @@
-From fd12e1505b19a0ee2b1fa2ad9e8808f7c459ef25 Mon Sep 17 00:00:00 2001
+From e6457e5f6639d2847198a3220d62cf508503bb34 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Thu, 15 Dec 2011 23:36:08 -0500
-Subject: [PATCH 01/74] =?UTF-8?q?2.1.1=20TrialOfTheCrusader:=20A=C3=B1adido=20?=
- =?UTF-8?q?inmunidades=20a=20los=20bosses?=
+Date: Sun, 22 Apr 2012 01:25:34 -0500
+Subject: [PATCH 10/13] =?UTF-8?q?2.1.1=20TrialOfTheCrusader:=20A=C3=B1adido=20?=
+ =?UTF-8?q?inmunidades=20en=20script?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -15,44 +15,44 @@ Content-Transfer-Encoding: 8bit
  4 files changed, 12 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_anubarak_trial.cpp b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_anubarak_trial.cpp
-index a9e41d9..4fc49a4 100755
+index f329b94..e81dc97 100755
 --- a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_anubarak_trial.cpp
 +++ b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_anubarak_trial.cpp
-@@ -141,6 +141,8 @@ public:
-     {
+@@ -142,6 +142,8 @@ public:
          boss_anubarak_trialAI(Creature* creature) : ScriptedAI(creature), Summons(me)
          {
+             instance = creature->GetInstanceScript();
 +            me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
 +            me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
-             m_instance = (InstanceScript*)creature->GetInstanceScript();
          }
  
+         InstanceScript* instance;
 diff --git a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_lord_jaraxxus.cpp b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_lord_jaraxxus.cpp
-index fc01ad2..12afd3d 100755
+index a7328b4..8165f02 100755
 --- a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_lord_jaraxxus.cpp
 +++ b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_lord_jaraxxus.cpp
 @@ -107,6 +107,8 @@ public:
-     {
          boss_jaraxxusAI(Creature* creature) : ScriptedAI(creature), Summons(me)
          {
+             instance = creature->GetInstanceScript();
 +            me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
 +            me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
-             m_instance = creature->GetInstanceScript();
              Reset();
          }
+ 
 diff --git a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_northrend_beasts.cpp b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_northrend_beasts.cpp
-index 1eca7ed..459ff4b 100755
+index 5bda329..ea6ff1e 100755
 --- a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_northrend_beasts.cpp
 +++ b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_northrend_beasts.cpp
-@@ -123,6 +123,8 @@ public:
-     {
+@@ -124,6 +124,8 @@ public:
          boss_gormokAI(Creature* creature) : ScriptedAI(creature), Summons(me)
          {
+             instance = creature->GetInstanceScript();
 +            me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
 +            me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
-             m_instance = (InstanceScript*)creature->GetInstanceScript();
          }
  
+         InstanceScript* instance;
 @@ -393,6 +395,8 @@ struct boss_jormungarAI : public ScriptedAI
  {
      boss_jormungarAI(Creature* creature) : ScriptedAI(creature)
@@ -62,28 +62,28 @@ index 1eca7ed..459ff4b 100755
          instanceScript = creature->GetInstanceScript();
      }
  
-@@ -757,6 +761,8 @@ public:
-     {
+@@ -759,6 +763,8 @@ public:
          boss_icehowlAI(Creature* creature) : ScriptedAI(creature)
          {
+             instance = creature->GetInstanceScript();
 +            me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
 +            me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
-             m_instance = (InstanceScript*)creature->GetInstanceScript();
          }
  
+         InstanceScript* instance;
 diff --git a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_twin_valkyr.cpp b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_twin_valkyr.cpp
-index c100996..286d3df 100755
+index cf84abb..9459c2d 100755
 --- a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_twin_valkyr.cpp
 +++ b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_twin_valkyr.cpp
-@@ -143,6 +143,8 @@ struct boss_twin_baseAI : public ScriptedAI
- {
+@@ -144,6 +144,8 @@ struct boss_twin_baseAI : public ScriptedAI
      boss_twin_baseAI(Creature* creature) : ScriptedAI(creature), Summons(me)
      {
+         instance = creature->GetInstanceScript();
 +        me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
 +        me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
-         m_instance = (InstanceScript*)creature->GetInstanceScript();
      }
  
+     InstanceScript* instance;
 -- 
 1.7.8.msysgit.0
 

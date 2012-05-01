@@ -1,14 +1,14 @@
-From 74ac8725337c2f7070377226e8c1889bc94db72d Mon Sep 17 00:00:00 2001
+From 87ba4c21ec94e384247f1c74a29905d1aee93e07 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 23:42:19 -0500
-Subject: [PATCH 02/74] 2.1.2 TrialOfTheCrusader: Mejorada AI de los compeones
+Subject: [PATCH 11/13] 2.1.2 TrialOfTheCrusader: Mejorada AI de los compeones
 
 ---
  .../TrialOfTheCrusader/boss_faction_champions.cpp  |  159 ++++++++++++++------
  1 files changed, 110 insertions(+), 49 deletions(-)
 
 diff --git a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_faction_champions.cpp b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_faction_champions.cpp
-index 2fe0bd3..76e684a 100755
+index 79bbb47..02709a7 100755
 --- a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_faction_champions.cpp
 +++ b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_faction_champions.cpp
 @@ -23,6 +23,10 @@ SDComment: Scripts by Selector, modified by /dev/rsa
@@ -22,7 +22,7 @@ index 2fe0bd3..76e684a 100755
  // Known bugs:
  // All - untested
  // Pets aren't being summoned by their masters
-@@ -520,16 +524,28 @@ public:
+@@ -522,16 +526,28 @@ public:
                  switch (urand(0, 4))
                  {
                      case 0:
@@ -55,7 +55,7 @@ index 2fe0bd3..76e684a 100755
                          break;
                      case 4:
                          if (Creature* target = SelectRandomFriendlyMissingBuff(SPELL_THORNS))
-@@ -615,13 +631,20 @@ public:
+@@ -618,13 +634,20 @@ public:
                  switch (urand(0, 5))
                  {
                      case 0: case 1:
@@ -79,7 +79,7 @@ index 2fe0bd3..76e684a 100755
                          break;
                      case 4:
                          DoCast(me, SPELL_SPIRIT_CLEANSE);
-@@ -707,7 +730,7 @@ public:
+@@ -711,7 +734,7 @@ public:
  
              if (m_uiHolyShockTimer <= uiDiff)
              {
@@ -88,7 +88,7 @@ index 2fe0bd3..76e684a 100755
                      DoCast(target, SPELL_HOLY_SHOCK);
                  m_uiHolyShockTimer = urand(6*IN_MILLISECONDS, 15*IN_MILLISECONDS);
              } else m_uiHolyShockTimer -= uiDiff;
-@@ -721,7 +744,7 @@ public:
+@@ -725,7 +748,7 @@ public:
  
              if (m_uiHammerOfJusticeTimer <= uiDiff)
              {
@@ -97,7 +97,7 @@ index 2fe0bd3..76e684a 100755
                      DoCast(target, SPELL_HAMMER_OF_JUSTICE);
                  m_uiHammerOfJusticeTimer = urand(5*IN_MILLISECONDS, 15*IN_MILLISECONDS);
              } else m_uiHammerOfJusticeTimer -= uiDiff;
-@@ -731,10 +754,16 @@ public:
+@@ -735,10 +758,16 @@ public:
                  switch (urand(0, 4))
                  {
                      case 0: case 1:
@@ -116,7 +116,7 @@ index 2fe0bd3..76e684a 100755
                          break;
                      case 4:
                          DoCast(me, SPELL_CLEANSE);
-@@ -757,6 +786,7 @@ enum ePriestSpells
+@@ -761,6 +790,7 @@ enum ePriestSpells
      SPELL_DISPEL            = 65546,
      SPELL_PSYCHIC_SCREAM    = 65543,
      SPELL_MANA_BURN         = 66100,
@@ -124,7 +124,7 @@ index 2fe0bd3..76e684a 100755
  };
  
  class mob_toc_priest : public CreatureScript
-@@ -797,24 +827,41 @@ public:
+@@ -802,24 +832,41 @@ public:
  
              if (m_uiCommonTimer <= uiDiff)
              {
@@ -171,7 +171,7 @@ index 2fe0bd3..76e684a 100755
                  }
                  m_uiCommonTimer = urand(15*IN_MILLISECONDS, 30*IN_MILLISECONDS);
              } else m_uiCommonTimer -= uiDiff;
-@@ -904,7 +951,7 @@ public:
+@@ -910,7 +957,7 @@ public:
  
              if (m_uiMindBlastTimer <= uiDiff)
              {
@@ -180,7 +180,7 @@ index 2fe0bd3..76e684a 100755
                      DoCast(target, SPELL_MIND_BLAST);
                  m_uiMindBlastTimer = urand(3*IN_MILLISECONDS, 8*IN_MILLISECONDS);
              } else m_uiMindBlastTimer -= uiDiff;
-@@ -914,20 +961,22 @@ public:
+@@ -920,20 +967,22 @@ public:
                  switch (urand(0, 4))
                  {
                      case 0: case 1:
@@ -206,7 +206,7 @@ index 2fe0bd3..76e684a 100755
                          break;
                  }
                  m_uiCommonTimer = urand(15*IN_MILLISECONDS, 30*IN_MILLISECONDS);
-@@ -994,7 +1043,7 @@ public:
+@@ -1001,7 +1050,7 @@ public:
  
              if (m_uiFearTimer <= uiDiff)
              {
@@ -215,7 +215,7 @@ index 2fe0bd3..76e684a 100755
                      DoCast(target, SPELL_FEAR);
                  m_uiFearTimer = urand(4*IN_MILLISECONDS, 15*IN_MILLISECONDS);
              } else m_uiFearTimer -= uiDiff;
-@@ -1008,7 +1057,7 @@ public:
+@@ -1015,7 +1064,7 @@ public:
  
              if (m_uiUnstableAfflictionTimer <= uiDiff)
              {
@@ -224,7 +224,7 @@ index 2fe0bd3..76e684a 100755
                      DoCast(target, SPELL_UNSTABLE_AFFLICTION);
                  m_uiUnstableAfflictionTimer = urand(2*IN_MILLISECONDS, 10*IN_MILLISECONDS);
              } else m_uiUnstableAfflictionTimer -= uiDiff;
-@@ -1029,13 +1078,15 @@ public:
+@@ -1036,13 +1085,15 @@ public:
                          DoCastVictim(SPELL_SEARING_PAIN);
                          break;
                      case 3:
@@ -243,7 +243,7 @@ index 2fe0bd3..76e684a 100755
                              DoCast(target, SPELL_CURSE_OF_EXHAUSTION);
                          break;
                  }
-@@ -1121,7 +1172,7 @@ public:
+@@ -1129,7 +1180,7 @@ public:
  
              if (m_uiPolymorphTimer <= uiDiff)
              {
@@ -252,7 +252,7 @@ index 2fe0bd3..76e684a 100755
                      DoCast(target, SPELL_POLYMORPH);
                  m_uiPolymorphTimer = urand(15*IN_MILLISECONDS, 40*IN_MILLISECONDS);
              } else m_uiPolymorphTimer -= uiDiff;
-@@ -1131,13 +1182,16 @@ public:
+@@ -1139,13 +1190,16 @@ public:
                  switch (urand(0, 2))
                  {
                      case 0:
@@ -272,7 +272,7 @@ index 2fe0bd3..76e684a 100755
                          break;
                  }
                  m_uiCommonTimer = urand(15*IN_MILLISECONDS, 30*IN_MILLISECONDS);
-@@ -1252,10 +1306,12 @@ public:
+@@ -1261,10 +1315,12 @@ public:
                          DoCastVictim(SPELL_SHOOT);
                          break;
                      case 2:
@@ -287,7 +287,7 @@ index 2fe0bd3..76e684a 100755
                          break;
                  }
                  m_uiCommonTimer = urand(15*IN_MILLISECONDS, 30*IN_MILLISECONDS);
-@@ -1323,14 +1379,14 @@ public:
+@@ -1333,14 +1389,14 @@ public:
  
              if (m_uiCycloneTimer <= uiDiff)
              {
@@ -304,7 +304,7 @@ index 2fe0bd3..76e684a 100755
                      DoCast(target, SPELL_ENTANGLING_ROOTS);
                  m_uiEntanglingRootsTimer = urand(5*IN_MILLISECONDS, 40*IN_MILLISECONDS);
              } else m_uiEntanglingRootsTimer -= uiDiff;
-@@ -1346,13 +1402,16 @@ public:
+@@ -1356,13 +1412,16 @@ public:
                  switch (urand(0, 6))
                  {
                      case 0: case 1:
@@ -324,7 +324,7 @@ index 2fe0bd3..76e684a 100755
                          break;
                      case 4: case 5: case 6:
                          DoCastVictim(SPELL_WRATH);
-@@ -1429,7 +1488,7 @@ public:
+@@ -1440,7 +1499,7 @@ public:
              if (m_uiBladestormTimer <= uiDiff)
              {
                  DoCastVictim(SPELL_BLADESTORM);
@@ -333,7 +333,7 @@ index 2fe0bd3..76e684a 100755
              } else m_uiBladestormTimer -= uiDiff;
  
              if (m_uiIntimidatingShoutTimer <= uiDiff)
-@@ -1452,13 +1511,14 @@ public:
+@@ -1463,13 +1522,14 @@ public:
  
              if (m_uiChargeTimer <= uiDiff)
              {
@@ -350,7 +350,7 @@ index 2fe0bd3..76e684a 100755
                  m_uiRetaliationTimer = urand(30*IN_MILLISECONDS, 60*IN_MILLISECONDS);
              } else m_uiRetaliationTimer -= uiDiff;
  
-@@ -1545,7 +1605,7 @@ public:
+@@ -1557,7 +1617,7 @@ public:
  
              if (m_uiChainsOfIceTimer <= uiDiff)
              {
@@ -359,7 +359,7 @@ index 2fe0bd3..76e684a 100755
                      DoCast(target, SPELL_CHAINS_OF_ICE);
                  m_uiChainsOfIceTimer = urand(5*IN_MILLISECONDS, 15*IN_MILLISECONDS);
              } else m_uiChainsOfIceTimer -= uiDiff;
-@@ -1666,7 +1726,7 @@ public:
+@@ -1679,7 +1739,7 @@ public:
  
              if (m_uiBlindTimer <= uiDiff)
              {
@@ -368,7 +368,7 @@ index 2fe0bd3..76e684a 100755
                      if (me->IsInRange(target, 0.0f, 15.0f, false))
                          DoCast(target, SPELL_BLIND);
                  m_uiBlindTimer = urand(7*IN_MILLISECONDS, 8*IN_MILLISECONDS);
-@@ -1681,7 +1741,7 @@ public:
+@@ -1694,7 +1754,7 @@ public:
  
              if (m_uiBladeFlurryTimer <= uiDiff)
              {
@@ -377,7 +377,7 @@ index 2fe0bd3..76e684a 100755
                  m_uiBladeFlurryTimer = urand(12*IN_MILLISECONDS, 120*IN_MILLISECONDS);
              } else m_uiBladeFlurryTimer -= uiDiff;
  
-@@ -1790,7 +1850,8 @@ public:
+@@ -1804,7 +1864,8 @@ public:
  
              if (m_uiEarthShockTimer <= uiDiff)
              {
@@ -387,7 +387,7 @@ index 2fe0bd3..76e684a 100755
                  m_uiEarthShockTimer = urand(5*IN_MILLISECONDS, 8*IN_MILLISECONDS);
              } else m_uiEarthShockTimer -= uiDiff;
  
-@@ -1846,7 +1907,7 @@ public:
+@@ -1860,7 +1921,7 @@ public:
      {
          mob_toc_retro_paladinAI(Creature* creature) : boss_faction_championsAI(creature, AI_MELEE) {}
  
@@ -396,7 +396,7 @@ index 2fe0bd3..76e684a 100755
          uint32 m_uiCrusaderStrikeTimer;
          uint32 m_uiAvengingWrathTimer;
          uint32 m_uiDivineShieldTimer;
-@@ -1856,7 +1917,7 @@ public:
+@@ -1870,7 +1931,7 @@ public:
          void Reset()
          {
              boss_faction_championsAI::Reset();
@@ -405,9 +405,9 @@ index 2fe0bd3..76e684a 100755
              m_uiCrusaderStrikeTimer = urand(6*IN_MILLISECONDS, 18*IN_MILLISECONDS);
              m_uiAvengingWrathTimer = 180*IN_MILLISECONDS;
              m_uiDivineShieldTimer = urand(0*IN_MILLISECONDS, 360*IN_MILLISECONDS);
-@@ -1875,12 +1936,12 @@ public:
-         {
-             if (!UpdateVictim()) return;
+@@ -1890,12 +1951,12 @@ public:
+             if (!UpdateVictim())
+                 return;
  
 -            if (m_uiRepeteanceTimer <= uiDiff)
 +            if (m_uiRepentanceTimer <= uiDiff)
@@ -421,7 +421,7 @@ index 2fe0bd3..76e684a 100755
  
              if (m_uiCrusaderStrikeTimer <= uiDiff)
              {
-@@ -1890,7 +1951,7 @@ public:
+@@ -1905,7 +1966,7 @@ public:
  
              if (m_uiAvengingWrathTimer <= uiDiff)
              {
