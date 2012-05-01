@@ -1,0 +1,627 @@
+From f29d3b3c32882aca79331fb179dc88d83f14737f Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Sun, 29 Apr 2012 22:44:28 -0500
+Subject: [PATCH 18/19] 0.26 Arena Espectador
+
+---
+ .../2012_01_27_100_world_arena_espectador.sql      |    9 +
+ src/server/game/Battlegrounds/Battleground.cpp     |   13 +
+ src/server/game/Battlegrounds/BattlegroundMgr.h    |    1 +
+ src/server/game/Entities/Player/Player.cpp         |   80 +++++
+ src/server/game/Entities/Player/Player.h           |    7 +
+ src/server/game/Handlers/ChatHandler.cpp           |   14 +
+ src/server/game/Miscellaneous/Language.h           |    3 +
+ src/server/game/Scripting/ScriptLoader.cpp         |    2 +
+ src/server/scripts/Custom/CMakeLists.txt           |    1 +
+ src/server/scripts/Custom/npc_arena_espectador.cpp |  339 ++++++++++++++++++++
+ 10 files changed, 469 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/custom/2012_01_27_100_world_arena_espectador.sql
+ create mode 100644 src/server/scripts/Custom/npc_arena_espectador.cpp
+
+diff --git a/sql/updates/world/custom/2012_01_27_100_world_arena_espectador.sql b/sql/updates/world/custom/2012_01_27_100_world_arena_espectador.sql
+new file mode 100644
+index 0000000..5a53d90
+--- /dev/null
++++ b/sql/updates/world/custom/2012_01_27_100_world_arena_espectador.sql
+@@ -0,0 +1,9 @@
++-- Eilo (https://github.com/eilo)
++-- Arena Espectador WowRean
++DELETE FROM `creature_template` WHERE `entry`=700000;
++INSERT INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`, `faction_A`, `faction_H`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `mindmg`, `maxdmg`, `dmgschool`, `attackpower`, `dmg_multiplier`, `baseattacktime`, `rangeattacktime`, `unit_class`, `unit_flags`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `minrangedmg`, `maxrangedmg`, `rangedattackpower`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `Health_mod`, `Mana_mod`, `Armor_mod`, `RacialLeader`, `questItem1`, `questItem2`, `questItem3`, `questItem4`, `questItem5`, `questItem6`, `movementId`, `RegenHealth`, `equipment_id`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`, `WDBVerified`) VALUES
++('700000','0','0','0','0','0','729','0','0','0','Arena Espectador','WowRean','','0','75','78','0','35','35','1','1','1.14286','1','0','387','543','0','528','1','2000','0','1','768','8','0','0','0','0','0','324','480','88','7','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','','0','3','1','1','1','0','0','0','0','0','0','0','0','1','0','0','0','npc_arena_espectador','12340');
++
++DELETE FROM `trinity_string` WHERE `entry` = 999;
++INSERT INTO `trinity_string` (`entry`, `content_default`) VALUES
++('999', 'No puedes usar el chat mientras eres espectador. WowRean');
+diff --git a/src/server/game/Battlegrounds/Battleground.cpp b/src/server/game/Battlegrounds/Battleground.cpp
+index 8fcd283..984f382 100755
+--- a/src/server/game/Battlegrounds/Battleground.cpp
++++ b/src/server/game/Battlegrounds/Battleground.cpp
+@@ -959,6 +959,19 @@ void Battleground::EndBattleground(uint32 winner)
+ 
+     if (winmsg_id)
+         SendMessageToAll(winmsg_id, CHAT_MSG_BG_SYSTEM_NEUTRAL);
++
++    // Esta parte es para el Arena Espectador
++    // Validaremos si es que tiene espectador al salir de la arena le quitara
++    Map::PlayerList const &PlList = m_Map->GetPlayers();
++
++    if (!PlList.isEmpty())
++        for (Map::PlayerList::const_iterator i = PlList.begin(); i != PlList.end(); ++i)
++            if (Player* pPlayer = i->getSource())
++                if (pPlayer->IsEspectador())
++                {
++                    pPlayer->SetEspectador(false);
++                    pPlayer->TeleportTo(pPlayer->m_recallMap, pPlayer->m_recallX, pPlayer->m_recallY, pPlayer->m_recallZ, pPlayer->m_recallO);
++                }
+ }
+ 
+ uint32 Battleground::GetBonusHonorFromKill(uint32 kills) const
+diff --git a/src/server/game/Battlegrounds/BattlegroundMgr.h b/src/server/game/Battlegrounds/BattlegroundMgr.h
+index 7afb83d..04e2d83 100755
+--- a/src/server/game/Battlegrounds/BattlegroundMgr.h
++++ b/src/server/game/Battlegrounds/BattlegroundMgr.h
+@@ -131,6 +131,7 @@ class BattlegroundMgr
+         static HolidayIds BGTypeToWeekendHolidayId(BattlegroundTypeId bgTypeId);
+         static BattlegroundTypeId WeekendHolidayIdToBGType(HolidayIds holiday);
+         static bool IsBGWeekend(BattlegroundTypeId bgTypeId);
++        BattlegroundSet GetAllBattlegroundsWithTypeId(BattlegroundTypeId bgTypeId) { return m_Battlegrounds[bgTypeId]; }
+     private:
+         BattleMastersMap    mBattleMastersMap;
+ 
+diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
+index 871414c..cc0203b 100755
+--- a/src/server/game/Entities/Player/Player.cpp
++++ b/src/server/game/Entities/Player/Player.cpp
+@@ -2960,6 +2960,79 @@ void Player::SetGMVisible(bool on)
+     }
+ }
+ 
++// Funcion para setear el estado del espectador ingame
++void Player::SetEspectador(bool on)
++{
++    if (on) // Si activamos
++    {
++        m_ExtraFlags |= PLAYER_EXTRA_GM_ON; // Al parecer faltaba esto
++        SetAcceptWhispers(false); // Quitamos whispers para q no lloren
++        setFaction(35); // Amigable a todos jeje
++        CombatStop(); // Parar de pelear
++        if (IsNonMeleeSpellCasted(true))
++            InterruptNonMeleeSpells(true);
++
++        if (Pet* pet = GetPet()) // Tipico entran a molestar con las pets
++        {
++            pet->setFaction(35); // pets amigables
++            pet->getHostileRefManager().setOnlineOfflineState(false); // Para q no pegue ni nada
++
++            pet->SavePetToDB(PET_SAVE_AS_CURRENT); // Guardando las pets en la db
++            if (pet && pet->isAlive()) // Haciendolas dismiss
++                RemovePet(pet, PET_SAVE_NOT_IN_SLOT);
++        }
++
++        RemoveByteFlag(UNIT_FIELD_BYTES_2, 1, UNIT_BYTE2_FLAG_FFA_PVP); // No se pueda activar pvp, mas bugueritos ¬¬
++        ResetContestedPvP(); // Mas flags de pvp por sea caso
++
++        getHostileRefManager().setOnlineOfflineState(false); // Para que no pueda atacar
++        CombatStopWithPets(); // No puede mandar a atacar
++
++        m_serverSideVisibilityDetect.SetValue(SERVERSIDE_VISIBILITY_GM, GetSession()->GetSecurity()); // Para que sea indetectable por gos spells y cosas asi
++        m_serverSideVisibility.SetValue(SERVERSIDE_VISIBILITY_GM, SEC_GAMEMASTER); // Invisible completamente
++    }
++    else // Si queremos quitar el estado de espectador
++    {
++        // Restaurando fases (creo que esto falta)
++        uint32 newPhase = 0;
++        AuraEffectList const& phases = GetAuraEffectsByType(SPELL_AURA_PHASE);
++        if (!phases.empty())
++            for (AuraEffectList::const_iterator itr = phases.begin(); itr != phases.end(); ++itr)
++                newPhase |= (*itr)->GetMiscValue();
++
++        if (!newPhase)
++            newPhase = PHASEMASK_NORMAL;
++
++        SetPhaseMask(newPhase, false);
++
++        SetAcceptWhispers(true); // Activamos los whispers :)
++        m_ExtraFlags &= ~ PLAYER_EXTRA_GM_ON; // funciona <3
++        setFactionForRace(getRace()); // Devolvemos la faccion
++
++        RemoveFlag(PLAYER_FLAGS, PLAYER_FLAGS_GM); // Aquitando el <GM> por sea caso xd
++        RemoveFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_ALLOW_CHEAT_SPELLS); // Uno nunca sabe xd
++
++        if (Pet* pet = GetPet()) // Si es que tiene pet
++        {
++            pet->setFaction(getFaction()); // Devolvemos la faccion de la pet
++            pet->getHostileRefManager().setOnlineOfflineState(true); // Devolvemos el aggro a la pet
++        }
++
++        // Si es PvP para permitirle q active las flags denuevo
++        if (sWorld->IsFFAPvPRealm())
++            SetByteFlag(UNIT_FIELD_BYTES_2, 1, UNIT_BYTE2_FLAG_FFA_PVP);
++
++        // actualizando estado para las flags PvP, esto es necesario :S
++        UpdateArea(m_areaUpdateId);
++
++        getHostileRefManager().setOnlineOfflineState(true); // Devolviendo el aggro
++        m_serverSideVisibilityDetect.SetValue(SERVERSIDE_VISIBILITY_GM, SEC_PLAYER); // Para q puedan ser detectados por gos spells y demas
++        m_serverSideVisibility.SetValue(SERVERSIDE_VISIBILITY_GM, SEC_PLAYER); // Visible otra ves :)
++    }
++ 
++    m_espectador = on; // Para guardar el estado de la bandera, solo para poder saber cuando esta o no en espectador un target
++}
++
+ bool Player::IsGroupVisibleFor(Player const* p) const
+ {
+     switch (sWorld->getIntConfig(CONFIG_GROUP_VISIBILITY))
+@@ -17502,6 +17575,10 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
+     sLog->outDebug(LOG_FILTER_PLAYER_LOADING, "The value of player %s after load item and aura is: ", m_name.c_str());
+     outDebugValues();
+ 
++    // Esto es del espectador
++    if (AccountMgr::IsPlayerAccount(GetSession()->GetSecurity()))
++        SetEspectador(false);
++
+     // GM state
+     if (!AccountMgr::IsPlayerAccount(GetSession()->GetSecurity()))
+     {
+@@ -22058,6 +22135,9 @@ bool Player::IsVisibleGloballyFor(Player* u) const
+     if (!IsVisible())
+         return false;
+ 
++    if (IsEspectador())
++        return false;
++
+     // non-gm stealth/invisibility not hide from global player lists
+     return true;
+ }
+diff --git a/src/server/game/Entities/Player/Player.h b/src/server/game/Entities/Player/Player.h
+index f261f76..fd0b149 100755
+--- a/src/server/game/Entities/Player/Player.h
++++ b/src/server/game/Entities/Player/Player.h
+@@ -2589,6 +2589,10 @@ class Player : public Unit, public GridObject<Player>
+             }
+         }
+ 
++        // Estas dos funciones son del Arena Espectador
++        bool IsEspectador() const { return m_espectador; }
++        void SetEspectador(bool on);
++
+     protected:
+         // Gamemaster whisper whitelist
+         WhisperListContainer WhisperList;
+@@ -2924,6 +2928,9 @@ class Player : public Unit, public GridObject<Player>
+         InstanceTimeMap _instanceResetTimes;
+         uint32 _pendingBindId;
+         uint32 _pendingBindTimer;
++
++        //Esto es del arena espectador
++        bool m_espectador;
+ };
+ 
+ void AddItemsSetItem(Player*player, Item* item);
+diff --git a/src/server/game/Handlers/ChatHandler.cpp b/src/server/game/Handlers/ChatHandler.cpp
+index 966eae5..d71fdb8 100755
+--- a/src/server/game/Handlers/ChatHandler.cpp
++++ b/src/server/game/Handlers/ChatHandler.cpp
+@@ -78,6 +78,13 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket & recv_data)
+         return;
+     }
+ 
++    // Esta parte es del arena espectador
++    if (GetPlayer()->IsEspectador())
++    {
++        SendNotification(LANG_SPEC_CAN_NOT_CHAT); // Para que no pueda chatear jeje :)
++        return;
++    }
++
+     Player* sender = GetPlayer();
+ 
+     //sLog->outDebug("CHAT: packet received. type %u, lang %u", type, lang);
+@@ -534,6 +541,13 @@ void WorldSession::HandleTextEmoteOpcode(WorldPacket & recv_data)
+         return;
+     }
+ 
++    // Esta parte es del arena espectador
++    if (GetPlayer()->IsEspectador())
++    {
++        SendNotification(LANG_SPEC_CAN_NOT_CHAT); // Para que no pueda chatear jeje :)
++        return;
++    }
++
+     uint32 text_emote, emoteNum;
+     uint64 guid;
+ 
+diff --git a/src/server/game/Miscellaneous/Language.h b/src/server/game/Miscellaneous/Language.h
+index 1ca809f..a26b04d 100755
+--- a/src/server/game/Miscellaneous/Language.h
++++ b/src/server/game/Miscellaneous/Language.h
+@@ -773,6 +773,9 @@ enum TrinityStrings
+     LANG_CHANNEL_CITY                   = 819,
+     // Room for in-game strings           820-999 not used
+ 
++    // Lang para el ArenaEspectador
++    LANG_SPEC_CAN_NOT_CHAT              = 999,
++
+     // Level 4 (CLI only commands)
+     LANG_COMMAND_EXIT                   = 1000,
+     LANG_ACCOUNT_DELETED                = 1001,
+diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
+index 68f1f6f..e3af9db 100755
+--- a/src/server/game/Scripting/ScriptLoader.cpp
++++ b/src/server/game/Scripting/ScriptLoader.cpp
+@@ -1229,6 +1229,7 @@ void AddBattlegroundScripts()
+ void AddSC_Mod_BossHistory();
+ void AddSC_Mod_CharacterHistory();
+ void AddSC_Mod_MailHistory();
++void AddSC_npc_arena_espectador();
+ 
+ #endif
+ 
+@@ -1239,6 +1240,7 @@ void AddCustomScripts()
+     AddSC_Mod_BossHistory();
+     AddSC_Mod_CharacterHistory();
+     AddSC_Mod_MailHistory();
++    AddSC_npc_arena_espectador();
+ 
+ #endif
+ }
+diff --git a/src/server/scripts/Custom/CMakeLists.txt b/src/server/scripts/Custom/CMakeLists.txt
+index b432e34..601a0df 100644
+--- a/src/server/scripts/Custom/CMakeLists.txt
++++ b/src/server/scripts/Custom/CMakeLists.txt
+@@ -13,6 +13,7 @@ set(scripts_STAT_SRCS
+   Custom/mod_BossHistory.cpp
+   Custom/mod_CharacterHistory.cpp
+   Custom/mod_MailHistory.cpp
++  Custom/npc_arena_espectador.cpp
+ )
+ 
+ message("  -> Prepared: Custom")
+diff --git a/src/server/scripts/Custom/npc_arena_espectador.cpp b/src/server/scripts/Custom/npc_arena_espectador.cpp
+new file mode 100644
+index 0000000..c453be4
+--- /dev/null
++++ b/src/server/scripts/Custom/npc_arena_espectador.cpp
+@@ -0,0 +1,339 @@
++/*
++ * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
++ * Copyright (C) 2009-2012 Eilo <https://github.com/eilo>
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License as published by the
++ * Free Software Foundation; either version 2 of the License, or (at your
++ * option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program. If not, see <http://www.gnu.org/licenses/>.
++ */
++
++/* ScriptData
++Name: Arena Espectador
++%Complete: 100
++Autor: Eilo
++Comment: El npc asigando con esta script tiene la habilidad de hacer que el
++         jugador que seleccione la debida opcion pueda entrar en cierta arena
++         con un estado de observador y no se le permitira intervenir en la
++         partida. 
++
++         Tiene tres partes, en el hello, se listaran los matches por zonas y
++         entregara un total de partidas por ladder, en el select lista los
++         nombres y ratings de los matches en ese momento validando ciertas 
++         cosas, y al seleccionar recorrera los offsets para que entre en la
++         partida adecuada, ya que esta dividido por zonas. Y por ultimo al
++         ingresar un nombre en el codebox, te teleporta a la ubicacion de ese
++         pj que obviamente tiene q estar en alguna arena.
++
++######
++## Arena Espectador
++######*/
++
++#include "Player.h"
++#include "BattlegroundMgr.h"
++#include "Battleground.h"
++#include "ArenaTeamMgr.h"
++#include "ArenaTeam.h"
++
++enum EspectadorData
++{
++    GOSSIP_OFFSET = GOSSIP_ACTION_INFO_DEF + 5,
++};
++
++class npc_arena_espectador : public CreatureScript
++{
++public:
++    npc_arena_espectador() : CreatureScript("npc_arena_espectador") {}
++    
++    BattlegroundSet GetAllBattlegroundsWithAllTypeIds()
++    {
++        BattlegroundSet arenasSet, tmpSet;
++        arenasSet = sBattlegroundMgr->GetAllBattlegroundsWithTypeId(BATTLEGROUND_NA);
++        tmpSet = sBattlegroundMgr->GetAllBattlegroundsWithTypeId(BATTLEGROUND_RL);
++        for (BattlegroundSet::const_iterator itr = tmpSet.begin(); itr != tmpSet.end(); ++itr)
++            arenasSet.insert(*itr);
++        tmpSet = sBattlegroundMgr->GetAllBattlegroundsWithTypeId(BATTLEGROUND_BE);
++        for (BattlegroundSet::const_iterator itr = tmpSet.begin(); itr != tmpSet.end(); ++itr)
++            arenasSet.insert(*itr);
++        tmpSet = sBattlegroundMgr->GetAllBattlegroundsWithTypeId(BATTLEGROUND_DS);
++        for (BattlegroundSet::const_iterator itr = tmpSet.begin(); itr != tmpSet.end(); ++itr)
++            arenasSet.insert(*itr);
++        tmpSet = sBattlegroundMgr->GetAllBattlegroundsWithTypeId(BATTLEGROUND_RV);
++        for (BattlegroundSet::const_iterator itr = tmpSet.begin(); itr != tmpSet.end(); ++itr)
++            arenasSet.insert(*itr);
++
++        return arenasSet;
++    }
++
++    // Saludando, apenas le clickeamos el npc nos entregara la lista completa de matches en ese momento
++    bool OnGossipHello(Player* player, Creature* creature)
++    {
++        // Variables usadas aqui, 
++        // el arenaSet y el arenasQty son holders para el tipo de arena y del Quantity o cantidad de gente
++        BattlegroundSet arenasSet = GetAllBattlegroundsWithAllTypeIds();
++        uint32 arenasQty[3] = {0, 0, 0};
++        // Declarando las strings para mostrar texto en el menu principal
++        std::stringstream gossip2;
++        std::stringstream gossip3;
++        std::stringstream gossip5;
++
++        // cycle through all arenas in one "for" statement
++        for (BattlegroundSet::const_iterator itr = arenasSet.begin(); itr != arenasSet.end(); ++itr)
++            if (Battleground* bg = itr->second)
++                if (bg->isRated()) // Solo si es rankeada imprimimos
++                    switch (bg->GetArenaType())
++                    {
++                        case ARENA_TYPE_2v2:  arenasQty[0]++; break;
++                        case ARENA_TYPE_3v3:  arenasQty[1]++; break;
++                        case ARENA_TYPE_5v5:  arenasQty[2]++; break;
++                    }
++
++        // Armando los textos
++        gossip2 << "Observar una arena 2v2 . (" << arenasQty[0] << " partida(s) ahora mismo). WowRean";
++        gossip3 << "Observar una arena 3v3 . (" << arenasQty[1] << " partida(s) ahora mismo). WowRean";
++        gossip5 << "Observar una arena 5v5 . (" << arenasQty[2] << " partida(s) ahora mismo). WowRean";
++        // Asignando los gossips
++        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, gossip2.str(), GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
++        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, gossip3.str(), GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
++        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, gossip5.str(), GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
++        // El ultimo gossip para players
++        player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Observar a un Jugador. WowRean", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4, "", 0, true);
++        // Enviando al player el menu
++        player->PlayerTalkClass->SendGossipMenu(player->GetGossipTextId(creature), creature->GetGUID());
++        return true;
++    }
++
++    // Aqui cuando usamos alguna de las opciones, o le damos click a alguna del menu se aparecera lo siguiente
++    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
++    {
++        // Nueva pagina
++        player->PlayerTalkClass->ClearMenus();
++        // Para seleccionar a manera de cases
++        uint8 mode = ARENA_TYPE_2v2;
++        if (action == (GOSSIP_ACTION_INFO_DEF + 3))
++            mode = ARENA_TYPE_3v3;
++        if (action == (GOSSIP_ACTION_INFO_DEF + 5))
++            mode = ARENA_TYPE_5v5;
++
++        // Si hemos seleccionado una opcion valida (el offset esta en 10, solo desplegara ese numero de matches)
++        if (action <= GOSSIP_OFFSET)
++        {
++            // Holders para esta parte, serviran para ayudar a listar dentro de cada bracket los equipos y ratings
++            BattlegroundSet arenasSet = GetAllBattlegroundsWithAllTypeIds();
++            bool bracketMatchs = false;
++
++            // Cycle all arenas in one "for" statement
++            for (BattlegroundSet::const_iterator itr = arenasSet.begin(); itr != arenasSet.end(); ++itr)
++            {
++                if (Battleground* bg = itr->second)
++                {
++                    // we are interested in a single mode per gossip, so filter the others
++                    if (bg->GetArenaType() == mode)
++                        if (bg->isRated()) // Solo si es rankeada imprimimos
++                        {
++                            ArenaTeam* teamOne = sArenaTeamMgr->GetArenaTeamById(bg->GetArenaTeamIdByIndex(0));
++                            ArenaTeam* teamTwo = sArenaTeamMgr->GetArenaTeamById(bg->GetArenaTeamIdByIndex(1));
++
++                            if (teamOne && teamTwo)
++                            {
++                                // String para imprimir los nombres de las clases
++                                std::stringstream class_teamOne;
++                                std::stringstream class_teamTwo;
++                                // Esta parte es para saber las clases que conforman de los del equipo
++                                // Primero me armo una lista para buscar dentro de los mapas de arenas
++                                for (Battleground::BattlegroundPlayerMap::const_iterator itr_class = bg->GetPlayers().begin(); itr_class != bg->GetPlayers().end(); ++itr_class)
++                                {
++                                    if (Player* player = ObjectAccessor::FindPlayer(itr_class->first)) // Player :)
++                                    {
++                                        if (teamOne->IsMember(player->GetGUIDLow())) // Si pertenece al equipo1
++                                        {
++                                            switch (player->getClass())
++                                            {
++                                                case CLASS_WARRIOR:         class_teamOne << " Warr ";      break;
++                                                case CLASS_PALADIN:         class_teamOne << " Pala ";      break;
++                                                case CLASS_HUNTER:          class_teamOne << " Caza ";      break;
++                                                case CLASS_ROGUE:           class_teamOne << " Pica ";      break;
++                                                case CLASS_PRIEST:          class_teamOne << " Sacer ";     break;
++                                                case CLASS_DEATH_KNIGHT:    class_teamOne << " Dk ";        break;
++                                                case CLASS_SHAMAN:          class_teamOne << " Shaman ";    break;
++                                                case CLASS_MAGE:            class_teamOne << " Mago ";      break;
++                                                case CLASS_WARLOCK:         class_teamOne << " Brujo ";     break;
++                                                case CLASS_DRUID:           class_teamOne << " Druida ";    break;
++                                            }
++                                        }
++                                        else if (teamTwo->IsMember(player->GetGUIDLow())) // Si pertenece al equipo2
++                                        {
++                                            switch (player->getClass())
++                                            {
++                                                case CLASS_WARRIOR:         class_teamTwo << " Warr ";      break;
++                                                case CLASS_PALADIN:         class_teamTwo << " Pala ";      break;
++                                                case CLASS_HUNTER:          class_teamTwo << " Caza ";      break;
++                                                case CLASS_ROGUE:           class_teamTwo << " Pica ";      break;
++                                                case CLASS_PRIEST:          class_teamTwo << " Sacer ";     break;
++                                                case CLASS_DEATH_KNIGHT:    class_teamTwo << " Dk ";        break;
++                                                case CLASS_SHAMAN:          class_teamTwo << " Shaman ";    break;
++                                                case CLASS_MAGE:            class_teamTwo << " Mago ";      break;
++                                                case CLASS_WARLOCK:         class_teamTwo << " Brujo ";     break;
++                                                case CLASS_DRUID:           class_teamTwo << " Druida ";    break;
++                                            }
++                                        }
++                                    }
++                                }
++                                // Cerrando la string para imprimir
++                                std::stringstream gossipItem;
++                                gossipItem << teamOne->GetName() << " (";
++                                gossipItem << teamOne->GetRating() << ") [";
++                                gossipItem << class_teamOne.str() << "] -VS- ";
++                                gossipItem << teamTwo->GetName() << " (";
++                                gossipItem << teamTwo->GetRating() << ") [";
++                                gossipItem << class_teamTwo.str() << "]";
++                                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, gossipItem.str(), GOSSIP_SENDER_MAIN + 1, itr->first + GOSSIP_OFFSET);
++                                bracketMatchs = true;
++                            }
++                        }
++                }
++            }
++            // Si no se ha encontrado coincidencias de matches
++            if (!bracketMatchs)
++            {
++                std::stringstream errMsg;
++                errMsg << "Lo sentimos " << player->GetName() << ", no se encontraron partidas disponibles. WowRean";
++                creature->MonsterWhisper(errMsg.str().c_str(), player->GetGUID());
++                player->PlayerTalkClass->ClearMenus();
++                player->CLOSE_GOSSIP_MENU();
++                return false;
++            }
++            // Al final cuando ya hemos acabado de listar a todos los matchs en los brackets
++            player->PlayerTalkClass->SendGossipMenu(player->GetGossipTextId(creature), creature->GetGUID());
++            
++        }
++        else
++        {
++            // Si se usa una de las opciones y se ha ido una arena ya, metodo de actualizacion bajo por peticion
++            uint32 arenaId = action - GOSSIP_OFFSET;
++            // Holder
++            BattlegroundSet arenasSet = GetAllBattlegroundsWithAllTypeIds();
++
++            // Funciones para teleportar al player
++            if (arenasSet[arenaId] != NULL)
++            {
++                Battleground* arenaChosen = arenasSet[arenaId];
++                // si ya no esta activa
++                if (arenaChosen->GetStatus() != STATUS_NONE && arenaChosen->GetStatus() != STATUS_IN_PROGRESS)
++                {
++                    std::stringstream errMsg;
++                    errMsg << "Lo sentimos " << player->GetName() << ", la arena elegida esta en etapa de preparacion o se ha terminado. WowRean";
++                    creature->MonsterWhisper(errMsg.str().c_str(), player->GetGUID());
++                    player->PlayerTalkClass->ClearMenus();
++                    player->CLOSE_GOSSIP_MENU();
++                    return false;
++                }
++
++                player->SetBattlegroundId(arenaChosen->GetInstanceID(), arenaChosen->GetTypeID());
++                player->SetBattlegroundEntryPoint();
++                float x, y, z;
++                switch (arenaChosen->GetMapId())
++                {
++                    case 617: x = 1299.046f;    y = 784.825f;     z = 9.338f;     break;
++                    case 618: x = 763.5f;       y = -284;         z = 28.276f;    break;
++                    case 572: x = 1285.810547f; y = 1667.896851f; z = 39.957642f; break;
++                    case 562: x = 6238.930176f; y = 262.963470f;  z = 0.889519f;  break;
++                    case 559: x = 4055.504395f; y = 2919.660645f; z = 13.611241f; break;
++                }
++                player->SaveRecallPosition();
++                player->SetEspectador(true);
++                player->TeleportTo(arenaChosen->GetMapId(), x, y, z, player->GetOrientation());
++            }
++        }
++        return true;
++    }
++
++    // Este es el select especial del player, este toca mirar denuevo a ver que pasa
++    bool OnGossipSelectCode(Player* player, Creature* creature, uint32 uiSender, uint32 uiAction, const char* code)
++    {
++        // Limpia la pantalla de menus
++        player->PlayerTalkClass->ClearMenus();
++        // para cerrar el primer menu
++        player->CLOSE_GOSSIP_MENU();
++        // para la ventanita overlapping
++        if (uiSender == GOSSIP_SENDER_MAIN)
++        {
++            switch (uiAction)
++            {
++                // Buscar por nombre de jugador
++                case GOSSIP_ACTION_INFO_DEF + 4:
++                {
++                    const char* plrName = code;
++                    if (Player* target = sObjectAccessor->FindPlayerByName(plrName))
++                    {
++                        if (!target->IsInWorld())
++                        {
++                            creature->MonsterWhisper("Lo sentimos, no se permite observar a un pj offline. WowRean", player->GetGUID());
++                            return true;
++                        }
++                        else if (!target->InArena())
++                        {
++                            creature->MonsterWhisper("Lo sentimos, el jugador no esta en arenas. WowRean", player->GetGUID());
++                            return true;
++                        }
++                        else if (target->isGameMaster())
++                        {
++                            creature->MonsterWhisper("Lo sentimos, no se permite observar a un MJ. WowRean", player->GetGUID());
++                            return true;
++                        }
++                        else
++                        {
++                            // Holders para esta otra parte
++                            BattlegroundSet arenasSet = GetAllBattlegroundsWithAllTypeIds();
++                            // Cycle all arenas in one "for" statement
++                            for (BattlegroundSet::const_iterator itr = arenasSet.begin(); itr != arenasSet.end(); ++itr)
++                                if (Battleground* bg = itr->second)
++                                    for (Battleground::BattlegroundPlayerMap::const_iterator itr_guid = bg->GetPlayers().begin(); itr_guid != bg->GetPlayers().end(); ++itr_guid)
++                                        if (target == ObjectAccessor::FindPlayer(itr_guid->first)) // si es que el que pedimos es igual a los q hay en las arenas
++                                        {
++                                            if (bg->GetStatus() != STATUS_NONE && bg->GetStatus() != STATUS_IN_PROGRESS)
++                                            {
++                                                std::stringstream errMsg;
++                                                errMsg << "Lo sentimos " << player->GetName() << ", el personaje "<< target->GetName() << " se encuentra en una arena en etapa de preparacion o se ha terminado. WowRean";
++                                                creature->MonsterWhisper(errMsg.str().c_str(), player->GetGUID());
++                                                return true;
++                                            }
++                                            else
++                                            {
++                                                player->SetBattlegroundId(target->GetBattleground()->GetInstanceID(), target->GetBattleground()->GetTypeID());
++                                                player->SetBattlegroundEntryPoint();
++                                                float x, y, z;
++                                                target->GetContactPoint(player, x, y, z);
++                                                player->SaveRecallPosition();
++                                                player->SetEspectador(true);
++                                                player->TeleportTo(target->GetMapId(), x, y, z, player->GetAngle(target));
++                                            }
++                                        }
++                        }
++                    }
++                    else
++                    {
++                        creature->MonsterWhisper("Lo sentimos, no se encuentra el jugador, recuerda escribirlo bien, con Mayusculas incluidas. WowRean", player->GetGUID());
++                        return true;
++                    }
++                    break;
++                }
++            }
++        }
++
++        return false;
++    }
++};
++
++void AddSC_npc_arena_espectador()
++{
++    new npc_arena_espectador;
++}
+-- 
+1.7.8.msysgit.0
+

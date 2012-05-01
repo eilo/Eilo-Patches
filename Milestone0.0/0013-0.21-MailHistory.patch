@@ -1,0 +1,337 @@
+From c53b2762f7708e2159086aa9073712002e175dcb Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Mon, 23 Apr 2012 05:09:59 -0500
+Subject: [PATCH 13/19] 0.21 MailHistory
+
+---
+ .../2012_04_23_100_characters_mailhistory.sql      |   18 +++++
+ src/server/game/Mails/Mail.cpp                     |    8 ++-
+ src/server/game/Scripting/ScriptLoader.cpp         |    2 +
+ src/server/game/Scripting/ScriptMgr.cpp            |   13 +++
+ src/server/game/Scripting/ScriptMgr.h              |   15 ++++
+ src/server/scripts/Custom/CMakeLists.txt           |    1 +
+ src/server/scripts/Custom/mod_MailHistory.cpp      |   78 ++++++++++++++++++++
+ src/server/worldserver/worldserver.conf.dist       |   54 ++++++++++++++
+ 8 files changed, 187 insertions(+), 2 deletions(-)
+ create mode 100644 sql/updates/characters/reanemu/2012_04_23_100_characters_mailhistory.sql
+ create mode 100644 src/server/scripts/Custom/mod_MailHistory.cpp
+
+diff --git a/sql/updates/characters/reanemu/2012_04_23_100_characters_mailhistory.sql b/sql/updates/characters/reanemu/2012_04_23_100_characters_mailhistory.sql
+new file mode 100644
+index 0000000..79e43c2
+--- /dev/null
++++ b/sql/updates/characters/reanemu/2012_04_23_100_characters_mailhistory.sql
+@@ -0,0 +1,18 @@
++DROP TABLE IF EXISTS `mail_history`;
++CREATE TABLE `mail_history` (
++  `log_id` int(11) NOT NULL,
++  `log_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
++  `id` int(10) unsigned NOT NULL DEFAULT '0',
++  `message_type` tinyint(3) unsigned NOT NULL DEFAULT '0',
++  `stationery` tinyint(3) unsigned NOT NULL DEFAULT '0',
++  `template_id` smallint(5) unsigned NOT NULL DEFAULT '0',
++  `sender` int(10) unsigned NOT NULL DEFAULT '0',
++  `receiver` int(10) unsigned NOT NULL DEFAULT '0',
++  `subject` longtext NOT NULL,
++  `body` longtext NOT NULL,
++  `money` int(10) unsigned NOT NULL DEFAULT '0',
++  `cod` int(10) unsigned NOT NULL DEFAULT '0',
++  PRIMARY KEY (`log_id`)
++) ENGINE=MyISAM DEFAULT CHARSET=utf8;
++ALTER TABLE `mail_history`
++MODIFY COLUMN `log_id`  int(11) UNSIGNED NOT NULL AUTO_INCREMENT FIRST ;
+diff --git a/src/server/game/Mails/Mail.cpp b/src/server/game/Mails/Mail.cpp
+index e6b3c49..297bfdb 100755
+--- a/src/server/game/Mails/Mail.cpp
++++ b/src/server/game/Mails/Mail.cpp
+@@ -16,6 +16,7 @@
+  * with this program. If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
++#include "ScriptMgr.h"
+ #include "DatabaseEnv.h"
+ #include "Mail.h"
+ #include "Log.h"
+@@ -178,10 +179,13 @@ void MailDraft::SendMailTo(SQLTransaction& trans, MailReceiver const& receiver,
+         prepareItems(pReceiver, trans);                            // generate mail template items
+ 
+     uint32 mailId = sObjectMgr->GenerateMailID();
++    bool needDelete = false;
+ 
+-    if (receiver.GetPlayerGUIDLow() == auctionbot.GetAHBplayerGUID())
++    sScriptMgr->OnSendMail(this, receiver, sender, mailId, needDelete);
++
++    if (needDelete || receiver.GetPlayerGUIDLow() == auctionbot.GetAHBplayerGUID())
+     {
+-        if (sender.GetMailMessageType() == MAIL_AUCTION)        // auction mail with items
++        if (!m_items.empty())
+             deleteIncludedItems(trans, true);
+         return;
+     }
+diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
+index d644b4a..0048196 100755
+--- a/src/server/game/Scripting/ScriptLoader.cpp
++++ b/src/server/game/Scripting/ScriptLoader.cpp
+@@ -1227,6 +1227,7 @@ void AddBattlegroundScripts()
+ #ifdef SCRIPTS
+ /* This is where custom scripts' loading functions should be declared. */
+ void AddSC_Mod_CharacterHistory();
++void AddSC_Mod_MailHistory();
+ 
+ #endif
+ 
+@@ -1235,6 +1236,7 @@ void AddCustomScripts()
+ #ifdef SCRIPTS
+     /* This is where custom scripts should be added. */
+     AddSC_Mod_CharacterHistory();
++    AddSC_Mod_MailHistory();
+ 
+ #endif
+ }
+diff --git a/src/server/game/Scripting/ScriptMgr.cpp b/src/server/game/Scripting/ScriptMgr.cpp
+index a48b21f..a37b22f 100755
+--- a/src/server/game/Scripting/ScriptMgr.cpp
++++ b/src/server/game/Scripting/ScriptMgr.cpp
+@@ -268,6 +268,7 @@ void ScriptMgr::Unload()
+     SCR_CLEAR(SpellScriptLoader);
+     SCR_CLEAR(ServerScript);
+     SCR_CLEAR(WorldScript);
++    SCR_CLEAR(MailScript);
+     SCR_CLEAR(FormulaScript);
+     SCR_CLEAR(WorldMapScript);
+     SCR_CLEAR(InstanceMapScript);
+@@ -523,6 +524,11 @@ void ScriptMgr::OnWorldUpdate(uint32 diff)
+     FOREACH_SCRIPT(WorldScript)->OnUpdate(diff);
+ }
+ 
++void ScriptMgr::OnSendMail(MailDraft* const draft, MailReceiver const& receiver, MailSender const& sender, uint32 mailId, bool& needDelete)
++{
++    FOREACH_SCRIPT(MailScript)->OnSendMail(draft, receiver, sender, mailId, needDelete);
++}
++
+ void ScriptMgr::OnHonorCalculation(float& honor, uint8 level, float multiplier)
+ {
+     FOREACH_SCRIPT(FormulaScript)->OnHonorCalculation(honor, level, multiplier);
+@@ -1414,6 +1420,12 @@ WorldScript::WorldScript(const char* name)
+     ScriptRegistry<WorldScript>::AddScript(this);
+ }
+ 
++MailScript::MailScript(const char* name)
++    : ScriptObject(name)
++{
++    ScriptRegistry<MailScript>::AddScript(this);
++}
++
+ FormulaScript::FormulaScript(const char* name)
+     : ScriptObject(name)
+ {
+@@ -1557,6 +1569,7 @@ template<class TScript> uint32 ScriptRegistry<TScript>::_scriptIdCounter = 0;
+ template class ScriptRegistry<SpellScriptLoader>;
+ template class ScriptRegistry<ServerScript>;
+ template class ScriptRegistry<WorldScript>;
++template class ScriptRegistry<MailScript>;
+ template class ScriptRegistry<FormulaScript>;
+ template class ScriptRegistry<WorldMapScript>;
+ template class ScriptRegistry<InstanceMapScript>;
+diff --git a/src/server/game/Scripting/ScriptMgr.h b/src/server/game/Scripting/ScriptMgr.h
+index f00657b..0ff1079 100755
+--- a/src/server/game/Scripting/ScriptMgr.h
++++ b/src/server/game/Scripting/ScriptMgr.h
+@@ -28,6 +28,7 @@
+ #include "SharedDefines.h"
+ #include "World.h"
+ #include "Weather.h"
++#include "Mail.h"
+ 
+ class AuctionHouseObject;
+ class AuraScript;
+@@ -273,6 +274,16 @@ class WorldScript : public ScriptObject
+         // Called when the world is actually shut down.
+         virtual void OnShutdown() { }
+ };
++class MailScript : public ScriptObject
++{
++    protected:
++
++        MailScript(const char* name);
++
++    public:
++
++        virtual void OnSendMail(MailDraft* const /*draft*/, MailReceiver const& /*receiver*/, MailSender const& /*sender*/, uint32 /*mailId*/, bool& /*needDelete*/) { }
++};
+ 
+ class FormulaScript : public ScriptObject
+ {
+@@ -858,6 +869,10 @@ class ScriptMgr
+         void OnStartup();
+         void OnShutdown();
+ 
++    public: /* MailScript*/
++
++        void OnSendMail(MailDraft* const draft, MailReceiver const& receiver, MailSender const& sender, uint32 mailId, bool& needDelete);
++
+     public: /* FormulaScript */
+ 
+         void OnHonorCalculation(float& honor, uint8 level, float multiplier);
+diff --git a/src/server/scripts/Custom/CMakeLists.txt b/src/server/scripts/Custom/CMakeLists.txt
+index e9b7fa9..e80a760 100644
+--- a/src/server/scripts/Custom/CMakeLists.txt
++++ b/src/server/scripts/Custom/CMakeLists.txt
+@@ -11,6 +11,7 @@
+ set(scripts_STAT_SRCS
+   ${scripts_STAT_SRCS}
+   Custom/mod_CharacterHistory.cpp
++  Custom/mod_MailHistory.cpp
+ )
+ 
+ message("  -> Prepared: Custom")
+diff --git a/src/server/scripts/Custom/mod_MailHistory.cpp b/src/server/scripts/Custom/mod_MailHistory.cpp
+new file mode 100644
+index 0000000..4a45671
+--- /dev/null
++++ b/src/server/scripts/Custom/mod_MailHistory.cpp
+@@ -0,0 +1,78 @@
++#include "ScriptPCH.h"
++#include "Config.h"
++#include <math.h>
++
++#define SQL_HISTORY "INSERT INTO `mail_history` (`id`, `message_type`, `stationery`, `template_id`, `sender`, `receiver`, `subject`, `body`, `money`, `cod`) VALUES ('%u', '%u', '%u', '%u', '%u', '%u', '%s', '%s', '%u', '%u')"
++
++bool mailHistoryEnable = false;
++uint8 mailHistoryMask = 0;
++
++enum MailHistoryMask
++{
++    MAIL_HISTORY_NORMAL     = 1,
++    MAIL_HISTORY_AUCTION    = 2,
++    MAIL_HISTORY_CREATURE   = 4,
++    MAIL_HISTORY_GAMEOBJECT = 8,
++    MAIL_HISTORY_ITEM       = 16
++};
++
++class Mod_MailHistory_WorldScript : public WorldScript
++{
++    public:
++        Mod_MailHistory_WorldScript() : WorldScript("Mod_MailHistory_WorldScript") { }
++
++    // Called after the world configuration is (re)loaded.
++    void OnConfigLoad(bool /*reload*/)
++    {
++        mailHistoryEnable = ConfigMgr::GetBoolDefault("MailHistory.Enable", false);
++        mailHistoryMask = 0;
++
++        if (!mailHistoryEnable)
++            return;
++
++        if (ConfigMgr::GetBoolDefault("MailHistory.Normal", false))
++            mailHistoryMask += MAIL_HISTORY_NORMAL;
++        if (ConfigMgr::GetBoolDefault("MailHistory.Auction", false))
++            mailHistoryMask += MAIL_HISTORY_AUCTION;
++        if (ConfigMgr::GetBoolDefault("MailHistory.Creature", false))
++            mailHistoryMask += MAIL_HISTORY_CREATURE;
++        if (ConfigMgr::GetBoolDefault("MailHistory.Gameobject", false))
++            mailHistoryMask += MAIL_HISTORY_GAMEOBJECT;
++        if (ConfigMgr::GetBoolDefault("MailHistory.Item", false))
++            mailHistoryMask += MAIL_HISTORY_ITEM;
++    }
++};
++
++class Mod_MailHistory_MailScript : public MailScript
++{
++    public:
++        Mod_MailHistory_MailScript() : MailScript("Mod_MailHistory_MailScript") { }
++
++    void OnSendMail(MailDraft* const draft, MailReceiver const& receiver, MailSender const& sender, uint32 mailId, bool& needDelete)
++    {
++        if (!mailHistoryEnable || needDelete)
++            return;
++
++        if (!(uint8(pow(float(sender.GetMailMessageType()), 2)) & mailHistoryMask))
++            return;
++
++        CharacterDatabase.PExecute(SQL_HISTORY,
++            mailId,
++            uint8(sender.GetMailMessageType()),
++            int8(sender.GetStationery()),
++            draft->GetMailTemplateId(),
++            sender.GetSenderId(),
++            receiver.GetPlayerGUIDLow(),
++            draft->GetSubject().c_str(),
++            draft->GetBody().c_str(),
++            draft->GetMoney(),
++            draft->GetCOD()
++        );
++    }
++};
++
++void AddSC_Mod_MailHistory()
++{
++    new Mod_MailHistory_WorldScript();
++    new Mod_MailHistory_MailScript();
++}
+\ No newline at end of file
+diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
+index b566baf..fa67ade 100644
+--- a/src/server/worldserver/worldserver.conf.dist
++++ b/src/server/worldserver/worldserver.conf.dist
+@@ -3232,3 +3232,57 @@ CharacterHistory.Delete = 0
+ 
+ #
+ ###################################################################################################
++
++###################################################################################################
++# MAIL HISTORY
++#
++#    MailHistory.Enable
++#        Description: Logging history send (normal/auction/creature/gameobject/item) mails
++#                     characters to database
++#        Default:     0 = Disable
++#                     1 = Enable
++
++MailHistory.Enable = 0
++
++#
++#     MailHistory.Normal
++#        Description: Enables logging normal mail send
++#        Default:     0 - (Disabled)
++#                     1 - (Enabled)
++
++MailHistory.Normal = 0
++
++#
++#     MailHistory.Auction
++#        Description: Enables logging auction mail send
++#        Default:     0 - (Disabled)
++#                     1 - (Enabled)
++
++MailHistory.Auction = 0
++
++#
++#     MailHistory.Creature
++#        Description: Enables logging creature mail send
++#        Default:     0 - (Disabled)
++#                     1 - (Enabled)
++
++MailHistory.Creature = 0
++
++#
++#     MailHistory.Gameobject
++#        Description: Enables logging gameobject mail send
++#        Default:     0 - (Disabled)
++#                     1 - (Enabled)
++
++MailHistory.Gameobject = 0
++
++#
++#     MailHistory.Item
++#        Description: Enables logging item mail send
++#        Default:     0 - (Disabled)
++#                     1 - (Enabled)
++
++MailHistory.Item = 0
++
++#
++###################################################################################################
+-- 
+1.7.8.msysgit.0
+

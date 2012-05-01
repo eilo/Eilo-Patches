@@ -1,7 +1,7 @@
-From 798f46cd3f3bb09a6593a54955349a3fa6ca7426 Mon Sep 17 00:00:00 2001
+From 82f822d4411f6b08e64e50135b2da5828001fa61 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Apr 2012 16:20:37 -0500
-Subject: [PATCH 04/11] 0.5 AhBot
+Subject: [PATCH 04/19] 0.5 AhBot
 
 ---
  .../reanemu/2012_04_10_100_characters_ahbot.sql    |   72 +
@@ -3334,7 +3334,7 @@ index 8b81a48..a58bd98 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/Battlegrounds/Zones
    ${CMAKE_CURRENT_SOURCE_DIR}/Calendar
 diff --git a/src/server/game/Chat/Chat.cpp b/src/server/game/Chat/Chat.cpp
-index 042f16b..9b0a2b3 100755
+index cc64a8e..716fbc7 100755
 --- a/src/server/game/Chat/Chat.cpp
 +++ b/src/server/game/Chat/Chat.cpp
 @@ -346,6 +346,7 @@ ChatCommand* ChatHandler::getCommandTable()

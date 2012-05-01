@@ -1,0 +1,134 @@
+From defc2093aa72f562d3c0a9d4fa40b1cb1f11608c Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 27 Apr 2012 00:29:29 -0500
+Subject: [PATCH 15/19] 0.23 Arenas anuncios
+
+---
+ .../reanemu/2012_04_07_100_world_arena_queue.txt   |    3 +++
+ .../game/Battlegrounds/BattlegroundQueue.cpp       |   11 +++++++----
+ src/server/game/Miscellaneous/Language.h           |    1 +
+ src/server/game/World/World.cpp                    |    2 ++
+ src/server/game/World/World.h                      |    2 ++
+ src/server/worldserver/worldserver.conf.dist       |   18 ++++++++++++++++++
+ 6 files changed, 33 insertions(+), 4 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.txt
+
+diff --git a/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.txt b/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.txt
+new file mode 100644
+index 0000000..c2115be
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.txt
+@@ -0,0 +1,3 @@
++DELETE FROM `trinity_string` WHERE `entry` = 11002;
++INSERT INTO `trinity_string` (`entry`, `content_default`) VALUES ('11002', '|cffff0000[Arena Queue Announcer]:|r A team has joined : %ux%u : %u|r');
++UPDATE trinity_string SET `content_loc6`='|cffff0000[Anuncio de Cola de Arena]:|r Un equipo se unió : %ux%u : %u|r' WHERE entry=11002;
+\ No newline at end of file
+diff --git a/src/server/game/Battlegrounds/BattlegroundQueue.cpp b/src/server/game/Battlegrounds/BattlegroundQueue.cpp
+index 6f4264c..700544e 100755
+--- a/src/server/game/Battlegrounds/BattlegroundQueue.cpp
++++ b/src/server/game/Battlegrounds/BattlegroundQueue.cpp
+@@ -162,8 +162,11 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, Battlegr
+     if (isRated && sWorld->getBoolConfig(CONFIG_ARENA_QUEUE_ANNOUNCER_ENABLE))
+     {
+         ArenaTeam* Team = sArenaTeamMgr->GetArenaTeamById(arenateamid);
+-        if (Team)
+-            sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN, Team->GetName().c_str(), ginfo->ArenaType, ginfo->ArenaType, ginfo->ArenaTeamRating);
++        if (Team && ginfo->ArenaType >= sWorld->getIntConfig(CONFIG_ARENA_QUEUE_ANNOUNCER_MINTYPE))
++            if(sWorld->getBoolConfig(CONFIG_ARENA_QUEUE_ANNOUNCER_SHOWTEAMNAMES))
++                sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN, Team->GetName().c_str(), ginfo->ArenaType, ginfo->ArenaType, ginfo->ArenaTeamRating);
++            else
++                sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN2, ginfo->ArenaType, ginfo->ArenaType, ginfo->ArenaTeamRating);
+     }
+ 
+     //add players from group to ginfo
+@@ -351,11 +354,11 @@ void BattlegroundQueue::RemovePlayer(uint64 guid, bool decreaseInvitedCount)
+     // remove player queue info
+     m_QueuedPlayers.erase(itr);
+ 
+-    // announce to world if arena team left queue for rated match, show only once
++/*    // announce to world if arena team left queue for rated match, show only once
+     if (group->ArenaType && group->IsRated && group->Players.empty() && sWorld->getBoolConfig(CONFIG_ARENA_QUEUE_ANNOUNCER_ENABLE))
+         if (ArenaTeam* Team = sArenaTeamMgr->GetArenaTeamById(group->ArenaTeamId))
+             sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_EXIT, Team->GetName().c_str(), group->ArenaType, group->ArenaType, group->ArenaTeamRating);
+-
++*/
+     // if player leaves queue and he is invited to rated arena match, then he have to lose
+     if (group->IsInvitedToBGInstanceGUID && group->IsRated && decreaseInvitedCount)
+     {
+diff --git a/src/server/game/Miscellaneous/Language.h b/src/server/game/Miscellaneous/Language.h
+index 6b9354a..1ca809f 100755
+--- a/src/server/game/Miscellaneous/Language.h
++++ b/src/server/game/Miscellaneous/Language.h
+@@ -1102,6 +1102,7 @@ enum TrinityStrings
+     // Use for custom patches             11000-11999
+     LANG_AUTO_BROADCAST                 = 11000,
+     LANG_INVALID_REALMID                = 11001,
++    LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN2   = 11002,
+ 
+     // NOT RESERVED IDS                   12000-1999999999
+     // `db_script_string` table index     2000000000-2000009999 (MIN_DB_SCRIPT_STRING_ID-MAX_DB_SCRIPT_STRING_ID)
+diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
+index a8309a6..f1dc1d6 100755
+--- a/src/server/game/World/World.cpp
++++ b/src/server/game/World/World.cpp
+@@ -1044,6 +1044,8 @@ void World::LoadConfigSettings(bool reload)
+     m_bool_configs[CONFIG_ARENA_AUTO_DISTRIBUTE_POINTS]              = ConfigMgr::GetBoolDefault("Arena.AutoDistributePoints", false);
+     m_int_configs[CONFIG_ARENA_AUTO_DISTRIBUTE_INTERVAL_DAYS]        = ConfigMgr::GetIntDefault ("Arena.AutoDistributeInterval", 7);
+     m_bool_configs[CONFIG_ARENA_QUEUE_ANNOUNCER_ENABLE]              = ConfigMgr::GetBoolDefault("Arena.QueueAnnouncer.Enable", false);
++    m_int_configs[CONFIG_ARENA_QUEUE_ANNOUNCER_MINTYPE]              = ConfigMgr::GetIntDefault ("Arena.QueueAnnouncer.MinimumType", 3);
++    m_bool_configs[CONFIG_ARENA_QUEUE_ANNOUNCER_SHOWTEAMNAMES]       = ConfigMgr::GetBoolDefault("Arena.QueueAnnouncer.ShowTeamNames", true);
+     m_bool_configs[CONFIG_ARENA_QUEUE_ANNOUNCER_PLAYERONLY]          = ConfigMgr::GetBoolDefault("Arena.QueueAnnouncer.PlayerOnly", false);
+     m_int_configs[CONFIG_ARENA_SEASON_ID]                            = ConfigMgr::GetIntDefault ("Arena.ArenaSeason.ID", 1);
+     m_int_configs[CONFIG_ARENA_START_RATING]                         = ConfigMgr::GetIntDefault ("Arena.ArenaStartRating", 0);
+diff --git a/src/server/game/World/World.h b/src/server/game/World/World.h
+index d705320..579e2f4 100755
+--- a/src/server/game/World/World.h
++++ b/src/server/game/World/World.h
+@@ -132,6 +132,7 @@ enum WorldBoolConfigs
+     CONFIG_BG_XP_FOR_KILL,
+     CONFIG_ARENA_AUTO_DISTRIBUTE_POINTS,
+     CONFIG_ARENA_QUEUE_ANNOUNCER_ENABLE,
++    CONFIG_ARENA_QUEUE_ANNOUNCER_SHOWTEAMNAMES,
+     CONFIG_ARENA_QUEUE_ANNOUNCER_PLAYERONLY,
+     CONFIG_ARENA_SEASON_IN_PROGRESS,
+     CONFIG_ARENA_LOG_EXTENDED_INFO,
+@@ -278,6 +279,7 @@ enum WorldIntConfigs
+     CONFIG_BATTLEGROUND_INVITATION_TYPE,
+     CONFIG_BATTLEGROUND_PREMATURE_FINISH_TIMER,
+     CONFIG_BATTLEGROUND_PREMADE_GROUP_WAIT_FOR_MATCH,
++    CONFIG_ARENA_QUEUE_ANNOUNCER_MINTYPE,
+     CONFIG_ARENA_MAX_RATING_DIFFERENCE,
+     CONFIG_ARENA_RATING_DISCARD_TIMER,
+     CONFIG_ARENA_AUTO_DISTRIBUTE_INTERVAL_DAYS,
+diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
+index d737456..5a1caf9 100644
+--- a/src/server/worldserver/worldserver.conf.dist
++++ b/src/server/worldserver/worldserver.conf.dist
+@@ -2556,6 +2556,24 @@ Arena.AutoDistributeInterval = 7
+ Arena.QueueAnnouncer.Enable = 0
+ 
+ #
++#    Arena.QueueAnnouncer.MinimumType
++#        Description: Choose from wich bracket start to announce, if arena queue announcer
++#                     is enabled.
++#        Default:     3 - (3vs3) announce 3v3 and 5v5 joins
++#                     2 - (2vs2) announce 2v2, 3v3 and 5v5 joins
++#                     5 - (5vs5) announce 5v5 joins only
++
++Arena.QueueAnnouncer.MinimumType = 3
++
++#
++#    Arena.QueueAnnouncer.ShowTeamNames
++#        Description: Enable showing team names on join announces
++#        Default:     1 - Enabled
++#                     0 - Disabled (team names are hidden)
++
++Arena.QueueAnnouncer.ShowTeamNames = 1
++
++#
+ #    Arena.ArenaSeason.ID
+ #        Description: Current arena season id shown in clients.
+ #        Default:     8
+-- 
+1.7.8.msysgit.0
+

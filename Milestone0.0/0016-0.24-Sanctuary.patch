@@ -1,0 +1,208 @@
+From f9083eb097bbd4f05623967aa416002262a8bd11 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 27 Apr 2012 02:45:32 -0500
+Subject: [PATCH 16/19] 0.24 Sanctuary
+
+---
+ .../2012_04_10_100_world_custom_sanctuary.sql      |    8 +++++
+ src/server/game/Chat/Chat.cpp                      |    2 +
+ src/server/game/Chat/Chat.h                        |    1 +
+ src/server/game/Chat/Commands/Level3.cpp           |   10 ++++++
+ src/server/game/Entities/Player/Player.cpp         |    4 +-
+ src/server/game/Globals/ObjectMgr.cpp              |   33 ++++++++++++++++++++
+ src/server/game/Globals/ObjectMgr.h                |   29 +++++++++++++++++
+ src/server/game/World/World.cpp                    |    3 ++
+ 8 files changed, 88 insertions(+), 2 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_10_100_world_custom_sanctuary.sql
+
+diff --git a/sql/updates/world/reanemu/2012_04_10_100_world_custom_sanctuary.sql b/sql/updates/world/reanemu/2012_04_10_100_world_custom_sanctuary.sql
+new file mode 100644
+index 0000000..daddb3a
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_10_100_world_custom_sanctuary.sql
+@@ -0,0 +1,8 @@
++DROP TABLE IF EXISTS `custom_sanctuary`;
++CREATE TABLE `custom_sanctuary` (
++  `entry` int(32) unsigned NOT NULL,
++  `type` int(8) unsigned NOT NULL default '0' COMMENT '0 = disabled, 1 = map, 2 = zone, 3 = area',
++  PRIMARY KEY  (`entry`,`type`)
++) 
++ENGINE=InnoDB
++ROW_FORMAT=DEFAULT;
+\ No newline at end of file
+diff --git a/src/server/game/Chat/Chat.cpp b/src/server/game/Chat/Chat.cpp
+index 44445a9..0642677 100755
+--- a/src/server/game/Chat/Chat.cpp
++++ b/src/server/game/Chat/Chat.cpp
+@@ -360,6 +360,8 @@ ChatCommand* ChatHandler::getCommandTable()
+         { "unjail",         SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleUnJailCommand>,              "", NULL },
+         { "jailreload",     SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleJailReloadCommand>,          "", NULL },
+ 
++        { "custom_sanctuary", SEC_ADMINISTRATOR, true, OldHandler<&ChatHandler::HandleReloadCustomSanctuaryCommand>, "", NULL },
++
+         { "aura",           SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleAuraCommand>,                "", NULL },
+         { "unaura",         SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleUnAuraCommand>,              "", NULL },
+         { "nameannounce",   SEC_MODERATOR,      true,  OldHandler<&ChatHandler::HandleNameAnnounceCommand>,        "", NULL },
+diff --git a/src/server/game/Chat/Chat.h b/src/server/game/Chat/Chat.h
+index 4fa50d7..424ccc5 100755
+--- a/src/server/game/Chat/Chat.h
++++ b/src/server/game/Chat/Chat.h
+@@ -346,6 +346,7 @@ class ChatHandler
+         bool HandleJailInfoCommand(const char* args);
+         bool HandleUnJailCommand(const char* args);
+         bool HandleJailReloadCommand(const char* args);
++        bool HandleReloadCustomSanctuaryCommand(const char* args);
+ 
+         bool HandlePlayAllCommand(const char* args);
+         bool HandleRepairitemsCommand(const char* args);
+diff --git a/src/server/game/Chat/Commands/Level3.cpp b/src/server/game/Chat/Commands/Level3.cpp
+index 48048b7..87c732c 100755
+--- a/src/server/game/Chat/Commands/Level3.cpp
++++ b/src/server/game/Chat/Commands/Level3.cpp
+@@ -562,6 +562,16 @@ bool ChatHandler::HandleAHBotOptionsCommand(const char *args)
+     return true;
+ }
+ 
++bool ChatHandler::HandleReloadCustomSanctuaryCommand(const char* /*arg*/)
++{
++    sLog->outString( "Re-Loading custom sanctuary table...");
++
++    sObjectMgr->LoadCustomSanctuary();
++
++    SendGlobalSysMessage("DB table `custom_sanctuary` reloaded.");
++
++    return true;
++}
+ 
+ bool ChatHandler::HandleMaxSkillCommand(const char* /*args*/)
+ {
+diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
+index 01db71f..f7f2489 100755
+--- a/src/server/game/Entities/Player/Player.cpp
++++ b/src/server/game/Entities/Player/Player.cpp
+@@ -7677,7 +7677,7 @@ void Player::UpdateArea(uint32 newArea)
+ 
+     // previously this was in UpdateZone (but after UpdateArea) so nothing will break
+     pvpInfo.inNoPvPArea = false;
+-    if (area && area->IsSanctuary())    // in sanctuary
++    if (area && (area->IsSanctuary() || sObjectMgr->IsCustomSanctuary(newArea)))    // in sanctuary
+     {
+         SetByteFlag(UNIT_FIELD_BYTES_2, 1, UNIT_BYTE2_FLAG_SANCTUARY);
+         pvpInfo.inNoPvPArea = true;
+@@ -7757,7 +7757,7 @@ void Player::UpdateZone(uint32 newZone, uint32 newArea)
+ 
+     if (zone->flags & AREA_FLAG_CAPITAL)                     // Is in a capital city
+     {
+-        if (!pvpInfo.inHostileArea || zone->IsSanctuary())
++        if (!pvpInfo.inHostileArea || zone->IsSanctuary() || sObjectMgr->IsCustomSanctuary(newArea))
+         {
+             SetFlag(PLAYER_FLAGS, PLAYER_FLAGS_RESTING);
+             SetRestType(REST_TYPE_IN_CITY);
+diff --git a/src/server/game/Globals/ObjectMgr.cpp b/src/server/game/Globals/ObjectMgr.cpp
+index 2dd5502..b8e4b92 100755
+--- a/src/server/game/Globals/ObjectMgr.cpp
++++ b/src/server/game/Globals/ObjectMgr.cpp
+@@ -6824,6 +6824,39 @@ while (result->NextRow());
+     sLog->outString("");
+ }
+ 
++void ObjectMgr::LoadCustomSanctuary()
++{
++    uint32 oldMSTime = getMSTime();
++
++    // for reload case
++    m_custom_sanctuary.clear();
++
++    uint32 count = 0;
++
++    QueryResult result = WorldDatabase.Query("SELECT entry, type FROM custom_sanctuary WHERE type > 0");
++
++    if (!result)
++    {
++        sLog->outErrorDb(">> Loaded 0 custom sanctuary entries. DB table `custom_sanctuary` is empty.");
++        sLog->outString();
++        return;
++    }
++
++    do
++    {
++        Field* fields = result->Fetch();
++
++        uint32 entry = fields[0].GetUInt32();
++        uint8 type = fields[1].GetUInt32();
++        
++        m_custom_sanctuary[entry] = type;
++        ++count;
++    } while ( result->NextRow() );
++    
++    sLog->outString(">> Loaded %u custom sanctuary entries in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
++    sLog->outString();
++}
++
+ void ObjectMgr::LoadCorpses()
+ {
+     uint32 oldMSTime = getMSTime();
+diff --git a/src/server/game/Globals/ObjectMgr.h b/src/server/game/Globals/ObjectMgr.h
+index 6957557..a42f8ad 100755
+--- a/src/server/game/Globals/ObjectMgr.h
++++ b/src/server/game/Globals/ObjectMgr.h
+@@ -936,6 +936,32 @@ class ObjectMgr
+         uint32 m_jailconf_horde_m;
+         uint32 m_jailconf_ban;          // Banear la cuenta si se ha llegado al limite
+         uint32 m_jailconf_radius;       // Radio maximo donde se puede caminar en la carcel
++        
++        void LoadCustomSanctuary();
++        bool IsCustomSanctuary(uint32 areaid)
++        {
++            AreaTableEntry const* place = GetAreaEntryByAreaID(areaid);
++
++            // map
++            CustomSanctuaryMap::const_iterator itrmap = m_custom_sanctuary.find(place->mapid);
++            if(itrmap != m_custom_sanctuary.end())
++                if(itrmap->second == 1)
++                    return true;
++
++            // zone
++            CustomSanctuaryMap::const_iterator itrzone = m_custom_sanctuary.find(place->zone ? place->zone : place->ID );
++            if(itrzone != m_custom_sanctuary.end())
++                if(itrzone->second == 2)
++                    return true;
++
++            // area
++            CustomSanctuaryMap::const_iterator itrarea = m_custom_sanctuary.find(place->ID);
++            if(itrarea != m_custom_sanctuary.end())
++                if(itrarea->second == 3)
++                    return true;
++
++            return false;
++        }
+ 
+         std::string GeneratePetName(uint32 entry);
+         uint32 GetBaseXP(uint8 level);
+@@ -1291,6 +1317,9 @@ class ObjectMgr
+         void BuildPlayerLevelInfo(uint8 race, uint8 class_, uint8 level, PlayerLevelInfo* plinfo) const;
+ 
+         PlayerInfo _playerInfo[MAX_RACES][MAX_CLASSES];
++        
++        typedef UNORDERED_MAP<uint32, uint32> CustomSanctuaryMap;
++        CustomSanctuaryMap  m_custom_sanctuary;
+ 
+         typedef std::vector<uint32> PlayerXPperLevel;       // [level]
+         PlayerXPperLevel _playerXPperLevel;
+diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
+index f1dc1d6..f664118 100755
+--- a/src/server/game/World/World.cpp
++++ b/src/server/game/World/World.cpp
+@@ -1646,6 +1646,9 @@ void World::SetInitialWorldSettings()
+     sLog->outString("Loading JailConfing...");
+     sObjectMgr->LoadJailConf();
+ 
++    sLog->outString("Loading Custom Sanctuaries..." );
++    sObjectMgr->LoadCustomSanctuary();
++
+     sLog->outString("Loading Autobroadcasts...");
+     LoadAutobroadcasts();
+ 
+-- 
+1.7.8.msysgit.0
+

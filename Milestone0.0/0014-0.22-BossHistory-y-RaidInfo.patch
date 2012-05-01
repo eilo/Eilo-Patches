@@ -1,0 +1,519 @@
+From a69e80000351dd901cf6721ebd284d528d8fa2c0 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Thu, 26 Apr 2012 23:58:06 -0500
+Subject: [PATCH 14/19] 0.22 BossHistory y RaidInfo
+
+---
+ .../2012_04_23_100_characters_bosshistory.sql      |   17 ++
+ .../reanemu/2012_04_23_100_world_bosshistory.sql   |    4 +
+ src/server/game/Entities/Creature/Creature.cpp     |    2 +
+ src/server/game/Entities/Unit/Unit.cpp             |    8 +
+ src/server/game/Scripting/ScriptLoader.cpp         |    2 +
+ src/server/game/Scripting/ScriptMgr.cpp            |   23 ++
+ src/server/game/Scripting/ScriptMgr.h              |   22 ++
+ src/server/scripts/Custom/CMakeLists.txt           |    1 +
+ src/server/scripts/Custom/mod_BossHistory.cpp      |  218 ++++++++++++++++++++
+ src/server/worldserver/worldserver.conf.dist       |   47 +++++
+ 10 files changed, 344 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/characters/reanemu/2012_04_23_100_characters_bosshistory.sql
+ create mode 100644 sql/updates/world/reanemu/2012_04_23_100_world_bosshistory.sql
+ create mode 100644 src/server/scripts/Custom/mod_BossHistory.cpp
+
+diff --git a/sql/updates/characters/reanemu/2012_04_23_100_characters_bosshistory.sql b/sql/updates/characters/reanemu/2012_04_23_100_characters_bosshistory.sql
+new file mode 100644
+index 0000000..f53beda
+--- /dev/null
++++ b/sql/updates/characters/reanemu/2012_04_23_100_characters_bosshistory.sql
+@@ -0,0 +1,17 @@
++DROP TABLE IF EXISTS `boss_history`;
++CREATE TABLE `boss_history` (
++  `Guid` bigint(20) NOT NULL AUTO_INCREMENT,
++  `GuildId` int(10) NOT NULL,
++  `CreatureEntry` int(10) NOT NULL,
++  `CreatureName` varchar(255) NOT NULL,
++  `PlayerCount` tinyint(3) unsigned NOT NULL DEFAULT '0',
++  `KillTime` int(10) NOT NULL,
++  `KillDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
++  `KillData` longtext NOT NULL,
++  `MapRaid` tinyint(1) unsigned NOT NULL DEFAULT '0',
++  `MapId` smallint(6) unsigned NOT NULL DEFAULT '0',
++  `MapName` varchar(255) NOT NULL,
++  `MapSpawnMode` tinyint(3) unsigned NOT NULL DEFAULT '0',
++  `MapMaxPlayers` tinyint(3) unsigned NOT NULL DEFAULT '0',
++  PRIMARY KEY (`Guid`)
++) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+diff --git a/sql/updates/world/reanemu/2012_04_23_100_world_bosshistory.sql b/sql/updates/world/reanemu/2012_04_23_100_world_bosshistory.sql
+new file mode 100644
+index 0000000..fae0ca3
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_23_100_world_bosshistory.sql
+@@ -0,0 +1,4 @@
++-- Textos de anuncio para el Boss kill
++REPLACE INTO `trinity_string` (`entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`) VALUES
++(11006, '|Cffff0000[RAID INFO] |cff00ffff%s %uN: |Cff00ff00%s |cff00ffffderrotado por la hermandad |Cff00ff00%s|cff00ffff. Jugadores: %u/%u Tiempo: %um %us', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
++(11007, '|Cffff0000[RAID INFO] |cff00ffff%s %uH: |Cff00ff00%s |cff00ffffderrotado por la hermandad |Cff00ff00%s|cff00ffff. Jugadores: %u/%u Tiempo: %um %us', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+\ No newline at end of file
+diff --git a/src/server/game/Entities/Creature/Creature.cpp b/src/server/game/Entities/Creature/Creature.cpp
+index fde85fe..035895f 100755
+--- a/src/server/game/Entities/Creature/Creature.cpp
++++ b/src/server/game/Entities/Creature/Creature.cpp
+@@ -550,6 +550,8 @@ void Creature::Update(uint32 diff)
+                 m_AI_locked = true;
+                 i_AI->UpdateAI(diff);
+                 m_AI_locked = false;
++                if (isInCombat() && GetCreatureTemplate()->flags_extra & CREATURE_FLAG_EXTRA_INSTANCE_BIND)
++                    sScriptMgr->AllCreatureUpdateAI(diff);
+             }
+ 
+             // creature can be dead after UpdateAI call
+diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
+index 18e2273..0d28cd2 100755
+--- a/src/server/game/Entities/Unit/Unit.cpp
++++ b/src/server/game/Entities/Unit/Unit.cpp
+@@ -13014,7 +13014,10 @@ void Unit::TauntFadeOut(Unit* taunter)
+     if (m_ThreatManager.isThreatListEmpty())
+     {
+         if (creature->IsAIEnabled)
++        {
+             creature->AI()->EnterEvadeMode();
++            sScriptMgr->AllCreatureReset();
++        }
+         return;
+     }
+ 
+@@ -13141,6 +13144,7 @@ Unit* Creature::SelectVictim()
+             if ((*itr)->GetBase()->IsPermanent())
+             {
+                 AI()->EnterEvadeMode();
++                sScriptMgr->AllCreatureReset();
+                 break;
+             }
+         }
+@@ -13149,6 +13153,7 @@ Unit* Creature::SelectVictim()
+ 
+     // enter in evade mode in other case
+     AI()->EnterEvadeMode();
++    sScriptMgr->AllCreatureReset();
+ 
+     return NULL;
+ }
+@@ -15683,6 +15688,9 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
+         if (creature->IsAIEnabled)
+             creature->AI()->JustDied(this);
+ 
++        if (creature)
++            sScriptMgr->AllCreatureJustDied(creature);
++
+         if (TempSummon* summon = creature->ToTempSummon())
+             if (Unit* summoner = summon->GetSummoner())
+                 if (summoner->ToCreature() && summoner->IsAIEnabled)
+diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
+index 0048196..68f1f6f 100755
+--- a/src/server/game/Scripting/ScriptLoader.cpp
++++ b/src/server/game/Scripting/ScriptLoader.cpp
+@@ -1226,6 +1226,7 @@ void AddBattlegroundScripts()
+ 
+ #ifdef SCRIPTS
+ /* This is where custom scripts' loading functions should be declared. */
++void AddSC_Mod_BossHistory();
+ void AddSC_Mod_CharacterHistory();
+ void AddSC_Mod_MailHistory();
+ 
+@@ -1235,6 +1236,7 @@ void AddCustomScripts()
+ {
+ #ifdef SCRIPTS
+     /* This is where custom scripts should be added. */
++    AddSC_Mod_BossHistory();
+     AddSC_Mod_CharacterHistory();
+     AddSC_Mod_MailHistory();
+ 
+diff --git a/src/server/game/Scripting/ScriptMgr.cpp b/src/server/game/Scripting/ScriptMgr.cpp
+index a37b22f..c228041 100755
+--- a/src/server/game/Scripting/ScriptMgr.cpp
++++ b/src/server/game/Scripting/ScriptMgr.cpp
+@@ -275,6 +275,7 @@ void ScriptMgr::Unload()
+     SCR_CLEAR(BattlegroundMapScript);
+     SCR_CLEAR(ItemScript);
+     SCR_CLEAR(CreatureScript);
++    SCR_CLEAR(AllCreatureScript);
+     SCR_CLEAR(GameObjectScript);
+     SCR_CLEAR(AreaTriggerScript);
+     SCR_CLEAR(BattlegroundScript);
+@@ -865,6 +866,21 @@ void ScriptMgr::OnCreatureUpdate(Creature* creature, uint32 diff)
+     tmpscript->OnUpdate(creature, diff);
+ }
+ 
++void ScriptMgr::AllCreatureJustDied(Creature* creature)
++{
++    FOREACH_SCRIPT(AllCreatureScript)->AllCreatureJustDied(creature);
++}
++
++void ScriptMgr::AllCreatureReset()
++{
++    FOREACH_SCRIPT(AllCreatureScript)->AllCreatureReset();
++}
++
++void ScriptMgr::AllCreatureUpdateAI(uint32 const diff)
++{
++    FOREACH_SCRIPT(AllCreatureScript)->AllCreatureUpdateAI(diff);
++}
++
+ bool ScriptMgr::OnGossipHello(Player* player, GameObject* go)
+ {
+     ASSERT(player);
+@@ -1471,6 +1487,12 @@ CreatureScript::CreatureScript(const char* name)
+     ScriptRegistry<CreatureScript>::AddScript(this);
+ }
+ 
++AllCreatureScript::AllCreatureScript(const char* name)
++    : ScriptObject(name)
++{
++    ScriptRegistry<AllCreatureScript>::AddScript(this);
++}
++
+ GameObjectScript::GameObjectScript(const char* name)
+     : ScriptObject(name)
+ {
+@@ -1576,6 +1598,7 @@ template class ScriptRegistry<InstanceMapScript>;
+ template class ScriptRegistry<BattlegroundMapScript>;
+ template class ScriptRegistry<ItemScript>;
+ template class ScriptRegistry<CreatureScript>;
++template class ScriptRegistry<AllCreatureScript>;
+ template class ScriptRegistry<GameObjectScript>;
+ template class ScriptRegistry<AreaTriggerScript>;
+ template class ScriptRegistry<BattlegroundScript>;
+diff --git a/src/server/game/Scripting/ScriptMgr.h b/src/server/game/Scripting/ScriptMgr.h
+index 0ff1079..f0c0398 100755
+--- a/src/server/game/Scripting/ScriptMgr.h
++++ b/src/server/game/Scripting/ScriptMgr.h
+@@ -447,6 +447,22 @@ class CreatureScript : public ScriptObject, public UpdatableScript<Creature>
+         virtual CreatureAI* GetAI(Creature* /*creature*/) const { return NULL; }
+ };
+ 
++class AllCreatureScript : public ScriptObject
++{
++    protected:
++
++        AllCreatureScript(const char* name);
++
++    public:
++               
++        // Llama cuando muere una criatura (usado en unit.cpp)
++        virtual void AllCreatureJustDied(Creature* /*creature*/) { }
++        // Llama cuando entra en evade una criatura (usado en unit.cpp)
++        virtual void AllCreatureReset() { }
++        // Llama cuando actualiza las criaturas (usado en creature.cpp)
++        virtual void AllCreatureUpdateAI(uint32 const /*diff*/) { }
++};
++
+ class GameObjectScript : public ScriptObject, public UpdatableScript<GameObject>
+ {
+     protected:
+@@ -918,6 +934,12 @@ class ScriptMgr
+         CreatureAI* GetCreatureAI(Creature* creature);
+         void OnCreatureUpdate(Creature* creature, uint32 diff);
+ 
++    public: /* AllCreatureScript */
++
++        void AllCreatureJustDied(Creature* creature);
++        void AllCreatureReset();
++        void AllCreatureUpdateAI(uint32 const diff);
++
+     public: /* GameObjectScript */
+ 
+         bool OnDummyEffect(Unit* caster, uint32 spellId, SpellEffIndex effIndex, GameObject* target);
+diff --git a/src/server/scripts/Custom/CMakeLists.txt b/src/server/scripts/Custom/CMakeLists.txt
+index e80a760..b432e34 100644
+--- a/src/server/scripts/Custom/CMakeLists.txt
++++ b/src/server/scripts/Custom/CMakeLists.txt
+@@ -10,6 +10,7 @@
+ 
+ set(scripts_STAT_SRCS
+   ${scripts_STAT_SRCS}
++  Custom/mod_BossHistory.cpp
+   Custom/mod_CharacterHistory.cpp
+   Custom/mod_MailHistory.cpp
+ )
+diff --git a/src/server/scripts/Custom/mod_BossHistory.cpp b/src/server/scripts/Custom/mod_BossHistory.cpp
+new file mode 100644
+index 0000000..c3b05dc
+--- /dev/null
++++ b/src/server/scripts/Custom/mod_BossHistory.cpp
+@@ -0,0 +1,218 @@
++/*
++ * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
++ * Copyright (C) 2009-2012 Eilo <https://github.com/eilo>
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License as published by the
++ * Free Software Foundation; either version 2 of the License, or (at your
++ * option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program. If not, see <http://www.gnu.org/licenses/>.
++ */
++
++/* SystemData
++Name: BossHistory
++%Complete: 100
++Autor: Codels, some improvements by Eilo
++
++Name: RaidInfo
++%Complete: 100
++Autor: Eilo
++*/
++
++#include "ScriptPCH.h"
++#include "Config.h"
++#include "Group.h"
++#include "Guild.h"
++#include "GuildMgr.h"
++
++#define SQL_BOSS_HISTORY_LOG "INSERT INTO `boss_history` (`GuildId`, `CreatureEntry`, `PlayerCount`, `KillTime`, `KillData`, `MapSpawnMode`, `MapId`, `MapRaid`, `CreatureName`, `MapName`, `MapMaxPlayers`) VALUES ('%u', '%u', '%u', '%u', '%s', '%u', '%u', '%u', '%s', '%s', '%u')"
++#define DATA_SEPARATOR ":"
++#define PEOPLE_SEPARATOR " "
++
++bool    BossHistoryEnable       = false;
++bool    BossHistoryMode         = false;
++bool    BossHistoryLog          = false;
++bool    RaidInfoAnnounce        = false;
++int32   RaidInfoDifficulty      = 0;
++int32   BossHistoryNormalText   = 11006;
++int32   BossHistoryHeroicText   = 11007;
++uint32  KillTime                = 0;
++uint32  minutes                 = 0;
++uint32  seconds                 = 0;
++
++class mod_BossHistory_WorldScript : public WorldScript
++{
++    public:
++        mod_BossHistory_WorldScript() : WorldScript("mod_BossHistory_WorldScript") { }
++
++    void OnConfigLoad(bool /*reload*/)
++    {
++        BossHistoryEnable      = ConfigMgr::GetBoolDefault("BossHistory.Enable", false);
++
++        if (!BossHistoryEnable)
++            return;
++
++        BossHistoryMode        = ConfigMgr::GetBoolDefault("BossHistory.Mode", false);
++        BossHistoryLog         = ConfigMgr::GetBoolDefault("BossHistory.Log", false);
++        RaidInfoAnnounce       = ConfigMgr::GetBoolDefault("RaidInfo.Announce", false);
++        RaidInfoDifficulty     = ConfigMgr::GetIntDefault("RaidInfo.Difficulty", 0);
++    }
++};
++
++class mod_BossHistory_AllCreatureScript : public AllCreatureScript
++{
++    public:
++        mod_BossHistory_AllCreatureScript() : AllCreatureScript("mod_BossHistory_AllCreatureScript") { }
++
++    void AllCreatureReset()
++    {
++        KillTime = 0;
++    }
++
++    void AllCreatureUpdateAI(const uint32 diff)
++    {
++        KillTime += diff;
++    }
++
++    void AllCreatureJustDied(Creature* creature)
++    {
++        if (!BossHistoryEnable)
++            return;
++
++        if (creature->GetCreatureTemplate()->rank != CREATURE_ELITE_WORLDBOSS)
++            return;
++
++        Player* recipient = creature->GetLootRecipient();
++        if (!recipient)
++            return;
++
++        Map* map = creature->GetMap();
++        if (!map)
++            return;
++
++        uint32 Entry = creature->GetEntry();
++        InstanceMap* instance = map->ToInstanceMap();
++
++        if (BossHistoryMode && (!map->Instanceable() || !instance))
++            return;
++
++        std::string bossName(creature->GetNameForLocaleIdx(sObjectMgr->GetDBCLocaleIndex()));
++        std::string mapName(creature->GetMap()->GetMapName());
++
++        uint8 spawnMode = map->GetSpawnMode();
++        uint32 GuildId = 0;
++        bool IsGuildKill = true;
++        uint32 PlayerCount = 0;
++        std::string KillTeam;
++
++        if(Group *pGroup = recipient->GetGroup())
++        {
++            for(GroupReference *itr = pGroup->GetFirstMember(); itr != NULL; itr = itr->next())
++            {
++                Player* Temp = itr->getSource();
++
++                if(!Temp)
++                    continue;
++
++                PlayerCount++;
++                uint32 playerGuildId = Temp->GetGuildId();
++                if (BossHistoryLog)
++                {
++                    std::ostringstream PeopleData;
++                    PeopleData << Temp->GetGUIDLow() << DATA_SEPARATOR;
++                    PeopleData << Temp->GetName() << DATA_SEPARATOR;
++                    PeopleData << uint32(Temp->getLevel()) << DATA_SEPARATOR;
++                    PeopleData << playerGuildId << DATA_SEPARATOR;
++                    PeopleData << uint32(Temp->isAlive()) << DATA_SEPARATOR;
++                    PeopleData << uint32(Temp->IsAtGroupRewardDistance(creature)) << PEOPLE_SEPARATOR;
++                    KillTeam += PeopleData.str();
++                }
++
++                if (IsGuildKill)
++                {
++                    if (GuildId == 0)
++                        GuildId = playerGuildId;
++
++                    IsGuildKill = GuildId != 0 && playerGuildId == GuildId;
++                }
++            }
++        }
++        else
++        {
++            PlayerCount = 1;
++            GuildId = recipient->GetGuildId();
++            IsGuildKill = GuildId != 0;
++
++            if (BossHistoryLog)
++            {
++                std::ostringstream PeopleData;
++                PeopleData << recipient->GetGUIDLow() << DATA_SEPARATOR;
++                PeopleData << recipient->GetName() << DATA_SEPARATOR;
++                PeopleData << uint32(recipient->getLevel()) << DATA_SEPARATOR;
++                PeopleData << recipient->GetGuildId() << DATA_SEPARATOR;
++                PeopleData << uint32(recipient->isAlive()) << DATA_SEPARATOR;
++                PeopleData << uint32(1) << PEOPLE_SEPARATOR;
++                KillTeam += PeopleData.str();
++            }
++        }
++
++        if (GuildId == 0 && IsGuildKill)
++            IsGuildKill = false;
++
++        if (!IsGuildKill)
++            GuildId = 0;
++
++        uint32 mapMaxPlayers = instance ? instance->GetMaxPlayers() : 40;
++
++        if (RaidInfoAnnounce && IsGuildKill)
++        {
++            int32 TextId = BossHistoryNormalText;
++            std::string guildName(sGuildMgr->GetGuildById(GuildId)->GetName());
++
++            if (map->IsRaid())
++            {
++                if (spawnMode == RAID_DIFFICULTY_25MAN_HEROIC || spawnMode == RAID_DIFFICULTY_10MAN_HEROIC)
++                    TextId = BossHistoryHeroicText;
++            }
++            else if (spawnMode == DUNGEON_DIFFICULTY_HEROIC)
++                TextId = BossHistoryHeroicText;
++
++            // Aqui va la conversion
++            if (KillTime > 0)
++            {
++                seconds = (uint32)floor(float(KillTime) / 1000);
++                
++                if (seconds >= 60)
++                {
++                    minutes =  (uint32)floor(float(KillTime) / 60000);
++                    seconds -= 60*minutes;
++                }
++                else 
++                    minutes = 0;
++            }
++            // Acondicionando parametros para mostrar
++            if (spawnMode >= RaidInfoDifficulty)
++                sWorld->SendWorldText(TextId, mapName.c_str(), mapMaxPlayers, bossName.c_str(), guildName.c_str(), PlayerCount, mapMaxPlayers, minutes, seconds);
++        }
++
++        if (!BossHistoryLog) return;
++
++        CharacterDatabase.EscapeString(KillTeam);
++        CharacterDatabase.EscapeString(bossName);
++        CharacterDatabase.EscapeString(mapName);
++        CharacterDatabase.PExecute(SQL_BOSS_HISTORY_LOG, GuildId, Entry, PlayerCount, KillTime, KillTeam.c_str(), spawnMode, map->GetId(), uint8(map->IsRaid()), bossName.c_str(), mapName.c_str(), mapMaxPlayers);
++    }
++};
++
++void AddSC_Mod_BossHistory()
++{
++    new mod_BossHistory_AllCreatureScript();
++    new mod_BossHistory_WorldScript();
++}
+\ No newline at end of file
+diff --git a/src/server/worldserver/worldserver.conf.dist b/src/server/worldserver/worldserver.conf.dist
+index fa67ade..d737456 100644
+--- a/src/server/worldserver/worldserver.conf.dist
++++ b/src/server/worldserver/worldserver.conf.dist
+@@ -3286,3 +3286,50 @@ MailHistory.Item = 0
+ 
+ #
+ ###################################################################################################
++
++###################################################################################################
++# BOSS HISTORY / RAID INFO
++#
++#    BossHistory.Enable
++#        Description: Logging history/announcing a boss kill
++#        Default:     0 = Disable
++#                     1 = Enable
++
++BossHistory.Enable = 0
++
++#
++#     BossHistory.Mode
++#        Description: Enables logging only instance bosses
++#        Default:     0 - (WorldBoss, DungeonBoss and InstanceBoss)
++#                     1 - (InstanceBoss only)
++
++BossHistory.Mode = 0
++
++#
++#     BossHistory.Log
++#        Description: Enables logging a boss kill
++#        Default:     0 - (Disabled)
++#                     1 - (Enabled)
++
++BossHistory.Log = 0
++
++#
++#     RaidInfo.Announce
++#        Description: Enables announcing a kill boss by a guild, announced by raid info 
++#        Default:     0 - (Disabled)
++#                     1 - (Enabled)
++
++RaidInfo.Announce = 0
++
++#
++#     RaidInfo.Difficulty
++#        Description: Selects which difficulty or difficulties announces raid info
++#        Default:     0 - (10normal, 25normal, 10heroic, 25heroic)
++#                     1 - (25normal, 10heroic, 25heroic)
++#                     2 - (10heroic, 25heroic)
++#                     3 - (25heroic)
++
++RaidInfo.Difficulty = 0
++
++#
++###################################################################################################
+-- 
+1.7.8.msysgit.0
+

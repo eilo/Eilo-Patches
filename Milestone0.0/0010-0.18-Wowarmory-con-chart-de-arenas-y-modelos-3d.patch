@@ -1,7 +1,7 @@
-From 68a2d814498bd80f3d067267f402e36e91b8bd91 Mon Sep 17 00:00:00 2001
+From d7f718572216d652a74c34f4777703bc60387a26 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Apr 2012 11:31:10 -0500
-Subject: [PATCH 10/11] 0.18 Wowarmory con chart de arenas y modelos 3d
+Subject: [PATCH 10/19] 0.18 Wowarmory con chart de arenas y modelos 3d
 
 ---
  .../2012_04_11_100_characters_wowarmory.sql        |   39 +++++++++++

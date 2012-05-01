@@ -1,0 +1,199 @@
+From 4c1799f895dd9f85bd02b542c6e6ab2e4f87c44e Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 27 Apr 2012 02:49:49 -0500
+Subject: [PATCH 17/19] 0.25 FFA Pvp
+
+---
+ .../reanemu/2012_04_10_100_world_custom_ffa.sql    |    8 +++++
+ src/server/game/Chat/Chat.cpp                      |    1 +
+ src/server/game/Chat/Chat.h                        |    1 +
+ src/server/game/Chat/Commands/Level3.cpp           |   11 ++++++
+ src/server/game/Entities/Player/Player.cpp         |    2 +-
+ src/server/game/Globals/ObjectMgr.cpp              |   33 ++++++++++++++++++++
+ src/server/game/Globals/ObjectMgr.h                |   29 +++++++++++++++++
+ src/server/game/World/World.cpp                    |    3 ++
+ 8 files changed, 87 insertions(+), 1 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_10_100_world_custom_ffa.sql
+
+diff --git a/sql/updates/world/reanemu/2012_04_10_100_world_custom_ffa.sql b/sql/updates/world/reanemu/2012_04_10_100_world_custom_ffa.sql
+new file mode 100644
+index 0000000..e8f3027
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_10_100_world_custom_ffa.sql
+@@ -0,0 +1,8 @@
++DROP TABLE IF EXISTS `custom_pvp_zones`;
++CREATE TABLE `custom_pvp_zones` (
++  `entry` int(32) unsigned NOT NULL,
++  `type` int(8) unsigned NOT NULL default '0' COMMENT '0 = disabled, 1 = map, 2 = zone, 3 = area',
++  PRIMARY KEY  (`entry`,`type`)
++) 
++ENGINE=InnoDB
++ROW_FORMAT=DEFAULT;
+\ No newline at end of file
+diff --git a/src/server/game/Chat/Chat.cpp b/src/server/game/Chat/Chat.cpp
+index 0642677..e4056b9 100755
+--- a/src/server/game/Chat/Chat.cpp
++++ b/src/server/game/Chat/Chat.cpp
+@@ -361,6 +361,7 @@ ChatCommand* ChatHandler::getCommandTable()
+         { "jailreload",     SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleJailReloadCommand>,          "", NULL },
+ 
+         { "custom_sanctuary", SEC_ADMINISTRATOR, true, OldHandler<&ChatHandler::HandleReloadCustomSanctuaryCommand>, "", NULL },
++        { "custom_ffa",     SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleReloadCustomFFACommand>,     "", NULL },
+ 
+         { "aura",           SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleAuraCommand>,                "", NULL },
+         { "unaura",         SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleUnAuraCommand>,              "", NULL },
+diff --git a/src/server/game/Chat/Chat.h b/src/server/game/Chat/Chat.h
+index 424ccc5..ee2c344 100755
+--- a/src/server/game/Chat/Chat.h
++++ b/src/server/game/Chat/Chat.h
+@@ -347,6 +347,7 @@ class ChatHandler
+         bool HandleUnJailCommand(const char* args);
+         bool HandleJailReloadCommand(const char* args);
+         bool HandleReloadCustomSanctuaryCommand(const char* args);
++        bool HandleReloadCustomFFACommand(const char* args);
+ 
+         bool HandlePlayAllCommand(const char* args);
+         bool HandleRepairitemsCommand(const char* args);
+diff --git a/src/server/game/Chat/Commands/Level3.cpp b/src/server/game/Chat/Commands/Level3.cpp
+index 87c732c..987c001 100755
+--- a/src/server/game/Chat/Commands/Level3.cpp
++++ b/src/server/game/Chat/Commands/Level3.cpp
+@@ -573,6 +573,17 @@ bool ChatHandler::HandleReloadCustomSanctuaryCommand(const char* /*arg*/)
+     return true;
+ }
+ 
++bool ChatHandler::HandleReloadCustomFFACommand(const char* /*arg*/)
++{
++    sLog->outString( "Re-Loading custom_pvp_zones table...");
++
++    sObjectMgr->LoadCustomFFA();
++
++    SendGlobalSysMessage("DB table `custom_pvp_zones` reloaded.");
++
++    return true;
++}
++
+ bool ChatHandler::HandleMaxSkillCommand(const char* /*args*/)
+ {
+     Player* SelectedPlayer = getSelectedPlayer();
+diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
+index f7f2489..871414c 100755
+--- a/src/server/game/Entities/Player/Player.cpp
++++ b/src/server/game/Entities/Player/Player.cpp
+@@ -7670,7 +7670,7 @@ void Player::UpdateArea(uint32 newArea)
+     m_areaUpdateId    = newArea;
+ 
+     AreaTableEntry const* area = GetAreaEntryByAreaID(newArea);
+-    pvpInfo.inFFAPvPArea = area && (area->flags & AREA_FLAG_ARENA);
++    pvpInfo.inFFAPvPArea = area && (area->flags & AREA_FLAG_ARENA || sObjectMgr->IsCustomFFA(newArea));
+     UpdatePvPState(true);
+ 
+     UpdateAreaDependentAuras(newArea);
+diff --git a/src/server/game/Globals/ObjectMgr.cpp b/src/server/game/Globals/ObjectMgr.cpp
+index b8e4b92..91fe7ed 100755
+--- a/src/server/game/Globals/ObjectMgr.cpp
++++ b/src/server/game/Globals/ObjectMgr.cpp
+@@ -6857,6 +6857,39 @@ void ObjectMgr::LoadCustomSanctuary()
+     sLog->outString();
+ }
+ 
++void ObjectMgr::LoadCustomFFA()
++{
++    uint32 oldMSTime = getMSTime();
++
++    // for reload case
++    m_custom_ffa.clear();
++
++    uint32 count = 0;
++
++    QueryResult result = WorldDatabase.Query("SELECT entry, type FROM custom_pvp_zones WHERE type > 0");
++
++    if (!result)
++    {
++        sLog->outErrorDb(">> Loaded 0 custom pvp zones. DB table `custom_pvp_zones` is empty.");
++        sLog->outString();
++        return;
++    }
++
++    do
++    {
++        Field* fields = result->Fetch();
++
++        uint32 entry = fields[0].GetUInt32();
++        uint8 type = fields[1].GetUInt32();
++        
++        m_custom_ffa[entry] = type;
++        ++count;
++    } while ( result->NextRow() );
++    
++    sLog->outString(">> Loaded %u custom pvp zones in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
++    sLog->outString();
++}
++
+ void ObjectMgr::LoadCorpses()
+ {
+     uint32 oldMSTime = getMSTime();
+diff --git a/src/server/game/Globals/ObjectMgr.h b/src/server/game/Globals/ObjectMgr.h
+index a42f8ad..1bb5e48 100755
+--- a/src/server/game/Globals/ObjectMgr.h
++++ b/src/server/game/Globals/ObjectMgr.h
+@@ -963,6 +963,32 @@ class ObjectMgr
+             return false;
+         }
+ 
++        void LoadCustomFFA();
++        bool IsCustomFFA(uint32 areaid)
++        {
++            AreaTableEntry const* place = GetAreaEntryByAreaID(areaid);
++
++            // map
++            CustomFFAMap::const_iterator itrmap = m_custom_ffa.find(place->mapid);
++            if(itrmap != m_custom_ffa.end())
++                if(itrmap->second == 1)
++                    return true;
++
++            // zone
++            CustomFFAMap::const_iterator itrzone = m_custom_ffa.find(place->zone ? place->zone : place->ID );
++            if(itrzone != m_custom_ffa.end())
++                if(itrzone->second == 2)
++                    return true;
++
++            // area
++            CustomFFAMap::const_iterator itrarea = m_custom_ffa.find(place->ID);
++            if(itrarea != m_custom_ffa.end())
++                if(itrarea->second == 3)
++                    return true;
++
++            return false;
++        }
++
+         std::string GeneratePetName(uint32 entry);
+         uint32 GetBaseXP(uint8 level);
+         uint32 GetXPForLevel(uint8 level);
+@@ -1321,6 +1347,9 @@ class ObjectMgr
+         typedef UNORDERED_MAP<uint32, uint32> CustomSanctuaryMap;
+         CustomSanctuaryMap  m_custom_sanctuary;
+ 
++        typedef UNORDERED_MAP<uint32, uint32> CustomFFAMap;
++        CustomFFAMap  m_custom_ffa;
++
+         typedef std::vector<uint32> PlayerXPperLevel;       // [level]
+         PlayerXPperLevel _playerXPperLevel;
+ 
+diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
+index f664118..bd2f059 100755
+--- a/src/server/game/World/World.cpp
++++ b/src/server/game/World/World.cpp
+@@ -1649,6 +1649,9 @@ void World::SetInitialWorldSettings()
+     sLog->outString("Loading Custom Sanctuaries..." );
+     sObjectMgr->LoadCustomSanctuary();
+ 
++    sLog->outString("Loading Custom FFA Zones..." );
++    sObjectMgr->LoadCustomFFA();
++
+     sLog->outString("Loading Autobroadcasts...");
+     LoadAutobroadcasts();
+ 
+-- 
+1.7.8.msysgit.0
+
