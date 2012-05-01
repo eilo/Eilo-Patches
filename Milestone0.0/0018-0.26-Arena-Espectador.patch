@@ -153,13 +153,12 @@ index 871414c..cc0203b 100755
  bool Player::IsGroupVisibleFor(Player const* p) const
  {
      switch (sWorld->getIntConfig(CONFIG_GROUP_VISIBILITY))
-@@ -17502,6 +17575,10 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
+@@ -17502,6 +17575,9 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
      sLog->outDebug(LOG_FILTER_PLAYER_LOADING, "The value of player %s after load item and aura is: ", m_name.c_str());
      outDebugValues();
  
 +    // Esto es del espectador
-+    if (AccountMgr::IsPlayerAccount(GetSession()->GetSecurity()))
-+        SetEspectador(false);
++    SetEspectador(false);
 +
      // GM state
      if (!AccountMgr::IsPlayerAccount(GetSession()->GetSecurity()))
