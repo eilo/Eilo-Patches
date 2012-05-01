@@ -37,13 +37,13 @@ index 87e8691..06dc29e 100644
 +0.12 - 29/11/2011: TrinityJail original de Warhead, añadido por Hispano, ajustes por Eilo
 +0.13 - 20/01/2012: Autenticacion con cata 4.0.6a 4.2.2 y 4.3.3 por Eilo
 +0.18 - 20/04/2012: Wowarmory con chart de arenas y 3d original por Shadez, adecuaciones por Eilo
-+0.19 - 19/04/2012: Comandos de informacion del server por Eilo
-+0.20 - 19/04/2012: Comandos de informacion del server por Eilo
-+0.21 - 19/04/2012: Comandos de informacion del server por Eilo
-+0.22 - 19/04/2012: Comandos de informacion del server por Eilo
-+0.23 - 19/04/2012: Comandos de informacion del server por Eilo
-+0.24 - 19/04/2012: Comandos de informacion del server por Eilo
-+0.25 - 19/04/2012: Comandos de informacion del server por Eilo
++0.19 - 19/04/2012: SOAP comandos de informacion del server por Eilo
++0.20 - 24/04/2012: CharacterHistory por Codels
++0.21 - 24/04/2012: MailHistory por Codels
++0.22 - 26/04/2012: BossHistory log db y RaidInfo anuncios por Eilo
++0.23 - 08/04/2012: Arenas anuncios de cola por Oceanor
++0.24 - 10/04/2012: Sanctuary zonas custom por Oceanor
++0.25 - 10/04/2012: FFA Pvp zonas custom por Oceanor
 +0.26 - 29/04/2012: Arena Espectador por Eilo
  
  ###############
