@@ -1,0 +1,67 @@
+From 51e2fdb3ba9abffac32ef468a9fe05a6a5645b48 Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 16:23:49 -0300
+Subject: [PATCH 02/40] =?UTF-8?q?4.0.1=20Clases:=20La=20Llamada=20del=20Agua?=
+ =?UTF-8?q?=20(Cham=C3=A1n)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+- Corregido gobject que no aparecía visible a los jugadores
+- Añadido evento para la quest http://old.wowhead.com/quest=9508
+---
+ .../reanemu/2012_04_02_100_world_call_of_water.sql |   41 ++++++++++++++++++++
+ 1 files changed, 41 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_02_100_world_call_of_water.sql
+
+diff --git a/sql/updates/world/reanemu/2012_04_02_100_world_call_of_water.sql b/sql/updates/world/reanemu/2012_04_02_100_world_call_of_water.sql
+new file mode 100644
+index 0000000..3ccb18a
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_02_100_world_call_of_water.sql
+@@ -0,0 +1,41 @@
++-- "La llamada del agua" Draenei
++SET @ELF :=17359;
++SET @ELEMENTAL :=6748;
++
++UPDATE `quest_template` SET `RequiredSourceItemId1`=23751, `RequiredSourceItemCount1`=1 WHERE `Id`=9508;
++UPDATE `creature_template` SET `faction_A`=1806, `faction_H`=1806, `unit_flags`=unit_flags|131702, `AIName`='SmartAI' WHERE `entry`=@ELEMENTAL;
++UPDATE `creature_template` SET `AIName`='SmartAI' WHERE `entry`=@ELF;
++
++DELETE FROM `smart_scripts` WHERE `entryorguid` IN (@ELF,@ELEMENTAL) AND `source_type`=0;
++DELETE FROM `smart_scripts` WHERE `entryorguid`=@ELEMENTAL*100 AND `source_type`=9;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@ELF,0,0,1,4,0,100,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Thelation the Impure - Aggro - Say text'),
++(@ELF,0,1,0,61,0,100,1,0,0,0,0,45,0,1,0,0,0,0,19,@ELEMENTAL,0,0,0,0,0,0,'Thelation the Impure - Aggro - Set data Water Spirit'),
++(@ELF,0,2,0,0,0,80,0,4000,5000,6000,7000,11,15736,0,0,0,0,0,2,0,0,0,0,0,0,0,'Thelation the Impure - IC - Cast arcane missiles'),
++(@ELF,0,3,0,0,0,80,0,700,8000,6000,7000,11,13339,0,0,0,0,0,2,0,0,0,0,0,0,0,'Thelation the Impure - IC - Cast Fire Blast'),
++(@ELF,0,4,0,0,0,80,0,10000,11000,6000,7000,11,11831,0,0,0,0,0,1,0,0,0,0,0,0,0,'Thelation the Impure - IC - Cast Frost Nova'),
++(@ELF,0,5,0,0,0,80,0,14000,15000,6000,7000,11,15736,0,0,0,0,0,2,0,0,0,0,0,0,0,'Thelation the Impure - IC - Cast arcane missiles'),
++(@ELEMENTAL,0,0,0,38,0,100,1,0,1,0,0,80,@ELEMENTAL*100,2,0,0,0,0,1,0,0,0,0,0,0,0,'Water Spirit - Data set 1 - Run script'),
++(@ELEMENTAL,0,1,0,38,0,100,1,0,2,0,0,49,0,0,0,0,0,0,11,@ELF,100,0,0,0,0,0,'Water Spirit - Data set 2 - Attack Thelation the Impure'),
++(@ELEMENTAL*100,9,0,0,0,0,100,1,0,0,0,0,45,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Water Spirit - Script - Set data self'),
++(@ELEMENTAL*100,9,1,0,0,0,100,1,3000,3000,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Water Spirit - Script - Say text'),
++(@ELEMENTAL*100,9,2,0,0,0,100,1,1500,1500,0,0,19,131702,0,0,0,0,0,9,@ELEMENTAL,0,30,0,0,0,0,'Water Spirit - Script - reomve unit flags Water spirit'),
++(@ELEMENTAL*100,9,3,0,0,0,100,1,0,0,0,0,19,131702,0,0,0,0,0,1,0,0,0,0,0,0,0,'Water Spirit - Script - remove unit flags self'),
++(@ELEMENTAL*100,9,4,0,0,0,100,1,0,0,0,0,45,0,2,0,0,0,0,1,0,0,0,0,0,0,0,'Water Spirit - Script - set data Water spirit'),
++(@ELEMENTAL*100,9,5,0,0,0,100,1,0,0,0,0,45,0,2,0,0,0,0,9,@ELEMENTAL,0,30,0,0,0,0,'Water Spirit - Script - set data Water spirit'),
++(@ELEMENTAL*100,9,6,0,0,0,100,1,2500,2500,0,0,1,1,0,0,0,0,0,9,@ELF,0,30,0,0,0,0,'Water Spirit - Script - Thelation the Impure Say text');
++
++DELETE FROM `creature_text` WHERE `entry` IN (@ELF,@ELEMENTAL);
++INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
++(@ELF,0,0,"What have you done to my life's work?! DIE!!!",12,0,100,0,5,0,'Thelation the impure'),
++(@ELF,1,0,"It is YOU who are wrong! I will deal with you two after I have slain this meddlesome shaman!",12,0,100,0,5,0,'Thelation the impure'),
++(@ELEMENTAL,0,0,"Wrong! It is you that will die, Thel'ation the Impure!",12,0,100,0,5,0,'Thelation the impure');
++
++DELETE FROM `event_scripts` WHERE `id`=10685;
++INSERT INTO `event_scripts` (`id`,`delay`,`command`,`datalong`,`datalong2`,`dataint`,`x`,`y`,`z`,`o`) VALUES
++(10685,2,10,@ELF,120000,0,-1648.906006,-10920.821829,58.857849,0.965057),
++(10685,2,10,@ELEMENTAL,120000,0,-1636.167358,-10916.873047,58.292709,3.427276),
++(10685,2,10,@ELEMENTAL,120000,0,-1657.527954,-10907.105469,58.143410,5.257248);
++
++-- Corregido gameobject "invisible"
++UPDATE `gameobject` SET `spawntimesecs`=300 WHERE `id`=202275;
+\ No newline at end of file
+-- 
+1.7.9.msysgit.0
+

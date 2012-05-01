@@ -1,0 +1,54 @@
+From 82f2e69388bbb5c12202e74a54df8d961d7e149e Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 16:52:24 -0300
+Subject: [PATCH 10/40] 4.2.0 Hijos de Hodir: Correcciones generales
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+- Añadido el cambio de fase al terminar la cadena de misiones
+- Correcciones en requisitos de las quest (algunas no lo tenían y se podía adelantarse en la cadena).
+- Añadidos requisitos para las diarias del Poblado Brunnhildar
+---
+ .../reanemu/2012_03_25_100_world_hodir_misc.sql    |   29 ++++++++++++++++++++
+ 1 files changed, 29 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_03_25_100_world_hodir_misc.sql
+
+diff --git a/sql/updates/world/reanemu/2012_03_25_100_world_hodir_misc.sql b/sql/updates/world/reanemu/2012_03_25_100_world_hodir_misc.sql
+new file mode 100644
+index 0000000..e2b4558
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_03_25_100_world_hodir_misc.sql
+@@ -0,0 +1,29 @@
++-- Orden correcto de misiones
++UPDATE `quest_template` SET `PrevQuestId`=12900 WHERE `Id`=12989; -- "La oscuridad reptadora" requiere "Hacer un arnés"
++UPDATE `quest_template` SET `PrevQuestId`=12971 WHERE `Id`=13423; -- "Defender tu título" requiere "Enfrentarse a todos los retos"
++UPDATE `quest_template` SET `PrevQuestId`=12997 WHERE `Id`=13424; -- "De vuelta al foso" requiere "Al foso"
++UPDATE `quest_template` SET `PrevQuestId`=12886 WHERE `Id`=13422; -- "Seguir con la disciplina" requiere "El Drakkensyrd"
++UPDATE `quest_template` SET `PrevQuestId`=12925 WHERE `Id`=13425; -- "Las aberraciones deben morir" requiere "Aberraciones"
++UPDATE `quest_template` SET `NextQuestId`=12924, `ExclusiveGroup`=-12915 WHERE `Id` IN (12915,12956); -- "Forjando una alianza" requiere "Enmiendas" & "Una chispa de esperanza"
++
++-- Cambios de fase
++DELETE FROM `spell_area` WHERE `spell` IN (55858,55012,72914);
++INSERT INTO `spell_area` (`spell`, `area`, `quest_start`, `quest_start_active`, `quest_end`, `aura_spell`, `racemask`, `gender`, `autocast`) VALUES
++(55858, 4438, 12924, 1, 0, 0, 0, 2, 1),
++(55858, 4439, 12924, 1, 0, 0, 0, 2, 1),
++(55858, 4495, 12924, 1, 0, 0, 0, 2, 1),
++-- Chollo de Lok'lira
++(55012,4438,12905,1,12886,0,0,2,1),
++(55012,4437,12905,1,12886,0,0,2,1),
++(55012,4455,12905,1,12886,0,0,2,1),
++(55012,4422,12905,1,0,0,0,2,1),
++(55012,4535,12905,1,0,0,0,2,1),
++(55012,4425,12905,1,0,0,0,2,1),
++(55012,4430,12905,1,12886,0,0,2,1),
++(72914,4438,12905,1,12886,0,0,2,1),
++(72914,4437,12905,1,12886,0,0,2,1),
++(72914,4455,12905,1,12886,0,0,2,1),
++(72914,4422,12905,1,0,0,0,2,1),
++(72914,4535,12905,1,0,0,0,2,1),
++(72914,4425,12905,1,0,0,0,2,1),
++(72914,4430,12905,1,12886,0,0,2,1);
+-- 
+1.7.9.msysgit.0
+

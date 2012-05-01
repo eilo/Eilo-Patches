@@ -1,0 +1,239 @@
+From 7e710b1ee55dc42e46683610ec76573216a495cf Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 16:59:07 -0300
+Subject: [PATCH 14/40] =?UTF-8?q?4.2.4=20Hijos=20de=20Hodir:=20Coraz=C3=B3n=20?=
+ =?UTF-8?q?Helado?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Añadido SAI a los npc Brunnhildar Prisoner y Freed protodrake para el correcto funcionamiento de la quest "Cold Hearted". La única diferencia con blizz es que el pathing del dragón comienza cuando tiene 3 pasajeros y no cuando sales del poblado.
+---
+ .../reanemu/2012_03_25_104_world_cold_hearted.sql  |   46 ++++++
+ src/server/scripts/Northrend/storm_peaks.cpp       |  150 --------------------
+ 2 files changed, 46 insertions(+), 150 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_03_25_104_world_cold_hearted.sql
+
+diff --git a/sql/updates/world/reanemu/2012_03_25_104_world_cold_hearted.sql b/sql/updates/world/reanemu/2012_03_25_104_world_cold_hearted.sql
+new file mode 100644
+index 0000000..4ce7848
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_03_25_104_world_cold_hearted.sql
+@@ -0,0 +1,46 @@
++SET @DRAKE := 29709;
++SET @PRISONER :=29639;
++SET @LIBERATED := 29734;
++
++UPDATE `creature_template` SET `AIName`='SmartAI', `ScriptName`='' WHERE `entry` IN (@DRAKE,@PRISONER,@LIBERATED);
++UPDATE `creature_template` SET `InhabitType`=7 WHERE `entry`=@DRAKE;
++DELETE FROM `smart_scripts` WHERE `source_type`=0 AND `entryorguid` IN (@DRAKE,@PRISONER,@LIBERATED);
++UPDATE `creature_template` SET `spell1`=55046 WHERE `entry`=@DRAKE;
++
++-- SAI Freed Protodrake
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@DRAKE,0,0,0,27,0,100,0,0,0,0,0,23,1,0,0,0,0,0,1,0,0,0,0,0,0,0,'Increase phase on passenger boarded'),
++(@DRAKE,0,1,2,1,8,100,1,0,0,0,0,53,0,@DRAKE,0,0,5000,0,1,0,0,0,0,0,0,0,'Waypoint Start OOC'),
++(@DRAKE,0,2,0,61,8,100,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Say text'),
++(@DRAKE,0,3,4,40,0,100,1,2,@DRAKE,0,0,33,29709,0,0,0,0,0,23,0,0,0,0,0,0,0,'Kill credit dragon'),
++(@DRAKE,0,4,5,61,0,100,1,0,0,0,0,41,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Despawn'),
++(@DRAKE,0,5,0,61,0,100,1,0,0,0,0,45,0,1,0,0,0,0,11,@PRISONER,10,0,0,0,0,0,'Set data prisoner');
++
++DELETE FROM `waypoints` WHERE `entry`=@DRAKE;
++INSERT INTO `waypoints` (`entry`,`pointid`,`position_x`,`position_y`,`position_z`,`point_comment`) VALUES
++(@DRAKE,1,7323.7568,-2677.371,860,'Freed Protodrake 1'),
++(@DRAKE,2,7004.3271,-1701.3242,855,'Freed Protodrake 2');
++
++DELETE FROM `creature_text` WHERE `entry`=@DRAKE;
++INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
++(@DRAKE,0,0,"The proto-drake smells freedom and flies homeward!",41,0,2000,0,0,0,'Freed protodrake');
++
++DELETE FROM `npc_spellclick_spells` WHERE `npc_entry`=29708;
++INSERT INTO `npc_spellclick_spells` (`npc_entry`,`spell_id`,`cast_flags`,`user_type`) VALUES
++(29708,55028,1,0);
++
++DELETE FROM `creature_template_addon` WHERE `entry`=@DRAKE;
++INSERT INTO `creature_template_addon` (`entry`,`path_id`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES
++(@DRAKE,0,0,50331648,1,0,'');
++
++-- SAI Brunnhildar Prisoner
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@PRISONER,0,0,0,25,0,100,1,0,0,0,0,11,54894,0,0,0,0,0,1,0,0,0,0,0,0,0,'Brunnhildar Prisoner - Spawn - Cast Ice prison'),
++(@PRISONER,0,1,2,8,0,100,1,55046,0,0,0,28,54894,0,0,0,0,0,1,0,0,0,0,0,0,0,'Brunnhildar Prisoner - Spell hit - Remove aura'),
++(@PRISONER,0,2,3,61,0,100,1,0,0,0,0,22,1,0,0,0,0,0,1,0,0,0,0,0,0,0,'Liberated Prisoner - Spell hit - Switch to phase 1'),
++(@PRISONER,0,3,0,61,0,100,1,0,0,0,0,11,55074,0,0,0,0,0,11,@DRAKE,50,0,0,0,0,0,'Liberated Prisoner - Spell hit - Mount Freed Protodrake'),
++(@PRISONER,0,4,5,38,0,100,1,0,1,0,0,33,@LIBERATED,0,0,0,0,0,21,5,0,0,0,0,0,0,'Liberated Prisoner - Data set - Kill Credit'),
++(@PRISONER,0,5,0,61,0,100,1,0,0,0,0,41,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Liberated Prisoner - Link - Despawn'),
++(@PRISONER,0,6,0,1,1,100,1,300000,300000,0,0,41,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Liberated Prisoner - 5 minutes phase 1 - Despawn');
++
++
+diff --git a/src/server/scripts/Northrend/storm_peaks.cpp b/src/server/scripts/Northrend/storm_peaks.cpp
+index bed7e78..9008dbc 100644
+--- a/src/server/scripts/Northrend/storm_peaks.cpp
++++ b/src/server/scripts/Northrend/storm_peaks.cpp
+@@ -283,155 +283,6 @@ public:
+     }
+ };
+ 
+-/*######
+-## npc_brunnhildar_prisoner
+-######*/
+-
+-enum brunhildar {
+-    NPC_QUEST_GIVER            = 29592,
+-
+-    SPELL_ICE_PRISON           = 54894,
+-    SPELL_KILL_CREDIT_PRISONER = 55144,
+-    SPELL_KILL_CREDIT_DRAKE    = 55143,
+-    SPELL_SUMMON_LIBERATED     = 55073,
+-    SPELL_ICE_LANCE            = 55046
+-};
+-
+-class npc_brunnhildar_prisoner : public CreatureScript
+-{
+-public:
+-    npc_brunnhildar_prisoner() : CreatureScript("npc_brunnhildar_prisoner") { }
+-
+-    struct npc_brunnhildar_prisonerAI : public ScriptedAI
+-    {
+-        npc_brunnhildar_prisonerAI(Creature* creature) : ScriptedAI(creature) {}
+-
+-        uint64 drakeGUID;
+-        uint16 enter_timer;
+-        bool hasEmptySeats;
+-
+-        void Reset()
+-        {
+-            me->CastSpell(me, SPELL_ICE_PRISON, true);
+-            enter_timer = 0;
+-            drakeGUID = 0;
+-            hasEmptySeats = false;
+-        }
+-
+-        void UpdateAI(const uint32 diff)
+-        {
+-            //TODO: not good script
+-            if (!drakeGUID)
+-                return;
+-
+-            Creature* drake = Unit::GetCreature(*me, drakeGUID);
+-            if (!drake)
+-            {
+-                drakeGUID = 0;
+-                return;
+-            }
+-
+-            // drake unsummoned, passengers dropped
+-            if (!me->IsOnVehicle(drake) && !hasEmptySeats)
+-                me->DespawnOrUnsummon(3000);
+-
+-            if (enter_timer <= 0)
+-                return;
+-
+-            if (enter_timer < diff)
+-            {
+-                enter_timer = 0;
+-                if (hasEmptySeats)
+-                    me->JumpTo(drake, 25.0f);
+-                else
+-                    Reset();
+-            }
+-            else
+-                enter_timer -= diff;
+-        }
+-
+-        void MoveInLineOfSight(Unit* who)
+-        {
+-            if (!who || !drakeGUID)
+-                return;
+-
+-            Creature* drake = Unit::GetCreature(*me, drakeGUID);
+-            if (!drake)
+-            {
+-                drakeGUID = 0;
+-                return;
+-            }
+-
+-            if (!me->IsOnVehicle(drake) && !me->HasAura(SPELL_ICE_PRISON))
+-            {
+-                if (who->IsVehicle() && me->IsWithinDist(who, 25.0f, true) && who->ToCreature() && who->ToCreature()->GetEntry() == 29709)
+-                {
+-                    uint8 seat = who->GetVehicleKit()->GetNextEmptySeat(0, true);
+-                    if (seat <= 0)
+-                        return;
+-
+-                    me->EnterVehicle(who, seat);
+-                    me->SendMovementFlagUpdate();
+-                    hasEmptySeats = false;
+-                }
+-            }
+-
+-            if (who->ToCreature() && me->IsOnVehicle(drake))
+-            {
+-                if (who->ToCreature()->GetEntry() == NPC_QUEST_GIVER && me->IsWithinDist(who, 15.0f, false))
+-                {
+-                    Unit* rider = drake->GetVehicleKit()->GetPassenger(0);
+-                    if (!rider)
+-                        return;
+-
+-                    rider->CastSpell(rider, SPELL_KILL_CREDIT_PRISONER, true);
+-
+-                    me->ExitVehicle();
+-                    me->CastSpell(me, SPELL_SUMMON_LIBERATED, true);
+-                    me->DespawnOrUnsummon(500);
+-
+-                    // drake is empty now, deliver credit for drake and despawn him
+-                    if (drake->GetVehicleKit()->HasEmptySeat(1) &&
+-                        drake->GetVehicleKit()->HasEmptySeat(2) &&
+-                        drake->GetVehicleKit()->HasEmptySeat(3))
+-                    {
+-                        // not working rider->CastSpell(rider, SPELL_KILL_CREDIT_DRAKE, true);
+-                        if (rider->ToPlayer())
+-                            rider->ToPlayer()->KilledMonsterCredit(29709, 0);
+-
+-                        drake->DespawnOrUnsummon(0);
+-                    }
+-                }
+-            }
+-        }
+-
+-        void SpellHit(Unit* hitter, const SpellInfo* spell)
+-        {
+-            if (!hitter || !spell)
+-                return;
+-
+-            if (spell->Id != SPELL_ICE_LANCE)
+-                return;
+-
+-            me->RemoveAura(SPELL_ICE_PRISON);
+-            enter_timer = 500;
+-
+-            if (hitter->IsVehicle())
+-                drakeGUID = hitter->GetGUID();
+-            else
+-                return;
+-
+-            if (hitter->GetVehicleKit()->GetNextEmptySeat(0, true))
+-                hasEmptySeats = true;
+-        }
+-    };
+-
+-    CreatureAI* GetAI(Creature* creature) const
+-    {
+-        return new npc_brunnhildar_prisonerAI(creature);
+-    }
+-};
+-
+ class npc_icefang : public CreatureScript
+ {
+ public:
+@@ -535,7 +386,6 @@ void AddSC_storm_peaks()
+     new npc_thorim();
+     new npc_injured_goblin();
+     new npc_roxi_ramrocket();
+-    new npc_brunnhildar_prisoner();
+     new npc_icefang();
+     new npc_hyldsmeet_protodrake();
+ }
+-- 
+1.7.9.msysgit.0
+

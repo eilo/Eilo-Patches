@@ -1,0 +1,388 @@
+From a1d33e5ba02add8a32af311ae5144017b8cbfd99 Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 16:56:45 -0300
+Subject: [PATCH 13/40] 4.2.3 Hijos de Hodir: Poblado Brunnhildar
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Mejoras en muchos NPC de la zona, a saber:
+- Añadido spawn de Lok'lira the crone
+- Añadido animación de las Brunnhildar Challenger para que parezca que combaten entre ellas
+- Convertido C++ de los NPC Lok'lira the crone, Agnetta Tyrsdottar y Victorious Challenger a SmartAI, con algunas mejoras
+- Añadido SmartAI a los osos para que te ataquen con sus habilidades correspondientes
+---
+ .../2012_03_25_103_world_brunnhildar_village.sql   |  113 ++++++++++
+ src/server/scripts/Northrend/storm_peaks.cpp       |  220 --------------------
+ 2 files changed, 113 insertions(+), 220 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_03_25_103_world_brunnhildar_village.sql
+
+diff --git a/sql/updates/world/reanemu/2012_03_25_103_world_brunnhildar_village.sql b/sql/updates/world/reanemu/2012_03_25_103_world_brunnhildar_village.sql
+new file mode 100644
+index 0000000..5201496
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_03_25_103_world_brunnhildar_village.sql
+@@ -0,0 +1,113 @@
++/*-------------------------------------------
++    Fixes para NPC poblado Brunnhildar
++-------------------------------------------*/
++
++-- Agnetta Tyrsdottar
++SET @ENTRY := 30154;
++
++UPDATE `creature_template` SET `faction_A`=2109, `faction_H`=2109, `AIName`='SmartAI', `ScriptName`='' WHERE `entry`=@ENTRY;
++
++DELETE FROM `smart_scripts` WHERE `entryorguid`=@ENTRY AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@ENTRY,0,0,0,25,0,100,1,0,0,0,0,2,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Agnetta Tyrsdottar - Reset - Change Faction to default'),
++(@ENTRY,0,1,2,62,0,100,0,9874,0,0,0,72,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'Agnetta Tyrsdottar - Gossip - Close Gossip'),
++(@ENTRY,0,2,3,61,0,100,0,0,0,0,0,2,45,0,0,0,0,0,1,0,0,0,0,0,0,0,'Agnetta Tyrsdottar - Gossip - Change Faction'),
++(@ENTRY,0,3,4,61,0,100,0,0,0,0,0,49,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'Agnetta Tyrsdottar - Gossip - Attack player'),
++(@ENTRY,0,4,0,61,0,100,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Agnetta Tyrsdottar - Gossip - Say Text'),
++(@ENTRY,0,5,0,6,0,100,0,0,0,0,0,45,0,1,0,0,0,0,10,103591,29525,0,0,0,0,0,'Agnetta Tyrsdottar - Death phase - Set data Zeev Fizzlespark');
++
++DELETE FROM `creature_text` WHERE `entry`=@ENTRY;
++INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
++(@ENTRY,0,0,"I'm not afraid of anything -- bring it on!",12,0,100,0,0,0,'Agnetta Tyrsdottar');
++
++DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=15 AND `SourceGroup`=9874;
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
++(15,9874,0,0,9,12969,0,0,0,'','Agnetta Tyrsdottar - Show gossip menu if quest accepted');
++
++-- Zeev Fizzlespark
++SET @ZEEV := 29525;
++
++UPDATE `creature_template` SET `AIName`='SmartAI' WHERE `entry`=@ZEEV;
++
++DELETE FROM `smart_scripts` WHERE `entryorguid`=@ZEEV AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@ZEEV,0,0,1,38,0,100,1,0,1,0,0,45,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Zeev Fizzlespark - On data set - Talk'),
++(@ZEEV,0,1,2,61,0,100,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Zeev Fizzlespark - On data set - Talk'),
++(@ZEEV,0,2,0,61,0,100,1,0,0,0,0,41,5000,0,0,0,0,0,1,0,0,0,0,0,0,0,'Zeev Fizzlespark - On data set - Despawn');
++
++DELETE FROM `creature_text` WHERE `entry`=@ZEEV;
++INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
++(@ZEEV,0,0,"Thank you, thank you! Time to get away from these crazy blue women!",12,0,100,4,0,0,'Zeev Fizzlespark');
++
++-- Brunnhildar Challenger
++DELETE FROM `creature_template_addon` WHERE `entry`=29366;
++INSERT INTO `creature_template_addon` (`entry`,`path_id`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES
++(29366,0,0,0,1,36,'');
++
++-- Victorious Challenger
++SET @ENTRY := 30012;
++
++UPDATE `creature_template` SET `faction_A`=2109, `faction_H`=2109, `AIName`='SmartAI', `ScriptName`='' WHERE `entry`=@ENTRY;
++
++DELETE FROM `smart_scripts` WHERE `entryorguid`=@ENTRY AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@ENTRY,0,0,0,25,0,100,1,0,0,0,0,2,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Victorious Challenger - Reset - Change Faction to default'),
++(@ENTRY,0,1,2,62,0,100,0,9865,0,0,0,72,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'Victorious Challenger - Gossip - Close Gossip'),
++(@ENTRY,0,2,3,61,0,100,0,0,0,0,0,2,45,0,0,0,0,0,1,0,0,0,0,0,0,0,'Victorious Challenger - Gossip - Change Faction'),
++(@ENTRY,0,3,4,61,0,100,0,0,0,0,0,49,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'Victorious Challenger - Gossip - Attack player'),
++(@ENTRY,0,4,0,61,0,100,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Victorious Challenger - Gossip - Say Text'),
++(@ENTRY,0,5,0,0,0,100,0,0,0,15000,15000,11,11977,0,0,0,0,0,2,0,0,0,0,0,0,0,'Victorious Challenger - Combat - Rend'),
++(@ENTRY,0,6,0,0,0,100,0,0,0,10000,10000,11,11971,0,0,0,0,0,2,0,0,0,0,0,0,0,'Victorious Challenger - Combat - Sunder Armor');
++
++DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=15 AND `SourceGroup`=9865;
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
++(15,9865,0,0,9,12971,0,0,0,'','Victorious Challenger - Show gossip if quest accepted'),
++(15,9865,0,1,9,13423,0,0,0,'','Victorious Challenger - Show gossip if quest accepted');
++
++DELETE FROM `creature_text` WHERE `entry`=@ENTRY;
++INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
++(@ENTRY,0,0,"You will not defeat me!",12,0,100,0,0,0,'Victorious Challenger'),
++(@ENTRY,0,1,"You're not worthy of Thorim!",12,0,100,0,0,0,'Victorious Challenger'),
++(@ENTRY,0,2,"Good luck... You'll need it!",12,0,100,0,0,0,'Victorious Challenger'),
++(@ENTRY,0,3,"May the best win!",12,0,100,0,0,0,'Victorious Challenger');
++
++-- Lok'lira the Crone
++SET @ENTRY := 29975;
++
++DELETE FROM `creature` WHERE id=@ENTRY;
++INSERT INTO `creature` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`) VALUES
++(NULL,@ENTRY,571,1,1,0,0,6922.507813,-1532.170776,836.514221,4.709190,300,0,0,12175,0,0,0,0,0);
++
++UPDATE `creature_template` SET `AIName`='SmartAI', `ScriptName`='' WHERE `entry`=@ENTRY;
++
++DELETE FROM `smart_scripts` WHERE `entryorguid`=@ENTRY AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@ENTRY,0,0,1,62,0,100,0,9910,0,0,0,33,30467,0,0,0,0,0,7,0,0,0,0,0,0,0,'Loklira - gossip select 4 - The Hyldsmeet Kill credit'),
++(@ENTRY,0,1,0,61,0,100,0,0,0,0,0,72,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'Loklira - gossip select 4 - Close gossip');
++
++UPDATE `gossip_menu_option` SET `action_menu_id`=9908 WHERE `menu_id`=9907;
++UPDATE `gossip_menu_option` SET `action_menu_id`=9909 WHERE `menu_id`=9908;
++UPDATE `gossip_menu_option` SET `action_menu_id`=9910 WHERE `menu_id`=9909;
++
++DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=15 AND `SourceGroup`=9907;
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
++(15,9907,0,0,9,12970,0,0,0,'','Loklira - Show gossip if quest accepted');
++
++-- Hyldsmeet Warbear
++SET @BEAR :=30174;
++SET @RIDER :=30175;
++
++DELETE FROM `creature` WHERE `id`=@RIDER;
++
++UPDATE `creature_template` SET `faction_A`=2127, `faction_H`=2127 WHERE `entry`=@RIDER;
++UPDATE `creature_template` SET `faction_A`=2127, `faction_H`=2127, `AIName`='SmartAI' WHERE `entry`=@BEAR;
++
++DELETE FROM `vehicle_template_accessory` WHERE `entry`=@BEAR;
++INSERT INTO `vehicle_template_accessory` (`entry`,`accessory_entry`,`seat_id`,`minion`,`description`,`summontype`,`summontimer`) VALUES
++(@BEAR,@RIDER,0,1,'Hyldsmeet Warbear',7,0);
++
++DELETE FROM `smart_scripts` WHERE `entryorguid`=@BEAR AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@BEAR,0,0,0,0,0,100,0,3000,5000,30000,30000,11,15971,0,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldsmeet Warbear - In combat - Demoralizing Roar'),
++(@BEAR,0,1,0,0,0,50,0,3000,5000,3000,5000,11,54458,0,0,0,0,0,2,0,0,0,0,0,0,0,'Hyldsmeet Warbear - In combat - Smash'),
++(@BEAR,0,2,0,9,0,100,1,8,25,0,0,11,54460,0,0,0,0,0,2,0,0,0,0,0,0,0,'Hyldsmeet Warbear - In range - Charge');
+diff --git a/src/server/scripts/Northrend/storm_peaks.cpp b/src/server/scripts/Northrend/storm_peaks.cpp
+index 15239e9..bed7e78 100644
+--- a/src/server/scripts/Northrend/storm_peaks.cpp
++++ b/src/server/scripts/Northrend/storm_peaks.cpp
+@@ -20,63 +20,6 @@
+ #include "Vehicle.h"
+ 
+ /*######
+-## npc_agnetta_tyrsdottar
+-######*/
+-
+-#define SAY_AGGRO                  -1571003
+-#define GOSSIP_AGNETTA             "Skip the warmup, sister... or are you too scared to face soemeone your own size?"
+-
+-enum eAgnetta
+-{
+-    QUEST_ITS_THAT_YOUR_GOBLIN      = 12969,
+-    FACTION_HOSTILE_AT1             = 45
+-};
+-
+-class npc_agnetta_tyrsdottar : public CreatureScript
+-{
+-public:
+-    npc_agnetta_tyrsdottar() : CreatureScript("npc_agnetta_tyrsdottar") { }
+-
+-    struct npc_agnetta_tyrsdottarAI : public ScriptedAI
+-    {
+-        npc_agnetta_tyrsdottarAI(Creature* creature) : ScriptedAI(creature) { }
+-
+-        void Reset()
+-        {
+-            me->RestoreFaction();
+-        }
+-    };
+-
+-    CreatureAI* GetAI(Creature* creature) const
+-    {
+-        return new npc_agnetta_tyrsdottarAI(creature);
+-    }
+-
+-    bool OnGossipHello(Player* player, Creature* creature)
+-    {
+-        if (player->GetQuestStatus(QUEST_ITS_THAT_YOUR_GOBLIN) == QUEST_STATUS_INCOMPLETE)
+-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_AGNETTA, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+-
+-        player->SEND_GOSSIP_MENU(13691, creature->GetGUID());
+-        return true;
+-    }
+-
+-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+-    {
+-        player->PlayerTalkClass->ClearMenus();
+-        if (action == GOSSIP_ACTION_INFO_DEF+1)
+-        {
+-            DoScriptText(SAY_AGGRO, creature);
+-            player->CLOSE_GOSSIP_MENU();
+-            creature->setFaction(FACTION_HOSTILE_AT1);
+-            creature->AI()->AttackStart(player);
+-        }
+-
+-        return true;
+-    }
+-};
+-
+-/*######
+ ## npc_frostborn_scout
+ ######*/
+ 
+@@ -192,166 +135,6 @@ public:
+     }
+ };
+ 
+-/*######
+-## npc_victorious_challenger
+-######*/
+-
+-#define GOSSIP_CHALLENGER            "Let's do this, sister."
+-
+-enum eVictoriousChallenger
+-{
+-    QUEST_TAKING_ALL_CHALLENGERS    = 12971,
+-    QUEST_DEFENDING_YOUR_TITLE      = 13423,
+-
+-    SPELL_SUNDER_ARMOR              = 11971,
+-    SPELL_REND_VC                   = 11977
+-};
+-
+-class npc_victorious_challenger : public CreatureScript
+-{
+-public:
+-    npc_victorious_challenger() : CreatureScript("npc_victorious_challenger") { }
+-
+-    struct npc_victorious_challengerAI : public ScriptedAI
+-    {
+-        npc_victorious_challengerAI(Creature* creature) : ScriptedAI(creature) {}
+-
+-        uint32 SunderArmorTimer;
+-        uint32 RendTimer;
+-
+-        void Reset()
+-        {
+-            me->RestoreFaction();
+-
+-            SunderArmorTimer = 10000;
+-            RendTimer        = 15000;
+-        }
+-
+-        void UpdateAI(const uint32 diff)
+-        {
+-            //Return since we have no target
+-            if (!UpdateVictim())
+-                return;
+-
+-            if (RendTimer < diff)
+-            {
+-                DoCast(me->getVictim(), SPELL_REND_VC, true);
+-                RendTimer = 15000;
+-            }else RendTimer -= diff;
+-
+-            if (SunderArmorTimer < diff)
+-            {
+-                DoCast(me->getVictim(), SPELL_SUNDER_ARMOR, true);
+-                SunderArmorTimer = 10000;
+-            }else SunderArmorTimer -= diff;
+-
+-            DoMeleeAttackIfReady();
+-        }
+-
+-        void KilledUnit(Unit* /*victim*/)
+-        {
+-            me->RestoreFaction();
+-        }
+-
+-    };
+-
+-    bool OnGossipHello(Player* player, Creature* creature)
+-    {
+-        if (creature->isQuestGiver())
+-            player->PrepareQuestMenu(creature->GetGUID());
+-
+-        if (player->GetQuestStatus(QUEST_TAKING_ALL_CHALLENGERS) == QUEST_STATUS_INCOMPLETE || player->GetQuestStatus(QUEST_DEFENDING_YOUR_TITLE) == QUEST_STATUS_INCOMPLETE)
+-        {
+-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_CHALLENGER, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+-            player->SEND_GOSSIP_MENU(player->GetGossipTextId(creature), creature->GetGUID());
+-            return true;
+-        }
+-
+-        return false;
+-    }
+-
+-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+-    {
+-        player->PlayerTalkClass->ClearMenus();
+-        if (action == GOSSIP_ACTION_INFO_DEF+1)
+-        {
+-            player->CLOSE_GOSSIP_MENU();
+-            creature->setFaction(14);
+-            creature->AI()->AttackStart(player);
+-        }
+-
+-        return true;
+-    }
+-
+-    CreatureAI* GetAI(Creature* creature) const
+-    {
+-        return new npc_victorious_challengerAI(creature);
+-    }
+-};
+-
+-/*######
+-## npc_loklira_crone
+-######*/
+-
+-#define GOSSIP_LOKLIRACRONE     "Tell me about this proposal"
+-#define GOSSIP_LOKLIRACRONE1    "What happened then?"
+-#define GOSSIP_LOKLIRACRONE2    "You want me to take part in the Hyldsmeet to end the war?"
+-#define GOSSIP_LOKLIRACRONE3    "Very well. I'll take part in this competition."
+-
+-enum eLokliraCrone
+-{
+-    QUEST_HYLDSMEET     = 12970,
+-
+-    GOSSIP_TEXTID_LOK1  = 13778,
+-    GOSSIP_TEXTID_LOK2  = 13779,
+-    GOSSIP_TEXTID_LOK3  = 13780
+-};
+-
+-class npc_loklira_crone : public CreatureScript
+-{
+-public:
+-    npc_loklira_crone() : CreatureScript("npc_loklira_crone") { }
+-
+-    bool OnGossipHello(Player* player, Creature* creature)
+-    {
+-        if (creature->isQuestGiver())
+-            player->PrepareQuestMenu(creature->GetGUID());
+-
+-        if (player->GetQuestStatus(QUEST_HYLDSMEET) == QUEST_STATUS_INCOMPLETE)
+-        {
+-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_LOKLIRACRONE, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+-            player->SEND_GOSSIP_MENU(player->GetGossipTextId(creature), creature->GetGUID());
+-            return true;
+-        }
+-        return false;
+-    }
+-
+-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+-    {
+-        player->PlayerTalkClass->ClearMenus();
+-        switch (action)
+-        {
+-            case GOSSIP_ACTION_INFO_DEF+1:
+-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_LOKLIRACRONE1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
+-                player->SEND_GOSSIP_MENU(GOSSIP_TEXTID_LOK1, creature->GetGUID());
+-                break;
+-            case GOSSIP_ACTION_INFO_DEF+2:
+-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_LOKLIRACRONE2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+3);
+-                player->SEND_GOSSIP_MENU(GOSSIP_TEXTID_LOK2, creature->GetGUID());
+-                break;
+-            case GOSSIP_ACTION_INFO_DEF+3:
+-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_LOKLIRACRONE3, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+4);
+-                player->SEND_GOSSIP_MENU(GOSSIP_TEXTID_LOK3, creature->GetGUID());
+-                break;
+-            case GOSSIP_ACTION_INFO_DEF+4:
+-                player->CLOSE_GOSSIP_MENU();
+-                player->CompleteQuest(QUEST_HYLDSMEET);
+-                break;
+-        }
+-        return true;
+-    }
+-};
+-
+ /////////////////////
+ ///npc_injured_goblin
+ /////////////////////
+@@ -748,11 +531,8 @@ class npc_hyldsmeet_protodrake : public CreatureScript
+ 
+ void AddSC_storm_peaks()
+ {
+-    new npc_agnetta_tyrsdottar();
+     new npc_frostborn_scout();
+     new npc_thorim();
+-    new npc_victorious_challenger();
+-    new npc_loklira_crone();
+     new npc_injured_goblin();
+     new npc_roxi_ramrocket();
+     new npc_brunnhildar_prisoner();
+-- 
+1.7.9.msysgit.0
+

@@ -1,0 +1,68 @@
+From 1e8657f17100fe66d5753f6abed842f9edb66f25 Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 16:54:21 -0300
+Subject: [PATCH 12/40] 4.2.2 Hijos de Hodir: Castigos ejemplares
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Añadido SAI a los Npc Garhal y Hyldnir Overseer para que sólo se ataquen cuando el player ataca a Garhal (además que en realidad atacan a los mineros que están detrás de él). Convertido EventAI de sus ataques a SmartAI
+---
+ .../2012_03_25_102_world_examples_to_be_made.sql   |   45 ++++++++++++++++++++
+ 1 files changed, 45 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_03_25_102_world_examples_to_be_made.sql
+
+diff --git a/sql/updates/world/reanemu/2012_03_25_102_world_examples_to_be_made.sql b/sql/updates/world/reanemu/2012_03_25_102_world_examples_to_be_made.sql
+new file mode 100644
+index 0000000..fbd7d4f
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_03_25_102_world_examples_to_be_made.sql
+@@ -0,0 +1,45 @@
++-- Cambiar a SAI y borrar EAI existente
++UPDATE `creature_template` SET `AIName`='SmartAI' WHERE `entry` IN (29426,29427,30147);
++DELETE FROM `creature_ai_scripts` WHERE `creature_id` IN (29426,30147);
++
++-- Facción de las Hyldnir
++UPDATE `creature_template` SET `faction_A`=2109, `faction_H`=2109 WHERE `entry`=29426;
++
++-- SAI Garhal
++DELETE FROM `smart_scripts` WHERE `entryorguid`=30147 AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
++(30147,0,0,0,1,0,100,0,10000,15000,60000,60000,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Garhal - Out of combat random times - Say random text'),
++(30147,0,1,2,4,0,100,1,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,'Garhal - In combat - Say text'),
++(30147,0,2,3,61,0,100,1,0,0,0,0,45,0,1,0,0,0,0,10,118746,29426,0,0,0,0,0,'Garhal - In combat - Set data Hyldnyr1 1'),
++(30147,0,3,0,61,0,100,1,0,0,0,0,45,0,1,0,0,0,0,10,118747,29426,0,0,0,0,0,'Garhal - In combat - Set data Hyldnyr2 1'),
++(30147,0,4,0,0,0,100,0,0,0,5000,9000,11,50306,1,0,0,0,0,2,0,0,0,0,0,0,0,'Garhal - Target on range - Cast Trash Kick');
++
++-- Garhal textos
++DELETE FROM `creature_text` WHERE `entry`=30147;
++INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
++(30147,0,0,"I'm not looking to cause trouble, but if things don't change around here, you're going to have an insurrection on your hands.",12,0,33,0,2,0,'Garhal'),
++(30147,0,1,"I'd be careful if I were you, Hyldnir. We're not afraid to lose a few men if it means smashing your pretty blue faces in.",12,0,33,0,2,0,'Garhal'),
++(30147,0,2,"This is just a warning, wench. You strike one of us again, and we'll kill you in your sleep.",12,0,33,0,2,0,'Garhal'),
++(30147,1,0,"Get them!",12,0,100,0,2,0,'Garhal');
++
++-- SAI Hyldnir Overseer
++DELETE FROM `smart_scripts` WHERE `entryorguid`=29426 AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
++(29426,0,0,0,8,0,100,0,0,5,6000,9000,11,46182,2,0,0,0,0,2,0,0,0,0,0,0,0,'Hyldnir Overseer - Cast Snap Kick'),
++(29426,0,1,0,0,0,100,0,3000,7000,11000,16000,11,30931,1,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldnir Overseer - Cast Battle Shout');
++DELETE FROM `smart_scripts` WHERE `entryorguid`=-118746 AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
++(-118746,0,0,1,38,0,100,1,0,1,0,0,2,2126,0,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldnir Overseer - If data set 1 - Change faction'),
++(-118746,0,1,2,61,0,100,1,0,0,0,0,49,0,0,0,0,0,0,10,118803,29427,0,0,0,0,0,'Hyldnir Overseer - If data set 1 - Attack Captive Vrykul'),
++(-118746,0,2,0,61,0,100,1,0,0,0,0,45,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldnir Overseer - If data set 1 - Set data 0'),
++(-118746,0,3,0,8,0,100,0,0,5,6000,9000,11,46182,2,0,0,0,0,2,0,0,0,0,0,0,0,'Hyldnir Overseer - Cast Snap Kick'),
++(-118746,0,4,0,0,0,100,0,3000,7000,11000,16000,11,30931,1,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldnir Overseer - Cast Battle Shout'),
++(-118746,0,5,0,25,0,100,1,0,0,0,0,2,2109,0,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldnir Overseer - Reset - Change faction');
++DELETE FROM `smart_scripts` WHERE `entryorguid`=-118747 AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
++(-118747,0,0,1,38,0,100,1,0,1,0,0,2,2126,0,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldnir Overseer - If data set 1 - Change faction'),
++(-118747,0,1,2,61,0,100,0,0,0,0,0,49,0,0,0,0,0,0,10,118804,29427,0,0,0,0,0,'Hyldnir Overseer - Link - Attack Captive Vrykul'),
++(-118747,0,2,0,61,0,100,1,0,0,0,0,45,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldnir Overseer - If data set 1 - Set data 0'),
++(-118747,0,3,0,8,0,100,0,0,5,6000,9000,11,46182,2,0,0,0,0,2,0,0,0,0,0,0,0,'Hyldnir Overseer - Cast Snap Kick'),
++(-118747,0,4,0,0,0,100,0,3000,7000,11000,16000,11,30931,1,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldnir Overseer - Cast Battle Shout'),
++(-118747,0,5,0,25,0,100,1,0,0,0,0,2,2109,0,0,0,0,0,1,0,0,0,0,0,0,0,'Hyldnir Overseer - Reset - Change faction');
+-- 
+1.7.9.msysgit.0
+

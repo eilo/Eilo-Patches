@@ -1,0 +1,52 @@
+From 69dbb04493f58f6e70840e1682d47ff949cd73c6 Mon Sep 17 00:00:00 2001
+From: miavi <miavi1@gmail.com>
+Date: Sat, 31 Mar 2012 18:00:14 -0300
+Subject: [PATCH 04/40] =?UTF-8?q?4.1.0=20Quel'Delar:=20Empu=C3=B1adura=20Mal?=
+ =?UTF-8?q?trecha?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Correcciones al loot del item Battered Hilt, realizadas por Skull
+---
+ .../reanemu/2012_03_26_100_world_battered_hilt.sql |   27 ++++++++++++++++++++
+ 1 files changed, 27 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_03_26_100_world_battered_hilt.sql
+
+diff --git a/sql/updates/world/reanemu/2012_03_26_100_world_battered_hilt.sql b/sql/updates/world/reanemu/2012_03_26_100_world_battered_hilt.sql
+new file mode 100644
+index 0000000..006d078
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_03_26_100_world_battered_hilt.sql
+@@ -0,0 +1,27 @@
++-- Corrección de loot Battered Hilt
++DELETE FROM `creature_loot_template` WHERE `item` IN (50379,50380);
++INSERT INTO `creature_loot_template` (`entry`, `item`, `ChanceOrQuestChance`, `lootmode`, `groupid`, `mincountOrRef`, `maxcount`) VALUES
++(36840, 50379, 0.12, 1, 2, 1, 1),
++(36840, 50380, 0.12, 1, 2, 1, 1),
++(36886, 50379, 0.12, 1, 2, 1, 1),
++(36886, 50380, 0.12, 1, 2, 1, 1),
++(36891, 50379, 0.12, 1, 2, 1, 1),
++(36891, 50380, 0.12, 1, 2, 1, 1),
++(36892, 50379, 0.12, 1, 2, 1, 1),
++(36892, 50380, 0.12, 1, 2, 1, 1),
++(36893, 50379, 0.12, 1, 2, 1, 1),
++(36893, 50380, 0.12, 1, 2, 1, 1),
++(37622, 50379, 0.12, 1, 2, 1, 1),
++(37622, 50380, 0.12, 1, 2, 1, 1),
++(37626, 50379, 0.12, 1, 2, 1, 1),
++(37626, 50380, 0.12, 1, 2, 1, 1),
++(37641, 50380, 0.12, 1, 2, 1, 1),
++(37642, 50379, 0.12, 1, 2, 1, 1),
++(37643, 50379, 0.12, 1, 2, 1, 1),
++(37643, 50380, 0.12, 1, 2, 1, 1),
++(37644, 50379, 0.12, 1, 2, 1, 1),
++(37644, 50380, 0.12, 1, 2, 1, 1),
++(100000, 50379, 0.12, 1, 2, 1, 1),
++(100000, 50380, 0.12, 1, 2, 1, 1),
++(100001, 50379, 0.12, 1, 2, 1, 1),
++(100001, 50380, 0.12, 1, 2, 1, 1);
+\ No newline at end of file
+-- 
+1.7.9.msysgit.0
+

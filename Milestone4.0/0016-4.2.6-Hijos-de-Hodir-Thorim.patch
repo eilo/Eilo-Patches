@@ -1,0 +1,128 @@
+From 88089d61b1c86c981a7b49c7a3c14cd02f4e133d Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 17:01:10 -0300
+Subject: [PATCH 16/40] 4.2.6 Hijos de Hodir: Thorim
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Corregido el modelo de Thorim al mismo que tiene en Ulduar (el cual se cambió en el parche 3.1.0) Convertido su C++ a SAI
+---
+ .../world/reanemu/2012_03_25_106_world_thorim.sql  |   22 +++++++
+ src/server/scripts/Northrend/storm_peaks.cpp       |   64 --------------------
+ 2 files changed, 22 insertions(+), 64 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_03_25_106_world_thorim.sql
+
+diff --git a/sql/updates/world/reanemu/2012_03_25_106_world_thorim.sql b/sql/updates/world/reanemu/2012_03_25_106_world_thorim.sql
+new file mode 100644
+index 0000000..779e861
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_03_25_106_world_thorim.sql
+@@ -0,0 +1,22 @@
++-- Thorim
++SET @THORIM :=29445;
++
++UPDATE `creature` SET `modelid`=0 WHERE `id`=@THORIM;
++UPDATE `creature_template` SET `AIName`='SmartAI', `ScriptName`='' WHERE `entry`=@THORIM;
++DELETE FROM `creature_addon` WHERE `guid`=97128;
++DELETE FROM `creature_template_addon` WHERE `entry`=@THORIM;
++INSERT INTO `creature_template_addon` (`entry`,`path_id`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES
++(@THORIM,0,0,1,0,0,'');
++
++DELETE FROM `smart_scripts` WHERE `entryorguid`=@THORIM AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@THORIM,0,0,0,62,0,100,0,9926,0,0,0,33,30514,0,0,0,0,0,7,0,0,0,0,0,0,0,'Thorim - gossip select  - give quest credit');
++
++UPDATE `gossip_menu_option` SET `action_menu_id`=9927 WHERE `menu_id`=9924;
++UPDATE `gossip_menu_option` SET `action_menu_id`=9926 WHERE `menu_id`=9927;
++UPDATE `gossip_menu_option` SET `action_menu_id`=9925 WHERE `menu_id`=9926;
++
++DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=15 AND `SourceGroup`=9924;
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
++(15,9924,0,0,9,13064,0,0,0,'','Thorim - Show gossip if quest accepted');
++
+diff --git a/src/server/scripts/Northrend/storm_peaks.cpp b/src/server/scripts/Northrend/storm_peaks.cpp
+index 9008dbc..ed0b340 100644
+--- a/src/server/scripts/Northrend/storm_peaks.cpp
++++ b/src/server/scripts/Northrend/storm_peaks.cpp
+@@ -72,69 +72,6 @@ public:
+     }
+ };
+ 
+-/*######
+-## npc_thorim
+-######*/
+-
+-#define GOSSIP_HN "Thorim?"
+-#define GOSSIP_SN1 "Can you tell me what became of Sif?"
+-#define GOSSIP_SN2 "He did more than that, Thorim. He controls Ulduar now."
+-#define GOSSIP_SN3 "It needn't end this way."
+-
+-enum eThorim
+-{
+-    QUEST_SIBLING_RIVALRY = 13064,
+-    NPC_THORIM = 29445,
+-    GOSSIP_TEXTID_THORIM1 = 13799,
+-    GOSSIP_TEXTID_THORIM2 = 13801,
+-    GOSSIP_TEXTID_THORIM3 = 13802,
+-    GOSSIP_TEXTID_THORIM4 = 13803
+-};
+-
+-class npc_thorim : public CreatureScript
+-{
+-public:
+-    npc_thorim() : CreatureScript("npc_thorim") { }
+-
+-    bool OnGossipHello(Player* player, Creature* creature)
+-    {
+-        if (creature->isQuestGiver())
+-            player->PrepareQuestMenu(creature->GetGUID());
+-
+-        if (player->GetQuestStatus(QUEST_SIBLING_RIVALRY) == QUEST_STATUS_INCOMPLETE) {
+-            player->ADD_GOSSIP_ITEM(0, GOSSIP_HN, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+-            player->SEND_GOSSIP_MENU(GOSSIP_TEXTID_THORIM1, creature->GetGUID());
+-            return true;
+-        }
+-        return false;
+-    }
+-
+-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+-    {
+-        player->PlayerTalkClass->ClearMenus();
+-        switch (action)
+-        {
+-            case GOSSIP_ACTION_INFO_DEF+1:
+-                player->ADD_GOSSIP_ITEM(0, GOSSIP_SN1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
+-                player->SEND_GOSSIP_MENU(GOSSIP_TEXTID_THORIM2, creature->GetGUID());
+-                break;
+-            case GOSSIP_ACTION_INFO_DEF+2:
+-                player->ADD_GOSSIP_ITEM(0, GOSSIP_SN2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+3);
+-                player->SEND_GOSSIP_MENU(GOSSIP_TEXTID_THORIM3, creature->GetGUID());
+-                break;
+-            case GOSSIP_ACTION_INFO_DEF+3:
+-                player->ADD_GOSSIP_ITEM(0, GOSSIP_SN3, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+4);
+-                player->SEND_GOSSIP_MENU(GOSSIP_TEXTID_THORIM4, creature->GetGUID());
+-                break;
+-            case GOSSIP_ACTION_INFO_DEF+4:
+-                player->CLOSE_GOSSIP_MENU();
+-                player->CompleteQuest(QUEST_SIBLING_RIVALRY);
+-                break;
+-        }
+-        return true;
+-    }
+-};
+-
+ /////////////////////
+ ///npc_injured_goblin
+ /////////////////////
+@@ -383,7 +320,6 @@ class npc_hyldsmeet_protodrake : public CreatureScript
+ void AddSC_storm_peaks()
+ {
+     new npc_frostborn_scout();
+-    new npc_thorim();
+     new npc_injured_goblin();
+     new npc_roxi_ramrocket();
+     new npc_icefang();
+-- 
+1.7.9.msysgit.0
+

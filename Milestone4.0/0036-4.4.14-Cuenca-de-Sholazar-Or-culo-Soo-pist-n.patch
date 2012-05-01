@@ -1,0 +1,52 @@
+From 09f002c50336f64f7bca9a17c26cc9b6441cc96a Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 18:01:02 -0300
+Subject: [PATCH 36/40] =?UTF-8?q?4.4.14=20Cuenca=20de=20Sholazar:=20Or=C3=A1?=
+ =?UTF-8?q?culo=20Soo-pist=C3=A1n?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Added SAI to npc Oracle Soo-say in order to allow players recover oracle's pets (lafoo, jaloot and moodle)
+---
+ .../reanemu/2012_04_21_100_oracle_soo_say.sql      |   28 ++++++++++++++++++++
+ 1 files changed, 28 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_21_100_oracle_soo_say.sql
+
+diff --git a/sql/updates/world/reanemu/2012_04_21_100_oracle_soo_say.sql b/sql/updates/world/reanemu/2012_04_21_100_oracle_soo_say.sql
+new file mode 100644
+index 0000000..76b67f2
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_21_100_oracle_soo_say.sql
+@@ -0,0 +1,28 @@
++-- High Oracle Soo-say
++SET @ENTRY := 28027;
++UPDATE `creature_template` SET `AIName`='SmartAI' WHERE `entry`=@ENTRY;
++DELETE FROM `creature_ai_scripts` WHERE `creature_id`=@ENTRY;
++DELETE FROM `smart_scripts` WHERE `entryorguid`=@ENTRY AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@ENTRY,0,0,0,0,0,100,1,5000,10000,12000,16000,11,53071,0,0,0,0,0,1,0,0,0,0,0,0,0,'High Oracle Soo-say - In combat - Cast Thunderstorm'),
++(@ENTRY,0,1,2,62,0,100,0,9742,0,0,0,11,52547,0,0,0,0,0,7,0,0,0,0,0,0,0,'High Oracle Soo-say - Gossip select - Cast Forceitem Lafoo'),
++(@ENTRY,0,2,0,61,0,100,0,0,0,0,0,72,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'High Oracle Soo-say - Gossip select - Close gossip'),
++(@ENTRY,0,3,4,62,0,100,0,9742,1,0,0,11,52548,0,0,0,0,0,7,0,0,0,0,0,0,0,'High Oracle Soo-say - Gossip select - Cast Forceitem Jaloot'),
++(@ENTRY,0,4,0,61,0,100,0,0,0,0,0,72,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'High Oracle Soo-say - Gossip select - Close gossip'),
++(@ENTRY,0,5,6,62,0,100,0,9742,2,0,0,11,52549,0,0,0,0,0,7,0,0,0,0,0,0,0,'High Oracle Soo-say - Gossip select - Cast Forceitem Moodle'),
++(@ENTRY,0,6,0,61,0,100,0,0,0,0,0,72,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'High Oracle Soo-say - Gossip select - Close gossip');
++
++DELETE FROM `gossip_menu_option` WHERE `menu_id`=9742;
++INSERT INTO `gossip_menu_option` (`menu_id`,`id`,`option_icon`,`option_text`,`option_id`,`npc_option_npcflag`,`action_menu_id`,`action_poi_id`,`box_coded`,`box_money`,`box_text`) VALUES
++(9742,0,0,'I need to find Lafoo, do you have his bug bag?',1,1,0,0,0,0,NULL),
++(9742,1,0,'I need to find Jaloot, do you have his favorite crystal?',1,1,0,0,0,0,NULL),
++(9742,2,0,'I need to find Moodle, do you have his stress ball?',1,1,0,0,0,0,NULL);
++
++DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=15 AND `SourceGroup`=9742;
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
++(15,9742,0,0,8,12571,0,0,0,'','High Oracle Soo-say - Show Lafoo Gossip if quest 12571 completed'),
++(15,9742,0,1,9,12571,0,0,0,'','High Oracle Soo-say - Show Lafoo Gossip if quest 12571 taken'),
++(15,9742,1,0,8,12575,0,0,0,'','High Oracle Soo-say - Show Jaloot Gossip if quest 12575 completed'),
++(15,9742,1,1,9,12575,0,0,0,'','High Oracle Soo-say - Show Jaloot Gossip if quest 12575 taken'),
++(15,9742,2,0,8,12578,0,0,0,'','High Oracle Soo-say - Show Moodle Gossip if quest 12578 completed'),
++(15,9742,2,1,9,12578,0,0,0,'','High Oracle Soo-say - Show Moodle Gossip if quest 12578 taken');
+-- 
+1.7.9.msysgit.0
+

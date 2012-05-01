@@ -1,0 +1,51 @@
+From ec05951c5447c10fcb2284be22912f87b63f5115 Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Mon, 16 Apr 2012 21:18:09 -0300
+Subject: [PATCH 19/40] 4.4.0 Cuenca de Sholazar: Seguir la corriente
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Conversion de EventAI a SmartAI para los NPC Tracker Gekgek y Pitch
+Añadido a Tracker Gekgek que sólo ofrezca la quest si Pitch está muerto
+---
+ .../reanemu/2012_04_16_100_world_playing_along.sql |   27 ++++++++++++++++++++
+ 1 files changed, 27 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_16_100_world_playing_along.sql
+
+diff --git a/sql/updates/world/reanemu/2012_04_16_100_world_playing_along.sql b/sql/updates/world/reanemu/2012_04_16_100_world_playing_along.sql
+new file mode 100644
+index 0000000..7ac3858
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_16_100_world_playing_along.sql
+@@ -0,0 +1,27 @@
++-- Playing Along quest 12528
++SET @PITCH := 28097;
++SET @GEKGEK :=28095;
++
++UPDATE `creature_template` SET `AIName`='SmartAI' WHERE `entry` IN (@PITCH,@GEKGEK);
++UPDATE `creature_template` SET `npcflag`=0 WHERE `entry`=@GEKGEK;
++DELETE FROM `creature_ai_scripts` WHERE `creature_id` IN (@PITCH,@GEKGEK);
++
++DELETE FROM `smart_scripts` WHERE `entryorguid` IN (@PITCH,@GEKGEK) AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@PITCH,0,0,0,25,0,100,0,0,0,0,0,45,0,2,0,0,0,0,11,@GEKGEK,100,0,0,0,0,0,'Pitch - Spawn & reset - Remove npcflag Tracker Gekgek'),
++(@PITCH,0,1,0,9,0,100,0,5,30,9000,12000,11,54487,0,0,0,0,0,2,0,0,0,0,0,0,0,'Pitch - Target in distance - Jump Attack'),
++(@PITCH,0,2,0,0,0,100,0,5000,8000,7000,13000,11,24332,0,0,0,0,0,2,0,0,0,0,0,0,0,'Pitch - IC - Rake'),
++(@PITCH,0,3,0,6,0,100,0,0,0,0,0,45,0,1,0,0,0,0,11,@GEKGEK,100,0,0,0,0,0,'Pitch - Death - Set data Tracker Gekgek'),
++(@GEKGEK,0,0,0,4,0,30,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Tracker Gekgek - Aggro - Say text'),
++(@GEKGEK,0,1,0,0,0,100,0,3000,6000,4000,7000,11,50533,0,0,0,0,0,2,0,0,0,0,0,0,0,'Tracker Gekgek - IC - Flip Attack'),
++(@GEKGEK,0,2,3,38,0,100,0,0,1,0,0,81,2,0,0,0,0,0,1,0,0,0,0,0,0,0,'Tracker Gekgek - Data set - Add npcflag Questgiver'),
++(@GEKGEK,0,3,4,61,0,100,0,0,0,0,0,45,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Tracker Gekgek - Data set - Set data'),
++(@GEKGEK,0,4,0,61,0,100,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,'Tracker Gekgek - Data set - Set data'),
++(@GEKGEK,0,5,6,38,0,100,0,0,2,0,0,81,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Tracker Gekgek - Data set - Add npcflag Questgiver'),
++(@GEKGEK,0,6,0,61,0,100,0,0,0,0,0,45,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Tracker Gekgek - Data set - Set data');
++
++DELETE FROM `creature_text` WHERE `entry`=@GEKGEK;
++INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
++(@GEKGEK,0,0,"Ahh! It's coming right for us!",12,0,33,0,2,0,'Tracker Gekgek'),
++(@GEKGEK,0,1,"...Go or I taunt you a second time!",12,0,33,0,2,0,'Tracker Gekgek'),
++(@GEKGEK,1,0,"No! You steal kill! Now you owe Gekgek!",12,0,100,1,2,0,'Tracker Gekgek - Kill Pitch Text');
+-- 
+1.7.9.msysgit.0
+

@@ -1,7 +1,7 @@
 From 8f8e727c32068d12de39e93acaf84943f1d7066d Mon Sep 17 00:00:00 2001
 From: strolch <sebeche@gmail.com>
 Date: Mon, 6 Feb 2012 21:59:19 -0500
-Subject: [PATCH 4/9] 4.4 ValleSombraluna: Zuluhed el Demente (10866)
+Subject: [PATCH 39/40] 4.9.2 Valle Sombraluna: Zuluhed el Demente
 
 ---
  .../2012_01_14_100_world_zuluhed_el_demente.sql    |    3 +++

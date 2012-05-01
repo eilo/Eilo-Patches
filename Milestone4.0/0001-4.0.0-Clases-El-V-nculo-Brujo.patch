@@ -1,0 +1,27 @@
+From 10ffecd38b5cbc98ab202dabf0aee43aa89e1c85 Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 16:15:14 -0300
+Subject: [PATCH 01/40] =?UTF-8?q?4.0.0=20Clases:=20El=20V=C3=ADnculo=20(Bruj?=
+ =?UTF-8?q?o)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Added unit flags to Summoned Voidwalker to be immnu to NPC
+---
+ .../reanemu/2012_01_14_100_world_the_binding.sql   |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_01_14_100_world_the_binding.sql
+
+diff --git a/sql/updates/world/reanemu/2012_01_14_100_world_the_binding.sql b/sql/updates/world/reanemu/2012_01_14_100_world_the_binding.sql
+new file mode 100644
+index 0000000..c85d148
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_01_14_100_world_the_binding.sql
+@@ -0,0 +1,2 @@
++-- Abisario Invocado inmune a NPC
++UPDATE `creature_template` SET `unit_flags`=unit_flags|512 WHERE `entry`=5676;
+\ No newline at end of file
+-- 
+1.7.9.msysgit.0
+

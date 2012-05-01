@@ -1,0 +1,91 @@
+From deae6cbb03379d2c1fd7b48cd1e1fb39412d139b Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 16:35:43 -0300
+Subject: [PATCH 09/40] =?UTF-8?q?4.1.5=20Quel'Delar:=20La=20Purificaci=C3=B3?=
+ =?UTF-8?q?n=20de=20Quel'Delar?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Añadido evento relacionado con la misión al mínimo.
+Hechos algunos apaños para que a los players no se les buguee la cadena ni las realidades
+---
+ ...12_03_26_105_the_purification_of_quel_delar.sql |   66 ++++++++++++++++++++
+ 1 files changed, 66 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_03_26_105_the_purification_of_quel_delar.sql
+
+diff --git a/sql/updates/world/reanemu/2012_03_26_105_the_purification_of_quel_delar.sql b/sql/updates/world/reanemu/2012_03_26_105_the_purification_of_quel_delar.sql
+new file mode 100644
+index 0000000..e35839e
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_03_26_105_the_purification_of_quel_delar.sql
+@@ -0,0 +1,66 @@
++/********************************************
++    Quest - The Purification of Quel'delar
++********************************************/
++
++-- Deshabilitadas quest "La Purificacion de la Quel'delar" version mazas, al no haber posibilidad en spell area
++UPDATE `quest_template` SET `Minlevel`=255 WHERE `Id` IN (24595,24598,24596);
++UPDATE `quest_template` SET `RequiredClasses`=0, `NextQuestIdChain`=0 WHERE `Id` IN  (24553,24595,24564,24598,24594,24596);
++UPDATE `quest_template` SET `PrevQuestId`=24553 WHERE `Id` IN (24795,24796);
++UPDATE `quest_template` SET `PrevQuestId`=24564 WHERE `Id` IN (24799,247801);
++UPDATE `quest_template` SET `PrevQuestId`=24594 WHERE `Id` IN (24798,247800);
++UPDATE `quest_template` SET `RequiredClasses`=1104 WHERE `Id` IN (24795,24798,24799);
++UPDATE `quest_template` SET `RequiredClasses`=431 WHERE `Id` IN (24796,24800,24801);
++
++-- Ajuste para que puedan completarse en grupo de banda
++UPDATE `quest_template` SET `Type`=62 WHERE `Id` IN (24553,24564,24594,24595,24596,24598);
++
++-- Warden of the Sunwell
++UPDATE `creature_template` SET `minlevel`=80, `maxlevel`=80, `gossip_menu_id`=56000, `npcflag`=1, `AIName`='SmartAI' WHERE `entry`=37523;
++
++DELETE FROM `gossip_menu` WHERE `entry`=56000;
++INSERT INTO `gossip_menu` (`entry`, `text_id`) VALUES (56000,56000);
++
++DELETE FROM `npc_text` WHERE `ID`=56000;
++INSERT INTO `npc_text` (`ID`,`text0_0`,`text0_1`,`text1_0`,`text1_1`,`text2_0`,`text2_1`,`text3_0`,`text3_1`,`text4_0`,`text4_1`,`text5_0`,`text5_1`,`text6_0`,`text6_1`,`text7_0`,`text7_1`) VALUES
++(56000,"I will escort you into the Sunwell when you're ready",'','','','','','','','','','','','','','','');
++
++DELETE FROM `gossip_menu_option` WHERE `menu_id`=56000;
++INSERT INTO `gossip_menu_option` (`menu_id`,`id`,`option_icon`,`option_text`,`option_id`,`npc_option_npcflag`,`action_menu_id`,`action_poi_id`,`box_coded`,`box_money`,`box_text`) VALUES
++(56000,0,0,"I'm ready to enter the Sunwell",1,1,0,0,0,0,'');
++
++DELETE FROM `smart_scripts` WHERE `entryorguid`=37523 AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(37523,0,0,1,62,0,100,0,56000,0,0,0,11,70746,0,0,0,0,0,7,0,0,0,0,0,0,0,'Warden of the Sunwell - On Gossip Select - Teleport'),
++(37523,0,1,0,61,0,100,0,0,0,0,0,72,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'Warden of the Sunwell - On Gossip Select - Close Gossip');
++
++DELETE FROM `spell_target_position` WHERE `id`=70746;
++INSERT INTO `spell_target_position`(`id`,`target_map`,`target_position_x` ,`target_position_y`,`target_position_z`,`target_orientation`) VALUES
++(70746,580,1783.392090,658.406738,71.192635,2.160746);
++
++DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=15 AND `SourceGroup`=56000;
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
++(15,56000,0,0,9,24553,0,0,0,'','Warden of the Sunwell - Show gossip menu if quest accepted'),
++(15,56000,0,1,9,24564,0,0,0,'','Warden of the Sunwell - Show gossip menu if quest accepted'),
++(15,56000,0,2,9,24594,0,0,0,'','Warden of the Sunwell - Show gossip menu if quest accepted');
++
++-- Fuente del Sol, NPC custom a falta de información
++DELETE FROM `creature_template` WHERE `entry`=500000;
++INSERT INTO `creature_template` (`entry`,`modelid1`,`name`,`unit_flags`,`flags_extra`) VALUES
++(500000,169,'Fuente del sol cosmetic',3355468,128);
++DELETE FROM `creature_template_addon` WHERE `entry`=500000;
++INSERT INTO `creature_template_addon` (`entry`,`auras`) VALUES (500000,'46822');
++
++UPDATE `gameobject_template` SET `data1`=100 WHERE `entry`=300246;
++
++DELETE FROM `gameobject` WHERE `id`=300246;
++INSERT INTO `gameobject` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `position_x`, `position_y`, `position_z`, `orientation`, `rotation0`, `rotation1`, `rotation2`, `rotation3`, `spawntimesecs`, `animprogress`, `state`) VALUES
++(NULL, 300246, 580, 1, 2048, 1698.86, 628.263, 27.5325, 1.64237, 0, 0, 0.731955, 0.681353, 300, 0, 1);
++DELETE FROM `creature` WHERE `id`=500000;
++INSERT INTO `creature` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `modelid`,`position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`) VALUES
++(NULL,500000,580,1,2048,169,1698.86, 628.263, 27.5325, 1.64237,0,0);
++
++DELETE FROM `event_scripts` WHERE `id` IN (22833,22854);
++INSERT INTO `event_scripts` (`id`,`delay`,`command`,`datalong`,`datalong2`)
++SELECT 22833,1,9, `guid`,120 FROM `gameobject` WHERE `id`=201794;
++INSERT INTO `event_scripts` (`id`,`delay`,`command`,`datalong`,`datalong2`)
++SELECT 22854,1,9, `guid`,120 FROM `gameobject` WHERE `id`=201794;
+-- 
+1.7.9.msysgit.0
+
