@@ -1,14 +1,14 @@
-From 5be838d37ad0ef6c5700d2953faeea7fc0784539 Mon Sep 17 00:00:00 2001
+From 1caf1532ceee21ea6687ca8d13c4081bd914f2e8 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Tue, 1 May 2012 13:08:35 -0500
-Subject: [PATCH 13/13] 2.1.4 TrialOfTheCrusader: AnubArak aggrea a 20y
+Date: Tue, 1 May 2012 15:57:44 -0500
+Subject: [PATCH 13/37] 2.1.4 TrialOfTheCrusader: AnubArak aggrea a 20y
 
 ---
- .../TrialOfTheCrusader/boss_anubarak_trial.cpp     |   10 ++++++++++
- 1 files changed, 10 insertions(+), 0 deletions(-)
+ .../TrialOfTheCrusader/boss_anubarak_trial.cpp     |   12 +++++++++++-
+ 1 files changed, 11 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_anubarak_trial.cpp b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_anubarak_trial.cpp
-index e81dc97..a814193 100755
+index e81dc97..61c3718 100755
 --- a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_anubarak_trial.cpp
 +++ b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_anubarak_trial.cpp
 @@ -168,6 +168,11 @@ public:
@@ -23,7 +23,15 @@ index e81dc97..a814193 100755
          void Reset()
          {
              m_uiFreezeSlashTimer = 15*IN_MILLISECONDS;
-@@ -209,6 +214,11 @@ public:
+@@ -202,13 +207,18 @@ public:
+             }
+         }
+ 
+-        void MoveInLineOfSight(Unit* /*who*/)
++        void MoveInLineOfSight(Unit* who)
+         {
+             if (!m_bIntro)
+             {
                  DoScriptText(SAY_INTRO, me);
                  m_bIntro = false;
              }
