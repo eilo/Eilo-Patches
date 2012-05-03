@@ -1,7 +1,7 @@
-From f83da4dc3ec3b57bf5b16414685ae1a7455d6a3f Mon Sep 17 00:00:00 2001
+From 5b23776f221ee1e0b688f8c1f40fae4e1f4cb525 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 29 Dec 2011 14:41:29 -0500
-Subject: [PATCH 36/37] 2.25.1 UtgardePinnacle: Svala ahora es atacable con
+Subject: [PATCH 35/36] 2.25.1 UtgardePinnacle: Svala ahora es atacable con
  normalidad
 
 ---

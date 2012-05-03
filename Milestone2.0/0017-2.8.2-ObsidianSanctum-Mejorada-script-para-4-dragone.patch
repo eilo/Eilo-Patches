@@ -1,7 +1,7 @@
-From 067aab37af317c6f8c3b03ccec9683d85381c0be Mon Sep 17 00:00:00 2001
+From e1fad3fb9d70edc9aa88c631f32452c2bfec543f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 00:06:55 -0500
-Subject: [PATCH 17/37] 2.8.2 ObsidianSanctum: Mejorada script para 4 dragones
+Subject: [PATCH 17/36] 2.8.2 ObsidianSanctum: Mejorada script para 4 dragones
  y logros
 
 ---
@@ -29,7 +29,7 @@ index 0000000..00cac52
 +UPDATE `gameobject_template` SET `ScriptName` = 'go_twilight_portal' WHERE `entry` = 193988;
 \ No newline at end of file
 diff --git a/src/server/scripts/Northrend/ChamberOfAspects/ObsidianSanctum/boss_sartharion.cpp b/src/server/scripts/Northrend/ChamberOfAspects/ObsidianSanctum/boss_sartharion.cpp
-index b115a4e..82d2f34 100644
+index b115a4e..e5f851c 100644
 --- a/src/server/scripts/Northrend/ChamberOfAspects/ObsidianSanctum/boss_sartharion.cpp
 +++ b/src/server/scripts/Northrend/ChamberOfAspects/ObsidianSanctum/boss_sartharion.cpp
 @@ -51,7 +51,9 @@ enum eEnums

@@ -1,7 +1,7 @@
-From e6c7f313b6c486f9b5d518473c864cb1d2236291 Mon Sep 17 00:00:00 2001
+From 3791bae492335f643409734e27a627e22c8ec56a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 01:03:11 -0500
-Subject: [PATCH 23/37] 2.13.1 TrialOfTheChampion: Reimplementacion y soporte
+Subject: [PATCH 23/36] 2.13.1 TrialOfTheChampion: Reimplementacion y soporte
 
 ---
  .../world/reanemu/2011_12_25_100_world_toc5.sql    |  696 +++++++++
@@ -808,7 +808,7 @@ index 2f79eaf..01abc11 100755
          SendSound(source, finalSound, finalType, whisperGuid, range, team, gmOnly);
  
 diff --git a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheChampion/boss_argent_challenge.cpp b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheChampion/boss_argent_challenge.cpp
-index 305266e..f44f38f 100644
+index 305266e..824bac4 100644
 --- a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheChampion/boss_argent_challenge.cpp
 +++ b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheChampion/boss_argent_challenge.cpp
 @@ -15,10 +15,11 @@
@@ -4783,7 +4783,7 @@ index 9ccd136..41fdb8b 100644
  
              OUT_LOAD_INST_DATA_COMPLETE;
 diff --git a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheChampion/trial_of_the_champion.cpp b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheChampion/trial_of_the_champion.cpp
-index c8236ac..c3c864a 100644
+index c8236ac..fb642fc 100644
 --- a/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheChampion/trial_of_the_champion.cpp
 +++ b/src/server/scripts/Northrend/CrusadersColiseum/TrialOfTheChampion/trial_of_the_champion.cpp
 @@ -17,7 +17,7 @@

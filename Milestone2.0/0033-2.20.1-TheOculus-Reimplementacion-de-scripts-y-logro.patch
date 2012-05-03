@@ -1,7 +1,7 @@
-From e3926a257eda437ca6d436cafcdae077d928a824 Mon Sep 17 00:00:00 2001
+From 0acef24d4e280be473bf6c48fefb6508675b4595 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 12:18:08 -0500
-Subject: [PATCH 34/37] 2.20.1 TheOculus: Reimplementacion de scripts y logros
+Subject: [PATCH 33/36] 2.20.1 TheOculus: Reimplementacion de scripts y logros
 
 ---
  .../world/reanemu/2011_12_19_100_world_oculus.sql  |  372 ++++++++++++++++
@@ -858,7 +858,7 @@ index bb75b78..9e7b8a9 100644
  
  void AddSC_boss_drakos()
 diff --git a/src/server/scripts/Northrend/Nexus/Oculus/boss_eregos.cpp b/src/server/scripts/Northrend/Nexus/Oculus/boss_eregos.cpp
-index ab814a2..7763247 100644
+index ab814a2..5e3a661 100644
 --- a/src/server/scripts/Northrend/Nexus/Oculus/boss_eregos.cpp
 +++ b/src/server/scripts/Northrend/Nexus/Oculus/boss_eregos.cpp
 @@ -1,26 +1,23 @@
@@ -1944,7 +1944,7 @@ index b96d7c4..a519fe0 100644
  
  void AddSC_boss_urom()
 diff --git a/src/server/scripts/Northrend/Nexus/Oculus/boss_varos.cpp b/src/server/scripts/Northrend/Nexus/Oculus/boss_varos.cpp
-index 19a84fd..0dd96bf 100644
+index 19a84fd..8b60769 100644
 --- a/src/server/scripts/Northrend/Nexus/Oculus/boss_varos.cpp
 +++ b/src/server/scripts/Northrend/Nexus/Oculus/boss_varos.cpp
 @@ -1,19 +1,19 @@

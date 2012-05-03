@@ -1,7 +1,7 @@
-From 56cf2e9f3e1e5ff9c162a636584cf751c1c440bb Mon Sep 17 00:00:00 2001
+From a5145a247aeb1f4407d454d1533e45724391366c Mon Sep 17 00:00:00 2001
 From: strolch <sebeche@gmail.com>
 Date: Mon, 6 Feb 2012 23:48:36 -0500
-Subject: [PATCH 29/37] =?UTF-8?q?2.16.2=20HallsOfReflection:=20A=C3=B1adidas?=
+Subject: [PATCH 29/36] =?UTF-8?q?2.16.2=20HallsOfReflection:=20A=C3=B1adidas?=
  =?UTF-8?q?=20mejoras=20en=20script=20de=20queldelar?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -28,7 +28,7 @@ index 0000000..a46eaff
 +DELETE FROM `creature` WHERE `id`=37158;
 +INSERT INTO `creature` (`id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`) VALUES (37158, 668, 1, 1, 0, 0, 5304.82, 2000.48, 709.341, 0.800565, 300, 0, 0, 214200, 0, 0, 0, 0, 0);
 diff --git a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
-index 43089e7..d13a579 100644
+index 6444a72..f7a9eac 100644
 --- a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
 +++ b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
 @@ -154,6 +154,14 @@ enum Spells

@@ -1,27 +1,27 @@
-From ea97b1a10a8ed3d40bbe5540ff508402abe9289a Mon Sep 17 00:00:00 2001
+From 0d216b2d731d9719df57264df73241d1ee368c63 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 01:11:08 -0500
-Subject: [PATCH 28/37] =?UTF-8?q?2.16.1=20HallsOfReflection:=20Reimplementac?=
+Subject: [PATCH 28/36] =?UTF-8?q?2.16.1=20HallsOfReflection:=20Reimplementac?=
  =?UTF-8?q?ion,=20flags=20y=20a=C3=B1adido=20segunda=20fase?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 ---
- .../2011_10_08_100_world_halls_of_reflection.sql   |  363 +++++++
+ .../2011_10_08_100_world_halls_of_reflection.sql   |  356 +++++++
  src/server/game/Scripting/ScriptLoader.cpp         |    2 +
  src/server/scripts/Northrend/CMakeLists.txt        |    1 +
  .../HallsOfReflection/boss_the_lich_king_hor.cpp   |  682 ++++++++++++
  .../HallsOfReflection/halls_of_reflection.cpp      | 1110 +++++++++++++++++++-
- .../HallsOfReflection/halls_of_reflection.h        |   95 ++-
+ .../HallsOfReflection/halls_of_reflection.h        |   94 ++-
  .../instance_halls_of_reflection.cpp               |  296 +++++-
- 7 files changed, 2463 insertions(+), 86 deletions(-)
+ 7 files changed, 2455 insertions(+), 86 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2011_10_08_100_world_halls_of_reflection.sql
  create mode 100644 src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/boss_the_lich_king_hor.cpp
 
 diff --git a/sql/updates/world/reanemu/2011_10_08_100_world_halls_of_reflection.sql b/sql/updates/world/reanemu/2011_10_08_100_world_halls_of_reflection.sql
 new file mode 100644
-index 0000000..bc06c4b
+index 0000000..c72af61
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_10_08_100_world_halls_of_reflection.sql
 @@ -0,0 +1,356 @@
@@ -1102,7 +1102,7 @@ index 0000000..0867a46
 +    new npc_abon();
 +}
 diff --git a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
-index 2abb60d..43089e7 100644
+index 2abb60d..6444a72 100644
 --- a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
 +++ b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
 @@ -17,6 +17,7 @@
@@ -2405,7 +2405,7 @@ index 2abb60d..43089e7 100644
 +    new npc_queldelar();
  }
 diff --git a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h
-index 1557fd1..f54128c 100644
+index 1557fd1..e55c536 100644
 --- a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h
 +++ b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h
 @@ -20,47 +20,107 @@

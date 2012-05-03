@@ -1,7 +1,7 @@
-From 839d00d60e77e71097c53d4f8f234269a784c1b6 Mon Sep 17 00:00:00 2001
+From 780fd2f00344d908203c65dcc00155a6f3deec13 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 17 Dec 2011 00:34:36 -0500
-Subject: [PATCH 22/37] 2.12.2 CullingOfStratholme: Arthas camina en la
+Subject: [PATCH 22/36] 2.12.2 CullingOfStratholme: Arthas camina en la
  segunda fase
 
 ---
