@@ -24,7 +24,7 @@ new file mode 100644
 index 0000000..bc06c4b
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_10_08_100_world_halls_of_reflection.sql
-@@ -0,0 +1,363 @@
+@@ -0,0 +1,356 @@
 +-- Eilo (https://github.com/eilo)
 +-- Recopilacion y adecuacion de querys originales de HyD y varios autores de scripts antiguas y raras
 +-- Algunas querys anadidas y ordenacion/comentarios del sql por Eilo
@@ -37,6 +37,7 @@ index 0000000..bc06c4b
 +
 +-- Unit flags de HoR (por Eilo)
 +UPDATE `creature_template` SET `unit_flags`=0 WHERE `entry` IN (38112,38599,38113,38603,36954,38173,38525,38172,38524,38176,38544,38175,38563,38177,38564,36723,37720,37226,36940,37550,36941,37551,37069,37549,38567,38568);
++UPDATE `creature` SET `unit_flags`=0 WHERE `id` IN (38112,38599,38113,38603,36954,38173,38525,38172,38524,38176,38544,38175,38563,38177,38564,36723,37720,37226,36940,37550,36941,37551,37069,37549,38567,38568);
 +
 +-- Complementos Intro
 +UPDATE `creature_template` SET `scale`='0.8', `equipment_id`='1221' WHERE `entry` IN (37221, @NPC_JAINA_OUTRO);
@@ -56,7 +57,6 @@ index 0000000..bc06c4b
 +UPDATE `creature_template` SET `AIName`='', `Scriptname`='npc_raging_gnoul' WHERE `entry`=36940;
 +UPDATE `creature_template` SET `AIName`='', `Scriptname`='npc_risen_witch_doctor' WHERE `entry`=36941;
 +UPDATE `creature_template` SET `AIName`='', `Scriptname`='npc_abon' WHERE `entry`=37069;
-+UPDATE `creature_template` SET `AIName`='', `Scriptname`='npc_queldelar' WHERE `entry`=37158;
 +
 +-- Complementos adicionales
 +UPDATE `creature_template` SET `unit_flags` = 32784, `AIName` = '', `ScriptName` = 'npc_spiritual_reflection', `difficulty_entry_1` = 37721 WHERE `entry` = 37107;
@@ -67,12 +67,6 @@ index 0000000..bc06c4b
 +
 +-- Quitando a Arthas visible
 +DELETE FROM `creature` WHERE `id` IN (37226) AND `map` = 668;
-+
-+-- Spawn Quel'delar
-+DELETE FROM `creature` WHERE `id` IN (37158) AND `map` = 668;
-+INSERT INTO `creature` (`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`,`npcflag`,`unit_flags`,`dynamicflags`)
-+VALUES 
-+('37158', '668', '3', '2', '0', '0', '5304.5', '2001.35', '709.341', '4.15073', '7200', '0', '0', '214200', '0', '0', '0', '0', '0');
 +
 +-- Spawn de Falric y Marwyn
 +DELETE FROM `creature` WHERE `id` IN (38112,38599,38113,38603);
@@ -369,7 +363,6 @@ index 0000000..bc06c4b
 +37107,
 +36954,
 +37745,
-+37158,
 +37226,
 +37225,
 +37221,
@@ -2415,7 +2408,7 @@ diff --git a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of
 index 1557fd1..f54128c 100644
 --- a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h
 +++ b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h
-@@ -20,47 +20,108 @@
+@@ -20,47 +20,107 @@
  
  enum Data
  {
@@ -2469,7 +2462,6 @@ index 1557fd1..f54128c 100644
 +    NPC_FROSTWORN_GENERAL                         = 36723,
 +    NPC_REFLECTION                                = 37107,
 +    NPC_LICH_KING_EVENT                           = 36954,
-+    NPC_QUELDELAR                                 = 37158,
 +    BOSS_LICH_KING                                = 37226,
  
      NPC_UTHER                                     = 37225,
