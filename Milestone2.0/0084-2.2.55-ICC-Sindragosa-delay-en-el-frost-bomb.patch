@@ -1,7 +1,7 @@
-From 0df6133350362f27ab5b7c23152cd98a2da10519 Mon Sep 17 00:00:00 2001
+From 687c8cd4fd6f0f31c80fd6eec1e7f1addfab5039 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 4 May 2012 06:24:40 -0500
-Subject: [PATCH 84/86] 2.2.55 ICC: Sindragosa delay en el frost bomb
+Subject: [PATCH 84/87] 2.2.55 ICC: Sindragosa delay en el frost bomb
 
 ---
  src/server/game/Spells/Spell.cpp |    2 ++

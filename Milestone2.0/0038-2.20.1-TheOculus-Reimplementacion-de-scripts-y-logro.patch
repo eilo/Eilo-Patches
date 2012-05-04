@@ -1,7 +1,7 @@
-From 49873a9fb29eac7f050878149a16ca200f19b276 Mon Sep 17 00:00:00 2001
+From b67037551540a944bef067e58a4d2a1fc75ea052 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 12:18:08 -0500
-Subject: [PATCH 38/86] 2.20.1 TheOculus: Reimplementacion de scripts y logros
+Subject: [PATCH 38/87] 2.20.1 TheOculus: Reimplementacion de scripts y logros
 
 ---
  .../world/reanemu/2011_12_19_100_world_oculus.sql  |  372 ++++++++++++++++

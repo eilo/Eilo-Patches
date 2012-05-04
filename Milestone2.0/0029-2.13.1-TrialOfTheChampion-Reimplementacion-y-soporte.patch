@@ -1,7 +1,7 @@
-From feee4bef0e511faaaf185de98709265daeb07f1b Mon Sep 17 00:00:00 2001
+From 31a1069ce7d0c76ee36981eb9c251b938c29287e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 01:03:11 -0500
-Subject: [PATCH 29/86] 2.13.1 TrialOfTheChampion: Reimplementacion y soporte
+Subject: [PATCH 29/87] 2.13.1 TrialOfTheChampion: Reimplementacion y soporte
 
 ---
  .../world/reanemu/2011_12_25_100_world_toc5.sql    |  696 +++++++++
@@ -18,7 +18,7 @@ Subject: [PATCH 29/86] 2.13.1 TrialOfTheChampion: Reimplementacion y soporte
 
 diff --git a/sql/updates/world/reanemu/2011_12_25_100_world_toc5.sql b/sql/updates/world/reanemu/2011_12_25_100_world_toc5.sql
 new file mode 100644
-index 0000000..c297378
+index 0000000..f7ea324
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_12_25_100_world_toc5.sql
 @@ -0,0 +1,696 @@
@@ -247,8 +247,8 @@ index 0000000..c297378
 +UPDATE `creature_template` SET `flags_extra` = 2, `ScriptName` = 'npc_black_knight_skeletal_gryphon' WHERE `entry` = 35491;-- S
 +-- Monta con spell
 +DELETE FROM `npc_spellclick_spells` WHERE `npc_entry` = 35491;
-+INSERT INTO `npc_spellclick_spells` (`npc_entry`, `spell_id`, `quest_start`, `quest_start_active`, `quest_end`, `cast_flags`, `aura_required`, `aura_forbidden`, `user_type`) VALUES
-+(35491,46598,0,0,0,0,0,0,0);
++INSERT INTO `npc_spellclick_spells` (`npc_entry`, `spell_id`, `cast_flags`, `user_type`) VALUES
++(35491,46598,0,0);
 +-- Especificando que vuela y que tiene waypoints para efecto de vuelo
 +UPDATE `creature_template` SET `movementtype` = 2,`inhabittype` = 4 WHERE `entry` = 35491;
 +UPDATE `creature` SET `movementtype` = 2 WHERE `id` = 35491;
@@ -381,12 +381,12 @@ index 0000000..c297378
 +(66905, -66904, 0, 'Eadric Hammer of Righteous');  -- Remove the Hammer of Righteous spell after using it
 +-- Condiciones en eventos en medio de la pelea
 +DELETE FROM `conditions` WHERE SourceTypeOrReferenceId = 13 AND SourceEntry IN (66905, 67705, 67715, 66798);
-+INSERT INTO `conditions` VALUES
-+(13, 0, 66905, 0, 18, 1, 35119, 0, 0, 0, '', 'Eadric Hammer of Rigtheous'), -- Target Eadric with Hammer of Righteous
-+(13, 0, 66798, 0, 18, 1, 35005, 0, 0, 0, '', 'The Black Kinght - Deaths Respite'),
-+(13, 0, 66798, 0, 18, 1, 35004, 0, 0, 0, '', 'The Black Kinght - Deaths Respite'),
-+(13, 0, 67705, 0, 18, 2, 35005, 0, 0, 0, '', 'The Black Kinght - Raise Arelas Brightstar'),
-+(13, 0, 67715, 0, 18, 2, 35004, 0, 0, 0, '', 'The Black Kinght - Raise Arelas Brightstar');
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
++(13, 0, 66905, 0, 18, 1, 35119, 0, 0, '', 'Eadric Hammer of Rigtheous'), -- Target Eadric with Hammer of Righteous
++(13, 0, 66798, 0, 18, 1, 35005, 0, 0, '', 'The Black Kinght - Deaths Respite'),
++(13, 0, 66798, 0, 18, 1, 35004, 0, 0, '', 'The Black Kinght - Deaths Respite'),
++(13, 0, 67705, 0, 18, 2, 35005, 0, 0, '', 'The Black Kinght - Raise Arelas Brightstar'),
++(13, 0, 67715, 0, 18, 2, 35004, 0, 0, '', 'The Black Kinght - Raise Arelas Brightstar');
 +
 +-- ----------------------
 +--       TEXTOS

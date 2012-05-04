@@ -1,7 +1,7 @@
-From 0d9f57d08fe21a5e7e341832c9be088b6da335f3 Mon Sep 17 00:00:00 2001
+From bfe94cc3d7389957ae28251899d5c37d9107bbd8 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Wed, 2 May 2012 01:11:08 -0500
-Subject: [PATCH 34/86] =?UTF-8?q?2.16.1=20HallsOfReflection:=20Reimplementac?=
+Date: Fri, 4 May 2012 13:17:20 -0500
+Subject: [PATCH 34/87] =?UTF-8?q?2.16.1=20HallsOfReflection:=20Reimplementac?=
  =?UTF-8?q?ion,=20flags=20y=20a=C3=B1adido=20segunda=20fase?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -12,10 +12,10 @@ Content-Transfer-Encoding: 8bit
  src/server/game/Scripting/ScriptLoader.cpp         |    2 +
  src/server/scripts/Northrend/CMakeLists.txt        |    1 +
  .../HallsOfReflection/boss_the_lich_king_hor.cpp   |  682 ++++++++++++
- .../HallsOfReflection/halls_of_reflection.cpp      | 1110 +++++++++++++++++++-
+ .../HallsOfReflection/halls_of_reflection.cpp      | 1082 +++++++++++++++++++-
  .../HallsOfReflection/halls_of_reflection.h        |   94 ++-
  .../instance_halls_of_reflection.cpp               |  296 +++++-
- 7 files changed, 2455 insertions(+), 86 deletions(-)
+ 7 files changed, 2427 insertions(+), 86 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2011_10_08_100_world_halls_of_reflection.sql
  create mode 100644 src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/boss_the_lich_king_hor.cpp
 
@@ -1102,7 +1102,7 @@ index 0000000..0867a46
 +    new npc_abon();
 +}
 diff --git a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
-index 2abb60d..6444a72 100644
+index 2abb60d..e641bea 100644
 --- a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
 +++ b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
 @@ -17,6 +17,7 @@
@@ -1445,7 +1445,7 @@ index 2abb60d..6444a72 100644
  };
  
  enum TrashEvents
-@@ -1013,14 +1125,958 @@ public:
+@@ -1013,14 +1125,930 @@ public:
  
  };
  
@@ -2361,33 +2361,6 @@ index 2abb60d..6444a72 100644
 +        }
 +};
 +
-+class npc_queldelar : public CreatureScript
-+{
-+public:
-+    npc_queldelar() : CreatureScript("npc_queldelar") { }
-+
-+    CreatureAI* GetAI(Creature* creature) const
-+    {
-+        return new npc_queldelarAI(creature);
-+    }
-+    struct npc_queldelarAI  : public ScriptedAI
-+    {
-+        npc_queldelarAI(Creature *c) : ScriptedAI(c)
-+        {
-+        }
-+        void MoveInLineOfSight(Unit* who)
-+        {
-+            if (!who)
-+                return;
-+            if (me->IsWithinDistInMap(who, 20) && who->HasAura(SPELL_QUELDELAR_AURA))
-+            {
-+                me->SummonCreature(NPC_QUELDELAR, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), me->GetOrientation(), TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 60000);
-+                me->DisappearAndDie();
-+            }
-+        }
-+    };
-+};
-+
  void AddSC_halls_of_reflection()
  {
      new npc_jaina_or_sylvanas_hor(true, "npc_sylvanas_hor_part1");
@@ -2402,7 +2375,6 @@ index 2abb60d..6444a72 100644
 +    new at_hor_waves_restarter();
 +    new npc_frostworn_general();
 +    new npc_spiritual_reflection();
-+    new npc_queldelar();
  }
 diff --git a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h
 index 1557fd1..e55c536 100644

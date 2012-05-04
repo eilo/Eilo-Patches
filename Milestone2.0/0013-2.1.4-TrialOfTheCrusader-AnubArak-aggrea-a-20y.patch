@@ -1,7 +1,7 @@
 From 18dc78426d30a72e70d972520c8e1bfa311e8dd6 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 1 May 2012 15:57:44 -0500
-Subject: [PATCH 13/86] 2.1.4 TrialOfTheCrusader: AnubArak aggrea a 20y
+Subject: [PATCH 13/87] 2.1.4 TrialOfTheCrusader: AnubArak aggrea a 20y
 
 ---
  .../TrialOfTheCrusader/boss_anubarak_trial.cpp     |   12 +++++++++++-

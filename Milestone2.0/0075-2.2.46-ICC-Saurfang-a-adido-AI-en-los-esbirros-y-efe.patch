@@ -1,7 +1,7 @@
-From adb73e7b253b2f420e9d551802b533ff084ee239 Mon Sep 17 00:00:00 2001
+From 6cb1aa2417f0fd5d44e4902ee4b9f0a4b5dfb319 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 11 Mar 2012 01:12:43 -0500
-Subject: [PATCH 75/86] =?UTF-8?q?2.2.46=20ICC:=20Saurfang=20a=C3=B1adido=20A?=
+Subject: [PATCH 75/87] =?UTF-8?q?2.2.46=20ICC:=20Saurfang=20a=C3=B1adido=20A?=
  =?UTF-8?q?I=20en=20los=20esbirros=20y=20efecto=20de=20la=20Marca=20de=20los?=
  =?UTF-8?q?=20Caidos=20(Curacion)?=
 MIME-Version: 1.0
@@ -23,7 +23,7 @@ index 0000000..2f321e2
 +-- Scriptnames de las blood beasts:
 +UPDATE `creature_template` SET `scriptname`='npc_bloodbeast' WHERE `entry`=38508;
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
-index 3f09baa..9e12402 100755
+index 3f09baa..0c66086 100755
 --- a/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
 @@ -112,10 +112,17 @@ enum Spells
@@ -130,7 +130,7 @@ index 3f09baa..9e12402 100755
 +
 +                Events.Update(diff);
 +
-+                if (me->HasUnitState(UNIT_STAT_CASTING))
++                if (me->HasUnitState(UNIT_STATE_CASTING))
 +                    return;
 +
 +                while (uint32 eventId = Events.ExecuteEvent())

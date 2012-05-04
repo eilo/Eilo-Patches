@@ -1,7 +1,7 @@
-From f3a8d684d9d1f329ebbcf1b254e9e457ede80b75 Mon Sep 17 00:00:00 2001
+From 0c5faaadef0b07509caeb9a6f78b1d4d8ee4ac92 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 10 Mar 2012 21:30:21 -0500
-Subject: [PATCH 73/86] =?UTF-8?q?2.2.43=20ICC:=20Trashmob=20Valkyr=20lower=20?=
+Subject: [PATCH 73/87] =?UTF-8?q?2.2.43=20ICC:=20Trashmob=20Valkyr=20lower=20?=
  =?UTF-8?q?spire=20a=C3=B1adida=20AI?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -26,7 +26,7 @@ index 0000000..4560fa0
 +UPDATE `creature_template` SET `scriptname`='npc_valkyr_herald' WHERE `entry`=37098;
 +UPDATE `creature_template` SET `scriptname`='npc_severed_essence' WHERE `entry`=38410;
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp b/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
-index 064b675..1812e6c 100644
+index 064b675..7f0c568 100644
 --- a/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
 @@ -26,6 +26,8 @@
@@ -596,7 +596,7 @@ index 064b675..1812e6c 100644
 +
 +        void UpdateAI(const uint32 diff)
 +        {
-+            if (me->HasUnitState(UNIT_STAT_CASTING))
++            if (me->HasUnitState(UNIT_STATE_CASTING))
 +                return;
 +            
 +            //me->MonsterSay("SE: Enter Combat", LANG_UNIVERSAL, 0);
@@ -706,7 +706,7 @@ index 064b675..1812e6c 100644
 +                    summons.DespawnAll();
 +                    return;
 +                }
-+                if (me->HasUnitState(UNIT_STAT_CASTING))
++                if (me->HasUnitState(UNIT_STATE_CASTING))
 +                    return;
 +                events.Update(diff);
 +                

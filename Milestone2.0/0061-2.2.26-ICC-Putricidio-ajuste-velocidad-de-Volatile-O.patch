@@ -1,7 +1,7 @@
-From ca8100b9677c2a7217a528f54faffd28e71ab337 Mon Sep 17 00:00:00 2001
+From 979df8467890f45df008130fc66063f1edfd9284 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 17:52:58 -0500
-Subject: [PATCH 61/86] 2.2.26 ICC: Putricidio ajuste velocidad de Volatile
+Subject: [PATCH 61/87] 2.2.26 ICC: Putricidio ajuste velocidad de Volatile
  Ooze
 
 ---

@@ -1,7 +1,7 @@
-From fee51ec03d6de8ab86fb14cd573da149a717b7ce Mon Sep 17 00:00:00 2001
+From 5ae20c7cb5093be347eae99d0a39e14f349426ac Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 4 May 2012 06:33:15 -0500
-Subject: [PATCH 86/86] 2.2.57 ICC: Principes cambio de cast por aura a shadow
+Subject: [PATCH 86/87] 2.2.57 ICC: Principes cambio de cast por aura a shadow
  prison
 
 ---

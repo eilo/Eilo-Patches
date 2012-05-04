@@ -1,7 +1,7 @@
-From 94e6059392fb65b925866e19c8c595edf5d26443 Mon Sep 17 00:00:00 2001
+From 6d7e265e72e08d3532efd5c9e43f3683abf01f45 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 14 Mar 2012 19:18:51 -0500
-Subject: [PATCH 59/86] 2.2.24 ICC: LickKing aggrea terminando el dialogo
+Subject: [PATCH 59/87] 2.2.24 ICC: LickKing aggrea terminando el dialogo
 
 ---
  .../IcecrownCitadel/boss_the_lich_king.cpp         |    2 +-

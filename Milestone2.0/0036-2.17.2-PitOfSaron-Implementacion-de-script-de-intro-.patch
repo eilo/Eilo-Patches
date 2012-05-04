@@ -1,7 +1,7 @@
-From fc2662fa215f315b70b9c6422b6593726c72a796 Mon Sep 17 00:00:00 2001
+From ddc3228367bd0079fab101635981419869deb6af Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 3 May 2012 10:51:08 -0500
-Subject: [PATCH 36/86] 2.17.2 PitOfSaron: Implementacion de script de intro y
+Subject: [PATCH 36/87] 2.17.2 PitOfSaron: Implementacion de script de intro y
  outro, y varios
 
 ---
@@ -17,7 +17,7 @@ Subject: [PATCH 36/86] 2.17.2 PitOfSaron: Implementacion de script de intro y
 
 diff --git a/sql/updates/world/reanemu/2012_04_04_100_world_pit_of_saron.sql b/sql/updates/world/reanemu/2012_04_04_100_world_pit_of_saron.sql
 new file mode 100644
-index 0000000..ac6dd41
+index 0000000..d50422c
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_04_04_100_world_pit_of_saron.sql
 @@ -0,0 +1,96 @@
@@ -116,7 +116,7 @@ index 0000000..ac6dd41
 +-- Para el esclavo antes de subir
 +DELETE FROM `script_texts` WHERE entry = -1658071;
 +INSERT INTO `script_texts` (`npc_entry`,`entry`,`content_default`,`content_loc1`,`content_loc2`,`content_loc3`,`content_loc4`,`content_loc5`,`content_loc6`,`content_loc7`,`content_loc8`,`sound`,`type`,`language`,`emote`,`comment`) VALUES
-+(36888,-1658071,'Por aqui! Estamos organizando el asalto al Señor de la Plaga!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,1,0,0,'SAY_RESCOUD_HORDE_ALLIANCE');
++(36888,-1658071,'Por aqui! Estamos organizando el asalto al Lider de la Plaga!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,1,0,0,'SAY_RESCOUD_HORDE_ALLIANCE');
 diff --git a/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/boss_forgemaster_garfrost.cpp b/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/boss_forgemaster_garfrost.cpp
 index 64609ef..d4a1549 100644
 --- a/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/boss_forgemaster_garfrost.cpp

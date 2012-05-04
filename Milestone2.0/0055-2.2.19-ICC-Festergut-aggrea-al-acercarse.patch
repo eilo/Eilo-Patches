@@ -1,7 +1,7 @@
-From e9625d9922be4b3bc9f6dd6351ba085e81687188 Mon Sep 17 00:00:00 2001
+From 961daa3d6df9d01429fa1beb7653ce04fee48852 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 14 Mar 2012 17:04:14 -0500
-Subject: [PATCH 55/86] 2.2.19 ICC: Festergut aggrea al acercarse
+Subject: [PATCH 55/87] 2.2.19 ICC: Festergut aggrea al acercarse
 
 ---
  .../Northrend/IcecrownCitadel/boss_festergut.cpp   |   28 ++++++++++---------
