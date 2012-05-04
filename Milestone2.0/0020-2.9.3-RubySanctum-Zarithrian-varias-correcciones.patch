@@ -1,7 +1,7 @@
-From a2c2638fa23e2ac31ee870500f8acdc7c538a79c Mon Sep 17 00:00:00 2001
+From 5f9337658c9373d42a04147d5d3b430b74fef73c Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 3 May 2012 23:45:32 -0500
-Subject: [PATCH 20/42] 2.9.3 RubySanctum: Zarithrian varias correcciones
+Subject: [PATCH 20/86] 2.9.3 RubySanctum: Zarithrian varias correcciones
 
 ---
  .../RubySanctum/boss_general_zarithrian.cpp        |   14 +++++++-------

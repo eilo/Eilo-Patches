@@ -1,0 +1,34 @@
+From eea26d41b80b1d1ce9b94cf0a51f59f7d4b56fea Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 4 May 2012 06:17:05 -0500
+Subject: [PATCH 81/86] =?UTF-8?q?2.2.52=20ICC:=20A=C3=B1adido=20las=20spells?=
+ =?UTF-8?q?=20para=20completar=20el=20residue=20rendezvouz?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../2012_04_04_100_world_residue_rendezvous.sql    |   11 +++++++++++
+ 1 files changed, 11 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_04_100_world_residue_rendezvous.sql
+
+diff --git a/sql/updates/world/reanemu/2012_04_04_100_world_residue_rendezvous.sql b/sql/updates/world/reanemu/2012_04_04_100_world_residue_rendezvous.sql
+new file mode 100644
+index 0000000..0d8a58e
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_04_100_world_residue_rendezvous.sql
+@@ -0,0 +1,11 @@
++-- Add linked spell to Gas Spore and Slime Spray
++DELETE FROM `spell_linked_spell` WHERE `spell_effect` IN (72144,72145);
++INSERT INTO `spell_linked_spell` (`spell_trigger`, `spell_effect`, `type`, `comment`) VALUES 
++(69291, 72144, 1, 'Festergut: Apply Orange Blight Residue'),
++(72101, 72144, 1, 'Festergut: Apply Orange Blight Residue'),
++(72102, 72144, 1, 'Festergut: Apply Orange Blight Residue'),
++(72103, 72144, 1, 'Festergut: Apply Orange Blight Residue'),
++(69507, 72145, 1, 'Rotface: Apply Green Blight Residue'),
++(71213, 72145, 1, 'Rotface: Apply Green Blight Residue'),
++(73189, 72145, 1, 'Rotface: Apply Green Blight Residue'),
++(73190, 72145, 1, 'Rotface: Apply Green Blight Residue');
+-- 
+1.7.8.msysgit.0
+

@@ -1,0 +1,32 @@
+From 94e6059392fb65b925866e19c8c595edf5d26443 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Wed, 14 Mar 2012 19:18:51 -0500
+Subject: [PATCH 59/86] 2.2.24 ICC: LickKing aggrea terminando el dialogo
+
+---
+ .../IcecrownCitadel/boss_the_lich_king.cpp         |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
+index 8f4f3dc..f9798ca 100644
+--- a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
++++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
+@@ -491,7 +491,6 @@ class boss_the_lich_king : public CreatureScript
+             void Reset()
+             {
+                 _Reset();
+-                me->SetReactState(REACT_PASSIVE);
+                 events.SetPhase(PHASE_INTRO);
+                 _necroticPlagueStack = 0;
+                 _vileSpiritExplosions = 0;
+@@ -906,6 +905,7 @@ class boss_the_lich_king : public CreatureScript
+                             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+                             me->SetReactState(REACT_AGGRESSIVE);
+                             events.SetPhase(PHASE_ONE);
++                            me->SetInCombatWithZone();
+                             break;
+                         case EVENT_SUMMON_SHAMBLING_HORROR:
+                             DoCast(me, SPELL_SUMMON_SHAMBLING_HORROR);
+-- 
+1.7.8.msysgit.0
+

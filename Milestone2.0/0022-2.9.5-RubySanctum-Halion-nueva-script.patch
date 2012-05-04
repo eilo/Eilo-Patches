@@ -1,7 +1,7 @@
-From 4fa6221d0886ec7f4f2fe23fdd254fbcbbc4a7fa Mon Sep 17 00:00:00 2001
+From 0365de81a27da24a226e9b07b9899c4843db1bba Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 4 May 2012 00:32:29 -0500
-Subject: [PATCH 22/42] 2.9.5 RubySanctum: Halion nueva script
+Subject: [PATCH 22/86] 2.9.5 RubySanctum: Halion nueva script
 
 ---
  .../reanemu/2012_04_26_100_world_ruby_sanctum.sql  |  298 +++

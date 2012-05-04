@@ -1,7 +1,7 @@
-From 2adf5318db067823bb475da594c5253af6e04292 Mon Sep 17 00:00:00 2001
+From c32965a27693aa0d1a43b9242c3d1a629eb71d35 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 25 Dec 2011 01:54:03 -0500
-Subject: [PATCH 30/42] 2.14.1 Drak'Tharon: Visuales y flags varias del trash
+Subject: [PATCH 30/86] 2.14.1 Drak'Tharon: Visuales y flags varias del trash
  y reward de LFG
 
 ---
