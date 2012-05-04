@@ -1,7 +1,7 @@
-From 3791bae492335f643409734e27a627e22c8ec56a Mon Sep 17 00:00:00 2001
+From 1068902c821adc9cda6cc82b8459b0fbc1127038 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 01:03:11 -0500
-Subject: [PATCH 23/36] 2.13.1 TrialOfTheChampion: Reimplementacion y soporte
+Subject: [PATCH 29/42] 2.13.1 TrialOfTheChampion: Reimplementacion y soporte
 
 ---
  .../world/reanemu/2011_12_25_100_world_toc5.sql    |  696 +++++++++

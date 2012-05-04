@@ -1,0 +1,26 @@
+From 6f1c93b81071b9756824a115b75b3b312a9f7c73 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Thu, 3 May 2012 23:44:30 -0500
+Subject: [PATCH 19/42] 2.9.2 RubySanctum: Baltharus inmune a knockback por
+ script
+
+---
+ .../RubySanctum/boss_baltharus_the_warborn.cpp     |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_baltharus_the_warborn.cpp b/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_baltharus_the_warborn.cpp
+index e848c29..6eb3120 100644
+--- a/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_baltharus_the_warborn.cpp
++++ b/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_baltharus_the_warborn.cpp
+@@ -232,6 +232,8 @@ class npc_baltharus_the_warborn_clone : public CreatureScript
+             npc_baltharus_the_warborn_cloneAI(Creature* creature) : ScriptedAI(creature),
+                 _instance(creature->GetInstanceScript())
+             {
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK_DEST, true);
+             }
+ 
+             void EnterCombat(Unit* /*who*/)
+-- 
+1.7.8.msysgit.0
+

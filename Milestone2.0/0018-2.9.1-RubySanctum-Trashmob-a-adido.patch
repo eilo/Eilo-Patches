@@ -1,0 +1,350 @@
+From 5fe32fe839689c1423fc640f70916af88865b78c Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Thu, 3 May 2012 23:38:29 -0500
+Subject: [PATCH 18/42] =?UTF-8?q?2.9.1=20RubySanctum:=20Trashmob=20a=C3=B1ad?=
+ =?UTF-8?q?ido?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../reanemu/2011_12_27_100_world_ruby_sanctum.sql  |   12 +
+ src/server/game/Scripting/ScriptLoader.cpp         |    2 +
+ src/server/scripts/Northrend/CMakeLists.txt        |    1 +
+ .../RubySanctum/trash_ruby_sanctum.cpp             |  273 ++++++++++++++++++++
+ 4 files changed, 288 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2011_12_27_100_world_ruby_sanctum.sql
+ create mode 100644 src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/trash_ruby_sanctum.cpp
+
+diff --git a/sql/updates/world/reanemu/2011_12_27_100_world_ruby_sanctum.sql b/sql/updates/world/reanemu/2011_12_27_100_world_ruby_sanctum.sql
+new file mode 100644
+index 0000000..a9b6884
+--- /dev/null
++++ b/sql/updates/world/reanemu/2011_12_27_100_world_ruby_sanctum.sql
+@@ -0,0 +1,12 @@
++-- Eilo (https://github.com/eilo)
++-- Recopilacion y adecuacion de querys para el trashmob de sagrario rubi
++
++-- Nombre de scripts
++UPDATE `creature_template` SET `ScriptName`='npc_convocadora_carboescala' WHERE `entry`=40417;
++UPDATE `creature_template` SET `ScriptName`='npc_acometedor_carboescala' WHERE `entry`=40419;
++UPDATE `creature_template` SET `ScriptName`='npc_elite_carboescala'  WHERE `entry`=40421;
++UPDATE `creature_template` SET `ScriptName`='npc_comandante_carboescala'  WHERE `entry`=40423;
++-- Inmunidades
++UPDATE creature_template SET mechanic_immune_mask=534724095 WHERE entry IN(40417,40418,40419,40420,40421,40422,40423,40424);
++-- Respawn
++UPDATE `creature` SET `spawntimesecs`=1209600 WHERE `map`=724 AND `id` NOT IN (39751,39746,39747);
+diff --git a/src/server/game/Scripting/ScriptLoader.cpp b/src/server/game/Scripting/ScriptLoader.cpp
+index a8b8d33..e5ebb66 100755
+--- a/src/server/game/Scripting/ScriptLoader.cpp
++++ b/src/server/game/Scripting/ScriptLoader.cpp
+@@ -488,6 +488,7 @@ void AddSC_ruby_sanctum();
+ void AddSC_boss_baltharus_the_warborn();
+ void AddSC_boss_saviana_ragefire();
+ void AddSC_boss_general_zarithrian();
++void AddSC_trash_ruby_sanctum();
+ 
+ void AddSC_dalaran();
+ void AddSC_borean_tundra();
+@@ -1193,6 +1194,7 @@ void AddNorthrendScripts()
+     AddSC_boss_baltharus_the_warborn();
+     AddSC_boss_saviana_ragefire();
+     AddSC_boss_general_zarithrian();
++    AddSC_trash_ruby_sanctum();
+ 
+     AddSC_dalaran();
+     AddSC_borean_tundra();
+diff --git a/src/server/scripts/Northrend/CMakeLists.txt b/src/server/scripts/Northrend/CMakeLists.txt
+index 10bb86d..ab659cd 100644
+--- a/src/server/scripts/Northrend/CMakeLists.txt
++++ b/src/server/scripts/Northrend/CMakeLists.txt
+@@ -51,6 +51,7 @@ set(scripts_STAT_SRCS
+   Northrend/ChamberOfAspects/RubySanctum/boss_baltharus_the_warborn.cpp
+   Northrend/ChamberOfAspects/RubySanctum/boss_saviana_ragefire.cpp
+   Northrend/ChamberOfAspects/RubySanctum/boss_general_zarithrian.cpp
++  Northrend/ChamberOfAspects/RubySanctum/trash_ruby_sanctum.cpp
+   Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h
+   Northrend/FrozenHalls/HallsOfReflection/boss_falric.cpp
+   Northrend/FrozenHalls/HallsOfReflection/instance_halls_of_reflection.cpp
+diff --git a/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/trash_ruby_sanctum.cpp b/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/trash_ruby_sanctum.cpp
+new file mode 100644
+index 0000000..ebc0028
+--- /dev/null
++++ b/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/trash_ruby_sanctum.cpp
+@@ -0,0 +1,273 @@
++/*
++ * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License as published by the
++ * Free Software Foundation; either version 2 of the License, or (at your
++ * option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program. If not, see <http://www.gnu.org/licenses/>.
++ */
++
++/*
++ * WowRean Script www.wowrean.com
++ */
++
++#include "ScriptPCH.h"
++#include "ruby_sanctum.h"
++
++/*##############################
++# npc_convocadora_carboescala (40417)
++# Gracias eilo
++###############################*/
++
++enum ConvocadoraSpells
++{
++    SPELL_AGOSTAR = 75412,
++    SPELL_OLA_LLAMAS = 75413
++};
++
++class npc_convocadora_carboescala : public CreatureScript
++{
++public:
++    npc_convocadora_carboescala() : CreatureScript("npc_convocadora_carboescala") { }
++
++    CreatureAI* GetAI(Creature* creature) const
++    {
++        return new npc_convocadora_carboescalaAI(creature);
++    }
++
++    struct npc_convocadora_carboescalaAI : public ScriptedAI
++    {
++        npc_convocadora_carboescalaAI(Creature* creature) : ScriptedAI(creature) { }
++
++        uint32 uiAgostarTimer;
++        uint32 uiOlaTimer;
++
++        void Reset()
++        {
++            uiAgostarTimer = 3000;
++            uiOlaTimer = urand(8*IN_MILLISECONDS,13*IN_MILLISECONDS);
++            me->SetRespawnDelay(7*DAY);
++        }
++
++        void UpdateAI(const uint32 uiDiff)
++        {
++            if (!UpdateVictim())
++                return;
++
++            if (uiAgostarTimer <= uiDiff)
++            {
++                if (Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM,0))
++                {
++                    if (pTarget && pTarget->isAlive())
++                        DoCast(pTarget, SPELL_AGOSTAR);
++                }
++                uiAgostarTimer = 8000;
++            }else uiAgostarTimer -= uiDiff;
++
++            if (uiOlaTimer <= uiDiff)
++            {
++                DoCast(me, SPELL_OLA_LLAMAS);
++                uiOlaTimer = urand(8*IN_MILLISECONDS,13*IN_MILLISECONDS);
++            }else uiOlaTimer -= uiDiff;
++
++            DoMeleeAttackIfReady();
++        }
++
++        void JustDied(Unit* pKiller) { }
++    };
++};
++
++/*##############################
++# npc_acometedor_carboescala (40419)
++# Gracias eilo
++###############################*/
++
++enum AcometedorSpells
++{
++    SPELL_RAJAR = 15284,
++    SPELL_OLA_CHOQUE = 75417
++};
++
++class npc_acometedor_carboescala : public CreatureScript
++{
++public:
++    npc_acometedor_carboescala() : CreatureScript("npc_acometedor_carboescala") { }
++
++    CreatureAI* GetAI(Creature* creature) const
++    {
++        return new npc_acometedor_carboescalaAI(creature);
++    }
++
++    struct npc_acometedor_carboescalaAI : public ScriptedAI
++    {
++        npc_acometedor_carboescalaAI(Creature* creature) : ScriptedAI(creature)
++        {
++        }
++
++        uint32 uiRajarTimer;
++        uint32 uiOlaChoqueTimer;
++
++
++        void Reset()
++        {
++            uiRajarTimer = 5000;
++            uiOlaChoqueTimer = 9000;
++            me->SetRespawnDelay(7*DAY);
++        }
++
++        void UpdateAI(const uint32 uiDiff)
++        {
++            if (!UpdateVictim())
++                return;
++
++            if (uiRajarTimer <= uiDiff)
++            {
++                DoCast(me->getVictim(), SPELL_RAJAR);
++                uiRajarTimer = 11000;
++            }else uiRajarTimer -= uiDiff;
++
++            if (uiOlaChoqueTimer <= uiDiff)
++            {
++                DoCast(me, SPELL_OLA_CHOQUE);
++                uiOlaChoqueTimer = 17000;
++            }else uiOlaChoqueTimer -= uiDiff;
++
++            DoMeleeAttackIfReady();
++        }
++
++        void JustDied(Unit* pKiller) { }
++    };
++};
++
++/*##############################
++# npc_elite_carboescala (40421)
++# Gracias eilo
++###############################*/
++
++enum EliteSpells
++{
++    SPELL_MACHACAR_CRANEOS = 15621
++};
++
++class npc_elite_carboescala : public CreatureScript
++{
++public:
++    npc_elite_carboescala() : CreatureScript("npc_elite_carboescala") { }
++
++    CreatureAI* GetAI(Creature* creature) const
++    {
++        return new npc_elite_carboescalaAI(creature);
++    }
++
++    struct npc_elite_carboescalaAI : public ScriptedAI
++    {
++        npc_elite_carboescalaAI(Creature* creature) : ScriptedAI(creature)
++        {
++        }
++
++        uint32 uiMachaqueTimer;
++
++
++        void Reset()
++        {
++            uiMachaqueTimer = 5000;
++            me->SetRespawnDelay(7*DAY);
++        }
++
++        void UpdateAI(const uint32 uiDiff)
++        {
++            if (!UpdateVictim())
++                return;
++
++            if (uiMachaqueTimer <= uiDiff)
++            {
++                DoCast(me->getVictim(), SPELL_MACHACAR_CRANEOS);
++                uiMachaqueTimer = 12000;
++            }else uiMachaqueTimer -= uiDiff;
++
++            DoMeleeAttackIfReady();
++        }
++
++        void JustDied(Unit* pKiller) { }
++    };
++};
++
++/*##############################
++# npc_comandante_carboescala (40423)
++# Gracias eilo
++###############################*/
++
++enum ComandanteSpells
++{
++    SPELL_GOLPE_MORTAL = 13737,
++    SPELL_GRITO_CONVOCACION = 75414
++};
++
++class npc_comandante_carboescala : public CreatureScript
++{
++public:
++    npc_comandante_carboescala() : CreatureScript("npc_comandante_carboescala") { }
++
++    CreatureAI* GetAI(Creature* creature) const
++    {
++        return new npc_comandante_carboescalaAI(creature);
++    }
++
++    struct npc_comandante_carboescalaAI : public ScriptedAI
++    {
++        npc_comandante_carboescalaAI(Creature* creature) : ScriptedAI(creature)
++        {
++        }
++
++        uint32 uiGolpeTimer;
++        uint32 uiGritoTimer;
++
++
++        void Reset()
++        {
++            uiGolpeTimer = 9000;
++            uiGritoTimer = 1000;
++            me->SetRespawnDelay(7*DAY);
++        }
++
++        void UpdateAI(const uint32 uiDiff)
++        {
++            if (!UpdateVictim())
++                return;
++
++            if (uiGolpeTimer <= uiDiff)
++            {
++                DoCast(me->getVictim(), SPELL_GOLPE_MORTAL);
++                uiGolpeTimer = 9000;
++            }else uiGolpeTimer -= uiDiff;
++
++            if (uiGritoTimer <= uiDiff)
++            {
++                DoCast(me, SPELL_GRITO_CONVOCACION);
++                uiGritoTimer = 100000;
++            }else uiGritoTimer -= uiDiff;
++
++            DoMeleeAttackIfReady();
++        }
++
++        void JustDied(Unit* pKiller) { }
++    };
++};
++
++
++
++void AddSC_trash_ruby_sanctum()
++{
++    new npc_convocadora_carboescala;
++    new npc_acometedor_carboescala;
++    new npc_elite_carboescala;
++    new npc_comandante_carboescala;
++}
+-- 
+1.7.8.msysgit.0
+
