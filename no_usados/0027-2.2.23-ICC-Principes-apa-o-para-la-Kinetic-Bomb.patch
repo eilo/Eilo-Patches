@@ -1,0 +1,46 @@
+From f9753167bfe509990aed4a8806e34454b6847901 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Wed, 14 Mar 2012 18:42:17 -0500
+Subject: [PATCH 27/50] =?UTF-8?q?2.2.23=20ICC:=20Principes=20apa=C3=B1o=20pa?=
+ =?UTF-8?q?ra=20la=20Kinetic=20Bomb?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../IcecrownCitadel/boss_blood_prince_council.cpp  |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_blood_prince_council.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_blood_prince_council.cpp
+index 882d006..9b246e5 100644
+--- a/src/server/scripts/Northrend/IcecrownCitadel/boss_blood_prince_council.cpp
++++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_blood_prince_council.cpp
+@@ -130,6 +130,7 @@ enum Events
+     EVENT_SHOCK_VORTEX          = 10,
+     EVENT_BOMB_DESPAWN          = 11,
+     EVENT_CONTINUE_FALLING      = 12,
++    EVENT_BOMB_FORCED_DESPAWN   = 13,
+ };
+ 
+ enum Actions
+@@ -1242,6 +1243,7 @@ class npc_kinetic_bomb : public CreatureScript
+                 me->SetSpeed(MOVE_FLIGHT, IsHeroic() ? 0.3f : 0.15f, true);
+                 me->GetPosition(_x, _y, _groundZ);
+                 _groundZ = me->GetMap()->GetHeight(_x, _y, _groundZ, true, 500.0f);
++                _events.ScheduleEvent(EVENT_BOMB_FORCED_DESPAWN, 70020);
+             }
+ 
+             void DoAction(int32 const action)
+@@ -1267,6 +1269,9 @@ class npc_kinetic_bomb : public CreatureScript
+                         case EVENT_BOMB_DESPAWN:
+                             me->SetVisible(false);
+                             break;
++                       case EVENT_BOMB_FORCED_DESPAWN:
++                            me->ForcedDespawn(0);
++                            break;
+                         case EVENT_CONTINUE_FALLING:
+                             me->GetMotionMaster()->Clear();
+                             me->GetMotionMaster()->MovePoint(POINT_KINETIC_BOMB_IMPACT, _x, _y, _groundZ);
+-- 
+1.7.8.msysgit.0
+

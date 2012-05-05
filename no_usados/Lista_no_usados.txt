@@ -1,0 +1,18 @@
+0.6  - 17/11/2011: ResetCD Duelos por Mouse, mejoras por Eilo
+
+0.27 - 04/02/2012: BuildWaitMovePacket funcion de soporte añadida por Eilo
+0.28 - 04/02/2012: AddNPCPassengerInInstance funcion de soporte añadida por Eilo
+0.29 - 04/02/2012: UpdatePlayerPosition funcion de soporte añadida por Eilo
+0.30 - 04/02/2012: LoadTransportForMap, UnloadTransportFromMap, LoadTransportForPlayers y UnloadTransportForPlayers funciones de soporte añadidas por Eilo
+
++0.18 - 01/11/2011: DoCompleteAchievement reañadida al nucleo como funcion activa por Eilo
++0.19 - 04/11/2011: DoAttackerAreaInCombat reañadida al nucleo para soporte por Eilo
++0.20 - 17/11/2011: DoAttackerGroupInCombat reañadida al nucleo para soporte por Eilo
++0.21 - 17/11/2011: _DoAggroPulse funcion y inFightAggroCheck_Timer reañadida para soporte por Eilo
++0.22 - 21/11/2011: UnsummonSpecificCreaturesNearby funcion de soporte añadida por Eilo
++0.23 - 30/12/2011: HasAchieved funcion de soporte reañadida por Eilo
++0.24 - 30/12/2011: FindNearestPlayer y GetNearestPlayersList reañadidas por Eilo
++0.25 - 30/12/2011: setRegeneratingHealth funcion de soporte reañadida por Eilo
++0.26 - 30/12/2011: SetImmuneToPushPullEffects funcion de soporte reañadida por Eilo
+
++1.20 - 20/12/2011: Mejoras en altura(z) criaturas que vuelan o nadan por Zwerg
