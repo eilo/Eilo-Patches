@@ -1,7 +1,7 @@
-From 9dc41f91edf6782437eb3a997030e027bdab1da9 Mon Sep 17 00:00:00 2001
+From b9ba0ebd4e4ac5613dd7905207df08df58ed31a9 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 16:57:32 +0200
-Subject: [PATCH 25/35] =?UTF-8?q?3.30=20ItemSet:=20P=C3=ADcaro=20T10=204p=20?=
+Subject: [PATCH 24/34] =?UTF-8?q?3.30=20ItemSet:=20P=C3=ADcaro=20T10=204p=20?=
  =?UTF-8?q?bonus=20(70802)?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -12,7 +12,7 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
-index e9db991..49e38ac 100644
+index 57b2884..5da18c9 100644
 --- a/src/server/game/Spells/Spell.cpp
 +++ b/src/server/game/Spells/Spell.cpp
 @@ -3246,7 +3246,7 @@ void Spell::cast(bool skipCheck)

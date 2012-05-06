@@ -1,21 +1,20 @@
-From 69d9e74c260af308e24b409821ac612c2d88c9f8 Mon Sep 17 00:00:00 2001
+From 40daf5af89906e9573032fe959fda0ad2af10a30 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
-Date: Tue, 1 May 2012 22:07:51 +0200
-Subject: [PATCH 35/35] Milestone 3.0
+Date: Sun, 6 May 2012 18:19:16 +0200
+Subject: [PATCH 34/34] Milestone 3.0
 
 ---
- README |   46 ++++++++++++++++++++++++++++++++++++++++++++--
- 1 files changed, 44 insertions(+), 2 deletions(-)
+ README |   43 +++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 43 insertions(+), 0 deletions(-)
 
 diff --git a/README b/README
-index 9166c8f..0d3674a 100644
+index 9166c8f..83986bc 100644
 --- a/README
 +++ b/README
-@@ -122,12 +122,54 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
- #######################
+@@ -123,11 +123,54 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
  # Hechizos y Talentos #
  #######################
--
+ 
 +3.1  - 05/12/2011: Guerrero: Filotormenta (46924) inmunidades y cambiar armas por Kandera
 +3.2  - 25/22/2011: Mago: Reflejo Exacto ahora no atacan a objetivos que están bajo los efectos de Polimorfia 
 +3.3  - 05/11/2011: Brujo: Mejoras en pet felhunter por Locknes
@@ -34,7 +33,6 @@ index 9166c8f..0d3674a 100644
 +3.22 - 28/03/2012: DK: Pesteador de Ebano (51161) ya no stackeara con diferentes casters por Xanvial.
 +3.23 - 26/03/2012: Pets: escalabilidad de hits y critics por Vincent-Michael
 +3.24 - 25/02/2012: Cazador: Picaduras ponzoñozas (53295) ahora sera afectado por dispel por Jildor.
-+3.25 - 26/03/2012: Dispel ahora no hara nada si no hay nada que dispelar, arreglado el check por Oceanor.
 +3.31 - 16/04/2012: LoS de totems y algunas spells como tifón (50516) por Retriman
 +3.32 - 11/03/2012: Mago: Buena Racha (44445) el aura sera removido al castear Piroexplosion en todos sus rangos, en vez de cuando hacia hit en el target por Hispano.
 +3.33 - 13/03/2012: Mago: Congelacion Cerebral (44546) y Dedos de Escarcha (44543) solo se activarán si Cono de Frio (120) golpea el target por oMadMano.
@@ -48,7 +46,7 @@ index 9166c8f..0d3674a 100644
  #################
  # Items y Bonus #
  #################
--
+ 
 +3.11 - 07/07/2011: ICC 25 Normal - Nibelungo - Proc Arma de Caster (71845) por Signfinder
 +3.11 - 07/07/2011: ICC 25 Heroico- Nibelungo - Proc Arma de Caster (71846) por Signfinder
 +3.11 - 07/07/2011: ICC 25 Normal - Trauma - Proc Arma de Healer (71865) por Signfinder

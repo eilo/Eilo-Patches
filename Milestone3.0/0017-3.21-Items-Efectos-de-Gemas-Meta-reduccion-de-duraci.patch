@@ -1,7 +1,7 @@
-From db2823c5ff9bebdf3b2fa22de0237f7a2317f489 Mon Sep 17 00:00:00 2001
+From 589705de8c9816a33c012abc9e745d076eca29a9 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Mon, 2 Jan 2012 15:37:15 +0100
-Subject: [PATCH 17/35] 3.21 Items: Efectos de Gemas Meta reduccion de
+Subject: [PATCH 17/34] 3.21 Items: Efectos de Gemas Meta reduccion de
  duracion de silencio(55366), reduccion de duracion de
  snare/root(55378), reduccion de duracion de
  miedo(55357) y reduccion de duracion de stun(55358)

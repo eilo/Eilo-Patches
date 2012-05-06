@@ -1,7 +1,7 @@
-From 2c7a6f81c9d02086ede6ef3bb91f01951c0db166 Mon Sep 17 00:00:00 2001
+From 3f62727914dc23fba4050980a09104cd48a09d1f Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 16:02:06 +0200
-Subject: [PATCH 32/35] 3.37 Sistema de delay para spells
+Subject: [PATCH 31/34] 3.37 Sistema de delay para spells
 
 ---
  src/server/game/Spells/SpellMgr.cpp |   43 ++++++++++++++++++++++++++++++++++-

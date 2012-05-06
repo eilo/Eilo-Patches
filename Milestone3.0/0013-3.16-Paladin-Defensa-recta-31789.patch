@@ -1,7 +1,7 @@
-From bbe8328e917585728c10fab1853ee7f6021a90d6 Mon Sep 17 00:00:00 2001
+From b2421381c4e73b58c51bccfc95ac2f96f4361569 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 20:45:18 -0500
-Subject: [PATCH 13/35] 3.16 Paladin: Defensa recta (31789)
+Subject: [PATCH 13/34] 3.16 Paladin: Defensa recta (31789)
 
 ---
  .../2011_10_28_100_world_paladin_defensa_recta.sql |    4 ++

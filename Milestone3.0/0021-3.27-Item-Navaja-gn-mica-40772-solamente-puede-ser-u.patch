@@ -1,7 +1,7 @@
-From d97f9cdf16cc4f89dd14a83a1cad2352012570e4 Mon Sep 17 00:00:00 2001
+From 2b3fdc24a0ae9dd86c0a6b9b4aa95dff60c063ed Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 22:22:46 +0200
-Subject: [PATCH 22/35] =?UTF-8?q?3.27=20Item:=20Navaja=20gn=C3=B3mica=20(407?=
+Subject: [PATCH 21/34] =?UTF-8?q?3.27=20Item:=20Navaja=20gn=C3=B3mica=20(407?=
  =?UTF-8?q?72)=20solamente=20puede=20ser=20usado=20si=20se=20es=20Gran=20Mae?=
  =?UTF-8?q?stro=20Ingeniero?=
 MIME-Version: 1.0
@@ -13,10 +13,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 5 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
-index 739fc22..e9db991 100644
+index 61f9c52..57b2884 100644
 --- a/src/server/game/Spells/Spell.cpp
 +++ b/src/server/game/Spells/Spell.cpp
-@@ -5405,6 +5405,11 @@ SpellCastResult Spell::CheckCast(bool strict)
+@@ -5355,6 +5355,11 @@ SpellCastResult Spell::CheckCast(bool strict)
                          if (bg->GetStatus() == STATUS_IN_PROGRESS)
                              return SPELL_FAILED_NOT_IN_BATTLEGROUND;
                  break;

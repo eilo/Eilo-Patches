@@ -1,7 +1,7 @@
-From 2882b6446298de7eff7e503a1794c7516cda84c5 Mon Sep 17 00:00:00 2001
+From 17d12eaf7051ce99f5677adc9f2337ea558237c2 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 16:54:51 +0200
-Subject: [PATCH 24/35] 3.29 ItemSet: Druida T10 Equilibrio 2p bonus (70718)
+Subject: [PATCH 23/34] 3.29 ItemSet: Druida T10 Equilibrio 2p bonus (70718)
 
 ---
  src/server/game/Spells/SpellEffects.cpp |    4 ++++

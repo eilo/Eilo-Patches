@@ -1,7 +1,7 @@
-From 8fc6c1bc90977f230e7d099d57132264cb8b66f3 Mon Sep 17 00:00:00 2001
+From 2b444335ac0194cdf82691e8d7c7fa557df6d774 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Tue, 24 Apr 2012 14:52:35 +0200
-Subject: [PATCH 18/35] =?UTF-8?q?3.22=20DK:=20Pesteador=20de=20=C3=89bano=20?=
+Subject: [PATCH 18/34] =?UTF-8?q?3.22=20DK:=20Pesteador=20de=20=C3=89bano=20?=
  =?UTF-8?q?(51161)=20ya=20no=20stackear=C3=A1=20con=20diferentes=20casters.?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

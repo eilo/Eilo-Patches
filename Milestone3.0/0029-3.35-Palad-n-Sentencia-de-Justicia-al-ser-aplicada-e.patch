@@ -1,7 +1,7 @@
-From 71e60e592e9ec1c6d3e487387507c3754cc5697e Mon Sep 17 00:00:00 2001
+From 13299eaae257c122854326b35f5a62ea21daf46d Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sat, 10 Mar 2012 21:23:10 +0100
-Subject: [PATCH 30/35] =?UTF-8?q?3.35=20Palad=C3=ADn:=20Sentencia=20de=20Jus?=
+Subject: [PATCH 29/34] =?UTF-8?q?3.35=20Palad=C3=ADn:=20Sentencia=20de=20Jus?=
  =?UTF-8?q?ticia=20al=20ser=20aplicada=20el=20aura=20y=20luego=20castear=20f?=
  =?UTF-8?q?ear,=20sentencia=20ser=C3=A1=20removido=20del=20target.=20Esto=20?=
  =?UTF-8?q?impedir=C3=A1=20exploits=20debido=20a=20que=20el=20target=20queda?=

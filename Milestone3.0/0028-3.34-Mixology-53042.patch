@@ -1,7 +1,7 @@
-From 7025704c2717ed0dd04691a5630aab89bf8e805d Mon Sep 17 00:00:00 2001
+From 5823d56501b07e28feb68a3072240931796b4046 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 16:42:34 +0200
-Subject: [PATCH 29/35] 3.34 Mixology (53042)
+Subject: [PATCH 28/34] 3.34 Mixology (53042)
 
 ---
  src/server/game/Spells/Auras/SpellAuraEffects.cpp |   29 +++++++++++++++++++++

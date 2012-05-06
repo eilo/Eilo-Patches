@@ -1,7 +1,7 @@
-From 4d9ae59706c0fb0e55755e6364da810cd1e6f260 Mon Sep 17 00:00:00 2001
+From 532b36e3c9a893355031077b23472a79dc8f5bab Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 11 Mar 2012 18:45:57 +0100
-Subject: [PATCH 27/35] =?UTF-8?q?3.32=20Mago:=20Buena=20Racha=20(44445)=20se?=
+Subject: [PATCH 26/34] =?UTF-8?q?3.32=20Mago:=20Buena=20Racha=20(44445)=20se?=
  =?UTF-8?q?r=C3=A1=20removido=20al=20castear=20Piroexplosi=C3=B3n=20en=20tod?=
  =?UTF-8?q?os=20sus=20rangos,=20en=20vez=20de=20cuando=20hac=C3=ADa=20hit=20?=
  =?UTF-8?q?en=20el=20target?=

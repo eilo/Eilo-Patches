@@ -1,7 +1,7 @@
-From 1803e8a19a052738d616063faab9a57caf87a7af Mon Sep 17 00:00:00 2001
+From 1709e69262a197dff61c2072f3259936acd9bc3b Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Mon, 2 Jan 2012 00:08:52 +0100
-Subject: [PATCH 16/35] 3.20 Sacerdote: Rezo de Alivio(33076) ahora es
+Subject: [PATCH 16/34] 3.20 Sacerdote: Rezo de Alivio(33076) ahora es
  afectado por Disciplinas gemelas(47588), Sanacion
  espiritual(87336) y Divina providencia(47567)
 
