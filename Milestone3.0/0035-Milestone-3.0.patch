@@ -1,0 +1,73 @@
+From 69d9e74c260af308e24b409821ac612c2d88c9f8 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Tue, 1 May 2012 22:07:51 +0200
+Subject: [PATCH 35/35] Milestone 3.0
+
+---
+ README |   46 ++++++++++++++++++++++++++++++++++++++++++++--
+ 1 files changed, 44 insertions(+), 2 deletions(-)
+
+diff --git a/README b/README
+index 9166c8f..0d3674a 100644
+--- a/README
++++ b/README
+@@ -122,12 +122,54 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
+ #######################
+ # Hechizos y Talentos #
+ #######################
+-
++3.1  - 05/12/2011: Guerrero: Filotormenta (46924) inmunidades y cambiar armas por Kandera
++3.2  - 25/22/2011: Mago: Reflejo Exacto ahora no atacan a objetivos que están bajo los efectos de Polimorfia 
++3.3  - 05/11/2011: Brujo: Mejoras en pet felhunter por Locknes
++3.4  - 02/09/2011: Druida: Trabazon con la naturaleza: añadido CD interno por Retriman
++3.5  - 09/09/2011: Cazador: Trampla explosiva corregido el daño periodico por Retriman
++3.6  - 11/08/2011: Chaman: Escudos de Agua por Jildor
++3.7  - 10/09/2011: Chaman: Maremoto ahora dará el bonus de critico correspondiente por Retriman
++3.8  - 11/08/2011: Cazador: Golpes de cobra por Jildor
++3.12 - 02/09/2011: Guerrero: Reflejar efecto de Multi-Reflect por Retriman
++3.13 - 25/02/2012: Mago: Reflejo exacto (55342) ya no causará problemas de que no se vean visualmente las auras en el propietario de las copias por Souler
++3.15 - 20/08/2011: Paladin: Escudo Sacro añadir cooldown (cd) después de efecto de remover por Odyssey
++3.16 - 28/10/2011: Paladin: Defensa recta por Chaplain
++3.18 - 05/11/2011: Cazador: Distraer ahora se interrumpen efectos de comer/beber por Kerhong
++3.19 - 22/09/2011: Cazador: Pet Demosaurio Mordedura monstruosa fix efecto aplicado al target por Retriman
++3.20 - 22/09/2011: Sacerdote: Rezo de Alivio (33076) ahora es afectado por Disciplinas gemelas (47588), Sanacion espiritual (87336) y Divina providencia (47567) por Retriman
++3.22 - 28/03/2012: DK: Pesteador de Ebano (51161) ya no stackeara con diferentes casters por Xanvial.
++3.23 - 26/03/2012: Pets: escalabilidad de hits y critics por Vincent-Michael
++3.24 - 25/02/2012: Cazador: Picaduras ponzoñozas (53295) ahora sera afectado por dispel por Jildor.
++3.25 - 26/03/2012: Dispel ahora no hara nada si no hay nada que dispelar, arreglado el check por Oceanor.
++3.31 - 16/04/2012: LoS de totems y algunas spells como tifón (50516) por Retriman
++3.32 - 11/03/2012: Mago: Buena Racha (44445) el aura sera removido al castear Piroexplosion en todos sus rangos, en vez de cuando hacia hit en el target por Hispano.
++3.33 - 13/03/2012: Mago: Congelacion Cerebral (44546) y Dedos de Escarcha (44543) solo se activarán si Cono de Frio (120) golpea el target por oMadMano.
++3.34 - 26/01/2012: Mixology (53042) por Eze
++3.35 - 10/03/2012: Paladin: Sentencia de Justicia: al ser aplicada el aura y luego castear fear sentencia será removido del target. Esto impedira exploits debido a que el target quedaba inmovilizado y no podia usar Trinket
++3.36 - 26/03/2012: Picaro: Capa de las Sombras (31224) ya no remueve Aullido Perforador (12323), Grito Desmoralizador (25203) y Rugido Desmoralizador (26998) por Bigpwn.
++3.37 - 22/04/2012: Sistema de delay para spells por Hispano basado en el trabajo de Cepox.
++3.38 - 27/03/2012: Pets: Apañando los tamaños de las pets, incluyen pets exoticas en base al nivel de la misma por Eze
++3.39 - 27/03/2012: Pets: Apaño para la stamina de las pets, ahora ira bien por S@m
+ 
+ #################
+ # Items y Bonus #
+ #################
+-
++3.11 - 07/07/2011: ICC 25 Normal - Nibelungo - Proc Arma de Caster (71845) por Signfinder
++3.11 - 07/07/2011: ICC 25 Heroico- Nibelungo - Proc Arma de Caster (71846) por Signfinder
++3.11 - 07/07/2011: ICC 25 Normal - Trauma - Proc Arma de Healer (71865) por Signfinder
++3.11 - 07/07/2011: ICC 25 Heroico - Trauma - Proc Arma de Healer (71868) por Signfinder
++3.11 - 07/07/2011: ICC 25 Normal - Últimas Palabras - Proc Arma de Tanque (71871) por Signfinder
++3.11 - 07/07/2011: ICC 25 Heroico - Últimas Palabras - Proc Arma de Tanque (71873) por Signfinder
++3.11 - 07/07/2011: ICC 25 Normal - Proc Daga (71883) por Signfinder
++3.11 - 07/07/2011: ICC 25 Heroico - Proc Daga (71888) por Signfinder
++3.21 - 22/09/2011: Efectos de Gemas Meta: reducción de duración de silencio (55366) por Retriman
++3.21 - 22/09/2011: Efectos de Gemas Meta: reducción de duración de snare/root (55378) por Retriman
++3.21 - 22/09/2011: Efectos de Gemas Meta: reducción de duración de miedo (55357) por Retriman
++3.21 - 22/09/2011: Efectos de Gemas Meta: reducción de duración de stun (55358) por Retriman
++3.27 - 09/03/2012: Navaja gnómica (40772) solamente puede ser usado si se es Gran Maestro Ingeniero por Oceanor
++3.28 - 26/08/2011: Chamán T10 Restauración 4p bonus (70808) por Ramusik
++3.29 - 26/09/2011: Druida T10 Equilibrio 2p bonus (70718) por Laighto
++3.30 - 26/02/2012: Pícaro T10 4p bonus (70802) por Eze
+ 
+ ##################
+ # Soporte Quests #
+-- 
+1.7.8.msysgit.0
+

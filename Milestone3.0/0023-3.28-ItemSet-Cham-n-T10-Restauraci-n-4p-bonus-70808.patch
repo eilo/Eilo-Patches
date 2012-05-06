@@ -1,0 +1,29 @@
+From 80e34e39f5cd85b9bf008be86df821037375fe94 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Sun, 22 Apr 2012 16:51:50 +0200
+Subject: [PATCH 23/35] =?UTF-8?q?3.28=20ItemSet:=20Cham=C3=A1n=20T10=20Resta?=
+ =?UTF-8?q?uraci=C3=B3n=204p=20bonus=20(70808)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/server/game/Entities/Unit/Unit.cpp |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
+index 72ebb15..a83b41f 100755
+--- a/src/server/game/Entities/Unit/Unit.cpp
++++ b/src/server/game/Entities/Unit/Unit.cpp
+@@ -7333,6 +7333,8 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
+                         if (!triggeredSpell)
+                             return false;
+                         basepoints0 = CalculatePctN(int32(damage), triggerAmount) / (triggeredSpell->GetMaxDuration() / triggeredSpell->Effects[0].Amplitude);
++                        // Add remaining ticks to healing done
++                        basepoints0 += GetRemainingPeriodicAmount(GetGUID(), triggered_spell_id, SPELL_AURA_PERIODIC_HEAL);
+                     }
+                     break;
+                 }
+-- 
+1.7.8.msysgit.0
+

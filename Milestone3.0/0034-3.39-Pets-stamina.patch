@@ -1,0 +1,29 @@
+From 19eb417a13a66e933b4bb6f3a34ffc8016b2dd41 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Fri, 27 Apr 2012 12:09:08 +0200
+Subject: [PATCH 34/35] 3.39 Pets stamina
+
+---
+ src/server/game/Entities/Pet/Pet.cpp |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
+
+diff --git a/src/server/game/Entities/Pet/Pet.cpp b/src/server/game/Entities/Pet/Pet.cpp
+index f368900..daf965b 100755
+--- a/src/server/game/Entities/Pet/Pet.cpp
++++ b/src/server/game/Entities/Pet/Pet.cpp
+@@ -890,7 +890,11 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
+     PetLevelInfo const* pInfo = sObjectMgr->GetPetLevelInfo(creature_ID, petlevel);
+     if (pInfo)                                      // exist in DB
+     {
+-        SetCreateHealth(pInfo->health);
++        if (petType == HUNTER_PET)
++            SetCreateHealth(pInfo->health + float((m_owner->GetStat(STAT_STAMINA)) * 0.45 ) * 10.5);
++        else
++            SetCreateHealth(pInfo->health);
++
+         if (petType != HUNTER_PET) //hunter pet use focus
+             SetCreateMana(pInfo->mana);
+ 
+-- 
+1.7.8.msysgit.0
+

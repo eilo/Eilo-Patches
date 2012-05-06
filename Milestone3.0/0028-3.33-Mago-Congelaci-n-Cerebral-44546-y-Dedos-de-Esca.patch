@@ -1,0 +1,28 @@
+From 55fd42f0acb951a5f3bfc318ae2fcb7a352295fb Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Tue, 13 Mar 2012 23:05:16 +0100
+Subject: [PATCH 28/35] =?UTF-8?q?3.33=20Mago:=20Congelaci=C3=B3n=20Cerebral(?=
+ =?UTF-8?q?44546)=20y=20Dedos=20de=20Escarcha=20(44543)=20solo=20se=20activa?=
+ =?UTF-8?q?r=C3=A1n=20si=20Cono=20de=20Fr=C3=ADo=20(120)=20golpea=20al=20tar?=
+ =?UTF-8?q?get?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ ...0_world_spell_proc_event_cone_of_cold_procs.sql |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_03_13_100_world_spell_proc_event_cone_of_cold_procs.sql
+
+diff --git a/sql/updates/world/reanemu/2012_03_13_100_world_spell_proc_event_cone_of_cold_procs.sql b/sql/updates/world/reanemu/2012_03_13_100_world_spell_proc_event_cone_of_cold_procs.sql
+new file mode 100644
+index 0000000..2bdf0b7
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_03_13_100_world_spell_proc_event_cone_of_cold_procs.sql
+@@ -0,0 +1,2 @@
++-- Force Brain Freeze and Fingers of Frost to proc only if spell hits
++UPDATE `spell_proc_event` SET `procEx` = 0x0040000 WHERE `entry` IN (44546,44548, 44549, 44543, 44545); 
+\ No newline at end of file
+-- 
+1.7.8.msysgit.0
+

@@ -1,0 +1,40 @@
+From 8fc6c1bc90977f230e7d099d57132264cb8b66f3 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Tue, 24 Apr 2012 14:52:35 +0200
+Subject: [PATCH 18/35] =?UTF-8?q?3.22=20DK:=20Pesteador=20de=20=C3=89bano=20?=
+ =?UTF-8?q?(51161)=20ya=20no=20stackear=C3=A1=20con=20diferentes=20casters.?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/server/game/Entities/Unit/Unit.cpp |   10 +++++++++-
+ 1 files changed, 9 insertions(+), 1 deletions(-)
+
+diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
+index 65bda2e..5729e60 100755
+--- a/src/server/game/Entities/Unit/Unit.cpp
++++ b/src/server/game/Entities/Unit/Unit.cpp
+@@ -11913,10 +11913,18 @@ void Unit::MeleeDamageBonus(Unit* victim, uint32 *pdamage, WeaponAttackType attT
+ 
+         if (mechanicMask)
+         {
++            int32 dmgBonusDisease = 0;
+             AuraEffectList const& mDamageDoneMechanic = victim->GetAuraEffectsByType(SPELL_AURA_MOD_MECHANIC_DAMAGE_TAKEN_PERCENT);
+             for (AuraEffectList::const_iterator i = mDamageDoneMechanic.begin(); i != mDamageDoneMechanic.end(); ++i)
+                 if (mechanicMask & uint32(1<<((*i)->GetMiscValue())))
+-                    AddPctN(TakenTotalMod, (*i)->GetAmount());
++                {
++                    if ((*i)->GetSpellInfo()->Id != 65142)          // Check if not disease damage modifier
++                        AddPctN(TakenTotalMod, (*i)->GetAmount());
++                    else if ((*i)->GetAmount() > dmgBonusDisease)   // Store highest disease modifier bonus
++                        dmgBonusDisease = (*i)->GetAmount();
++                }
++            if (dmgBonusDisease != 0)
++                AddPctN(TakenTotalMod, dmgBonusDisease);            // apply bonus
+         }
+     }
+ 
+-- 
+1.7.8.msysgit.0
+
