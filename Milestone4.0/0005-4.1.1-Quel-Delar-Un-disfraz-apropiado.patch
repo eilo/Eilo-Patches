@@ -1,4 +1,4 @@
-From 3c0589df6fcf6155b75942c2f9a8d346d7c0c8dc Mon Sep 17 00:00:00 2001
+From 76023cc362d6152f70d82795862697b7976612cf Mon Sep 17 00:00:00 2001
 From: strolch <sebeche@gmail.com>
 Date: Sat, 28 Apr 2012 16:29:45 -0300
 Subject: [PATCH 05/40] 4.1.1 Quel'Delar: Un disfraz apropiado
@@ -187,5 +187,5 @@ index 0000000..d51329e
 +(13,1,69601,31,0,3,36946), -- Toss Unmentionables requires target Wants Unmentionables
 +(13,1,69614,31,0,3,36947); -- Toss Water requires target Wants Water
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

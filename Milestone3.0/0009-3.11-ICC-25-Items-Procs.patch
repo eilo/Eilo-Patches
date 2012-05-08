@@ -1,4 +1,4 @@
-From bb63935a165347fbba74e1788c67f5e17772244b Mon Sep 17 00:00:00 2001
+From 21d4e8dea3bb9f866d921283a2838c9d36dc9602 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 27 Nov 2011 18:48:01 +0100
 Subject: [PATCH 09/34] 3.11 ICC 25 Items Procs
@@ -41,7 +41,7 @@ index 0000000..c401e5f
 +INSERT INTO `spell_proc_event` VALUES (71873, 0x01, 0x00, 0x00000000, 0x00000000, 0x00000000, 0x00000014, 0x00000018, 0, 37, 35);
 \ No newline at end of file
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index b94d5ee..1dedca6 100755
+index e7ec318..ac988b9 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
 @@ -5269,10 +5269,38 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
@@ -83,7 +83,7 @@ index b94d5ee..1dedca6 100755
                  // Vampiric Aura (boss spell)
                  case 38196:
                  {
-@@ -8582,6 +8610,20 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
+@@ -8589,6 +8617,20 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
                          target = victim;
                          break;
                      }
@@ -105,10 +105,10 @@ index b94d5ee..1dedca6 100755
                          // Illumination
                          if (auraSpellInfo->SpellIconID == 241)
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index d3566c2..ac7ab4a 100755
+index b507880..4547624 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -686,6 +686,17 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
+@@ -692,6 +692,17 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
                      damage += CalculatePctN(block_value, m_spellInfo->Effects[EFFECT_1].CalcValue());
                      break;
                  }

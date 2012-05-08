@@ -1,4 +1,4 @@
-From 574f469775bc2911dd0df91272e6b3567588e774 Mon Sep 17 00:00:00 2001
+From ce7d724a2d563bbb1634901b1ece8321abf86342 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:04:45 -0300
 Subject: [PATCH 18/40] 4.2.8 Hijos de Hodir: El Fuego del Refinador
@@ -17,5 +17,5 @@ index 0000000..76e666e
 @@ -0,0 +1 @@
 +DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=1 AND `SourceGroup`=29375 AND `SourceEntry`=41556;
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

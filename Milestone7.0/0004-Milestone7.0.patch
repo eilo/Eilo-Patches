@@ -1,0 +1,34 @@
+From 0f5dd825f0fe3c80fcf0d4e57e0030a5c532059b Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Tue, 8 May 2012 00:57:49 -0500
+Subject: [PATCH 4/4] Milestone7.0
+
+---
+ README |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/README b/README
+index d1daba7..065236e 100644
+--- a/README
++++ b/README
+@@ -55,6 +55,7 @@ Milestone5.0: Traducciones, e inclusion de varios dentro de tablas y strings
+               del emulador, ya sea en c++ o en sqls.
+ Milestone6.0: Arreglos en eventos de mundo y logros, sobre todo con SAI, pero 
+               habra arreglos con c++ y sql.
++Milestone7.0: Código custom, utilitario y caracteristicas interesantes varias.
+ 
+ 
+ ##################################
+@@ -331,6 +332,9 @@ Milestone6.0: Arreglos en eventos de mundo y logros, sobre todo con SAI, pero
+ ##########
+ # Custom #
+ ##########
++7.1  - 08/10/2011: NPC recupera anillos de icc por Karlos
++7.2  - 08/12/2011: NPC subastador en dalaran por Hispano
++7.3  - 05/05/2012: NPC vendedor de loteria por Karlos
+ 
+ 
+   Trinity Core is free software; you can redistribute it and/or modify
+-- 
+1.7.8.msysgit.0
+

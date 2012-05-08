@@ -1,4 +1,4 @@
-From 2b444335ac0194cdf82691e8d7c7fa557df6d774 Mon Sep 17 00:00:00 2001
+From 7aead3638c965c38b0b356af853fc8fdc52889ea Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Tue, 24 Apr 2012 14:52:35 +0200
 Subject: [PATCH 18/34] =?UTF-8?q?3.22=20DK:=20Pesteador=20de=20=C3=89bano=20?=
@@ -12,10 +12,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 9 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index 65bda2e..5729e60 100755
+index acaf986..403804d 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -11913,10 +11913,18 @@ void Unit::MeleeDamageBonus(Unit* victim, uint32 *pdamage, WeaponAttackType attT
+@@ -11927,10 +11927,18 @@ void Unit::MeleeDamageBonus(Unit* victim, uint32 *pdamage, WeaponAttackType attT
  
          if (mechanicMask)
          {

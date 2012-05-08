@@ -1,4 +1,4 @@
-From 88089d61b1c86c981a7b49c7a3c14cd02f4e133d Mon Sep 17 00:00:00 2001
+From be05e507a7a9b3221c570001a00d6a0893fb801d Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:01:10 -0300
 Subject: [PATCH 16/40] 4.2.6 Hijos de Hodir: Thorim
@@ -124,5 +124,5 @@ index 9008dbc..ed0b340 100644
      new npc_roxi_ramrocket();
      new npc_icefang();
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

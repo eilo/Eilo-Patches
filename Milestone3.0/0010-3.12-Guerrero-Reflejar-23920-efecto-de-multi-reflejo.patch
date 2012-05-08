@@ -1,4 +1,4 @@
-From 3585bf2a2591e7bf11df02c005343931e4f42f9d Mon Sep 17 00:00:00 2001
+From 8a8885171e65152c6840825552148a90512cd088 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 27 Nov 2011 19:09:45 +0100
 Subject: [PATCH 10/34] 3.12 Guerrero: Reflejar (23920) efecto de
@@ -10,7 +10,7 @@ Subject: [PATCH 10/34] 3.12 Guerrero: Reflejar (23920) efecto de
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index 1dedca6..65bda2e 100755
+index ac988b9..acaf986 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
 @@ -2568,8 +2568,6 @@ SpellMissInfo Unit::SpellHitResult(Unit* victim, SpellInfo const* spell, bool Ca
@@ -23,10 +23,10 @@ index 1dedca6..65bda2e 100755
          }
      }
 diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
-index e8b9ba7..61f9c52 100644
+index c281b02..f17f5ab 100644
 --- a/src/server/game/Spells/Spell.cpp
 +++ b/src/server/game/Spells/Spell.cpp
-@@ -2353,6 +2353,8 @@ void Spell::DoAllEffectOnTarget(TargetInfo* target)
+@@ -2355,6 +2355,8 @@ void Spell::DoAllEffectOnTarget(TargetInfo* target)
          if (target->reflectResult == SPELL_MISS_NONE)       // If reflected spell hit caster -> do all effect on him
          {
              spellHitTarget = m_caster;

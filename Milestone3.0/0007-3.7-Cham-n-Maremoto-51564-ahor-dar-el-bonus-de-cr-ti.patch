@@ -1,4 +1,4 @@
-From bff4b1d05689b882a8e2f3d9dd7c85d96ea92d6f Mon Sep 17 00:00:00 2001
+From 7258d2accf27a03520881e3e0d7ab257c1d80685 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Mon, 23 Apr 2012 23:43:26 +0200
 Subject: [PATCH 07/34] =?UTF-8?q?3.7=20Cham=C3=A1n:=20Maremoto=20(51564)=20a?=
@@ -16,10 +16,10 @@ Content-Transfer-Encoding: 8bit
 diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
 old mode 100755
 new mode 100644
-index 28b089f..3d1b4fd
+index 52d80ca..e3de82e
 --- a/src/server/game/Spells/Spell.cpp
 +++ b/src/server/game/Spells/Spell.cpp
-@@ -2432,9 +2432,8 @@ void Spell::DoAllEffectOnTarget(TargetInfo* target)
+@@ -2434,9 +2434,8 @@ void Spell::DoAllEffectOnTarget(TargetInfo* target)
      // Do healing and triggers
      if (m_healing > 0)
      {
@@ -30,7 +30,7 @@ index 28b089f..3d1b4fd
          {
              procEx |= PROC_EX_CRITICAL_HIT;
              addhealth = caster->SpellCriticalHealingBonus(m_spellInfo, addhealth, NULL);
-@@ -2442,7 +2441,7 @@ void Spell::DoAllEffectOnTarget(TargetInfo* target)
+@@ -2444,7 +2443,7 @@ void Spell::DoAllEffectOnTarget(TargetInfo* target)
          else
              procEx |= PROC_EX_NORMAL_HIT;
  

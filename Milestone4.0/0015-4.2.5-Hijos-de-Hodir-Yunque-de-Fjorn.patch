@@ -1,4 +1,4 @@
-From 9635120146f4c602c041ec0a4c826701dd92434c Mon Sep 17 00:00:00 2001
+From 6b6f3655c8d7e8e806f7e4714464f9c06b2cc4ff Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 16:59:58 -0300
 Subject: [PATCH 15/40] 4.2.5 Hijos de Hodir: Yunque de Fjorn
@@ -22,5 +22,5 @@ index 0000000..ad41ace
 +INSERT INTO `gameobject` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `position_x`, `position_y`, `position_z`, `orientation`, `rotation0`, `rotation1`, `rotation2`, `rotation3`, `spawntimesecs`, `animprogress`, `state`) VALUES
 +(NULL, 192060, 571, 1, 5, 7220.74, -3651.34, 819.300, 1.85661, 0, 0, 0.800606, 0.599192, 300, 0, 1);
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

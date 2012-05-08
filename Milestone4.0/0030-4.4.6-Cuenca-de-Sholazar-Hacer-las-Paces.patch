@@ -1,0 +1,160 @@
+From d31312333fdc7c4ac394fb0360d098db04f3fe3a Mon Sep 17 00:00:00 2001
+From: Santiago Rossi <santiago_rho_psi@hotmail.com>
+Date: Sat, 28 Apr 2012 17:26:26 -0300
+Subject: [PATCH 30/40] 4.4.6 Cuenca de Sholazar: Hacer las Paces
+
+Converted C++ script for npc "Shaman Vekjik" to SAI
+Fixed spell "Frenzyheart's Fury" thanks to @Hispano
+---
+ .../reanemu/2012_04_16_107_world_making_peace.sql  |   29 +++++++++
+ src/server/game/Spells/SpellMgr.cpp                |    3 +
+ src/server/scripts/Northrend/sholazar_basin.cpp    |   65 +-------------------
+ 3 files changed, 33 insertions(+), 64 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_16_107_world_making_peace.sql
+
+diff --git a/sql/updates/world/reanemu/2012_04_16_107_world_making_peace.sql b/sql/updates/world/reanemu/2012_04_16_107_world_making_peace.sql
+new file mode 100644
+index 0000000..43d1340
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_04_16_107_world_making_peace.sql
+@@ -0,0 +1,29 @@
++SET @VEKJIK :=28315;
++UPDATE `creature_template` SET `gossip_menu_id`=13137, `AIName`='SmartAI', `ScriptName`='' WHERE `entry`=@VEKJIK;
++
++DELETE FROM `gossip_menu` WHERE `entry` IN (13137,13138);
++INSERT INTO `gossip_menu` (`entry`,`text_id`) VALUES
++(13137,13137),
++(13138,13138);
++
++DELETE FROM `gossip_menu_option` WHERE `menu_id` IN (13137,13138);
++INSERT INTO `gossip_menu_option` (`menu_id`,`id`,`option_icon`,`option_text`,`option_id`,`npc_option_npcflag`,`action_menu_id`,`action_poi_id`,`box_coded`,`box_money`,`box_text`) VALUES
++(13137,0,0,"Shaman Vekjik, I have spoken with the big-tongues and they desire peace. I have brought this offering on their behalf.",1,1,0,0,0,0,''),
++(13138,0,0,"No no... I had no intentions of betraying your people. I was only defending myself. it was all a misunderstanding.",1,1,0,0,0,0,'');
++
++DELETE FROM `conditions` WHERE `SourceGroup`=13137 AND `SourceTypeOrReferenceId`=15;
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
++(15,13137,0,0,9,12573,0,0,0,0,'Only show gossip option when quest 12573 is added');
++
++DELETE FROM `smart_scripts` WHERE `entryorguid`=@VEKJIK AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES
++(@VEKJIK,0,0,0,62,0,100,0,13137,0,0,0,98,13138,13138,0,0,0,0,7,0,0,0,0,0,0,0,'Shaman Vekjik - Gossip select - Send custom gossip'),
++(@VEKJIK,0,1,2,62,0,100,0,13138,0,0,0,72,0,0,0,0,0,0,7,0,0,0,0,0,0,0,'Shaman Vekjik - Gossip select - Close Gossip'),
++(@VEKJIK,0,2,3,61,0,100,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Shaman Vekjik - Gossip select - Say text'),
++(@VEKJIK,0,3,4,61,0,100,0,0,0,0,0,15,12573,0,0,0,0,0,7,0,0,0,0,0,0,0,'Shaman Vekjik - Gossip select - Call Area explored of event happens'),
++(@VEKJIK,0,4,0,61,0,100,0,0,0,0,0,11,51469,0,0,0,0,0,7,0,0,0,0,0,0,0,'Shaman Vekjik - Gossip select - Cast Frenzyhearts Fury');
++
++DELETE FROM `script_texts` WHERE `npc_entry`=@VEKJIK;
++DELETE FROM `creature_text` WHERE `entry`=@VEKJIK;
++INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
++(@VEKJIK,0,0,"Frenzyheart kill you if you come back. You no welcome here no more!",12,0,100,0,0,0,'Shaman Vekjik');
+diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
+index 57ac0c4..346c491 100755
+--- a/src/server/game/Spells/SpellMgr.cpp
++++ b/src/server/game/Spells/SpellMgr.cpp
+@@ -3611,6 +3611,9 @@ void SpellMgr::LoadDbcDataCorrections()
+                 spellInfo->manaCost = 0;
+                 spellInfo->manaPerSecond = 0;
+                 break;
++			case 51469: // Frenzyheart's Fury
++				spellInfo->AttributesEx = SPELL_ATTR1_CANT_TARGET_SELF;	
++				break;
+             default:
+                 break;
+         }
+diff --git a/src/server/scripts/Northrend/sholazar_basin.cpp b/src/server/scripts/Northrend/sholazar_basin.cpp
+index 0c210cf..778327d 100644
+--- a/src/server/scripts/Northrend/sholazar_basin.cpp
++++ b/src/server/scripts/Northrend/sholazar_basin.cpp
+@@ -18,12 +18,11 @@
+ /* ScriptData
+ SDName: Sholazar_Basin
+ SD%Complete: 100
+-SDComment: Quest support: 12573, 12621.
++SDComment: Quest support: 12621.
+ SDCategory: Sholazar_Basin
+ EndScriptData */
+ 
+ /* ContentData
+-npc_vekjik
+ avatar_of_freya
+ EndContentData */
+ 
+@@ -31,67 +30,6 @@ EndContentData */
+ #include "ScriptedEscortAI.h"
+ 
+ /*######
+-## npc_vekjik
+-######*/
+-
+-#define GOSSIP_VEKJIK_ITEM1 "Shaman Vekjik, I have spoken with the big-tongues and they desire peace. I have brought this offering on their behalf."
+-#define GOSSIP_VEKJIK_ITEM2 "No no... I had no intentions of betraying your people. I was only defending myself. it was all a misunderstanding."
+-
+-enum eVekjik
+-{
+-    GOSSIP_TEXTID_VEKJIK1       = 13137,
+-    GOSSIP_TEXTID_VEKJIK2       = 13138,
+-
+-    SAY_TEXTID_VEKJIK1          = -1000208,
+-
+-    SPELL_FREANZYHEARTS_FURY    = 51469,
+-
+-    QUEST_MAKING_PEACE          = 12573
+-};
+-
+-class npc_vekjik : public CreatureScript
+-{
+-public:
+-    npc_vekjik() : CreatureScript("npc_vekjik") { }
+-
+-    bool OnGossipHello(Player* player, Creature* creature)
+-    {
+-        if (creature->isQuestGiver())
+-            player->PrepareQuestMenu(creature->GetGUID());
+-
+-        if (player->GetQuestStatus(QUEST_MAKING_PEACE) == QUEST_STATUS_INCOMPLETE)
+-        {
+-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_VEKJIK_ITEM1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+-            player->SEND_GOSSIP_MENU(GOSSIP_TEXTID_VEKJIK1, creature->GetGUID());
+-            return true;
+-        }
+-
+-        player->SEND_GOSSIP_MENU(player->GetGossipTextId(creature), creature->GetGUID());
+-        return true;
+-    }
+-
+-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+-    {
+-        player->PlayerTalkClass->ClearMenus();
+-        switch (action)
+-        {
+-            case GOSSIP_ACTION_INFO_DEF+1:
+-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_VEKJIK_ITEM2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
+-                player->SEND_GOSSIP_MENU(GOSSIP_TEXTID_VEKJIK2, creature->GetGUID());
+-                break;
+-            case GOSSIP_ACTION_INFO_DEF+2:
+-                player->CLOSE_GOSSIP_MENU();
+-                DoScriptText(SAY_TEXTID_VEKJIK1, creature, player);
+-                player->AreaExploredOrEventHappens(QUEST_MAKING_PEACE);
+-                creature->CastSpell(player, SPELL_FREANZYHEARTS_FURY, false);
+-                break;
+-        }
+-
+-        return true;
+-    }
+-};
+-
+-/*######
+ ## avatar_of_freya
+ ######*/
+ 
+@@ -611,7 +549,6 @@ public:
+ 
+ void AddSC_sholazar_basin()
+ {
+-    new npc_vekjik();
+     new npc_avatar_of_freya();
+     new npc_bushwhacker();
+     new npc_engineer_helice();
+-- 
+1.7.8.msysgit.0
+

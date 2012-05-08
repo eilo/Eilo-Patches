@@ -1,4 +1,4 @@
-From 3f62727914dc23fba4050980a09104cd48a09d1f Mon Sep 17 00:00:00 2001
+From fa5dfbd6ee3dee13e88af8409e0a584017125d0d Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 16:02:06 +0200
 Subject: [PATCH 31/34] 3.37 Sistema de delay para spells
@@ -8,7 +8,7 @@ Subject: [PATCH 31/34] 3.37 Sistema de delay para spells
  1 files changed, 42 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
-index b656c06..3b72491 100755
+index 342b27e..57ac0c4 100755
 --- a/src/server/game/Spells/SpellMgr.cpp
 +++ b/src/server/game/Spells/SpellMgr.cpp
 @@ -2651,11 +2651,15 @@ void SpellMgr::LoadSpellCustomAttr()
