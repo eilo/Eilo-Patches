@@ -33,8 +33,9 @@ index 0000000..45d6e21
 +                tales como ahbot, wintergrasp, warden, ac1, reset duel, etc.
 +Milestone1.0 -- Jugabilidad en general, adecuaciones de código vario en mapas
 +                comportamiento de bgs, arenas, players-units-pets y mejoras.
-+Milestone2.0 -- Principales arreglos a dungeons e instances, sobre todo las
-+                raids de ICC, Sagrario Rubi, Ulduar y Prueba del Cruzado.
++Milestone2.0 -- Mejoras en Instances y dungeons, escencialmente para darles funcionalidad
++                y detalles para tenerlas lo mas cercano a blizzlike, solucion de bugs 
++                relativos a las mismas, implementacion de nuevas scripts, prioridad tlk.
 +Milestone3.0 -- Arreglos a Spells, sobre todo para estabilidad del pve y del
 +                pvp dentro de los reinos.
 +Milestone4.0 -- Arreglos en quests, y cadenas de misión, esto incluye scripts
@@ -43,8 +44,7 @@ index 0000000..45d6e21
 +                del emulador, ya sea en c++ o en sqls.
 +Milestone6.0 -- Arreglos en eventos de mundo y logros, sobre todo con SAI, pero 
 +                habra arreglos con c++ y sql.
-+Milestone7.0 -- Código custom, utilitario y caracteristicas interesantes tales 
-+                como arena espectador, subastador dalaran, eventos custom, etc.
++Milestone7.0 -- Código custom, utilitario y caracteristicas interesantes varias.
 +
 + ---------
 +| Commits |
