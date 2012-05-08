@@ -15,9 +15,9 @@ index 0000000..d51329e
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_03_16_101_world_a_suitable_disguise.sql
 @@ -0,0 +1,171 @@
-+/********************************
-+   Quest - A Suitable Disguise
-+********************************/
++-- *********************************
++--    Quest - A Suitable Disguise
++-- *********************************
 +
 +-- Shandy Glossgleam SAI
 +SET @ENTRY := 36856;
