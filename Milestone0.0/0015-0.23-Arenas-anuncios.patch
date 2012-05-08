@@ -1,17 +1,17 @@
-From b40b41c014623b945b0abe3ec964589c9f774f2d Mon Sep 17 00:00:00 2001
+From d4102166c0596d37adb0034f5d04e1feeea18bb5 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Tue, 8 May 2012 14:20:48 -0500
+Date: Tue, 8 May 2012 14:57:21 -0500
 Subject: [PATCH 15/19] 0.23 Arenas anuncios
 
 ---
  .../reanemu/2012_04_07_100_world_arena_queue.sql   |    3 +++
  .../game/Battlegrounds/BattlegroundQueue.cpp       |   18 ++++++++++++++----
- src/server/game/Battlegrounds/BattlegroundQueue.h  |    2 ++
+ src/server/game/Battlegrounds/BattlegroundQueue.h  |    3 +++
  src/server/game/Miscellaneous/Language.h           |    1 +
  src/server/game/World/World.cpp                    |    2 ++
  src/server/game/World/World.h                      |    2 ++
  src/server/worldserver/worldserver.conf.dist       |   18 ++++++++++++++++++
- 7 files changed, 42 insertions(+), 4 deletions(-)
+ 7 files changed, 43 insertions(+), 4 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.sql
 
 diff --git a/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.sql b/sql/updates/world/reanemu/2012_04_07_100_world_arena_queue.sql
@@ -25,18 +25,18 @@ index 0000000..7b38589
 +UPDATE trinity_string SET `content_loc6`='|cffff0000[Anuncio de Cola de Arena]:|r Un equipo se unio : %ux%u : %u|r' WHERE entry=11002;
 \ No newline at end of file
 diff --git a/src/server/game/Battlegrounds/BattlegroundQueue.cpp b/src/server/game/Battlegrounds/BattlegroundQueue.cpp
-index 6f4264c..89d0cbb 100755
+index 6f4264c..f027d7f 100755
 --- a/src/server/game/Battlegrounds/BattlegroundQueue.cpp
 +++ b/src/server/game/Battlegrounds/BattlegroundQueue.cpp
-@@ -68,6 +68,8 @@ void BattlegroundQueue::SelectionPool::Init()
- {
-     SelectedGroups.clear();
-     PlayerCount = 0;
+@@ -41,6 +41,8 @@ BattlegroundQueue::BattlegroundQueue()
+                 m_WaitTimes[i][j][k] = 0;
+         }
+     }
 +    // Esto es del Arena Queue Announce
 +    teamID = 0;
  }
  
- // remove group info from selection pool
+ BattlegroundQueue::~BattlegroundQueue()
 @@ -162,8 +164,16 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, Battlegr
      if (isRated && sWorld->getBoolConfig(CONFIG_ARENA_QUEUE_ANNOUNCER_ENABLE))
      {
@@ -71,15 +71,16 @@ index 6f4264c..89d0cbb 100755
      if (group->IsInvitedToBGInstanceGUID && group->IsRated && decreaseInvitedCount)
      {
 diff --git a/src/server/game/Battlegrounds/BattlegroundQueue.h b/src/server/game/Battlegrounds/BattlegroundQueue.h
-index 5cf5afc..40f07e7 100755
+index 5cf5afc..f46f18f 100755
 --- a/src/server/game/Battlegrounds/BattlegroundQueue.h
 +++ b/src/server/game/Battlegrounds/BattlegroundQueue.h
-@@ -125,6 +125,8 @@ class BattlegroundQueue
+@@ -125,6 +125,9 @@ class BattlegroundQueue
          uint32 m_WaitTimeLastPlayer[BG_TEAMS_COUNT][MAX_BATTLEGROUND_BRACKETS];
          uint32 m_SumOfWaitTimes[BG_TEAMS_COUNT][MAX_BATTLEGROUND_BRACKETS];
  
 +        // Esto es del Arena Queue Announce
 +        uint32 teamID;
++
          // Event handler
          EventProcessor m_events;
  };
