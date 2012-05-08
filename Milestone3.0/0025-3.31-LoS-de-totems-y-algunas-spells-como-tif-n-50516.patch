@@ -1,4 +1,4 @@
-From 7ee04baedfc947095619aa2b599bbce8885da3d3 Mon Sep 17 00:00:00 2001
+From 185ecbc767e7de44275f0dab9f313910e661a728 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 22:19:35 +0200
 Subject: [PATCH 25/34] =?UTF-8?q?3.31=20LoS=20de=20totems=20y=20algunas=20sp?=
@@ -12,7 +12,7 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 9 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellInfo.cpp b/src/server/game/Spells/SpellInfo.cpp
-index 4f73b87..786cbbe 100644
+index 148bb86..606d836 100644
 --- a/src/server/game/Spells/SpellInfo.cpp
 +++ b/src/server/game/Spells/SpellInfo.cpp
 @@ -1529,6 +1529,15 @@ SpellCastResult SpellInfo::CheckTarget(Unit const* caster, WorldObject const* ta

@@ -1,4 +1,4 @@
-From 01eea8ed17c090aa9554ebe8034d7ed2f75d0346 Mon Sep 17 00:00:00 2001
+From 4560e6f11ab3eeb877c57ba3151e516f951e5b6e Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sat, 26 Nov 2011 21:28:43 +0100
 Subject: [PATCH 06/34] =?UTF-8?q?3.6=20Cham=C3=A1n:=20Escudos=20de=20Agua=20?=
@@ -22,7 +22,7 @@ index 0000000..0d3662e
 +UPDATE `spell_bonus_data` SET `direct_bonus` = 0.473 WHERE `entry` = 974;
 \ No newline at end of file
 diff --git a/src/server/game/Spells/Auras/SpellAuraEffects.cpp b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
-index 31a8e57..7d9d652 100755
+index e0a17df..e32bff4 100755
 --- a/src/server/game/Spells/Auras/SpellAuraEffects.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
 @@ -592,7 +592,14 @@ int32 AuraEffect::CalculateAmount(Unit* caster)

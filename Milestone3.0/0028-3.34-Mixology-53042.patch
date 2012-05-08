@@ -1,4 +1,4 @@
-From 5823d56501b07e28feb68a3072240931796b4046 Mon Sep 17 00:00:00 2001
+From c297d5f97408b9ae0517d0c85be4cd78c72878cd Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 16:42:34 +0200
 Subject: [PATCH 28/34] 3.34 Mixology (53042)
@@ -9,7 +9,7 @@ Subject: [PATCH 28/34] 3.34 Mixology (53042)
  2 files changed, 45 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/Auras/SpellAuraEffects.cpp b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
-index 7d9d652..4fafb5b 100755
+index e32bff4..2ca7b4d 100755
 --- a/src/server/game/Spells/Auras/SpellAuraEffects.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
 @@ -757,6 +757,35 @@ int32 AuraEffect::CalculateAmount(Unit* caster)

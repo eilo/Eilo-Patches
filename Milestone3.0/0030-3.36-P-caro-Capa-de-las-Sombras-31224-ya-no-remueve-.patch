@@ -1,4 +1,4 @@
-From df2a2d8eca896657e7f35f31f3d568f00c3cecb6 Mon Sep 17 00:00:00 2001
+From 81bb438be03d8c6c626583d3515302f6030bcf35 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 22:25:45 +0200
 Subject: [PATCH 30/34] =?UTF-8?q?3.36=20P=C3=ADcaro:=20Capa=20de=20las=20Som?=
@@ -14,10 +14,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 2 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 0de767b..51d33e1 100755
+index 45ef625..3c53d94 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -953,7 +953,8 @@ void Spell::EffectTriggerSpell(SpellEffIndex effIndex)
+@@ -959,7 +959,8 @@ void Spell::EffectTriggerSpell(SpellEffIndex effIndex)
                      if ((spell->DmgClass == SPELL_DAMAGE_CLASS_MAGIC // only affect magic spells
                          || ((spell->GetDispelMask()) & dispelMask))
                          // ignore positive and passive auras
