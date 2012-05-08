@@ -1,22 +1,22 @@
-From e316c38f91bef366251b2901fd2291a8bbfd1d1f Mon Sep 17 00:00:00 2001
+From 933c112dbf856a87d92af651b5d4f91d2693f35c Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Fri, 4 May 2012 13:03:02 -0500
+Date: Tue, 8 May 2012 02:52:32 -0300
 Subject: [PATCH 59/92] 2.2.58 ICC: Sindragosa Gauntlet event
 
 ---
- .../2012_05_04_100_world_sindragosa_gaunlet.sql    |   41 ++++
+ .../2012_05_04_100_world_sindragosa_gaunlet.sql    |   48 ++++
  .../Northrend/IcecrownCitadel/icecrown_citadel.cpp |  231 ++++++++++++++++++++
  .../Northrend/IcecrownCitadel/icecrown_citadel.h   |   10 +-
  .../IcecrownCitadel/instance_icecrown_citadel.cpp  |    7 +
- 4 files changed, 288 insertions(+), 1 deletions(-)
+ 4 files changed, 295 insertions(+), 1 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2012_05_04_100_world_sindragosa_gaunlet.sql
 
 diff --git a/sql/updates/world/reanemu/2012_05_04_100_world_sindragosa_gaunlet.sql b/sql/updates/world/reanemu/2012_05_04_100_world_sindragosa_gaunlet.sql
 new file mode 100644
-index 0000000..e7363c3
+index 0000000..246e150
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_04_100_world_sindragosa_gaunlet.sql
-@@ -0,0 +1,41 @@
+@@ -0,0 +1,48 @@
 +-- Eilo (https://github.com/eilo)
 +-- Recopilacion y adecuacion de querys de avalonfr
 +-- Sindragosa Gauntlet event
@@ -34,31 +34,37 @@ index 0000000..e7363c3
 +DELETE FROM `areatrigger_scripts` WHERE `entry` = 5623;
 +INSERT INTO `areatrigger_scripts` (entry, ScriptName) VALUES
 +(5623, 'at_icc_start_sindragosa_gauntlet');
-+UPDATE `creature_template` SET `minlevel` = 80, `maxlevel` = 80, `exp` = 2, `faction_A` = 21, `faction_H` = 21, `mechanic_immune_mask` = 8388624 WHERE `entry` IN (37228, 37229, 37232, 37501, 37502, 38197, 38198, 38362, 38134, 38137);
-+UPDATE `creature_template` SET `mindmg` = 422, `maxdmg` = 586, `attackpower` = 642, `dmg_multiplier` = 7.5, `minrangedmg` = 345, `maxrangedmg` = 509, `rangedattackpower` = 103 WHERE `entry` IN (37228, 37229);
++UPDATE `creature_template` SET `minlevel` = 80, `maxlevel` = 80, `exp` = 2, `faction_A` = 21, `faction_H` = 21, `mechanic_immune_mask` = 8388624 WHERE `entry` IN (37228, 37229, 37232, 37501, 37502, 38197, 38198, 38362, 38134, 38137, 38199);
++UPDATE `creature_template` SET `mindmg` = 422, `maxdmg` = 586, `attackpower` = 642, `dmg_multiplier` = 7.5, `minrangedmg` = 345, `maxrangedmg` = 509, `rangedattackpower` = 103 WHERE `entry` IN (37228, 37229, 38199);
 +UPDATE `creature_template` SET `mindmg` = 422, `maxdmg` = 586, `attackpower` = 642, `dmg_multiplier` = 13, `lootid` = 100002, `minrangedmg` = 345, `maxrangedmg` = 509, `rangedattackpower` = 103 WHERE `entry` IN (38134, 38137);
 +UPDATE `creature_template` SET `dmg_multiplier` = 2 WHERE `entry` = 38362;
 +UPDATE `creature_template` SET `difficulty_entry_1` = 38134 WHERE `entry` = 37228;
 +UPDATE `creature_template` SET `difficulty_entry_1` = 38137 WHERE `entry` = 37229;
-+UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN (37228, 37229, 37501, 37502);
-+DELETE FROM `smart_scripts` WHERE `entryorguid` IN (37228, 37229, 37501, 37502) AND `source_type` = 0;
++UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN (37228, 37229, 37501, 37502,38199);
++DELETE FROM `smart_scripts` WHERE `entryorguid` IN (37228, 37229, 37501, 37502, 38199) AND `source_type` = 0;
 +INSERT INTO `smart_scripts` (entryorguid, source_type, id, link, event_type, event_phase_mask, event_chance, event_flags, event_param1, event_param2, event_param3, event_param4, action_type, action_param1, action_param2, action_param3, action_param4, action_param5, action_param6, target_type, target_param1, target_param2, target_param3, target_x, target_y, target_z, target_o, comment) VALUES
 +-- Frostwarden Warrior: 37228 / 38134
-+(37228, 0, 0, 0, 0, 0, 100, 30, 5000, 15000, 10000, 25000, 11, 71323, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Warrior - Cast Frostblade'),
-+(37228, 0, 1, 0, 6, 0, 100, 30, 0, 0, 0, 0, 11, 71203, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Warrior - Cast Soul Feast On Death'),
++(37228, 0, 0, 0, 0, 0, 100, 30, 5000, 15000, 10000, 25000, 11, 71323, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Warrior - Cast Frostblade'),
++(37228, 0, 1, 0, 0, 0, 100, 10, 7000, 15000, 5000, 15000, 11, 71316, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Warrior - Cast Glacial Strike (10 man)'),
++(37228, 0, 2, 0, 0, 0, 100, 20, 7000, 15000, 5000, 15000, 11, 71317, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Warrior - Cast Glacial Strike (25 man)'),
++(37228, 0, 3, 0, 6, 0, 100, 30, 0, 0, 0, 0, 11, 71203, 2, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'Frostwarden Warrior - Cast Soul Feast On Death'),
++-- Frostblade: 38199
++(38199, 0, 0, 0, 54, 0, 100, 30, 0, 0, 0, 0, 89, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Frostblade - Random Move on Spawn'),
++(38199, 0, 1, 0, 4, 0, 100, 31, 0, 0, 0, 0, 11, 41062, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Frostblade - Disarm Target on aggro'),
++(38199, 0, 2, 0, 0, 0, 100, 11, 4000, 7000, 0, 0, 11, 71323, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Frostblade - Cast Frostblade (10 man)'),
++(38199, 0, 3, 0, 0, 0, 100, 21, 4000, 7000, 0, 0, 11, 71324, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Frostblade - Cast Frostblade (25 man)'),
 +-- Frostwarden Sorceress: 37229 / 38137
 +(37229, 0, 0, 0, 0, 0, 100, 20, 15000, 20000, 20000, 25000, 11, 71331, 1, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Sorceress - Cast Ice Tomb (25 man only)'),
-+(37229, 0, 1, 0, 0, 0, 100, 30, 10000, 15000, 10000, 20000, 11, 71320, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Sorceress - Cast Frost Nova'),
++(37229, 0, 1, 0, 0, 0, 100, 30, 10000, 15000, 10000, 20000, 11, 71320, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Sorceress - Cast Frost Nova'),
 +(37229, 0, 2, 0, 0, 0, 100, 30, 3000, 5000, 3000, 4000, 11, 71318, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Sorceress - Cast Frostbolt'),
-+(37229, 0, 3, 0, 6, 0, 100, 30, 0, 0, 0, 0, 11, 71203, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Frostwarden Sorceress - Cast Soul Feast On Death'),
++(37229, 0, 3, 0, 6, 0, 100, 30, 0, 0, 0, 0, 11, 71203, 2, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'Frostwarden Sorceress - Cast Soul Feast On Death'),
 +-- Nerub'ar Champion: 37501 / 38197
-+(37501, 0, 0, 0, 0, 0, 100, 30, 3000, 5000, 10000, 15000, 11, 71801, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Champion - Cast Rush'),
-+(37501, 0, 1, 0, 6, 0, 100, 30, 0, 0, 0, 0, 11, 71203, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Champion - Cast Soul Feast On Death'),
++(37501, 0, 0, 0, 9, 0, 100, 30, 8, 25, 10000, 15000, 11, 71801, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Champion - Cast Rush'),
++(37501, 0, 1, 0, 6, 0, 100, 30, 0, 0, 0, 0, 11, 71203, 2, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Champion - Cast Soul Feast On Death'),
 +-- Nerub'ar Webweaver: 37502 / 38198
 +(37502, 0, 0, 0, 0, 0, 100, 30, 3000, 5000, 10000, 15000, 11, 71326, 1, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Webweaver - Cast Crypt Scarabs'),
 +(37502, 0, 1, 0, 0, 0, 100, 30, 10000, 15000, 10000, 20000, 11, 71327, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Webweaver - Cast Web'),
-+(37502, 0, 2, 0, 6, 0, 100, 30, 0, 0, 0, 0, 11, 71203, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Webweaver - Cast Soul Feast On Death');
-\ No newline at end of file
++(37502, 0, 2, 0, 6, 0, 100, 30, 0, 0, 0, 0, 11, 71203, 2, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Webweaver - Cast Soul Feast On Death');
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp b/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
 index 7f0c568..46b34de 100644
 --- a/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
@@ -402,5 +408,5 @@ index 5d1d80d..c80fd3a 100755
  
          InstanceScript* GetInstanceScript(InstanceMap* map) const
 -- 
-1.7.8.msysgit.0
+1.7.9.msysgit.0
 
