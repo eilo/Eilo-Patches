@@ -14,7 +14,7 @@ new file mode 100644
 index 0000000..42f31b3
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_11_25_100_world_trashmobs_icc.sql
-@@ -0,0 +1,205 @@
+@@ -0,0 +1,275 @@
 +-- Eilo (https://github.com/eilo)  -- Muzashi https://github.com/Muzashi
 +-- Trashmobs icc 
 +-- En desarrollo ReanEmu https://github.com/ComunidadRean/ReanEmu
@@ -56,10 +56,13 @@ index 0000000..42f31b3
 +(37011, 0, 0, 0, 2, 0, 100, 0, 5, 30, 15000, 20000, 75, 70960, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'The Damned - Bone Flurry at 5-30%'),
 +(37011, 0, 1, 2, 6, 0, 100, 1, 0, 0, 0, 0, 11, 70961, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'The Damned - Shattered Bones on death'),
 +(37011, 0, 2, 0, 61, 0, 100, 1, 0, 0, 0, 0, 11, 71203, 0, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'On Creature Kill - Cast Soul Feast'),
-+(36725, 0, 0, 0, 0, 0, 100, 0, 2000, 2000, 8000, 8000, 11, 70965, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - Crypt Scarabs'),
-+(36725, 0, 1, 0, 14, 0, 100, 0, 5000, 40, 5000, 5000, 11, 71020, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - Dark Mending'),
-+(36725, 0, 2, 0, 0, 0, 100, 0, 5000, 5000, 5000, 5000, 11, 70980, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - Web Wrap'),
-+(36725, 0, 3, 0, 6, 0, 100, 1, 0, 0, 0, 0, 11, 71203, 0, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'On Creature Kill - Cast Soul Feast'),
++(36725, 0, 0, 0, 4, 0, 100, 0, 0, 0, 0, 0, 11, 69887, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - Aggro - Cast Web Beam'),
++(36725, 0, 1, 0, 10, 0, 100, 1, 0, 45, 0, 0, 49, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - OOC LOS - Attack Invoker'),
++(36725, 0, 2, 0, 0, 1, 100, 0, 2000, 2000, 8000, 8000, 11, 70965, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - In Combat - Crypt Scarabs'),
++(36725, 0, 3, 0, 14, 1, 100, 0, 5000, 40, 5000, 5000, 11, 71020, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - Friendly missing 5k HP - Dark Mending'),
++(36725, 0, 4, 0, 0, 1, 100, 0, 5000, 5000, 5000, 5000, 11, 70980, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - In Combat - Web Wrap'),
++(36725, 0, 5, 0, 6, 0, 100, 1,  0, 0, 0, 0, 11, 71203, 0, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - Death - Cast Soul Feast'),
++(36725, 0, 6, 0, 9, 0, 100, 1, 0, 5, 0, 0, 22, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Nerubar Broodkeeper - Target at 5 yards - Set phase 1'),
 +/*--Trash de Oratorio de los Malditos--*/
 +-- SAI
 +(36805, 0, 0, 0, 0, 0, 100, 0, 3000, 5000, 8000, 15000, 11, 69405, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Deathspeaker Servant - Consuming Shadows'),
@@ -79,7 +82,7 @@ index 0000000..42f31b3
 +(36811, 0, 1, 0, 0, 0, 100, 10, 5000, 10000, 5000, 10000, 11, 69355, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Deathspeaker Attendant - Shadow Nova'),
 +(36811, 0, 2, 0, 0, 0, 100, 20, 5000, 8000, 5000, 10000, 11, 71106, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Deathspeaker Attendant - Shadow Nova'),
 +(36811, 0, 3, 0, 6, 0, 100, 1, 0, 0, 0, 0, 11, 71203, 0, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'On Creature Kill - Cast Soul Feast'),
-+(36829, 0, 0, 0, 4, 0, 100, 1, 0, 0, 0, 0, 75, 69491, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Deathspeaker High Priest - Aura of Darkness on Aggro'),
++(36829, 0, 0, 0, 4, 0, 100, 1, 0, 0, 0, 0, 11, 69491, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Deathspeaker High Priest - Aura of Darkness on Aggro'),
 +(36829, 0, 1, 0, 0, 0, 100, 0, 2000, 2000, 10000, 12000, 11, 69483, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Deathspeaker High Priest - Dark Reckoning'),
 +(36829, 0, 2, 0, 0, 0, 100, 1, 0, 0, 0, 0, 28, 69491, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Deathspeaker High Priest - Remove Aura of Darkness OOC'),
 +(36829, 0, 3, 0, 6, 0, 100, 1, 0, 0, 0, 0, 11, 71203, 0, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'On Creature Kill - Cast Soul Feast'),
@@ -220,6 +223,73 @@ index 0000000..42f31b3
 +UPDATE `creature_template` SET `mechanic_immune_mask` = `mechanic_immune_mask`|1|4|8|16|128|512|1024|65536|131072|524288|1048576|4194304|8388608|33554432|67108864|134217728 WHERE `entry`=38134;
 +-- ymirjar warlord
 +UPDATE `creature_template` SET `mechanic_immune_mask` = `mechanic_immune_mask`|1|4|8|16|128|512|1024|65536|131072|524288|1048576|4194304|8388608|33554432|67108864|134217728 WHERE `entry`=38133;
++
++-- Corregidas las Spirit Alarm
++UPDATE `gameobject` SET `position_x`=-192.116287, `position_y`=2167.751465,`position_z`=37.985165 WHERE `guid`=150166;
++UPDATE `gameobject_template` SET `data4`=1, `data11`=1 WHERE `entry` IN (201814,201815,201816,201817);
++
++-- The Damned pathing
++SET @NPC1 := 201107;
++SET @NPC2 := 201146;
++UPDATE `creature` SET `position_x`=-175.160233, `position_y`=2180.252441, `position_z`=37.985165, `orientation`=1.621184 WHERE `guid`=@NPC1;
++UPDATE `creature` SET `currentwaypoint`=1, `MovementType`=2 WHERE `guid` IN (@NPC1,@NPC2);
++DELETE FROM `creature_addon` WHERE `guid` IN (@NPC1, @NPC2);
++INSERT INTO `creature_addon` (`guid`,`path_id`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES
++(@NPC1,@NPC1*10,0,0,0,0,''),
++(@NPC2,@NPC2*10,0,0,0,0,'');
++DELETE FROM `waypoint_data` WHERE `id` IN (@NPC1*10, @NPC2*10);
++INSERT INTO `waypoint_data` (`id`,`point`,`position_x`,`position_y`,`position_Z`,`orientation`,`delay`,`move_flag`,`action`,`action_chance`,`wpguid`) VALUES
++(@NPC1*10,1,-175.160233,2180.252441,37.985165,1.621184,0,0,0,100,0),
++(@NPC1*10,2,-178.473145,2245.945801,37.985241,1.621184,0,0,0,100,0),
++(@NPC2*10,1,-170.416,2180.83,37.8201,1.36136,0,0,0,100,0),
++(@NPC2*10,4,-173.728912,2246.52336,37.985241,1.36136,0,0,0,100,0);
++
++-- Vengeful Fleshreaper pathing
++SET @NPC1 := 201373;
++SET @NPC2 := 201389;
++UPDATE `creature` SET `position_x`=4370.501953, `position_y`=3063.313477, `position_z`=371.682373, `orientation`=4.678616, `currentwaypoint`=1,`MovementType`=2 WHERE `guid`=@NPC1;
++UPDATE `creature` SET `position_x`=4342.688965, `position_y`=3062.161133, `position_z`=371.673218, `orientation`=4.695860, `currentwaypoint`=1,`MovementType`=2 WHERE `guid`=@NPC2;
++DELETE FROM `creature_addon` WHERE `guid` IN (@NPC1, @NPC2);
++INSERT INTO `creature_addon` (`guid`,`path_id`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES
++(@NPC1,@NPC1*10,0,0,0,0,''),
++(@NPC2,@NPC2*10,0,0,0,0,'');
++DELETE FROM `waypoint_data` WHERE `id` IN (@NPC1*10, @NPC2*10);
++INSERT INTO `waypoint_data` (`id`,`point`,`position_x`,`position_y`,`position_Z`,`orientation`,`delay`,`move_flag`,`action`,`action_chance`,`wpguid`) VALUES
++(@NPC1*10,1,4370.501953,3063.313477,371.682373,4.678616,0,0,0,100,0),
++(@NPC1*10,2,4370.446777,3041.886475,372.798065,6.239988,0,0,0,100,0),
++(@NPC1*10,3,4431.955078,3040.562012,372.796875,1.515033,0,0,0,100,0),
++(@NPC1*10,4,4432.262695,3079.419189,372.941071,4.673120,0,0,0,100,0),
++(@NPC1*10,5,4432.354004,3041.560547,372.790863,3.114890,0,0,0,100,0),
++(@NPC1*10,6,4370.663086,3040.779785,372.800293,1.551947,0,0,0,100,0),
++(@NPC2*10,1,4342.688965,3062.161133,371.673218,4.695860,0,0,0,100,0),
++(@NPC2*10,2,4342.340820,3041.446533,372.792023,3.113284,0,0,0,100,0),
++(@NPC2*10,3,4281.295410,3040.479004,372.788544,1.588826,0,0,0,100,0),
++(@NPC2*10,4,4280.906738,3073.233643,371.702759,4.732776,0,0,0,100,0),
++(@NPC2*10,5,4280.291504,3041.645020,372.785004,6.281582,0,0,0,100,0),
++(@NPC2*10,6,4342.137695,3041.630127,372.792053,1.557411,0,0,0,100,0);
++
++-- Conditions to spell Soul Feast
++DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=17 AND `SourceEntry`=71203;
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`SourceId`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionTarget`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`NegativeCondition`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
++(17,0,71203,0,0,3,1,49888,0,0,0,0,'','Soul Feast can target only players with Shadows Edge'),
++(17,0,71203,0,0,9,1,24547,0,0,0,0,'','Soul Feast can target only players with quest 24547');
++
++-- Argent & Ebon Champions SAI
++SET @ARGENT := 37928; -- Argent Champion
++SET @EBON := 37996; -- Ebon Champion
++SET @SPELL1 := 53625; -- Heroic Leap
++SET @SPELL2 := 67939; -- Icy Touch
++SET @SPELL3 := 66023; -- Icebound Fortitude
++SET @SPELL4 := 66019; -- Death Coil
++SET @SPELL5 := 66047; -- Frost Strike
++UPDATE `creature_template` SET `AIName`='SmartAI' WHERE `entry` IN (@ARGENT,@EBON);
++DELETE FROM `smart_scripts` WHERE `entryorguid` IN (@ARGENT,@EBON) AND `source_type`=0;
++INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
++(@ARGENT,0,0,0,9,0,100,0,8,40,7000,10000,11,@SPELL1,0,0,0,0,0,2,0,0,0,0,0,0,0, 'Argent Champion - Target at 8-40 yards - Heroic Leap'),
++(@EBON,0,0,0,0,0,100,0,5000,7000,10000,15000,11,@SPELL2,0,0,0,0,0,2,0,0,0,0,0,0,0, 'Ebon Champion - In combat - Icy Touch'),
++(@EBON,0,1,0,0,0,100,0,10000,15000,7000,8000,11,@SPELL4,0,0,0,0,0,2,0,0,0,0,0,0,0, 'Ebon Champion - In combat - Death Coil'),
++(@EBON,0,2,0,0,0,100,0,10000,15000,10000,15000,11,@SPELL5,0,0,0,0,0,2,0,0,0,0,0,0,0, 'Ebon Champion - In combat - Frost Strike'),
++(@EBON,0,3,0,2,0,100,0,0,80,60000,60000,11,@SPELL3,0,0,0,0,0,1,0,0,0,0,0,0,0, 'Ebon Champion - 80% HP - Icebound Fortitude');
 -- 
 1.7.8.msysgit.0
 
