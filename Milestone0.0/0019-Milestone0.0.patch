@@ -23,11 +23,10 @@ index 87e8691..06dc29e 100644
  
  
  ##################################
-@@ -47,7 +52,23 @@ parches y/o c
+@@ -47,6 +52,23 @@ parches y/o c
  ###############
  # Adicionales #
  ###############
--
 +0.1  - 28/10/2011: Archivo sqlcombinado.BAT para unificar sqls de actualizacion por Eilo
 +0.2  - 24/11/2011: Añadido sql TDB11.46
 +0.4  - 28/10/2011: Pvp Ranks, honor y titulos original por Spgm, adecuaciones varias por Eilo
@@ -46,8 +45,8 @@ index 87e8691..06dc29e 100644
 +0.25 - 10/04/2012: FFA Pvp zonas custom por Oceanor
 +0.26 - 29/04/2012: Arena Espectador por Eilo
  
+ 
  ###############
- # Jugabilidad #
 -- 
 1.7.8.msysgit.0
 
