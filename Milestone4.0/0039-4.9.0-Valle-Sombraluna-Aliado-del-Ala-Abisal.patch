@@ -1,7 +1,7 @@
-From 052cbec90c58bb0126e38de19aeb9fae789b2349 Mon Sep 17 00:00:00 2001
+From 64c5530c93cb4fe36746196ca3ac90457efdf98d Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Tue, 17 Apr 2012 20:22:24 -0300
-Subject: [PATCH 33/40] 4.9.0 Valle Sombraluna: Aliado del Ala Abisal
+Subject: [PATCH 39/40] 4.9.0 Valle Sombraluna: Aliado del Ala Abisal
 
 Disabled quest 10871 for players, it's a test version of quest 10870 never released
 ---
@@ -21,5 +21,5 @@ index 0000000..cfe51de
 +(1,10871,0,0,0,'Ally of the Netherwing - test version disabled for players');
 \ No newline at end of file
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

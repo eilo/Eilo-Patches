@@ -1,4 +1,4 @@
-From 51e2fdb3ba9abffac32ef468a9fe05a6a5645b48 Mon Sep 17 00:00:00 2001
+From 91f8bab91a49b4edbda522a08820197821fe1363 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 16:23:49 -0300
 Subject: [PATCH 02/40] =?UTF-8?q?4.0.1=20Clases:=20La=20Llamada=20del=20Agua?=
@@ -63,5 +63,5 @@ index 0000000..3ccb18a
 +UPDATE `gameobject` SET `spawntimesecs`=300 WHERE `id`=202275;
 \ No newline at end of file
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

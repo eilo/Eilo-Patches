@@ -1,4 +1,4 @@
-From 2cc0c3131866b5fc791d4de9a1378d121b7cc1fa Mon Sep 17 00:00:00 2001
+From abb224e50f205829c1e5063897f65f7d9cbaceb1 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 16:34:04 -0300
 Subject: [PATCH 08/40] 4.1.4 Quel'Delar: Thalorien Buscalba
@@ -173,5 +173,5 @@ index 0000000..b1eb4e6
 +(37211,0,0,1,1,0,100,1,30000,30000,0,0,5,66,0,0,0,0,0,1,0,0,0,0,0,0,0,'Sunwell Defender - OOC time - Salute'),
 +(37211,0,1,0,61,0,100,1,0,0,0,0,41,2000,0,0,0,0,0,1,0,0,0,0,0,0,0,'Sunwell Defender - OOC time - Despawn');
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

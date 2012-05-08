@@ -1,4 +1,4 @@
-From 69dbb04493f58f6e70840e1682d47ff949cd73c6 Mon Sep 17 00:00:00 2001
+From 74759bb32506da1e76ea7939d830cbe9ccd2e33e Mon Sep 17 00:00:00 2001
 From: miavi <miavi1@gmail.com>
 Date: Sat, 31 Mar 2012 18:00:14 -0300
 Subject: [PATCH 04/40] =?UTF-8?q?4.1.0=20Quel'Delar:=20Empu=C3=B1adura=20Mal?=
@@ -48,5 +48,5 @@ index 0000000..006d078
 +(100001, 50380, 0.12, 1, 2, 1, 1);
 \ No newline at end of file
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

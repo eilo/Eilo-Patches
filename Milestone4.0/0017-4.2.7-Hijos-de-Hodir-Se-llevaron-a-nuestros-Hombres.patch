@@ -1,4 +1,4 @@
-From 4013616993e439f1c95f8e2ef4249f7d66c0b4d2 Mon Sep 17 00:00:00 2001
+From 62caa5edea39430fbd632246d537b8ac8f71522d Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:03:43 -0300
 Subject: [PATCH 17/40] =?UTF-8?q?4.2.7=20Hijos=20de=20Hodir:=20=C2=A1Se=20ll?=
@@ -21,5 +21,5 @@ index 0000000..b4852d2
 @@ -0,0 +1 @@
 +UPDATE `smart_scripts` SET `event_param2`=571, `event_param3`=67 WHERE `entryorguid`=29466 AND `source_type`=0 AND `id`=0;
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

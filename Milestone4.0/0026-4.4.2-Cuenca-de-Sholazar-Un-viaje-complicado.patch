@@ -1,7 +1,7 @@
-From 06c3b089664696add5030962e84eaba59ac2d78b Mon Sep 17 00:00:00 2001
+From ddb8e84fc520d1f9268899b8fdd1857715814beb Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:15:38 -0300
-Subject: [PATCH 21/40] 4.4.2 Cuenca de Sholazar: Un viaje complicado
+Subject: [PATCH 26/40] 4.4.2 Cuenca de Sholazar: Un viaje complicado
 
 Some corrections on Crocolik's waypoints
 ---
@@ -82,5 +82,5 @@ index 0000000..56776b4
 +-- Give Zepik's Horn to player on quest accept
 +UPDATE `quest_template` SET `SourceSpellId`=52545 WHERE `Id`=12536;
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

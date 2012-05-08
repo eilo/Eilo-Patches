@@ -1,7 +1,7 @@
-From b2a2f7f3ad9a22a213ce5f421880ac0600ccb560 Mon Sep 17 00:00:00 2001
+From 14ce104f5faf26c81cafd02651ab6803e5898a79 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Tue, 17 Apr 2012 22:11:17 -0300
-Subject: [PATCH 34/40] 4.3.0 - Corona de Hielo: Sangre en el Agua
+Subject: [PATCH 20/40] 4.3.0 - Corona de Hielo: Sangre en el Agua
 
 Fix for quest "Blood in the Water"
 ---
@@ -28,5 +28,5 @@ index 0000000..80fceb0
 +(@ENTRY,0,3,0,61,0,100,0,0,0,0,0,28,@AURA,0,0,0,0,0,1,0,0,0,0,0,0,0,'Ravenous Jaws - Spell Hit - Remove Blood Aura');
 \ No newline at end of file
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

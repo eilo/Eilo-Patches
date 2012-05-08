@@ -1,7 +1,7 @@
-From 72fd6e4bd8ccbb5236b1489042659dbd5d8ca961 Mon Sep 17 00:00:00 2001
+From 5531e1d50d031a192b39cde5a8c2405140045821 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:34:30 -0300
-Subject: [PATCH 31/40] 4.4.12 Cuenca de Sholazar: La carga de un heroe
+Subject: [PATCH 36/40] 4.4.12 Cuenca de Sholazar: La carga de un heroe
 
 Support for quest "A Hero's Burden"
 Fixes for Frenzyheart Oracles Reputation's switch dailies
@@ -112,5 +112,5 @@ index 0000000..fcbb8ce
 +UPDATE `creature_involvedrelation` SET `id`=@ZEPIK WHERE `quest`=12582;
 +UPDATE `creature_questrelation` SET `id`=@ZEPIK WHERE `quest`=12582;
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

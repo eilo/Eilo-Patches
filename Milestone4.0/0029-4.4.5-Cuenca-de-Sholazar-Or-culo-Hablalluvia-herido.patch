@@ -1,7 +1,7 @@
-From 071e0b72139952ce03f75088215d1b7954f3c59e Mon Sep 17 00:00:00 2001
+From 98343c3b9ca6a9b6ba65ae947e290a20d47cf1da Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:21:30 -0300
-Subject: [PATCH 24/40] =?UTF-8?q?4.4.5=20Cuenca=20de=20Sholazar:=20Or=C3=A1c?=
+Subject: [PATCH 29/40] =?UTF-8?q?4.4.5=20Cuenca=20de=20Sholazar:=20Or=C3=A1c?=
  =?UTF-8?q?ulo=20Hablalluvia=20herido?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -280,5 +280,5 @@ index 93d0182..0c210cf 100644
      new npc_avatar_of_freya();
      new npc_bushwhacker();
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

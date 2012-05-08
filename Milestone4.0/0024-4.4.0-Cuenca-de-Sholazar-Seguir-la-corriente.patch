@@ -1,7 +1,7 @@
-From ec05951c5447c10fcb2284be22912f87b63f5115 Mon Sep 17 00:00:00 2001
+From f8f4184b87077f5982eecfadfef975a42371614c Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Mon, 16 Apr 2012 21:18:09 -0300
-Subject: [PATCH 19/40] 4.4.0 Cuenca de Sholazar: Seguir la corriente
+Subject: [PATCH 24/40] 4.4.0 Cuenca de Sholazar: Seguir la corriente
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -47,5 +47,5 @@ index 0000000..7ac3858
 +(@GEKGEK,0,1,"...Go or I taunt you a second time!",12,0,33,0,2,0,'Tracker Gekgek'),
 +(@GEKGEK,1,0,"No! You steal kill! Now you owe Gekgek!",12,0,100,1,2,0,'Tracker Gekgek - Kill Pitch Text');
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

@@ -1,7 +1,7 @@
-From 4c92ef11f7beba4c8cae8e02d83bd43b586af5fc Mon Sep 17 00:00:00 2001
+From f627f0625914d8a79e7023d742e738378273d269 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Mon, 16 Apr 2012 21:18:48 -0300
-Subject: [PATCH 20/40] 4.4.1 Cuenca de Sholazar: Atormentar a los
+Subject: [PATCH 25/40] 4.4.1 Cuenca de Sholazar: Atormentar a los
  badanudillos
 
 Mejoras en la jugabilidad de la quest "Tormenting the Softknuckles"
@@ -31,5 +31,5 @@ index 0000000..114da04
 +(@MATRIARCH,0,1,0,0,0,100,0,6000,10000,12000,15000,11,61580,0,0,0,0,0,1,0,0,0,0,0,0,0,'Hardknuckle Matriarch - In combat - Cast Thunderstomp');
 \ No newline at end of file
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

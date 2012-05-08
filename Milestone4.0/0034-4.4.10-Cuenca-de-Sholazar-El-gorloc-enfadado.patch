@@ -1,7 +1,7 @@
-From cac2d431ff34f6390c802c97a0ee512f67f8c5a6 Mon Sep 17 00:00:00 2001
+From aab4ec45729bb9aaba2b57af62cb41680692b8fc Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Mon, 16 Apr 2012 21:41:09 -0300
-Subject: [PATCH 29/40] 4.4.10 Cuenca de Sholazar: El gorloc enfadado
+Subject: [PATCH 34/40] 4.4.10 Cuenca de Sholazar: El gorloc enfadado
 
 Fix for quest "The Angry Gorloc" from Oracles/Frenzyheart quest chain
 ---
@@ -21,5 +21,5 @@ index 0000000..4ff62d0
 +(54057,4297,12578,1,12578,0,0,2,1);
 \ No newline at end of file
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

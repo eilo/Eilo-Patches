@@ -1,7 +1,7 @@
-From 3941adfa51ccddb6b9ab3b6aa83970b13bc53031 Mon Sep 17 00:00:00 2001
+From 0523ff4cd4c87662eaebcbf711d5ea46b8ec29ab Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Tue, 1 May 2012 01:52:02 -0300
-Subject: [PATCH 42/40] =?UTF-8?q?4.3.2=20Torneo=20Argenta:=20El=20Desaf=C3=AD?=
+Subject: [PATCH 22/40] =?UTF-8?q?4.3.2=20Torneo=20Argenta:=20El=20Desaf=C3=AD?=
  =?UTF-8?q?o=20del=20Aspirante?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -230,5 +230,5 @@ index fb2e0f6..c323007 100644
      new npc_vereth_the_cunning;
      new npc_tournament_training_dummy;
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

@@ -1,4 +1,4 @@
-From 1a0e3994a873eecc4735c303a6381342a7626f33 Mon Sep 17 00:00:00 2001
+From ab4003376f47d6caf87776917da932a2242f7feb Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 16:53:39 -0300
 Subject: [PATCH 11/40] 4.2.1 Hijos de Hodir: Disciplina y Seguir con la
@@ -41,5 +41,5 @@ index 0000000..73ebfef
 +(@ENTRY,0,12,0,2,0,100,1,0,30,0,0,11,57395,0,0,0,0,0,2,0,0,0,0,0,0,0,'Exhausted Vrykul - At 30% Hp - Cast Desperate Blow');
 +
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

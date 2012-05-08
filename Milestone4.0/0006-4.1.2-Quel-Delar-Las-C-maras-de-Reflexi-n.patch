@@ -1,4 +1,4 @@
-From 97acc628b508accee88b97f1b849222e3305890e Mon Sep 17 00:00:00 2001
+From 02045e619f6c01a436b5cac63f3e1df0064001e3 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 16:31:21 -0300
 Subject: [PATCH 06/40] =?UTF-8?q?4.1.2=20Quel'Delar:=20Las=20C=C3=A1maras=20?=
@@ -87,5 +87,5 @@ index 0000000..00794b6
 +INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
 +(@QUEL,0,0,"Quel'Delar prepares to attack!",41,0,100,0,2,0,'Queldelar');
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

@@ -1,7 +1,7 @@
-From e259d2a637ff506be6fbc89dbbad2287973f968d Mon Sep 17 00:00:00 2001
+From d31312333fdc7c4ac394fb0360d098db04f3fe3a Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:26:26 -0300
-Subject: [PATCH 25/40] 4.4.6 Cuenca de Sholazar: Hacer las Paces
+Subject: [PATCH 30/40] 4.4.6 Cuenca de Sholazar: Hacer las Paces
 
 Converted C++ script for npc "Shaman Vekjik" to SAI
 Fixed spell "Frenzyheart's Fury" thanks to @Hispano
@@ -48,10 +48,10 @@ index 0000000..43d1340
 +INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
 +(@VEKJIK,0,0,"Frenzyheart kill you if you come back. You no welcome here no more!",12,0,100,0,0,0,'Shaman Vekjik');
 diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
-index 3de8779..f75a692 100755
+index 57ac0c4..346c491 100755
 --- a/src/server/game/Spells/SpellMgr.cpp
 +++ b/src/server/game/Spells/SpellMgr.cpp
-@@ -3524,6 +3524,9 @@ void SpellMgr::LoadDbcDataCorrections()
+@@ -3611,6 +3611,9 @@ void SpellMgr::LoadDbcDataCorrections()
                  spellInfo->manaCost = 0;
                  spellInfo->manaPerSecond = 0;
                  break;
@@ -156,5 +156,5 @@ index 0c210cf..778327d 100644
      new npc_bushwhacker();
      new npc_engineer_helice();
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

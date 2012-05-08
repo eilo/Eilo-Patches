@@ -1,7 +1,7 @@
-From f8064ed09d09f1a502d18e77f1b1bbe383a99251 Mon Sep 17 00:00:00 2001
+From dc06c54820c34a8a57be975dcae3b32127a28ad6 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Mon, 16 Apr 2012 21:20:46 -0300
-Subject: [PATCH 22/40] 4.4.3 Cuenca de Sholazar: El rayo golpea dos veces sin
+Subject: [PATCH 27/40] 4.4.3 Cuenca de Sholazar: El rayo golpea dos veces sin
  duda
 
 Fix for quest "Lightning Definitely Strikes Twice" from Oracles/Frenzyheart quest chain
@@ -29,5 +29,5 @@ index 0000000..25fd21c
 +SELECT 18475,1,9, `guid`,60 FROM `gameobject` WHERE `id`=190502;
 \ No newline at end of file
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

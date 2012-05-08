@@ -1,7 +1,7 @@
-From a9eca9522ef932d8592bc557372480c12e8b1802 Mon Sep 17 00:00:00 2001
+From 85ab882acd4861808d412f57ca98dc3c78150bf9 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Mon, 16 Apr 2012 21:42:42 -0300
-Subject: [PATCH 30/40] 4.4.11 Cuenca de Sholazar: El salvador de los
+Subject: [PATCH 35/40] 4.4.11 Cuenca de Sholazar: El salvador de los
  Caminamoho
 
 Support for quest "The Mosswalker Savior" from Oracles/Frenzyheart quest chain
@@ -60,5 +60,5 @@ index 0000000..90e7e97
 +(@ORACLE,1,11,"You save us! Yay for you!",12,0,100,1,0,0,'Mosswalker victim');
 \ No newline at end of file
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

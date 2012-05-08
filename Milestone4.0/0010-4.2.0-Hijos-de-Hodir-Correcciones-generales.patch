@@ -1,4 +1,4 @@
-From 82f2e69388bbb5c12202e74a54df8d961d7e149e Mon Sep 17 00:00:00 2001
+From b667f75a57abc8a12b9d116b3889098a43479fed Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 16:52:24 -0300
 Subject: [PATCH 10/40] 4.2.0 Hijos de Hodir: Correcciones generales
@@ -50,5 +50,5 @@ index 0000000..e2b4558
 +(72914,4425,12905,1,0,0,0,2,1),
 +(72914,4430,12905,1,12886,0,0,2,1);
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 
