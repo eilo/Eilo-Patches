@@ -24,7 +24,7 @@ new file mode 100644
 index 0000000..c72af61
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_10_08_100_world_halls_of_reflection.sql
-@@ -0,0 +1,356 @@
+@@ -0,0 +1,368 @@
 +-- Eilo (https://github.com/eilo)
 +-- Recopilacion y adecuacion de querys originales de HyD y varios autores de scripts antiguas y raras
 +-- Algunas querys anadidas y ordenacion/comentarios del sql por Eilo
@@ -61,6 +61,18 @@ index 0000000..c72af61
 +-- Complementos adicionales
 +UPDATE `creature_template` SET `unit_flags` = 32784, `AIName` = '', `ScriptName` = 'npc_spiritual_reflection', `difficulty_entry_1` = 37721 WHERE `entry` = 37107;
 +UPDATE `creature_template` SET `minlevel` = 80, `maxlevel` = 80, `unit_flags` = 32784, `mindmg` = '422', `maxdmg` = '586', `attackpower` = '642', `dmg_multiplier` = '13' WHERE `entry` = 37721;
++
++-- Facciones del Frostworn General N y H
++UPDATE `creature_template` SET faction_A=16, faction_H=16 WHERE entry IN (36723,37720);
++
++-- Facciones del Raging Ghoul N y H
++UPDATE `creature_template` SET faction_A=1771, faction_H=1771 WHERE entry IN (36940,37550);
++-- Facciones del Risen Witch Doctor N y H
++UPDATE `creature_template` SET faction_A=1771, faction_H=1771 WHERE entry IN (36941,37551);
++-- Facciones del Lumbering Abomination N y H
++UPDATE `creature_template` SET faction_A=1771, faction_H=1771 WHERE entry IN (37069,37549);
++-- Facciones del Spiritual Reflection N y H
++UPDATE `creature_template` SET faction_A=1771, faction_H=1771 WHERE entry IN (37107,37721);
 +
 +-- Quitando a Uther visible
 +DELETE FROM `creature` WHERE `id` IN (37225) AND `map` = 668;
