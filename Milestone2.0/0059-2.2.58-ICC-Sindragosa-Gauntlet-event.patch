@@ -1,7 +1,7 @@
-From 933c112dbf856a87d92af651b5d4f91d2693f35c Mon Sep 17 00:00:00 2001
+From 858ca544b30ffb69c3b6a31b9ddc7571117f6041 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 8 May 2012 02:52:32 -0300
-Subject: [PATCH 59/92] 2.2.58 ICC: Sindragosa Gauntlet event
+Subject: [PATCH 59/93] 2.2.58 ICC: Sindragosa Gauntlet event
 
 ---
  .../2012_05_04_100_world_sindragosa_gaunlet.sql    |   48 ++++
@@ -408,5 +408,5 @@ index 5d1d80d..c80fd3a 100755
  
          InstanceScript* GetInstanceScript(InstanceMap* map) const
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

@@ -1,0 +1,34 @@
+From 75c4745fc99c4a7fdf4c9ec978450d8d5a73ba49 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Tue, 8 May 2012 01:35:45 -0500
+Subject: [PATCH 60/93] 2.2.59 ICC: Rotface inmunidades en Oozes
+
+---
+ .../Northrend/IcecrownCitadel/boss_rotface.cpp     |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_rotface.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_rotface.cpp
+index ab3882d..72f6009 100644
+--- a/src/server/scripts/Northrend/IcecrownCitadel/boss_rotface.cpp
++++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_rotface.cpp
+@@ -230,6 +230,8 @@ class npc_little_ooze : public CreatureScript
+         {
+             npc_little_oozeAI(Creature* creature) : ScriptedAI(creature)
+             {
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
++                me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
+             }
+ 
+             void IsSummonedBy(Unit* summoner)
+@@ -280,6 +282,8 @@ class npc_big_ooze : public CreatureScript
+         {
+             npc_big_oozeAI(Creature* creature) : ScriptedAI(creature), instance(creature->GetInstanceScript())
+             {
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
++                me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
+             }
+ 
+             void IsSummonedBy(Unit* /*summoner*/)
+-- 
+1.7.8.msysgit.0
+

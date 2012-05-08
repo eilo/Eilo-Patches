@@ -1,7 +1,7 @@
-From 4ddd390831c158464575140c647ea9b34707f323 Mon Sep 17 00:00:00 2001
+From a5d7dddacdf54495695bb7e640c1609c1b991bb2 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 4 May 2012 04:05:04 -0500
-Subject: [PATCH 21/92] 2.2.12 ICC: Putricide Volatile Ooze efecto explosion
+Subject: [PATCH 21/93] 2.2.12 ICC: Putricide Volatile Ooze efecto explosion
 
 ---
  .../IcecrownCitadel/boss_professor_putricide.cpp   |   10 +++++++++-

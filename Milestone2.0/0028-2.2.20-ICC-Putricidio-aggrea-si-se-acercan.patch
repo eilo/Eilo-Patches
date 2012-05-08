@@ -1,7 +1,7 @@
-From 798528a49774c9eb224baa87745ae3af6f76652c Mon Sep 17 00:00:00 2001
+From 5929e6ae64bfa6a91f4e39e2c5c61dd8bdc57a3a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 4 May 2012 03:28:08 -0500
-Subject: [PATCH 28/92] 2.2.20 ICC: Putricidio aggrea si se acercan
+Subject: [PATCH 28/93] 2.2.20 ICC: Putricidio aggrea si se acercan
 
 ---
  .../IcecrownCitadel/boss_professor_putricide.cpp   |    2 +-

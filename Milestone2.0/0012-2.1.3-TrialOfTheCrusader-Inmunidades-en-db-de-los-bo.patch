@@ -1,7 +1,7 @@
-From 9d8f5b43af76e07ec85faf98b44db468e3a8f567 Mon Sep 17 00:00:00 2001
+From 7d1c0317242948cb3ac88c69f48fc06d416554f7 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 17:41:10 -0500
-Subject: [PATCH 12/92] 2.1.3 TrialOfTheCrusader: Inmunidades en db de los
+Subject: [PATCH 12/93] 2.1.3 TrialOfTheCrusader: Inmunidades en db de los
  bosses y adds
 
 ---

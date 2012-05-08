@@ -1,7 +1,7 @@
-From 652705ed71e1138669dea55260e9bc166e186b84 Mon Sep 17 00:00:00 2001
+From bd0d90b9a5808c0b67e0156bc338ada45101e3a7 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 02:12:38 -0500
-Subject: [PATCH 20/92] 2.2.11 ICC: Sindragosa evitando crash en spell Fury
+Subject: [PATCH 20/93] 2.2.11 ICC: Sindragosa evitando crash en spell Fury
 
 ---
  .../Northrend/IcecrownCitadel/boss_sindragosa.cpp  |    2 +-

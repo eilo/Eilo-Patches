@@ -1,8 +1,8 @@
-From 5658a42bae2bc5aa7e9c459f61ed50abf2ca7e86 Mon Sep 17 00:00:00 2001
+From cbaab034f81b3409da7a9016df7434f81f68bd92 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Tue, 8 May 2012 01:56:40 -0300
-Subject: [PATCH 32/92] 2.2.25 ICC: Trash mob Nerubar Broodkeeper correccion en
- posiciones
+Subject: [PATCH 32/93] 2.2.25 ICC: Trash mob Nerubar Broodkeeper correccion
+ en posiciones
 
 ---
  .../2011_11_24_100_world_correcciones_icc.sql      |    3 +++
@@ -19,5 +19,5 @@ index 0000000..c172e6a
 +UPDATE `creature` SET `position_z`=75.0923 WHERE `guid`=201106;
 +UPDATE `creature_template` SET `InhabitType`=4 WHERE `entry`=36725;
 -- 
-1.7.9.msysgit.0
+1.7.8.msysgit.0
 

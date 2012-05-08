@@ -1,0 +1,132 @@
+From a66a02f254a288b4fb170a8a7e082121b4ef2ca0 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Mon, 7 May 2012 21:19:58 -0500
+Subject: [PATCH 93/93] Milestone2.0
+
+---
+ README |   87 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 87 insertions(+), 0 deletions(-)
+
+diff --git a/README b/README
+index 1aa3e72..bcfacc5 100644
+--- a/README
++++ b/README
+@@ -44,6 +44,9 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
+               para complemento del nucleo y funciones de soporte.
+ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
+               comportamiento de bgs, arenas, players-units-pets y mejoras.
++Milestone2.0: Mejoras en Instances y dungeons, escencialmente para darles funcionalidad
++              y detalles para tenerlas lo mas cercano a blizzlike, solucion de bugs 
++              relativos a las mismas, implementacion de nuevas scripts, prioridad tlk.
+ 
+ 
+ ##################################
+@@ -104,21 +107,105 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
+ ###############################
+ # Dungeons e Instances Varias #
+ ###############################
++2.1.1  - 08/10/2011: TrialOfTheCrusader: Añadida inmunidad a grip y knockback por Karlos
++2.1.2  - 10/10/2011: TrialOfTheCrusader: Mejorada la AI de los campeones por Gigatotem
++2.1.3  - 01/11/2011: TrialOfTheCrusader: Inmunidades en db de los bosses y adds por Eilo
++2.1.4  - 01/05/2012: TrialOfTheCrusader: AnubArak ahora aggrea a 20y por Eilo
++2.4.1  - 28/03/2011: Onyxia: Inmunidades en script por Souler
++2.8.1  - 01/05/2012: ObsidianSanctum: Añadido trashmob e inmunidades por Zwerg, actualizado por Eilo
++2.8.2  - 02/05/2012: ObsidianSanctum: Mejora de script de los 3 dragones y logros por Zwerg, actualizado por Eilo
++2.10.1 - 03/08/2011: Ahn'Kahet: Taldaram combate en invisible por Greymane
++2.10.2 - 16/12/2011: Ahn'Kahet: Taldaram daño esferas ajustado por Eilo
++2.11.1 - 02/05/2012: AzjolNerub: AnubArak corregido exploit de la zona de combate por Eilo
++2.12.1 - 17/12/2011: CullingOfStratholme: Arthas no desaparece a distancia por Eilo
++2.12.2 - 17/12/2011: CullingOfStratholme: Arthas camina en la segunda fase por Eilo
++2.13.1 - 27/11/2011: TrialOfTheChampions: Reimplementacion y soporte spells por Souler, mejoras, reordenacion y complementos por Eilo
++2.14.1 - 17/12/2011: Drak'Tharon: Visuales y flags varias del trash y reward de LFG por Treak y Eilo
++2.14.2 - 11/02/2011: Drak'Tharon: Novos permitir reinicio boss por Odyssey
++2.14.3 - 24/03/2011: Drak'Tharon: Tharon'Ja no atacable hasta terminar demas bosses por Souler
++2.15.1 - 09/08/2011: Gundrak: Colossus desactiva el aura de MojoVolley al morir por Odyssey
++2.16.1 - 08/10/2011: HallsOfReflection: Reimplementacion y añadido LichKing por Odyssey, editada por Eilo
++2.17.1 - 24/12/2011: PitOfSaron: Correccion de varios mobs por Eilo
++2.17.2 - 08/01/2011: PitOfSaron: Evento de inicio y salida de la instance por Cemak, mejoras por Eilo
++2.19.1 - 05/12/2011: TheNexus: Correccion de trash mob y varias flags por Treak
++2.20.1 - 19/12/2011: ThOculus: Reimplementacion de scripts, logros y adecuaciones de spells por Zwerg
++2.24.1 - 01/10/2011: UtgardeKeep: Ingvar permitiendo que se le pueda atacar en el reseteo por Eilo
++2.25.1 - 25/12/2011: UtgardePinnacle: Svala ahora es atacable con normalidad por Eilo
++2.25.2 - 19/08/2011: UtgardePinnacle: Skadi apaño para poder atacarle por Lavitz
+ 
+ 
+ #################
+ # Sagrario Rubí #
+ #################
++2.9.1  - 03/05/2012: RubySanctum: Trashmob añadido, original por Vlad, actualizada por Eilo
++2.9.2  - 27/05/2012: RubySanctum: Baltharus inmunde a knockback por Xanvial
++2.9.3  - 27/05/2012: RubySanctum: Zarithian varias correcciones por Vlad, actualizado y codestyle por Eilo
++2.9.4  - 27/05/2012: RubySanctum: Saviana limpiando los targets del combustion por Xanvial
++2.9.5  - 27/05/2012: RubySanctum: Halion nueva script, original por Kaelima y Warpten, mejorada por Xanvial
++2.9.6  - 27/05/2012: RubySanctum: Varias correcciones a mobs y bosses, original LordOfDomm, actualizada por Eilo
+ 
+ 
+ #######
+ # ICC #
+ #######
++2.2.4  - 26/11/2011: Inmunidades en script para todos los bosses y mini bosses por Eilo
++2.2.5  - 16/11/2011: Marrowgar daño de Bone Storm proporcional a distancia por Retriman
++2.2.6  - 24/10/2011: Trash mob Deathbound Ward disminuido rango de aggro por Plangcoder
++2.2.7  - 02/11/2011: LichKing apaño a tirion cuando se congela por Retriman
++2.2.8  - 02/10/2011: Putricidio inmune en los balcones por Retriman
++2.2.10 - 21/11/2011: Putricidio despawn de Volatile Ooze y Gas Cloud entre fases por Eilo
++2.2.11 - 16/10/2011: Sindragosa evitando crash en spell fury por Retriman
++2.2.12 - 28/10/2011: Putricide Volatile Ooze efecto explosion por Greymane
++2.2.13 - 30/10/2011: Putricide Stinky spell Plague Stench por Greymane, actualizado por Eilo
++2.2.15 - 24/11/2011: Marrowgar aggrea a 20y por Eilo
++2.2.16 - 24/11/2011: Marrowgar Coldflame haca daño a los melees debajo por Eilo
++2.2.17 - 24/11/2011: Saurfang aggrea terminando el dialogoy a 20y por Eilo
++2.2.18 - 25/11/2011: Rotface aggrea a 20y por Eilo
++2.2.19 - 24/11/2011: Festergut aggrea al acercarse Eilo
++2.2.20 - 24/11/2011: Putricidio aggrea si se acercan por Eilo
++2.2.21 - 24/11/2011: Sindragosa prevencion para que tenga target cuando baja por Eilo
++2.2.22 - 24/11/2011: Principes aggrea si se les acercan por Eilo
++2.2.23 - 14/03/2012: Principes Valanar apaño para la Kinetic Bomb por Eilo
++2.2.24 - 25/11/2011: LichKing aggrea terminando el dialogo con tirion por Eilo
++2.2.25 - 24/11/2011: Correcciones en npcs Nerubar Broodkeeper por Eilo y Muzashi
++2.2.26 - 24/11/2011: Putricidio ajuste velocidad de Volatile Ooze por Eilo
++2.2.28 - 26/11/2011: Putricidio ajuste inmunidades de Volatile Ooze por Eilo
++2.2.29 - 04/12/2011: LichKing Valkyrs ajuste inmunidades por Eilo
++2.2.30 - 25/11/2011: ICC Trashmob implementacion original por Eilo, en sai y mejoras por Muzashi
++2.2.31 - 21/11/2011: Inmunidades en db para todos los bosses y mini bosses por Eilo
++2.2.33 - 04/12/2011: LichKing Valkyrs ajuste velocidad en script por Eilo
++2.2.35 - 27/11/2011: Daño fisico de todos los bosses ajustado por Eilo
++2.2.36 - 13/11/2011: Sindragosa arreglo para no perder target apenas baje por Retriman
++2.2.39 - 28/12/2011: Sindragosa no mete al tank en tumba por Eilo
++2.2.40 - 13/01/2012: LichKing inmune a taunt en cambio de fase por Odyssey
++2.2.41 - 09/01/2012: Saurfang añadido el efecto de Marca del Campeon Caido (Daño) por Eilo
++2.2.42 - 09/11/2011: Sindragosa tomar target que no esten en tumbas por Macavity
++2.2.43 - 09/11/2011: Trashmob Valkyr lower spire añadida AI por Macavity
++2.2.44 - 06/02/2012: LadyDeathwhisper añadiendo dificultades de la spell Death&Decay por AliveShiro
++2.2.46 - 14/02/2012: Saurfang añadido AI en los esbirros y efecto de la Marca de los Caidos (Curacion) por Macavity
++2.2.47 - 04/05/2012: Marrowgar añadido resistencia al fuego para players por Xanvial
++2.2.48 - 04/05/2012: Putricidio añadiendo inmunidades a la ooze y gas cloud por Xanvial
++2.2.49 - 04/05/2012: Rotface añadiendo el visual correcto a slime spray por Xanvial
++2.2.50 - 04/05/2012: Putricidio permitiendo al gas bomb que haga daño a los players por Xanvial
++2.2.51 - 04/05/2012: Lanathel arreglando el requisito para blood quickening por Xanvial
++2.2.52 - 04/05/2012: Festergut y Rotface añadiendo el requisito para completar el residue rendezvouz por Xanvial
++2.2.53 - 04/05/2012: LichKing correcciones para que salte la necrotic plague por Xanvial
++2.2.54 - 04/05/2012: Putricidio y LichKing las oozes y las ice spheres deben moverse por Xanvial
++2.2.55 - 04/05/2012: Sindragosa delay en frost bomb por Xanvial
++2.2.56 - 04/05/2012: Principes spell shadow prison deberia atacar al target por Xanvial
++2.2.57 - 04/05/2012: Principes cambio de cast por aura a shadow prison por Xanvial
++2.2.58 - 04/05/2012: Sindragosa Gauntlet añadido, original por Cemak, actualizado por Eilo y mejoras por Muzashi
++2.2.59 - 08/05/2012: Rotface inmunidades de las oozes por Jildor
+ 
+ 
+ ##########
+ # Ulduar #
+ ##########
++2.6.1  - 13/02/2012: XT002 Apaño para evitar la fase del corazon por Eilo
++2.6.2  - 06/05/2012: Mimiron nueva script, original por Darkman, actualizada por Eilo
++2.6.3  - 07/05/2012: Thorim nueva script, original por Darkman, mejoras y actualizaciones por Eilo
++2.6.4  - 07/05/2012: YoggSaron nueva script, original por Darkman, mejoras por Shaco, actualizaciones por Eilo
++2.6.5  - 07/05/2012: Trashmob por Darkman y correcciones/soporte de scripts por Eilo
+ 
+ 
+ #######################
+-- 
+1.7.8.msysgit.0
+

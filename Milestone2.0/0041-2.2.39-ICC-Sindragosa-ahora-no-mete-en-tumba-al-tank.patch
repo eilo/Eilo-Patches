@@ -1,7 +1,7 @@
-From a1f2315091a7d18aa554637994c4770ab0bd1fe2 Mon Sep 17 00:00:00 2001
+From 61655d349ec76fdb545a83b6a4f0796359679bea Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 29 Dec 2011 13:59:57 -0500
-Subject: [PATCH 41/92] 2.2.39 ICC: Sindragosa ahora no mete en tumba al tank
+Subject: [PATCH 41/93] 2.2.39 ICC: Sindragosa ahora no mete en tumba al tank
 
 ---
  .../Northrend/IcecrownCitadel/boss_sindragosa.cpp  |    3 +++

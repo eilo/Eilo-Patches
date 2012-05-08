@@ -1,0 +1,26 @@
+From b363a2d2ba22cd73a984a6cf6a00f70a6dd46548 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Tue, 8 May 2012 01:32:27 -0500
+Subject: [PATCH 33/93] 2.2.26 ICC: Putricidio ajuste velocidad de la Ooze
+
+---
+ .../2011_11_24_100_world_correcciones_icc.sql      |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
+
+diff --git a/sql/updates/world/reanemu/2011_11_24_100_world_correcciones_icc.sql b/sql/updates/world/reanemu/2011_11_24_100_world_correcciones_icc.sql
+index c172e6a..690d63c 100644
+--- a/sql/updates/world/reanemu/2011_11_24_100_world_correcciones_icc.sql
++++ b/sql/updates/world/reanemu/2011_11_24_100_world_correcciones_icc.sql
+@@ -1,3 +1,9 @@
+ -- Updates en los Nerub'ar Broodkeeper
+ UPDATE `creature` SET `position_z`=75.0923 WHERE `guid`=201106;
+ UPDATE `creature_template` SET `InhabitType`=4 WHERE `entry`=36725;
++
++
++-- Icc adds putricidio
++-- Ajuste de velocidades para babosas de putricidio, amenorada la velocidad
++-- Originalmente speed_walk=2
++UPDATE `creature_template` SET `speed_walk`=0.68 WHERE `entry` IN (37697,38604,38758,38759);
+-- 
+1.7.8.msysgit.0
+
