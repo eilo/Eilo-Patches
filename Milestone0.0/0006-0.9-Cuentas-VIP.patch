@@ -198,21 +198,20 @@ index f771375..661367a 100755
      RATE_REPUTATION_GAIN,
      RATE_REPUTATION_LOWLEVEL_KILL,
 diff --git a/src/server/shared/Database/Implementation/LoginDatabase.cpp b/src/server/shared/Database/Implementation/LoginDatabase.cpp
-index 70d874b..4b1536f 100755
+index 028d927..66995cf 100755
 --- a/src/server/shared/Database/Implementation/LoginDatabase.cpp
 +++ b/src/server/shared/Database/Implementation/LoginDatabase.cpp
-@@ -86,5 +86,6 @@ void LoginDatabaseConnection::DoPrepareStatements()
+@@ -87,4 +87,5 @@ void LoginDatabaseConnection::DoPrepareStatements()
      PREPARE_STATEMENT(LOGIN_SEL_ACCOUNT_WHOIS, "SELECT username, email, last_ip FROM account WHERE id = ?", CONNECTION_SYNCH);
      PREPARE_STATEMENT(LOGIN_SEL_REALMLIST_SECURITY_LEVEL, "SELECT allowedSecurityLevel from realmlist WHERE id = ?", CONNECTION_SYNCH);
      PREPARE_STATEMENT(LOGIN_DEL_ACCOUNT, "DELETE FROM account WHERE id = ?", CONNECTION_ASYNC);
 +    PREPARE_STATEMENT(LOGIN_UPD_ACCOUNT_PREMIUM, "UPDATE account_premium SET active = 0 WHERE unsetdate<=UNIX_TIMESTAMP() AND unsetdate<>setdate", CONNECTION_ASYNC);
- 
  }
 diff --git a/src/server/shared/Database/Implementation/LoginDatabase.h b/src/server/shared/Database/Implementation/LoginDatabase.h
-index 2b9d94c..e405c1f 100755
+index 7c2a94e..f1c5860 100755
 --- a/src/server/shared/Database/Implementation/LoginDatabase.h
 +++ b/src/server/shared/Database/Implementation/LoginDatabase.h
-@@ -106,6 +106,7 @@ enum LoginDatabaseStatements
+@@ -107,6 +107,7 @@ enum LoginDatabaseStatements
      LOGIN_SEL_ACCOUNT_WHOIS,
      LOGIN_SEL_REALMLIST_SECURITY_LEVEL,
      LOGIN_DEL_ACCOUNT,
