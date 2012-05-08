@@ -1,4 +1,4 @@
-From a66a02f254a288b4fb170a8a7e082121b4ef2ca0 Mon Sep 17 00:00:00 2001
+From 6ea47e21f7820c5ee68da77e08bf6f006d6cd8cf Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 7 May 2012 21:19:58 -0500
 Subject: [PATCH 93/93] Milestone2.0
@@ -8,7 +8,7 @@ Subject: [PATCH 93/93] Milestone2.0
  1 files changed, 87 insertions(+), 0 deletions(-)
 
 diff --git a/README b/README
-index 1aa3e72..bcfacc5 100644
+index 74aac26..7c75011 100644
 --- a/README
 +++ b/README
 @@ -44,6 +44,9 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo

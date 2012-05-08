@@ -1,4 +1,4 @@
-From 516b9f8de789f11062eeb6f7d266dce8f7eeb9ec Mon Sep 17 00:00:00 2001
+From 92e780b99042b5fc7dd43ad389317d6b150166f7 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 12:18:08 -0500
 Subject: [PATCH 89/93] 2.20.1 TheOculus: Reimplementacion de scripts y logros
@@ -23,7 +23,7 @@ Subject: [PATCH 89/93] 2.20.1 TheOculus: Reimplementacion de scripts y logros
 
 diff --git a/sql/updates/world/reanemu/2011_12_19_100_world_oculus.sql b/sql/updates/world/reanemu/2011_12_19_100_world_oculus.sql
 new file mode 100644
-index 0000000..9e94bbf
+index 0000000..b2f1c56
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_12_19_100_world_oculus.sql
 @@ -0,0 +1,372 @@
