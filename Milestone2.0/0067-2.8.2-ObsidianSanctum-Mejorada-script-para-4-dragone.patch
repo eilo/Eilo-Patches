@@ -1,21 +1,21 @@
-From 439262d0553de9340effc1762ce229280cf1618c Mon Sep 17 00:00:00 2001
+From db8dce92a46ff3ee6a5e6a6cb302bfe0c4b3bfe9 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 00:06:55 -0500
-Subject: [PATCH 67/91] 2.8.2 ObsidianSanctum: Mejorada script para 4 dragones
+Subject: [PATCH 67/92] 2.8.2 ObsidianSanctum: Mejorada script para 4 dragones
  y logros
 
 ---
- .../2011_08_08_100_world_obsidian_sanctum.sql      |   10 +
+ .../2011_05_02_100_world_obsidian_sanctum.sql      |   10 +
  .../ObsidianSanctum/boss_sartharion.cpp            | 1090 ++++++++++++--------
  .../ObsidianSanctum/instance_obsidian_sanctum.cpp  |   90 ++-
  3 files changed, 745 insertions(+), 445 deletions(-)
- create mode 100644 sql/updates/world/reanemu/2011_08_08_100_world_obsidian_sanctum.sql
+ create mode 100644 sql/updates/world/reanemu/2011_05_02_100_world_obsidian_sanctum.sql
 
-diff --git a/sql/updates/world/reanemu/2011_08_08_100_world_obsidian_sanctum.sql b/sql/updates/world/reanemu/2011_08_08_100_world_obsidian_sanctum.sql
+diff --git a/sql/updates/world/reanemu/2011_05_02_100_world_obsidian_sanctum.sql b/sql/updates/world/reanemu/2011_05_02_100_world_obsidian_sanctum.sql
 new file mode 100644
 index 0000000..00cac52
 --- /dev/null
-+++ b/sql/updates/world/reanemu/2011_08_08_100_world_obsidian_sanctum.sql
++++ b/sql/updates/world/reanemu/2011_05_02_100_world_obsidian_sanctum.sql
 @@ -0,0 +1,10 @@
 +-- Obsidian_Sanctum
 +-- Mejoras en script para logro de 4 dragones

@@ -1,7 +1,7 @@
-From 1485bfcbe46f5d59fe84f0646c62fa3508f8733a Mon Sep 17 00:00:00 2001
+From ebf42ae996764bb84eacdcafc28b0bdb5a587411 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 17 Dec 2011 14:45:43 -0500
-Subject: [PATCH 82/91] 2.14.3 Drak'Tharon: Tharon'Ja no atacable hasta
+Subject: [PATCH 82/92] 2.14.3 Drak'Tharon: Tharon'Ja no atacable hasta
  terminar demas bosses
 
 ---

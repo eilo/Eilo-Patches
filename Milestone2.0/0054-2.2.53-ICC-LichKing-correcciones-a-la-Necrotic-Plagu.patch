@@ -1,7 +1,7 @@
-From 08430ffb533d81f823dbffff18e162b5cba9bd8c Mon Sep 17 00:00:00 2001
+From 8ef509e51609081b8fcb60a956d64651765bfd9d Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 4 May 2012 06:18:41 -0500
-Subject: [PATCH 54/91] 2.2.53 ICC: LichKing correcciones a la Necrotic Plague
+Subject: [PATCH 54/92] 2.2.53 ICC: LichKing correcciones a la Necrotic Plague
 
 ---
  .../IcecrownCitadel/boss_the_lich_king.cpp         |   10 ++++++++++

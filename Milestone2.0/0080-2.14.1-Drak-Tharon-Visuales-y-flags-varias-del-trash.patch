@@ -1,7 +1,7 @@
-From 504d2b34418e26e633efd7e89854710c487fcb79 Mon Sep 17 00:00:00 2001
+From 985c820490623be91c6a58cc267a8b3c0c6f48f1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 25 Dec 2011 01:54:03 -0500
-Subject: [PATCH 80/91] 2.14.1 Drak'Tharon: Visuales y flags varias del trash
+Subject: [PATCH 80/92] 2.14.1 Drak'Tharon: Visuales y flags varias del trash
  y reward de LFG
 
 ---

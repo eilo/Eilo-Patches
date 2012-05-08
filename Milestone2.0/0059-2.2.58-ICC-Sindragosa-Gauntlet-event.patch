@@ -1,7 +1,7 @@
-From d66c1715f881a27c7397d40a3a91c30c6a3d98fe Mon Sep 17 00:00:00 2001
+From e316c38f91bef366251b2901fd2291a8bbfd1d1f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 4 May 2012 13:03:02 -0500
-Subject: [PATCH 59/91] 2.2.58 ICC: Sindragosa Gauntlet event
+Subject: [PATCH 59/92] 2.2.58 ICC: Sindragosa Gauntlet event
 
 ---
  .../2012_05_04_100_world_sindragosa_gaunlet.sql    |   41 ++++

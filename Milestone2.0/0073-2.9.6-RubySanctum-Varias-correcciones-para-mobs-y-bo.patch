@@ -1,7 +1,7 @@
-From 114628079b0603c26fded25b554c795b0a6a69f1 Mon Sep 17 00:00:00 2001
+From ce4cf35201b9a847aa923ca7c0f30995e06e8675 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 4 May 2012 02:36:22 -0500
-Subject: [PATCH 73/91] 2.9.6 RubySanctum: Varias correcciones para mobs y
+Subject: [PATCH 73/92] 2.9.6 RubySanctum: Varias correcciones para mobs y
  bosses
 
 ---

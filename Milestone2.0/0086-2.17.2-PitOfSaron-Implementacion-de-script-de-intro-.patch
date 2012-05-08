@@ -1,7 +1,7 @@
-From 6014deb5ea220221231e52acf23ce732a773c0e6 Mon Sep 17 00:00:00 2001
+From adc0c8ecf8e55f0ef6066988f9b635dc760d8db5 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 3 May 2012 10:51:08 -0500
-Subject: [PATCH 86/91] 2.17.2 PitOfSaron: Implementacion de script de intro y
+Subject: [PATCH 86/92] 2.17.2 PitOfSaron: Implementacion de script de intro y
  outro, y varios
 
 ---

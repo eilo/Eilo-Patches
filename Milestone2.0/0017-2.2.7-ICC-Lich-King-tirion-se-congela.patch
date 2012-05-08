@@ -1,7 +1,7 @@
-From 79016c042d0b0ad3fbe2d62cdf33fd87ebaf420e Mon Sep 17 00:00:00 2001
+From 22d5cadcd378b695e79a8298169a0dcb2d069396 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 16 Dec 2011 01:36:40 -0500
-Subject: [PATCH 17/91] 2.2.7 ICC: Lich King, tirion se congela
+Subject: [PATCH 17/92] 2.2.7 ICC: Lich King, tirion se congela
 
 ---
  .../IcecrownCitadel/boss_the_lich_king.cpp         |    3 ++-
