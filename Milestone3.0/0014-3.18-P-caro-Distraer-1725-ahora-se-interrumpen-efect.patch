@@ -1,18 +1,21 @@
-From ad90f1298a77181ed0a5844bfd0bc53afe4b4a11 Mon Sep 17 00:00:00 2001
+From 144f03330e245e3cf0dcf89ce38cce34a6eaef64 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 20:49:33 -0500
-Subject: [PATCH 18/24] 3.18 Cazador: Distraer (1725) ahora se interrumpen
- efectos de comer beber
+Subject: [PATCH 14/34] =?UTF-8?q?3.18=20P=C3=ADcaro:=20Distraer=20(1725)=20a?=
+ =?UTF-8?q?hora=20se=20interrumpen=20efectos=20de=20comer=20beber?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 ---
  src/server/game/Spells/SpellEffects.cpp |    3 +++
  1 files changed, 3 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 6a4a692..475fe04 100755
+index 4d8c733..ae588da 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -3388,6 +3388,9 @@ void Spell::EffectDistract(SpellEffIndex /*effIndex*/)
+@@ -2644,6 +2644,9 @@ void Spell::EffectDistract(SpellEffIndex /*effIndex*/)
      unitTarget->ClearUnitState(UNIT_STATE_MOVING);
  
      if (unitTarget->GetTypeId() == TYPEID_UNIT)

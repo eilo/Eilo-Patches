@@ -1,0 +1,80 @@
+From 5823d56501b07e28feb68a3072240931796b4046 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Sun, 22 Apr 2012 16:42:34 +0200
+Subject: [PATCH 28/34] 3.34 Mixology (53042)
+
+---
+ src/server/game/Spells/Auras/SpellAuraEffects.cpp |   29 +++++++++++++++++++++
+ src/server/game/Spells/Auras/SpellAuras.cpp       |   16 +++++++++++
+ 2 files changed, 45 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Spells/Auras/SpellAuraEffects.cpp b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
+index 7d9d652..4fafb5b 100755
+--- a/src/server/game/Spells/Auras/SpellAuraEffects.cpp
++++ b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
+@@ -757,6 +757,35 @@ int32 AuraEffect::CalculateAmount(Unit* caster)
+         default:
+             break;
+     }
++
++    // Mixology - Effect value mod
++    if (caster && caster->GetTypeId() == TYPEID_PLAYER)
++    {
++        if (GetSpellInfo()->SpellFamilyName == SPELLFAMILY_POTION && (
++            sSpellMgr->IsSpellMemberOfSpellGroup(GetId(), SPELL_GROUP_ELIXIR_BATTLE) ||
++            sSpellMgr->IsSpellMemberOfSpellGroup(GetId(), SPELL_GROUP_ELIXIR_GUARDIAN)))
++        {
++            if (caster->HasAura(53042) && caster->HasSpell(GetSpellInfo()->Effects[0].TriggerSpell))
++            {
++                switch (GetId())
++                {
++                    case 53760: // Flask of Endless Rage
++                        amount += 64;
++                        break;
++                    case 53755: // Flask of the Frost Wyrm
++                        amount += 47;
++                        break;
++                    case 53758: // Flask of Stoneblood
++                        amount += 650;
++                        break;
++                    case 54212: // Flask of Pure Mojo
++                        amount += 20;
++                        break;
++                }
++            }
++        }
++    }
++
+     if (DoneActualBenefit != 0.0f)
+     {
+         DoneActualBenefit *= caster->CalculateLevelPenalty(GetSpellInfo());
+diff --git a/src/server/game/Spells/Auras/SpellAuras.cpp b/src/server/game/Spells/Auras/SpellAuras.cpp
+index 34071ad..a8d1e47 100755
+--- a/src/server/game/Spells/Auras/SpellAuras.cpp
++++ b/src/server/game/Spells/Auras/SpellAuras.cpp
+@@ -357,6 +357,22 @@ void Aura::_InitEffects(uint8 effMask, Unit* caster, int32 *baseAmount)
+         else
+             m_effects[i] = NULL;
+     }
++	
++    // Mixology
++    if (m_spellInfo->SpellFamilyName == SPELLFAMILY_POTION && caster /*&& caster->IsPlayer()*/ && caster->HasAura(53042))
++    {
++        if (sSpellMgr->IsSpellMemberOfSpellGroup(m_spellInfo->Id, SPELL_GROUP_ELIXIR_BATTLE) ||
++            sSpellMgr->IsSpellMemberOfSpellGroup(m_spellInfo->Id, SPELL_GROUP_ELIXIR_GUARDIAN))
++        {
++            m_maxDuration *= 2;
++            m_duration = m_maxDuration;
++            for (uint8 i = 0 ; i < MAX_SPELL_EFFECTS; ++i)
++            {
++                if (effMask & (uint8(1) << i))
++                    m_effects[i]->SetAmount((int32)(m_effects[i]->GetAmount() * 1.3f));
++            }
++        }
++    }
+ }
+ 
+ Aura::~Aura()
+-- 
+1.7.8.msysgit.0
+

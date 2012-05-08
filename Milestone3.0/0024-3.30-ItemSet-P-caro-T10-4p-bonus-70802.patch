@@ -1,0 +1,29 @@
+From b9ba0ebd4e4ac5613dd7905207df08df58ed31a9 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Sun, 22 Apr 2012 16:57:32 +0200
+Subject: [PATCH 24/34] =?UTF-8?q?3.30=20ItemSet:=20P=C3=ADcaro=20T10=204p=20?=
+ =?UTF-8?q?bonus=20(70802)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/server/game/Spells/Spell.cpp |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
+index 57b2884..5da18c9 100644
+--- a/src/server/game/Spells/Spell.cpp
++++ b/src/server/game/Spells/Spell.cpp
+@@ -3246,7 +3246,7 @@ void Spell::cast(bool skipCheck)
+     SendSpellGo();
+ 
+     // Okay, everything is prepared. Now we need to distinguish between immediate and evented delayed spells
+-    if ((m_spellInfo->Speed > 0.0f && !m_spellInfo->IsChanneled()) || m_spellInfo->Id == 14157)
++    if ((m_spellInfo->Speed > 0.0f && !m_spellInfo->IsChanneled()) || m_spellInfo->Id == 14157 || m_spellInfo->Id == 70802)
+     {
+         // Remove used for cast item if need (it can be already NULL after TakeReagents call
+         // in case delayed spell remove item at cast delay start
+-- 
+1.7.8.msysgit.0
+

@@ -1,7 +1,7 @@
-From 73cc8f171bf0b3c8ef1807ebfa32e8bf76cb5f21 Mon Sep 17 00:00:00 2001
+From 38178a1a07bf3b7593c2f29ff61ed4d1520b04fd Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Tue, 3 Jan 2012 17:29:21 +0100
-Subject: [PATCH 02/24] =?UTF-8?q?3.2=20Mago:=20Reflejo=20Exacto=20(55342)=20?=
+Subject: [PATCH 02/34] =?UTF-8?q?3.2=20Mago:=20Reflejo=20Exacto=20(55342)=20?=
  =?UTF-8?q?ahora=20no=20atacan=20a=20objetivos=20que=20est=C3=A1n=20bajo=20l?=
  =?UTF-8?q?os=20efectos=20de=20Polimorfia=20(118)?=
 MIME-Version: 1.0
@@ -13,10 +13,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 57 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/scripts/World/npcs_special.cpp b/src/server/scripts/World/npcs_special.cpp
-index 04e9c05..1a49dac 100644
+index e1cfd07..cf4334d 100644
 --- a/src/server/scripts/World/npcs_special.cpp
 +++ b/src/server/scripts/World/npcs_special.cpp
-@@ -1905,6 +1905,63 @@ public:
+@@ -1857,6 +1857,63 @@ public:
              // here should be auras (not present in client dbc): 35657, 35658, 35659, 35660 selfcasted by mirror images (stats related?)
              // Clone Me!
              owner->CastSpell(me, 45204, false);

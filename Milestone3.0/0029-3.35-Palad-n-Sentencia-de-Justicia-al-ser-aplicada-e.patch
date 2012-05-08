@@ -1,0 +1,37 @@
+From 13299eaae257c122854326b35f5a62ea21daf46d Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Sat, 10 Mar 2012 21:23:10 +0100
+Subject: [PATCH 29/34] =?UTF-8?q?3.35=20Palad=C3=ADn:=20Sentencia=20de=20Jus?=
+ =?UTF-8?q?ticia=20al=20ser=20aplicada=20el=20aura=20y=20luego=20castear=20f?=
+ =?UTF-8?q?ear,=20sentencia=20ser=C3=A1=20removido=20del=20target.=20Esto=20?=
+ =?UTF-8?q?impedir=C3=A1=20exploits=20debido=20a=20que=20el=20target=20queda?=
+ =?UTF-8?q?ba=20inmovilizado=20y=20no=20pod=C3=ADa=20ussar=20Trinket.=20Grac?=
+ =?UTF-8?q?ias=20a=20@strolch=20por=20la=20ayuda?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/server/game/Spells/Auras/SpellAuraEffects.cpp |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
+
+diff --git a/src/server/game/Spells/Auras/SpellAuraEffects.cpp b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
+index 4fafb5b..a34d47c 100755
+--- a/src/server/game/Spells/Auras/SpellAuraEffects.cpp
++++ b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
+@@ -3108,7 +3108,11 @@ void AuraEffect::HandleModFear(AuraApplication const* aurApp, uint8 mode, bool a
+ 
+     Unit* target = aurApp->GetTarget();
+ 
+-    target->SetControlled(apply, UNIT_STATE_FLEEING);
++	if (target->HasAura(20184))
++		target->RemoveAura(20184);
++		
++	target->SetControlled(apply, UNIT_STATE_FLEEING);
++
+ }
+ 
+ void AuraEffect::HandleAuraModStun(AuraApplication const* aurApp, uint8 mode, bool apply) const
+-- 
+1.7.8.msysgit.0
+

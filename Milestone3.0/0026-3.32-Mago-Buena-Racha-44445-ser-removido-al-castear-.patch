@@ -1,0 +1,39 @@
+From 532b36e3c9a893355031077b23472a79dc8f5bab Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Sun, 11 Mar 2012 18:45:57 +0100
+Subject: [PATCH 26/34] =?UTF-8?q?3.32=20Mago:=20Buena=20Racha=20(44445)=20se?=
+ =?UTF-8?q?r=C3=A1=20removido=20al=20castear=20Piroexplosi=C3=B3n=20en=20tod?=
+ =?UTF-8?q?os=20sus=20rangos,=20en=20vez=20de=20cuando=20hac=C3=ADa=20hit=20?=
+ =?UTF-8?q?en=20el=20target?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ ..._11_100_world_spell_linked_spell_hot_streak.sql |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_03_11_100_world_spell_linked_spell_hot_streak.sql
+
+diff --git a/sql/updates/world/reanemu/2012_03_11_100_world_spell_linked_spell_hot_streak.sql b/sql/updates/world/reanemu/2012_03_11_100_world_spell_linked_spell_hot_streak.sql
+new file mode 100644
+index 0000000..5d838d8
+--- /dev/null
++++ b/sql/updates/world/reanemu/2012_03_11_100_world_spell_linked_spell_hot_streak.sql
+@@ -0,0 +1,14 @@
++DELETE FROM `spell_linked_spell` where `spell_trigger` IN (11366,12505,12522,12523,12524,12525,12526);
++INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
++(11366, -48108, 0, 'Hot Streak removed when pyroblast (rank 1) is casted');
++INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
++(12505, -48108, 0, 'Hot Streak removed when pyroblast (rank 2) is casted');
++INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
++(12522, -48108, 0, 'Hot Streak removed when pyroblast (rank 3) is casted');
++INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
++(12523, -48108, 0, 'Hot Streak removed when pyroblast (rank 4) is casted');
++INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
++(12524, -48108, 0, 'Hot Streak removed when pyroblast (rank 5) is casted');
++INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
++(12525, -48108, 0, 'Hot Streak removed when pyroblast (rank 6) is casted');
++INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
+-- 
+1.7.8.msysgit.0
+

@@ -1,0 +1,75 @@
+From 25a704e217a790a3a51388c11f3cb7331bc9c80c Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Sun, 22 Apr 2012 17:21:02 +0200
+Subject: [PATCH 21/35] 3.25 Dispel: fix check del cast de los hechizos con
+ efectos de tipo dispel cuando no hay nada que
+ dispelar
+
+---
+ src/server/game/Spells/Spell.cpp |   50 ++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 50 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
+index 61f9c52..739fc22 100644
+--- a/src/server/game/Spells/Spell.cpp
++++ b/src/server/game/Spells/Spell.cpp
+@@ -4818,6 +4818,56 @@ SpellCastResult Spell::CheckCast(bool strict)
+         if (castResult != SPELL_CAST_OK)
+             return castResult;
+ 
++        if (!IsTriggered())
++        {
++            bool foundDispel = false;
++            bool foundNotDispel = false;
++            for (uint8 i = 0; i < MAX_SPELL_EFFECTS; ++i)
++            {
++                if (m_spellInfo->Effects[i].Effect != 0)
++                {
++                    if (m_spellInfo->Effects[i].Effect == SPELL_EFFECT_DISPEL)
++                        foundDispel = true;
++                    else
++                    {
++                        foundNotDispel = true;
++                        break;
++                    }
++                }
++            }
++  
++            // if the spell has only dispel effects
++            if(foundDispel && !foundNotDispel && target->IsFriendlyTo(m_caster))
++            {
++                bool foundNeg = false;
++                Unit::AuraMap const& auras = target->GetOwnedAuras();
++                for (Unit::AuraMap::const_iterator itr = auras.begin(); itr != auras.end(); ++itr)
++                {
++                    Aura* aura = itr->second;
++                    AuraApplication * aurApp = aura->GetApplicationOfTarget(target->GetGUID());
++                    if (!aurApp)
++                        continue;
++
++                    if (!aura->GetSpellInfo()->IsPositive() && aura->GetSpellInfo()->Dispel) // negative and can be dispelled
++                    {
++                        for (uint8 eff = 0; eff < MAX_SPELL_EFFECTS; ++eff)
++                        {
++                            if ((1 << aura->GetSpellInfo()->Dispel) &
++                                SpellInfo::GetDispelMask(DispelType(m_spellInfo->Effects[eff].MiscValue)))
++                            {
++                                foundNeg = true;
++                                break;
++                            }
++                        }
++                    }
++                    if (foundNeg)
++                        break;
++                }
++                if (!foundNeg)
++                    return SPELL_FAILED_NOTHING_TO_DISPEL;
++            }
++        }
++        
+         if (target != m_caster)
+         {
+             // Must be behind the target
+-- 
+1.7.8.msysgit.0
+

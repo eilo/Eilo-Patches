@@ -1,7 +1,7 @@
-From 7e2e7d623ea5c61c51d76f316f9154bf7bc6b8b7 Mon Sep 17 00:00:00 2001
+From 3566553b5702e24f6bac9be37a131e992f167e99 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
-Date: Sat, 26 Nov 2011 17:44:14 +0100
-Subject: [PATCH 03/24] 3.3 Brujo: Pet Felhunter mejoras en spells
+Date: Mon, 23 Apr 2012 22:01:47 +0200
+Subject: [PATCH 03/34] 3.3 Brujo: Pet Fellhunter mejoras en spells
 
 ---
  .../2011_11_05_100_world_felhunter_mejorado.sql    |    2 +
@@ -19,13 +19,13 @@ index 0000000..fdde9c6
 +INSERT INTO spell_script_names (spell_id, ScriptName) VALUES (-54049, 'spell_warl_shadow_bite');
 \ No newline at end of file
 diff --git a/src/server/scripts/Spells/spell_warlock.cpp b/src/server/scripts/Spells/spell_warlock.cpp
-index 24e76de..826eb70 100644
+index 838b9e4..c4b2170 100644
 --- a/src/server/scripts/Spells/spell_warlock.cpp
 +++ b/src/server/scripts/Spells/spell_warlock.cpp
-@@ -34,57 +34,14 @@ enum WarlockSpells
-     WARLOCK_DEMONIC_EMPOWERMENT_IMP         = 54444,
-     WARLOCK_IMPROVED_HEALTHSTONE_R1         = 18692,
-     WARLOCK_IMPROVED_HEALTHSTONE_R2         = 18693,
+@@ -37,57 +37,14 @@ enum WarlockSpells
+     WARLOCK_DEMONIC_CIRCLE_SUMMON           = 48018,
+     WARLOCK_DEMONIC_CIRCLE_TELEPORT         = 48020,
+     WARLOCK_DEMONIC_CIRCLE_ALLOW_CAST       = 62388,
 -};
 -
 -class spell_warl_banish : public SpellScriptLoader
@@ -77,7 +77,7 @@ index 24e76de..826eb70 100644
 -    {
 -        return new spell_warl_banish_SpellScript();
 -    }
-+	WARLOCK_FELHUNTER_SHADOWBITE_R1         = 54049,
++    WARLOCK_FELHUNTER_SHADOWBITE_R1         = 54049,
 +	WARLOCK_FELHUNTER_SHADOWBITE_R2         = 54050,
 +	WARLOCK_FELHUNTER_SHADOWBITE_R3         = 54051,
 +	WARLOCK_FELHUNTER_SHADOWBITE_R4         = 54052,
@@ -88,7 +88,7 @@ index 24e76de..826eb70 100644
  };
  
  // 47193 Demonic Empowerment
-@@ -308,6 +265,133 @@ class spell_warl_seed_of_corruption : public SpellScriptLoader
+@@ -317,6 +274,133 @@ class spell_warl_seed_of_corruption : public SpellScriptLoader
          }
  };
  
@@ -219,10 +219,10 @@ index 24e76de..826eb70 100644
 +        }
 +};
 +
- class spell_warl_demonic_circle_summon : public SpellScriptLoader
+ enum Soulshatter
  {
- public:
-@@ -354,11 +438,12 @@ public:
+     SPELL_SOULSHATTER   = 32835,
+@@ -525,7 +609,6 @@ class spell_warl_demonic_circle_teleport : public SpellScriptLoader
  
  void AddSC_warlock_spell_scripts()
  {
@@ -230,11 +230,14 @@ index 24e76de..826eb70 100644
      new spell_warl_demonic_empowerment();
      new spell_warl_create_healthstone();
      new spell_warl_everlasting_affliction();
-     new spell_warl_ritual_of_doom_effect();
+@@ -533,6 +616,8 @@ void AddSC_warlock_spell_scripts()
      new spell_warl_seed_of_corruption();
+     new spell_warl_soulshatter();
+     new spell_warl_life_tap();
 +    new spell_warl_shadow_bite();
 +    new spell_warl_banish();
      new spell_warl_demonic_circle_summon();
+     new spell_warl_demonic_circle_teleport();
  }
 -- 
 1.7.8.msysgit.0

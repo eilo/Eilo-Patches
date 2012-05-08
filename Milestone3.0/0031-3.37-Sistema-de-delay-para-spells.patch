@@ -1,0 +1,84 @@
+From 3f62727914dc23fba4050980a09104cd48a09d1f Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Sun, 22 Apr 2012 16:02:06 +0200
+Subject: [PATCH 31/34] 3.37 Sistema de delay para spells
+
+---
+ src/server/game/Spells/SpellMgr.cpp |   43 ++++++++++++++++++++++++++++++++++-
+ 1 files changed, 42 insertions(+), 1 deletions(-)
+
+diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
+index b656c06..3b72491 100755
+--- a/src/server/game/Spells/SpellMgr.cpp
++++ b/src/server/game/Spells/SpellMgr.cpp
+@@ -2651,11 +2651,15 @@ void SpellMgr::LoadSpellCustomAttr()
+             switch (spellInfo->Effects[j].ApplyAuraName)
+             {
+                 case SPELL_AURA_MOD_POSSESS:
+-                case SPELL_AURA_MOD_CONFUSE:
+                 case SPELL_AURA_MOD_CHARM:
+                 case SPELL_AURA_AOE_CHARM:
++                    spellInfo->AttributesCu |= SPELL_ATTR0_CU_AURA_CC;
++                    break;
+                 case SPELL_AURA_MOD_FEAR:
+                 case SPELL_AURA_MOD_STUN:
++                case SPELL_AURA_MOD_CONFUSE:
++                    if (spellInfo->Mechanic != MECHANIC_FREEZE) // check for freezing effects
++                        spellInfo->Speed = 43;  // don't know the correct time but it seems fine
+                     spellInfo->AttributesCu |= SPELL_ATTR0_CU_AURA_CC;
+                     break;
+                 case SPELL_AURA_PERIODIC_HEAL:
+@@ -2699,6 +2703,9 @@ void SpellMgr::LoadSpellCustomAttr()
+                 case SPELL_EFFECT_LEAP_BACK:
+                     spellInfo->AttributesCu |= SPELL_ATTR0_CU_CHARGE;
+                     break;
++                case SPELL_EFFECT_LEAP:
++                    spellInfo->Speed = 375; // delay 
++                    break;
+                 case SPELL_EFFECT_PICKPOCKET:
+                     spellInfo->AttributesCu |= SPELL_ATTR0_CU_PICKPOCKET;
+                     break;
+@@ -2960,6 +2967,40 @@ void SpellMgr::LoadDbcDataCorrections()
+ 
+         switch (spellInfo->Id)
+         {
++            ///////////////////////////////////////////////////
++            // Delay System                
++            case 30283:
++            case 30413:
++            case 30414: // ShadowFury Warlock
++            case 47846:
++            case 47847: // ShadowFury Warlock
++            case 64044: // Psychic horror priest
++            case 26679: // Deadly Throw
++            case 61988: // Divine Shield
++            case 3355: // Freezing Trap
++            case 14308:	  	
++            case 14309:	  	
++            case 60210: // Freezing Arrow	
++                spellInfo->speed = 0; // Instant
++                break;
++            case 48020: // Teleport demonic circle warlock
++            case 1953: // Blink
++            case 36554: // Shadowstep
++                spellInfo->speed = 375;
++                break;
++            case 1543: // Flare - No travel time
++                spellInfo->speed = 100;
++                break;
++            case 2094: // Blind
++                 spellInfo->speed = 590.0f; // Minor delay
++                 break;
++            case 1833: // Cheap Shot
++                 spellInfo->speed = 1230.0f; // Tiny delay
++                 break;
++            case 24259: // Spell Lock silence
++                spellInfo->speed = 80;
++                break;
++            ///////////////////////////////////////////////////
+             case 40244: case 40245: // Simon Game Visual
+             case 40246: case 40247: // Simon Game Visual
+             case 42835: // Spout, remove damage effect, only anim is needed
+-- 
+1.7.8.msysgit.0
+

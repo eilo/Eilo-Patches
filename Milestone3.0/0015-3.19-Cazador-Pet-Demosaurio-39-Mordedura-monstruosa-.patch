@@ -1,7 +1,7 @@
-From 841251bd6dc6fba22ad024c0a97629c0c642f8c8 Mon Sep 17 00:00:00 2001
+From e918f5cfa200780fcad71c250de1ffb3ffabf847 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 1 Jan 2012 23:47:09 +0100
-Subject: [PATCH 19/24] =?UTF-8?q?3.19=20Cazador:=20Pet=20Demosaurio=20(39)=20?=
+Subject: [PATCH 15/34] =?UTF-8?q?3.19=20Cazador:=20Pet=20Demosaurio=20(39)=20?=
  =?UTF-8?q?Mordedura=20monstruosa=20(54680)=20correcci=C3=B3n=20del=20efecto?=
  =?UTF-8?q?=20aplicado=20al=20target?=
 MIME-Version: 1.0
@@ -13,10 +13,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 6 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellMgr.cpp b/src/server/game/Spells/SpellMgr.cpp
-index eebbadb..e959f11 100755
+index 4fafefa..387e77a 100755
 --- a/src/server/game/Spells/SpellMgr.cpp
 +++ b/src/server/game/Spells/SpellMgr.cpp
-@@ -3570,6 +3570,12 @@ void SpellMgr::LoadDbcDataCorrections()
+@@ -3543,6 +3543,12 @@ void SpellMgr::LoadDbcDataCorrections()
  
          switch (spellInfo->SpellFamilyName)
          {

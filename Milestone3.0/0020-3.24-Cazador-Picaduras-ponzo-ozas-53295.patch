@@ -1,0 +1,41 @@
+From ad82def8b85e474e71d1ee93a63623ab0a4573a0 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Sun, 22 Apr 2012 22:59:43 +0200
+Subject: [PATCH 20/34] =?UTF-8?q?3.24=20Cazador:=20Picaduras=20ponzo=C3=B1oz?=
+ =?UTF-8?q?as=20(53295)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/server/game/Entities/Unit/Unit.cpp |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
+index 5729e60..72ebb15 100755
+--- a/src/server/game/Entities/Unit/Unit.cpp
++++ b/src/server/game/Entities/Unit/Unit.cpp
+@@ -3703,6 +3703,20 @@ void Unit::RemoveAurasDueToSpellByDispel(uint32 spellId, uint32 dispellerSpellId
+                     }
+                     break;
+                 }
++                case SPELLFAMILY_HUNTER:
++                {
++                    // Wyvern Sting
++                    if (aura->GetSpellInfo()->SpellFamilyFlags[1] & 0x1000)
++                    {
++                        Unit * caster = aura->GetCaster();
++                        if (caster && !(dispeller->GetTypeId() == TYPEID_UNIT && dispeller->ToCreature()->isTotem()))
++                            // Noxious Stings
++                            if (AuraEffect * auraEff = caster->GetAuraEffect(SPELL_AURA_OVERRIDE_CLASS_SCRIPTS, SPELLFAMILY_HUNTER, 3521, 1))
++                                if (Aura * newAura = caster->AddAura(aura->GetId(), dispeller))
++                                    newAura->SetDuration(aura->GetDuration() / 100 * auraEff->GetAmount());
++                    }
++                    break;
++                }
+                 default:
+                     break;
+             }
+-- 
+1.7.8.msysgit.0
+

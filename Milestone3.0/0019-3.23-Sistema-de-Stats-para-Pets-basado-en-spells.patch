@@ -1,7 +1,7 @@
-From 3e8042f33b10902a39a006867930740bb267d62b Mon Sep 17 00:00:00 2001
-From: Eilo <eilo2518@gmail.com>
-Date: Thu, 1 Mar 2012 14:45:25 -0500
-Subject: [PATCH 23/24] 3.23 Sistema de Stats para Pets basado en spells
+From 343d540fa7b84e3b582be7723aa5b52525619519 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Tue, 1 May 2012 16:57:04 +0200
+Subject: [PATCH 19/34] 3.23 Sistema de Stats para Pets basado en spells
 
 ---
  ...012_02_06_100_world_spell_gen_pet_calculate.sql |   16 ++
@@ -33,11 +33,11 @@ index 0000000..06e753f
 +(54566,61697,0,'Death Knight Pet Scaling 03'); -- Risen Ghoul
 \ No newline at end of file
 diff --git a/src/server/scripts/Spells/spell_generic.cpp b/src/server/scripts/Spells/spell_generic.cpp
-index 6fc9373..209979a 100644
+index 501c7c4..42cd141 100644
 --- a/src/server/scripts/Spells/spell_generic.cpp
 +++ b/src/server/scripts/Spells/spell_generic.cpp
-@@ -2351,6 +2351,150 @@ class spell_gen_tournament_pennant : public SpellScriptLoader
-         }
+@@ -2688,6 +2688,150 @@ public:
+     }
  };
  
 +enum PetCalculate
@@ -187,10 +187,10 @@ index 6fc9373..209979a 100644
  void AddSC_generic_spell_scripts()
  {
      new spell_gen_absorb0_hitlimit1();
-@@ -2394,4 +2538,5 @@ void AddSC_generic_spell_scripts()
-     new spell_gen_summon_tournament_mount();
-     new spell_gen_on_tournament_mount();
-     new spell_gen_tournament_pennant();
+@@ -2742,4 +2886,5 @@ void AddSC_generic_spell_scripts()
+     new spell_gen_count_pct_from_max_hp("spell_gen_default_count_pct_from_max_hp");
+     new spell_gen_count_pct_from_max_hp("spell_gen_50pct_count_pct_from_max_hp", 50);
+     new spell_gen_despawn_self();
 +    new spell_gen_pet_calculate();
  }
 -- 
