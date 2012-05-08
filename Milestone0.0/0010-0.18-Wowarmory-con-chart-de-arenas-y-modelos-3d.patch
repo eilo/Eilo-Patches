@@ -1,4 +1,4 @@
-From d7f718572216d652a74c34f4777703bc60387a26 Mon Sep 17 00:00:00 2001
+From 212b74c2dbafe86b5b057c22475075aa67729c9d Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Apr 2012 11:31:10 -0500
 Subject: [PATCH 10/19] 0.18 Wowarmory con chart de arenas y modelos 3d
@@ -184,7 +184,7 @@ index f2b8938..86edfc5 100755
  }
  
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 28de3d2..01db71f 100755
+index ee5129c..afe76f3 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -5162,6 +5162,9 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC

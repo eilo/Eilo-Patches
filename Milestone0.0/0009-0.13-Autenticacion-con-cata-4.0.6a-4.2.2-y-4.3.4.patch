@@ -1,4 +1,4 @@
-From 90bc5a65f5cd982496d5b5b13c8bbc0e02076b16 Mon Sep 17 00:00:00 2001
+From ab00488abea817ec8f9f4e79c55c4be6d465db3f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 00:40:26 -0500
 Subject: [PATCH 09/19] 0.13 Autenticacion con cata 4.0.6a, 4.2.2 y 4.3.4
@@ -8,7 +8,7 @@ Subject: [PATCH 09/19] 0.13 Autenticacion con cata 4.0.6a, 4.2.2 y 4.3.4
  1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/authserver/Authentication/AuthCodes.h b/src/server/authserver/Authentication/AuthCodes.h
-index f940d45..554ae17 100755
+index f940d45..1cead68 100755
 --- a/src/server/authserver/Authentication/AuthCodes.h
 +++ b/src/server/authserver/Authentication/AuthCodes.h
 @@ -65,7 +65,7 @@ enum LoginResult

@@ -1,4 +1,4 @@
-From a69e80000351dd901cf6721ebd284d528d8fa2c0 Mon Sep 17 00:00:00 2001
+From 998fc6bc4155a4b4f64d9a86b6397874235da094 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 26 Apr 2012 23:58:06 -0500
 Subject: [PATCH 14/19] 0.22 BossHistory y RaidInfo
@@ -54,7 +54,7 @@ index 0000000..fae0ca3
 +(11007, '|Cffff0000[RAID INFO] |cff00ffff%s %uH: |Cff00ff00%s |cff00ffffderrotado por la hermandad |Cff00ff00%s|cff00ffff. Jugadores: %u/%u Tiempo: %um %us', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 \ No newline at end of file
 diff --git a/src/server/game/Entities/Creature/Creature.cpp b/src/server/game/Entities/Creature/Creature.cpp
-index fde85fe..035895f 100755
+index acdf2b1..93128f6 100755
 --- a/src/server/game/Entities/Creature/Creature.cpp
 +++ b/src/server/game/Entities/Creature/Creature.cpp
 @@ -550,6 +550,8 @@ void Creature::Update(uint32 diff)

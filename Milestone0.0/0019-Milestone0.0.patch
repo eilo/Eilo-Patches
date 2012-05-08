@@ -1,14 +1,14 @@
-From 7a9a522cac103e7bb36d8485bba2120d7f3ad843 Mon Sep 17 00:00:00 2001
+From 81eda212e6883fbebf9d62d53378f9296be216a7 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 21 Apr 2012 13:23:19 -0500
 Subject: [PATCH 19/19] Milestone0.0
 
 ---
- README |   23 ++++++++++++++++++++++-
- 1 files changed, 22 insertions(+), 1 deletions(-)
+ README |   22 ++++++++++++++++++++++
+ 1 files changed, 22 insertions(+), 0 deletions(-)
 
 diff --git a/README b/README
-index 87e8691..06dc29e 100644
+index 87e8691..da048fe 100644
 --- a/README
 +++ b/README
 @@ -37,6 +37,11 @@ parches y/o c
@@ -40,7 +40,7 @@ index 87e8691..06dc29e 100644
 +0.20 - 24/04/2012: CharacterHistory por Codels
 +0.21 - 24/04/2012: MailHistory por Codels
 +0.22 - 26/04/2012: BossHistory log db y RaidInfo anuncios por Eilo
-+0.23 - 08/04/2012: Arenas anuncios de cola por Oceanor
++0.23 - 08/04/2012: Arenas anuncios de cola por Oceanor, mejoras y mas codigo por Eilo
 +0.24 - 10/04/2012: Sanctuary zonas custom por Oceanor
 +0.25 - 10/04/2012: FFA Pvp zonas custom por Oceanor
 +0.26 - 29/04/2012: Arena Espectador por Eilo

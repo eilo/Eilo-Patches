@@ -1,4 +1,4 @@
-From f29d3b3c32882aca79331fb179dc88d83f14737f Mon Sep 17 00:00:00 2001
+From 294426cc06db1300c435087e4abd4286f6d5769b Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 29 Apr 2012 22:44:28 -0500
 Subject: [PATCH 18/19] 0.26 Arena Espectador
@@ -7,14 +7,14 @@ Subject: [PATCH 18/19] 0.26 Arena Espectador
  .../2012_01_27_100_world_arena_espectador.sql      |    9 +
  src/server/game/Battlegrounds/Battleground.cpp     |   13 +
  src/server/game/Battlegrounds/BattlegroundMgr.h    |    1 +
- src/server/game/Entities/Player/Player.cpp         |   80 +++++
+ src/server/game/Entities/Player/Player.cpp         |   79 +++++
  src/server/game/Entities/Player/Player.h           |    7 +
  src/server/game/Handlers/ChatHandler.cpp           |   14 +
  src/server/game/Miscellaneous/Language.h           |    3 +
  src/server/game/Scripting/ScriptLoader.cpp         |    2 +
  src/server/scripts/Custom/CMakeLists.txt           |    1 +
  src/server/scripts/Custom/npc_arena_espectador.cpp |  339 ++++++++++++++++++++
- 10 files changed, 469 insertions(+), 0 deletions(-)
+ 10 files changed, 468 insertions(+), 0 deletions(-)
  create mode 100644 sql/updates/world/custom/2012_01_27_100_world_arena_espectador.sql
  create mode 100644 src/server/scripts/Custom/npc_arena_espectador.cpp
 
@@ -70,7 +70,7 @@ index 7afb83d..04e2d83 100755
          BattleMastersMap    mBattleMastersMap;
  
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 871414c..cc0203b 100755
+index 5d32bfb..e53a68c 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -2960,6 +2960,79 @@ void Player::SetGMVisible(bool on)
@@ -163,7 +163,7 @@ index 871414c..cc0203b 100755
      // GM state
      if (!AccountMgr::IsPlayerAccount(GetSession()->GetSecurity()))
      {
-@@ -22058,6 +22135,9 @@ bool Player::IsVisibleGloballyFor(Player* u) const
+@@ -22058,6 +22134,9 @@ bool Player::IsVisibleGloballyFor(Player* u) const
      if (!IsVisible())
          return false;
  

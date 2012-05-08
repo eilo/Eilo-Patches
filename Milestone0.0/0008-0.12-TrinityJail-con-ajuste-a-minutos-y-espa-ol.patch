@@ -1,4 +1,4 @@
-From 45a3fd5fdfb89638f67afb5c7e76b27582d98d85 Mon Sep 17 00:00:00 2001
+From b12adeb6e1f8fe4fd21c986b8d483e81ce02828f Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 24 Apr 2012 19:04:09 -0500
 Subject: [PATCH 08/19] =?UTF-8?q?0.12=20TrinityJail=20con=20ajuste=20a=20min?=
@@ -728,7 +728,7 @@ index 919acfb..48048b7 100755
  {
      Player* SelectedPlayer = getSelectedPlayer();
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index a3617ac..28de3d2 100755
+index a3617ac..ee5129c 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -643,6 +643,21 @@ Player::Player(WorldSession* session): Unit(true), m_achievementMgr(this), m_rep
