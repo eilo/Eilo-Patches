@@ -1,7 +1,7 @@
-From dc06c54820c34a8a57be975dcae3b32127a28ad6 Mon Sep 17 00:00:00 2001
+From 71603146686bf4a8f7beb1618a0d5c01b42be966 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Mon, 16 Apr 2012 21:20:46 -0300
-Subject: [PATCH 27/40] 4.4.3 Cuenca de Sholazar: El rayo golpea dos veces sin
+Subject: [PATCH 25/40] 4.4.3 Cuenca de Sholazar: El rayo golpea dos veces sin
  duda
 
 Fix for quest "Lightning Definitely Strikes Twice" from Oracles/Frenzyheart quest chain

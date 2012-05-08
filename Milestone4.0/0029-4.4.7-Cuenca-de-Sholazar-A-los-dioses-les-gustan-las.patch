@@ -1,7 +1,7 @@
-From a30bf681a61ae76728389105c20e07c5a272c4e1 Mon Sep 17 00:00:00 2001
+From 7f6f31d402bace2703c27f232fc67bb80afceabb Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Mon, 16 Apr 2012 21:30:59 -0300
-Subject: [PATCH 31/40] 4.4.7 Cuenca de Sholazar: A los dioses les gustan las
+Subject: [PATCH 29/40] 4.4.7 Cuenca de Sholazar: A los dioses les gustan las
  cosas brillantes
 
 Support for quest "Gods like shiny things" from Oracles/Frenzyheart quest chain

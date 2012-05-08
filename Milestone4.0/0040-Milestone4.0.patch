@@ -1,4 +1,4 @@
-From e4fadc242a41967db7dcda2fab71b4035f4879ee Mon Sep 17 00:00:00 2001
+From 3458f26422dadc9c1303c2f8566b3af483c41688 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 8 May 2012 00:33:29 -0500
 Subject: [PATCH 40/40] Milestone4.0
@@ -8,7 +8,7 @@ Subject: [PATCH 40/40] Milestone4.0
  1 files changed, 47 insertions(+), 0 deletions(-)
 
 diff --git a/README b/README
-index d9fc970..9fdca1d 100644
+index 6c2d6de..85f653e 100644
 --- a/README
 +++ b/README
 @@ -49,6 +49,8 @@ Milestone2.0: Mejoras en Instances y dungeons, escencialmente para darles funcio
@@ -20,7 +20,7 @@ index d9fc970..9fdca1d 100644
  
  
  ##################################
-@@ -263,6 +265,51 @@ Milestone3.0: Arreglos a Spells, sobre todo para estabilidad del pve y del
+@@ -266,6 +268,51 @@ Milestone3.0: Arreglos a Spells, sobre todo para estabilidad del pve y del
  ##################
  # Soporte Quests #
  ##################

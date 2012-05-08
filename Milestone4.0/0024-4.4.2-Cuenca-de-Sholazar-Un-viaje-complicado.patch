@@ -1,7 +1,7 @@
-From ddb8e84fc520d1f9268899b8fdd1857715814beb Mon Sep 17 00:00:00 2001
+From 61d6b9ed789fb2a8a6f9863b3a5daadf89f372e2 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:15:38 -0300
-Subject: [PATCH 26/40] 4.4.2 Cuenca de Sholazar: Un viaje complicado
+Subject: [PATCH 24/40] 4.4.2 Cuenca de Sholazar: Un viaje complicado
 
 Some corrections on Crocolik's waypoints
 ---

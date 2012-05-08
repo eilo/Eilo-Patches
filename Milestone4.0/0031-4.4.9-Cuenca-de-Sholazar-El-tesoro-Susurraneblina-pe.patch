@@ -1,7 +1,7 @@
-From e1faf62a59e562d8e74cb103e0539d90fbcd4d30 Mon Sep 17 00:00:00 2001
+From 709830d11e4cbcc8f3c71dfe0ec6ddab4b6f926f Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:31:33 -0300
-Subject: [PATCH 33/40] 4.4.9 Cuenca de Sholazar: El tesoro Susurraneblina
+Subject: [PATCH 31/40] 4.4.9 Cuenca de Sholazar: El tesoro Susurraneblina
  perdido
 
 Support for quest "The Lost Mistwhisper Treasure" from Oracles/Frenzyheart quest chain.

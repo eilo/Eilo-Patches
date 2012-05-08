@@ -1,7 +1,7 @@
-From bcc1a7da6c7e0dc847228638a2bcdcccb2acd122 Mon Sep 17 00:00:00 2001
+From 1eb6528e8cfb2aa5d31db63c382f267ad1026761 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Mon, 16 Apr 2012 21:21:25 -0300
-Subject: [PATCH 28/40] 4.4.4 Cuenca de Sholazar: Serfex el Atracador
+Subject: [PATCH 26/40] 4.4.4 Cuenca de Sholazar: Serfex el Atracador
 
 Converted "Serfex the Reaver" from EAI to SAI. Related to quest "The Underground Menace"
 ---

@@ -1,7 +1,7 @@
-From f627f0625914d8a79e7023d742e738378273d269 Mon Sep 17 00:00:00 2001
+From 3cf2c9d3d13342bfb090ef88861963e272a5aeb4 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Mon, 16 Apr 2012 21:18:48 -0300
-Subject: [PATCH 25/40] 4.4.1 Cuenca de Sholazar: Atormentar a los
+Subject: [PATCH 23/40] 4.4.1 Cuenca de Sholazar: Atormentar a los
  badanudillos
 
 Mejoras en la jugabilidad de la quest "Tormenting the Softknuckles"

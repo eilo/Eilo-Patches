@@ -1,7 +1,7 @@
-From d31312333fdc7c4ac394fb0360d098db04f3fe3a Mon Sep 17 00:00:00 2001
+From 5c60b9fab20344b16ef36235cec7b4955dd1ca60 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:26:26 -0300
-Subject: [PATCH 30/40] 4.4.6 Cuenca de Sholazar: Hacer las Paces
+Subject: [PATCH 28/40] 4.4.6 Cuenca de Sholazar: Hacer las Paces
 
 Converted C++ script for npc "Shaman Vekjik" to SAI
 Fixed spell "Frenzyheart's Fury" thanks to @Hispano

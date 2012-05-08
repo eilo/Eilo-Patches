@@ -1,7 +1,7 @@
-From 14ce104f5faf26c81cafd02651ab6803e5898a79 Mon Sep 17 00:00:00 2001
+From 5a34979d7db947033bff976f75944a166a376c22 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Tue, 17 Apr 2012 22:11:17 -0300
-Subject: [PATCH 20/40] 4.3.0 - Corona de Hielo: Sangre en el Agua
+Subject: [PATCH 19/40] 4.3.0 - Corona de Hielo: Sangre en el Agua
 
 Fix for quest "Blood in the Water"
 ---

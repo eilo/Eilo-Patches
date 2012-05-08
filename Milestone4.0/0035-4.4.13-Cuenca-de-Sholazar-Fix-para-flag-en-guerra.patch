@@ -1,7 +1,7 @@
-From e4a357613d92d22adb3657420ac10ce8ccccbcf0 Mon Sep 17 00:00:00 2001
+From ef9222d52f6fa49a545a064e943f3248dc95ace2 Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
 Date: Sat, 28 Apr 2012 17:38:26 -0300
-Subject: [PATCH 37/40] 4.4.13 Cuenca de Sholazar: Fix para flag en guerra
+Subject: [PATCH 35/40] 4.4.13 Cuenca de Sholazar: Fix para flag en guerra
 
 Temporary fix for related issues with "At war" flag, related to Oracles/Frenzyheart factions
 ---
