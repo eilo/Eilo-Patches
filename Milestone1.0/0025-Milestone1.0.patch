@@ -33,7 +33,7 @@ index 9e6a047..a5db0b8 100644
 +1.7  - 27/10/2011: Bindeo instance players que se salen y lotean por Greymane
 +1.8  - 18/10/2011: Apaño Parry formula de calculo por Faelon
 +1.9  - 18/10/2011: Apaño del Dodge formula y comportamiento por Faelon
-+1.11  - 11/05/2011: EyeOfStorm: Fix entrega de bandera en FelReaver(AtracadorVil) por Tobmaps actualizado por Eilo
++1.11 - 11/05/2011: EyeOfStorm: Fix entrega de bandera en FelReaver(AtracadorVil) por Tobmaps actualizado por Eilo
 +1.16 - 13/01/2012: Prevenir exploit login dentro de instances por Tobmaps
 +1.17 - 03/11/2011: Mejora en pesos(probabilidad) de cada bg y min-max pj por Eilo
 +1.18 - 15/10/2011: Deshabilitadas spells de nefarian que usan para exploit por Havenard
