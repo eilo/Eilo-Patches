@@ -1,0 +1,28 @@
+From 1b5b9446e69b671070554bfaffea5799f65ba55d Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 4 May 2012 03:48:55 -0500
+Subject: [PATCH 40/91] 2.2.36 ICC: Sindragosa arreglo para no perder target
+ apenas baje
+
+---
+ .../Northrend/IcecrownCitadel/boss_sindragosa.cpp  |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_sindragosa.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_sindragosa.cpp
+index 02a17e2..147f792 100644
+--- a/src/server/scripts/Northrend/IcecrownCitadel/boss_sindragosa.cpp
++++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_sindragosa.cpp
+@@ -337,6 +337,10 @@ class boss_sindragosa : public CreatureScript
+                         me->SetReactState(REACT_AGGRESSIVE);
+                         if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() == POINT_MOTION_TYPE)
+                             me->GetMotionMaster()->MovementExpired();
++                        if (Unit* target = me->getVictim())
++                            DoStartMovement(target);
++                        else if(Unit* target = SelectTarget(SELECT_TARGET_RANDOM,0,300.0f,true))
++                            DoStartMovement(target);
+                         _isInAirPhase = false;
+                         // trigger Asphyxiation
+                         EntryCheckPredicate pred(NPC_ICE_TOMB);
+-- 
+1.7.8.msysgit.0
+

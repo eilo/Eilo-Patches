@@ -1,0 +1,65 @@
+From fc34d7651b9de917f98a4d6dad816a91a881d67e Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Thu, 3 May 2012 23:45:32 -0500
+Subject: [PATCH 70/91] 2.9.3 RubySanctum: Zarithrian varias correcciones
+
+---
+ .../RubySanctum/boss_general_zarithrian.cpp        |   14 +++++++-------
+ 1 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_general_zarithrian.cpp b/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_general_zarithrian.cpp
+index b2cf755..b126043 100644
+--- a/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_general_zarithrian.cpp
++++ b/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_general_zarithrian.cpp
+@@ -43,7 +43,7 @@ enum Events
+ {
+     // General Zarithrian
+     EVENT_CLEAVE                    = 1,
+-    EVENT_INTIDMDATING_ROAR         = 2,
++    EVENT_INTIMIDATING_ROAR         = 2,
+     EVENT_SUMMON_ADDS               = 3,
+     // Onyx Flamecaller
+     EVENT_BLAST_NOVA                = 4,
+@@ -52,7 +52,7 @@ enum Events
+ 
+ uint32 const MAX_PATH_FLAMECALLER_WAYPOINTS = 12;
+ 
+-Position const FlamecallerWaypoints[MAX_PATH_FLAMECALLER_WAYPOINTS*2] =
++Position const FlamecallerWaypoints[MAX_PATH_FLAMECALLER_WAYPOINTS * 2] =
+ {
+     // East
+     {3042.971f, 419.8809f, 86.94320f, 0.0f},
+@@ -106,7 +106,7 @@ class boss_general_zarithrian : public CreatureScript
+                 Talk(SAY_AGGRO);
+                 events.Reset();
+                 events.ScheduleEvent(EVENT_CLEAVE, 15000);
+-                events.ScheduleEvent(EVENT_INTIDMDATING_ROAR, 42000);
++                events.ScheduleEvent(EVENT_INTIMIDATING_ROAR, 42000);
+                 events.ScheduleEvent(EVENT_SUMMON_ADDS, 40000);
+             }
+ 
+@@ -157,17 +157,17 @@ class boss_general_zarithrian : public CreatureScript
+                     {
+                         case EVENT_SUMMON_ADDS:
+                         {
+-                            if (Creature* stalker1 = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_ZARITHIAN_SPAWN_STALKER_1)))
++                            if (Creature* stalker1 = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_ZARITHRIAN_SPAWN_STALKER_1)))
+                                 stalker1->AI()->DoCast(stalker1, SPELL_SUMMON_FLAMECALLER);
+-                            if (Creature* stalker2 = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_ZARITHIAN_SPAWN_STALKER_2)))
++                            if (Creature* stalker2 = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_ZARITHRIAN_SPAWN_STALKER_2)))
+                                 stalker2->AI()->DoCast(stalker2, SPELL_SUMMON_FLAMECALLER);
+                             Talk(SAY_ADDS);
+                             events.ScheduleEvent(EVENT_SUMMON_ADDS, 42000);
+                             break;
+                         }
+-                        case EVENT_INTIDMDATING_ROAR:
++                        case EVENT_INTIMIDATING_ROAR:
+                             DoCast(me, SPELL_INTIMIDATING_ROAR, true);
+-                            events.ScheduleEvent(EVENT_INTIDMDATING_ROAR, 42000);
++                            events.ScheduleEvent(EVENT_INTIMIDATING_ROAR, 42000);
+                         case EVENT_CLEAVE:
+                             DoCastVictim(SPELL_CLEAVE_ARMOR);
+                             events.ScheduleEvent(EVENT_CLEAVE, 15000);
+-- 
+1.7.8.msysgit.0
+

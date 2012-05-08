@@ -1,0 +1,59 @@
+From 2d51492a437fcd9efd90676a17cee45b8696a13e Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 4 May 2012 06:02:09 -0500
+Subject: [PATCH 49/91] =?UTF-8?q?2.2.48=20ICC:=20Putricidio=20a=C3=B1adiendo?=
+ =?UTF-8?q?=20inmunidades=20a=20la=20ooze=20y=20gascloud=20para=20evitar=20e?=
+ =?UTF-8?q?xploits?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/server/game/Spells/Spell.cpp                   |    4 ++++
+ .../IcecrownCitadel/boss_professor_putricide.cpp   |    8 ++++++++
+ 2 files changed, 12 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
+index 28b089f..7d4f668 100755
+--- a/src/server/game/Spells/Spell.cpp
++++ b/src/server/game/Spells/Spell.cpp
+@@ -3039,6 +3039,10 @@ void Spell::cancel()
+     if (m_spellState == SPELL_STATE_FINISHED)
+         return;
+ 
++    // Really bad hack fix, make spell casted by Gas Cloud (37562) and Volatile Ooze (37697) uncancelable
++    if (m_caster->GetEntry() == 37562 || m_caster->GetEntry() == 37697)
++        return;
++
+     uint32 oldState = m_spellState;
+     m_spellState = SPELL_STATE_FINISHED;
+ 
+diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_professor_putricide.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_professor_putricide.cpp
+index 2732985..79f8097 100755
+--- a/src/server/scripts/Northrend/IcecrownCitadel/boss_professor_putricide.cpp
++++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_professor_putricide.cpp
+@@ -720,6 +720,10 @@ class npc_volatile_ooze : public CreatureScript
+             npc_putricide_oozeAI(Creature* creature) : ScriptedAI(creature)
+             {
+                 _newTargetSelectTimer = 0;
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK_DEST, true);
++                me->ApplySpellImmune(0, IMMUNITY_STATE, SPELL_AURA_MOD_TAUNT, true);
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_ATTACK_ME, true);
+             }
+ 
+             void SpellHitTarget(Unit* /*target*/, SpellInfo const* spell)
+@@ -782,6 +786,10 @@ class npc_gas_cloud : public CreatureScript
+             npc_gas_cloudAI(Creature* creature) : ScriptedAI(creature)
+             {
+                 _newTargetSelectTimer = 0;
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK_DEST, true);
++                me->ApplySpellImmune(0, IMMUNITY_STATE, SPELL_AURA_MOD_TAUNT, true);
++                me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_ATTACK_ME, true);
+             }
+ 
+             void SpellHitTarget(Unit* /*target*/, SpellInfo const* spell)
+-- 
+1.7.8.msysgit.0
+

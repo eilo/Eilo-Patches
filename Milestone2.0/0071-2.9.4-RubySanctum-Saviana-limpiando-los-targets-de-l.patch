@@ -1,0 +1,27 @@
+From f71fca5818f381c7ae91ef92707ad00f0bc393a8 Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Thu, 3 May 2012 23:46:56 -0500
+Subject: [PATCH 71/91] 2.9.4 RubySanctum: Saviana limpiando los targets de la
+ conflagracion
+
+---
+ .../RubySanctum/boss_saviana_ragefire.cpp          |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_saviana_ragefire.cpp b/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_saviana_ragefire.cpp
+index 4e5e01c..20cb2ad 100644
+--- a/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_saviana_ragefire.cpp
++++ b/src/server/scripts/Northrend/ChamberOfAspects/RubySanctum/boss_saviana_ragefire.cpp
+@@ -203,6 +203,9 @@ class spell_saviana_conflagration_init : public SpellScriptLoader
+ 
+             void FilterTargets(std::list<Unit*>& unitList)
+             {
++                if (unitList.empty())
++                    return;
++
+                 unitList.remove_if (ConflagrationTargetSelector());
+                 uint8 maxSize = uint8(GetCaster()->GetMap()->GetSpawnMode() & 1 ? 6 : 3);
+                 if (unitList.size() > maxSize)
+-- 
+1.7.8.msysgit.0
+

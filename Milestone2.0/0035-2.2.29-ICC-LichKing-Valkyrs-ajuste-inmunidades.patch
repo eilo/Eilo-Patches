@@ -1,0 +1,27 @@
+From 218d504ce030a8d64b4c09e79dc8902a9f9889da Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Fri, 4 May 2012 03:38:42 -0500
+Subject: [PATCH 35/91] 2.2.29 ICC: LichKing Valkyrs ajuste inmunidades
+
+---
+ .../2011_11_24_100_world_correcciones_icc.sql      |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
+
+diff --git a/sql/updates/world/reanemu/2011_11_24_100_world_correcciones_icc.sql b/sql/updates/world/reanemu/2011_11_24_100_world_correcciones_icc.sql
+index 11a67a3..5ff676f 100644
+--- a/sql/updates/world/reanemu/2011_11_24_100_world_correcciones_icc.sql
++++ b/sql/updates/world/reanemu/2011_11_24_100_world_correcciones_icc.sql
+@@ -22,4 +22,8 @@ UPDATE `creature_template` SET `speed_walk`=0.68 WHERE `entry` IN (37697,38604,3
+ 
+ -- Inmunidades de las babosas de putricidio
+ -- Babosas de putricidio Volatile Ooze(37697)
+-UPDATE `creature_template` SET `mechanic_immune_mask` = `mechanic_immune_mask`|1|2|8|16|32|64|128|256|512|1024|2048|4096|8192|65536|131072|524288|4194304|8388608|33554432|536870912 WHERE `entry` IN (37697,38604,38758,38759,37562,38602,38760,38761);
+\ No newline at end of file
++UPDATE `creature_template` SET `mechanic_immune_mask` = `mechanic_immune_mask`|1|2|8|16|32|64|128|256|512|1024|2048|4096|8192|65536|131072|524288|4194304|8388608|33554432|536870912 WHERE `entry` IN (37697,38604,38758,38759,37562,38602,38760,38761);
++
++-- Icc adds Lich King
++-- Valkyrs de lich king(36609)
++UPDATE `creature_template` SET `mechanic_immune_mask` = `mechanic_immune_mask`|1|2|4|8|16|32|64|128|256|512|4096|8192|65536|131072|524288|1048576|4194304|8388608|33554432|67108864|536870912 WHERE `entry` IN (36609,39120,39121,39122);
+-- 
+1.7.8.msysgit.0
+
