@@ -19,7 +19,7 @@ new file mode 100644
 index 0000000..5d838d8
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_03_11_100_world_spell_linked_spell_hot_streak.sql
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,15 @@
 +DELETE FROM `spell_linked_spell` where `spell_trigger` IN (11366,12505,12522,12523,12524,12525,12526);
 +INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
 +(11366, -48108, 0, 'Hot Streak removed when pyroblast (rank 1) is casted');
@@ -34,6 +34,7 @@ index 0000000..5d838d8
 +INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
 +(12525, -48108, 0, 'Hot Streak removed when pyroblast (rank 6) is casted');
 +INSERT INTO `spell_linked_spell` (`spell_trigger`,`spell_effect`,`type`,`comment`) VALUES
++(12526, -48108, 0, 'Hot Streak removed when pyroblast (rank 7) is casted');
 -- 
 1.7.8.msysgit.0
 
