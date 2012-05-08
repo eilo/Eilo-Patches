@@ -1,7 +1,7 @@
-From d1f19bef0e5fb9494af23ff946ffd05d413b546c Mon Sep 17 00:00:00 2001
+From 134965f797a6767715f120875b92b005bd984eae Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 10 Feb 2012 02:13:30 -0500
-Subject: [PATCH 18/25] 1.27 Cada pj debe tener el logro para entrar en
+Subject: [PATCH 15/22] 1.27 Cada pj debe tener el logro para entrar en
  heroico
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 18/25] 1.27 Cada pj debe tener el logro para entrar en
  1 files changed, 2 insertions(+), 8 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 6a1fb74..33331a4 100755
+index 943e305..ef18b22 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
-@@ -18771,14 +18771,8 @@ bool Player::Satisfy(AccessRequirement const* ar, uint32 target_map, bool report
+@@ -18847,14 +18847,8 @@ bool Player::Satisfy(AccessRequirement const* ar, uint32 target_map, bool report
              missingQuest = ar->quest_H;
  
          uint32 missingAchievement = 0;

@@ -1,7 +1,7 @@
-From 450064bf68cf7f666b8c1610afc13cfaca298f17 Mon Sep 17 00:00:00 2001
+From 1b5464ca81b11ad2de9ed71cc6db3556514efd14 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 22 Apr 2012 00:05:08 -0500
-Subject: [PATCH 24/25] 1.40 No permitir doble stackeo de auras
+Subject: [PATCH 21/22] 1.40 No permitir doble stackeo de auras
 
 ---
  src/server/game/Spells/Auras/SpellAuras.cpp |   14 ++++++++++++++

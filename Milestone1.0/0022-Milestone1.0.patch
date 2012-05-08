@@ -1,14 +1,14 @@
-From 3547765d15801bd442759b1afdacbc747e16eed5 Mon Sep 17 00:00:00 2001
+From 3c9917845685e2f4a06a60996631df683cede773 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 22 Apr 2012 00:08:13 -0500
-Subject: [PATCH 25/25] Milestone1.0
+Subject: [PATCH 22/22] Milestone1.0
 
 ---
- README |   27 ++++++++++++++++++++++++++-
- 1 files changed, 26 insertions(+), 1 deletions(-)
+ README |   25 +++++++++++++++++++++++++
+ 1 files changed, 25 insertions(+), 0 deletions(-)
 
 diff --git a/README b/README
-index 9e6a047..a5db0b8 100644
+index da048fe..74aac26 100644
 --- a/README
 +++ b/README
 @@ -42,6 +42,8 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
@@ -20,7 +20,7 @@ index 9e6a047..a5db0b8 100644
  
  
  ##################################
-@@ -75,6 +77,29 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
+@@ -74,6 +76,29 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
  ###############
  # Jugabilidad #
  ###############

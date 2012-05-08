@@ -1,7 +1,7 @@
-From 8b8e86ef884924571bb95a708e24aec30a1110b7 Mon Sep 17 00:00:00 2001
+From f689600fe04d26ae082c821372b350303beefe33 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 21:47:13 -0500
-Subject: [PATCH 02/25] 1.2 Desactivado avisos Join/Leave en canales
+Subject: [PATCH 02/22] 1.2 Desactivado avisos Join/Leave en canales
 
 ---
  src/server/game/Chat/Channels/Channel.cpp |    8 ++++----

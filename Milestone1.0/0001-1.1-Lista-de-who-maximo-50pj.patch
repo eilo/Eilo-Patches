@@ -1,7 +1,7 @@
-From 5e7b126f35352bfc7796c0cb4cc045fccf585584 Mon Sep 17 00:00:00 2001
+From a1c8cd072f89a8702c4e88f96215cbd9b78d56a1 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 15 Dec 2011 21:22:54 -0500
-Subject: [PATCH 01/25] 1.1 Lista de who maximo 50pj
+Subject: [PATCH 01/22] 1.1 Lista de who maximo 50pj
 
 ---
  src/server/game/Handlers/MiscHandler.cpp |    2 +-

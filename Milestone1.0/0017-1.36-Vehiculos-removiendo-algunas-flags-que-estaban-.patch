@@ -1,7 +1,7 @@
-From 42e539123bf20a3d2fa842020d0cd1fc3850b33d Mon Sep 17 00:00:00 2001
+From f498398cbcf800028a4999b007dbb5a013872aee Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 10 Mar 2012 15:34:40 -0500
-Subject: [PATCH 20/25] 1.36 Vehiculos removiendo algunas flags que estaban
+Subject: [PATCH 17/22] 1.36 Vehiculos removiendo algunas flags que estaban
  demas y permitian exploit
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 20/25] 1.36 Vehiculos removiendo algunas flags que estaban
  1 files changed, 6 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Vehicle/Vehicle.cpp b/src/server/game/Entities/Vehicle/Vehicle.cpp
-index 7683b7a..e0dea41 100755
+index dc6c632..23c2b23 100755
 --- a/src/server/game/Entities/Vehicle/Vehicle.cpp
 +++ b/src/server/game/Entities/Vehicle/Vehicle.cpp
-@@ -451,6 +451,12 @@ void Vehicle::RemovePassenger(Unit* unit)
+@@ -445,6 +445,12 @@ void Vehicle::RemovePassenger(Unit* unit)
  
      unit->ClearUnitState(UNIT_STATE_ONVEHICLE);
      unit->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, false);

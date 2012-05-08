@@ -1,7 +1,7 @@
-From 478b84522afb2f153cce6e100431a516d6f89bf8 Mon Sep 17 00:00:00 2001
+From a1bd0348741c93e7a0ed60236206c82ff8f05fd3 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 08:18:56 -0500
-Subject: [PATCH 15/25] 1.24 Absorcion Magica ajustada
+Subject: [PATCH 13/22] 1.24 Absorcion Magica ajustada
 
 ---
  src/server/game/Spells/SpellInfo.cpp |    3 ++-

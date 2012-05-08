@@ -1,14 +1,14 @@
-From 84e148012e68f1eab9bbe3ade5852e7cd931c98c Mon Sep 17 00:00:00 2001
+From 4748cffddaa923fe27aca8be5a828717470e9905 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 21 Apr 2012 20:47:34 -0500
-Subject: [PATCH 04/25] 1.4 Inmunidades de vehiculos
+Subject: [PATCH 04/22] 1.4 Inmunidades de vehiculos
 
 ---
  src/server/game/Entities/Vehicle/Vehicle.cpp |   39 ++++++++++++++++++++++++++
  1 files changed, 39 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Vehicle/Vehicle.cpp b/src/server/game/Entities/Vehicle/Vehicle.cpp
-index 4ce05ff..da833cd 100755
+index c297ce1..dc6c632 100755
 --- a/src/server/game/Entities/Vehicle/Vehicle.cpp
 +++ b/src/server/game/Entities/Vehicle/Vehicle.cpp
 @@ -42,6 +42,43 @@ Vehicle::Vehicle(Unit* unit, VehicleEntry const* vehInfo, uint32 creatureEntry)
@@ -55,7 +55,7 @@ index 4ce05ff..da833cd 100755
      InitMovementInfoForBase();
  }
  
-@@ -345,6 +382,7 @@ bool Vehicle::AddPassenger(Unit* unit, int8 seatId)
+@@ -342,6 +379,7 @@ bool Vehicle::AddPassenger(Unit* unit, int8 seatId)
          unit->AddUnitState(UNIT_STATE_ONVEHICLE);
  
      unit->AddUnitMovementFlag(MOVEMENTFLAG_ONTRANSPORT);
@@ -63,7 +63,7 @@ index 4ce05ff..da833cd 100755
      VehicleSeatEntry const* veSeat = seat->second.SeatInfo;
      unit->m_movementInfo.t_pos.m_positionX = veSeat->m_attachmentOffsetX;
      unit->m_movementInfo.t_pos.m_positionY = veSeat->m_attachmentOffsetY;
-@@ -408,6 +446,7 @@ void Vehicle::RemovePassenger(Unit* unit)
+@@ -406,6 +444,7 @@ void Vehicle::RemovePassenger(Unit* unit)
      }
  
      unit->ClearUnitState(UNIT_STATE_ONVEHICLE);

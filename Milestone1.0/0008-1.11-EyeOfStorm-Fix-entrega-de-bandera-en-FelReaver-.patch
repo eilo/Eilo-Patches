@@ -1,7 +1,7 @@
-From 554e6c1bdf32349b02a2f10bb119b7e996d6fe45 Mon Sep 17 00:00:00 2001
+From 7a8c277f6b00921224a68edd9c0e4ca385d87321 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 17:47:11 -0500
-Subject: [PATCH 09/25] 1.11 EyeOfStorm: Fix entrega de bandera en
+Subject: [PATCH 08/22] 1.11 EyeOfStorm: Fix entrega de bandera en
  FelReaver(AtracadorVil)
 
 ---

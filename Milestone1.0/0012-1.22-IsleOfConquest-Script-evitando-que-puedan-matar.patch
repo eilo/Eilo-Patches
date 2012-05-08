@@ -1,7 +1,7 @@
-From ffb7aa7af29799be4e278f3f4827250b95971a8e Mon Sep 17 00:00:00 2001
+From fc7942b89df104cc836d43ad32dfffa12b9463b9 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 25 Dec 2011 13:03:55 -0500
-Subject: [PATCH 14/25] 1.22 IsleOfConquest: Script evitando que puedan matar
+Subject: [PATCH 12/22] 1.22 IsleOfConquest: Script evitando que puedan matar
  a los bosses con exploit
 
 ---

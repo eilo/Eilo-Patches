@@ -1,7 +1,7 @@
-From 1fbfeb4102bf46de7571717298d010ce97f4f5af Mon Sep 17 00:00:00 2001
+From 7c2a01f305743584fc4fd471ce831994ae507c2c Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 21 Apr 2012 23:11:41 -0500
-Subject: [PATCH 22/25] 1.38 Arenas, teleportarlos mas arriba si se caen bajo
+Subject: [PATCH 19/22] 1.38 Arenas, teleportarlos mas arriba si se caen bajo
  el suelo
 
 ---
@@ -32,7 +32,7 @@ index cda80fe..4a950b6 100755
          // since arenas can be AvA or Hvh, we have to get the "temporary" team of a player
          uint32 GetPlayerTeam(uint64 guid) const;
 diff --git a/src/server/game/Battlegrounds/Zones/BattlegroundBE.cpp b/src/server/game/Battlegrounds/Zones/BattlegroundBE.cpp
-index c7eddbb..59ee938 100755
+index c7eddbb..d3eead3 100755
 --- a/src/server/game/Battlegrounds/Zones/BattlegroundBE.cpp
 +++ b/src/server/game/Battlegrounds/Zones/BattlegroundBE.cpp
 @@ -105,6 +105,14 @@ bool BattlegroundBE::HandlePlayerUnderMap(Player* player)
@@ -63,10 +63,10 @@ index 8c0df2b..af05f87 100755
          /* Scorekeeping */
          void UpdatePlayerScore(Player* Source, uint32 type, uint32 value, bool doAddHonor = true);
 diff --git a/src/server/game/Battlegrounds/Zones/BattlegroundDS.cpp b/src/server/game/Battlegrounds/Zones/BattlegroundDS.cpp
-index 8a11edf..3836d58 100644
+index ccc6a23..c755786 100644
 --- a/src/server/game/Battlegrounds/Zones/BattlegroundDS.cpp
 +++ b/src/server/game/Battlegrounds/Zones/BattlegroundDS.cpp
-@@ -215,6 +215,14 @@ bool BattlegroundDS::HandlePlayerUnderMap(Player* player)
+@@ -212,6 +212,14 @@ bool BattlegroundDS::HandlePlayerUnderMap(Player* player)
      return true;
  }
  
@@ -82,7 +82,7 @@ index 8a11edf..3836d58 100644
  {
      data << uint32(3610) << uint32(1);                                              // 9 show
 diff --git a/src/server/game/Battlegrounds/Zones/BattlegroundDS.h b/src/server/game/Battlegrounds/Zones/BattlegroundDS.h
-index 12ed91f..66a5076 100755
+index aaf08ba..50fea29 100755
 --- a/src/server/game/Battlegrounds/Zones/BattlegroundDS.h
 +++ b/src/server/game/Battlegrounds/Zones/BattlegroundDS.h
 @@ -105,6 +105,7 @@ class BattlegroundDS : public Battleground
@@ -94,7 +94,7 @@ index 12ed91f..66a5076 100755
          uint32 _waterfallTimer;
          uint8 _waterfallStatus;
 diff --git a/src/server/game/Battlegrounds/Zones/BattlegroundNA.cpp b/src/server/game/Battlegrounds/Zones/BattlegroundNA.cpp
-index 0974c96..7fbd858 100755
+index 0974c96..52baa10 100755
 --- a/src/server/game/Battlegrounds/Zones/BattlegroundNA.cpp
 +++ b/src/server/game/Battlegrounds/Zones/BattlegroundNA.cpp
 @@ -102,6 +102,14 @@ bool BattlegroundNA::HandlePlayerUnderMap(Player* player)
@@ -124,7 +124,7 @@ index 53c0faf..20753c3 100755
  };
  #endif
 diff --git a/src/server/game/Battlegrounds/Zones/BattlegroundRL.cpp b/src/server/game/Battlegrounds/Zones/BattlegroundRL.cpp
-index 6a62621..cccf751 100755
+index 6a62621..5cc0a14 100755
 --- a/src/server/game/Battlegrounds/Zones/BattlegroundRL.cpp
 +++ b/src/server/game/Battlegrounds/Zones/BattlegroundRL.cpp
 @@ -102,6 +102,14 @@ bool BattlegroundRL::HandlePlayerUnderMap(Player* player)
@@ -154,7 +154,7 @@ index dc041a1..fe38219 100755
  };
  #endif
 diff --git a/src/server/game/Battlegrounds/Zones/BattlegroundRV.cpp b/src/server/game/Battlegrounds/Zones/BattlegroundRV.cpp
-index 6869a89..3aaa2b6 100755
+index 6869a89..a7d17ac 100755
 --- a/src/server/game/Battlegrounds/Zones/BattlegroundRV.cpp
 +++ b/src/server/game/Battlegrounds/Zones/BattlegroundRV.cpp
 @@ -144,10 +144,48 @@ void BattlegroundRV::HandleKillPlayer(Player* player, Player* killer)
@@ -220,7 +220,7 @@ index 8c57469..7916c1e 100755
      private:
          uint32 Timer;
 diff --git a/src/server/game/Handlers/MovementHandler.cpp b/src/server/game/Handlers/MovementHandler.cpp
-index f1217e5..5b2708c 100755
+index b3d663e..e4b9c4e 100755
 --- a/src/server/game/Handlers/MovementHandler.cpp
 +++ b/src/server/game/Handlers/MovementHandler.cpp
 @@ -381,6 +381,14 @@ void WorldSession::HandleMovementOpcodes(WorldPacket & recv_data)
