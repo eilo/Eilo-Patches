@@ -95,8 +95,8 @@ index e641bea..08c78ae 100644
      QUEST_DELIVRANCE_FROM_THE_PIT_H2              = 24712,
      QUEST_WRATH_OF_THE_LICH_KING_A2               = 24500,
      QUEST_WRATH_OF_THE_LICH_KING_H2               = 24802,
-+	QUEST_HALLS_OF_REFLECTION_A					  = 24480,
-+	QUEST_HALLS_OF_REFLECTION_H					  = 24561,
++    QUEST_HALLS_OF_REFLECTION_A                      = 24480,
++    QUEST_HALLS_OF_REFLECTION_H                      = 24561,
  };
  
  enum Spells
@@ -106,19 +106,19 @@ index e641bea..08c78ae 100644
  
 +class at_quel_delar_uther : public AreaTriggerScript
 +{
-+	public:
-+		at_quel_delar_uther() : AreaTriggerScript("at_quel_delar_uther") {}
++    public:
++        at_quel_delar_uther() : AreaTriggerScript("at_quel_delar_uther") {}
 +
-+		bool OnTrigger(Player* player, AreaTriggerEntry const* /*trigger*/)
-+		{
-+			if ((player->GetQuestStatus(QUEST_HALLS_OF_REFLECTION_A) == QUEST_STATUS_INCOMPLETE) || (player->GetQuestStatus(QUEST_HALLS_OF_REFLECTION_H) == QUEST_STATUS_INCOMPLETE))
-+			{
-+				if (!player->FindNearestCreature(NPC_UTHER, 200))
-+					player->SummonCreature(NPC_UTHER, UtherSpawnPos, TEMPSUMMON_MANUAL_DESPAWN);				
-+			}
++        bool OnTrigger(Player* player, AreaTriggerEntry const* /*trigger*/)
++        {
++            if ((player->GetQuestStatus(QUEST_HALLS_OF_REFLECTION_A) == QUEST_STATUS_INCOMPLETE) || (player->GetQuestStatus(QUEST_HALLS_OF_REFLECTION_H) == QUEST_STATUS_INCOMPLETE))
++            {
++                if (!player->FindNearestCreature(NPC_UTHER, 200))
++                    player->SummonCreature(NPC_UTHER, UtherSpawnPos, TEMPSUMMON_MANUAL_DESPAWN);                
++            }
 +
-+			return false;
-+		}
++            return false;
++        }
 +};
 +
  void AddSC_halls_of_reflection()
@@ -128,7 +128,7 @@ index e641bea..08c78ae 100644
      new at_hor_waves_restarter();
      new npc_frostworn_general();
      new npc_spiritual_reflection();
-+	new at_quel_delar_uther();
++    new at_quel_delar_uther();
  }
 -- 
 1.7.9.msysgit.0
