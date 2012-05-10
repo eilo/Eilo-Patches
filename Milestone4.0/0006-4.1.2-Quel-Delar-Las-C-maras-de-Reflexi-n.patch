@@ -1,30 +1,33 @@
-From 0b195facca456d251a57e685d4e1250e3d664d58 Mon Sep 17 00:00:00 2001
+From 75291185e5a1c0da29c3a51e7adf4ff1d5308fba Mon Sep 17 00:00:00 2001
 From: Santiago Rossi <santiago_rho_psi@hotmail.com>
-Date: Sat, 28 Apr 2012 16:31:21 -0300
+Date: Thu, 10 May 2012 19:02:46 -0300
 Subject: [PATCH 06/40] =?UTF-8?q?4.1.2=20Quel'Delar:=20Las=20C=C3=A1maras=20?=
  =?UTF-8?q?de=20Reflexi=C3=B3n?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-AÃ±adido evento para la quest "The Halls of Reflection"
+Añadido evento para la quest "The Halls of Reflection"
 ---
- ...012_04_16_114_world_the_halls_of_reflection.sql |   67 ++++++++++++++++++++
- 1 files changed, 67 insertions(+), 0 deletions(-)
- create mode 100644 sql/updates/world/reanemu/2012_04_16_114_world_the_halls_of_reflection.sql
+ .../2012_04_16_114_world_halls_of_reflection.sql   |   67 ++++++++++++++++++++
+ .../HallsOfReflection/halls_of_reflection.cpp      |   20 ++++++
+ 2 files changed, 87 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/reanemu/2012_04_16_114_world_halls_of_reflection.sql
 
-diff --git a/sql/updates/world/reanemu/2012_04_16_114_world_the_halls_of_reflection.sql b/sql/updates/world/reanemu/2012_04_16_114_world_the_halls_of_reflection.sql
+diff --git a/sql/updates/world/reanemu/2012_04_16_114_world_halls_of_reflection.sql b/sql/updates/world/reanemu/2012_04_16_114_world_halls_of_reflection.sql
 new file mode 100644
-index 0000000..00794b6
+index 0000000..202fc08
 --- /dev/null
-+++ b/sql/updates/world/reanemu/2012_04_16_114_world_the_halls_of_reflection.sql
++++ b/sql/updates/world/reanemu/2012_04_16_114_world_halls_of_reflection.sql
 @@ -0,0 +1,67 @@
-+-- /*******************************************
-+--     Quest - The Halls of Reflection
-+-- *******************************************/
-+
++-- Quest - The Halls of Reflection
 +SET @UTHER :=37225;
 +SET @QUEL :=37158;
++SET @TRIGG :=5632;
++
++DELETE FROM `areatrigger_scripts` WHERE `entry`=@TRIGG;
++INSERT INTO `areatrigger_scripts` (`entry`,`ScriptName`) VALUES
++(@TRIGG,'at_quel_delar_uther');
 +
 +DELETE FROM `creature` WHERE `id`=@QUEL; -- spawn incorrecto
 +UPDATE `creature_template` SET `AIName`='SmartAI', `ScriptName`='' WHERE `entry`=@UTHER;
@@ -47,8 +50,6 @@ index 0000000..00794b6
 +(@UTHER*100,9,5,0,0,0,100,0,4000,4000,0,0,41,0,0,0,0,0,0,1,0,0,0,0,0,0,0,'Uther - Script - Despawn');
 +
 +DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=22 AND `SourceEntry`=@UTHER;
-+INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`SourceId`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionTarget`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
-+(22,2,@UTHER,0,0,1,0,70013,0,0,0,'','Uther the Lightbringer - Activate SAI if player has aura');
 +
 +DELETE FROM `creature_text` WHERE `entry`=@UTHER;
 +INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
@@ -86,6 +87,49 @@ index 0000000..00794b6
 +DELETE FROM `creature_text` WHERE `entry`=@QUEL;
 +INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`language`,`probability`,`emote`,`duration`,`sound`,`comment`) VALUES
 +(@QUEL,0,0,"Quel'Delar prepares to attack!",41,0,100,0,2,0,'Queldelar');
+diff --git a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
+index e641bea..08c78ae 100644
+--- a/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
++++ b/src/server/scripts/Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
+@@ -141,6 +141,8 @@ enum eEnum
+     QUEST_DELIVRANCE_FROM_THE_PIT_H2              = 24712,
+     QUEST_WRATH_OF_THE_LICH_KING_A2               = 24500,
+     QUEST_WRATH_OF_THE_LICH_KING_H2               = 24802,
++	QUEST_HALLS_OF_REFLECTION_A					  = 24480,
++	QUEST_HALLS_OF_REFLECTION_H					  = 24561,
+ };
+ 
+ enum Spells
+@@ -2037,6 +2039,23 @@ class at_hor_waves_restarter : public AreaTriggerScript
+         }
+ };
+ 
++class at_quel_delar_uther : public AreaTriggerScript
++{
++	public:
++		at_quel_delar_uther() : AreaTriggerScript("at_quel_delar_uther") {}
++
++		bool OnTrigger(Player* player, AreaTriggerEntry const* /*trigger*/)
++		{
++			if ((player->GetQuestStatus(QUEST_HALLS_OF_REFLECTION_A) == QUEST_STATUS_INCOMPLETE) || (player->GetQuestStatus(QUEST_HALLS_OF_REFLECTION_H) == QUEST_STATUS_INCOMPLETE))
++			{
++				if (!player->FindNearestCreature(NPC_UTHER, 200))
++					player->SummonCreature(NPC_UTHER, UtherSpawnPos, TEMPSUMMON_MANUAL_DESPAWN);				
++			}
++
++			return false;
++		}
++};
++
+ void AddSC_halls_of_reflection()
+ {
+     new npc_jaina_or_sylvanas_hor(true, "npc_sylvanas_hor_part1");
+@@ -2051,4 +2070,5 @@ void AddSC_halls_of_reflection()
+     new at_hor_waves_restarter();
+     new npc_frostworn_general();
+     new npc_spiritual_reflection();
++	new at_quel_delar_uther();
+ }
 -- 
-1.7.8.msysgit.0
+1.7.9.msysgit.0
 
