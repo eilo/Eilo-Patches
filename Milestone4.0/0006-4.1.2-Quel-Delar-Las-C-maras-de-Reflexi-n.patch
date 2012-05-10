@@ -19,9 +19,9 @@ index 0000000..00794b6
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_04_16_114_world_the_halls_of_reflection.sql
 @@ -0,0 +1,67 @@
-+/*******************************************
-+    Quest - The Halls of Reflection
-+*******************************************/
++-- /*******************************************
++--     Quest - The Halls of Reflection
++-- *******************************************/
 +
 +SET @UTHER :=37225;
 +SET @QUEL :=37158;
