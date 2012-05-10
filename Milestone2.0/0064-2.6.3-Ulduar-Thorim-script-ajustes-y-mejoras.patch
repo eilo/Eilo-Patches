@@ -15,7 +15,7 @@ new file mode 100644
 index 0000000..5cc03fc
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_06_100_world_thorim.sql
-@@ -0,0 +1,88 @@
+@@ -0,0 +1,100 @@
 +-- ##########################################################
 +-- Thorim
 +-- ##########################################################
@@ -32,7 +32,9 @@ index 0000000..5cc03fc
 +-- Charge Orb
 +DELETE FROM conditions WHERE SourceEntry = 62016;
 +INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
-+('13','0','62016','0','29','33378','100','0','0','',NULL);
++('13','1','62016','0','31','3','33378','0','0','',NULL),
++('13','1','62017','0','31','3','33378','0','0','',NULL),
++('13','1','62017','0','31','4','0','0','0','',NULL);
 +UPDATE `creature_template` SET `unit_flags` = 33685508 WHERE `entry` = 33378;
 +
 +-- Gate
@@ -73,14 +75,24 @@ index 0000000..5cc03fc
 +('136816','0','0','0','1','0','40775 0');
 +
 +DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=13 AND `SourceEntry` IN (62942,62466,62976,64098);
-+INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
-+(13, 62942, 31, 3, 33110),
-+(13, 62942, 31, 3, 32874),
-+(13, 62942, 31, 3, 32872),
-+(13, 62942, 31, 3, 32875),
-+(13, 62466, 29, 32780, 150),
-+(13, 64098, 31, 3, 32865),
-+(13, 62976, 29, 34055, 25);
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
++(13,1,62942,31,3,33110),
++(13,2,62942,31,3,33110),
++(13,4,62942,31,3,33110),
++(13,1,62942,31,3,32874),
++(13,2,62942,31,3,32874),
++(13,4,62942,31,3,32874),
++(13,1,62942,31,3,32872),
++(13,2,62942,31,3,32872),
++(13,4,62942,31,3,32872),
++(13,1,62942,31,3,32875),
++(13,2,62942,31,3,32875),
++(13,4,62942,31,3,32875),
++(13,1,62466,29,32780,150),
++(13,2,62466,29,32780,150),
++(13,4,62466,29,32780,150),
++(13,1,64098,31,3,32865),
++(13,1,62976,29,34055,25);
 +
 +UPDATE `creature_template` SET `faction_A`=35, `faction_H`=35 WHERE `entry`=34055;
 +

@@ -78,7 +78,7 @@ new file mode 100644
 index 0000000..f71183d
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_07_100_world_ulduar_trash.sql
-@@ -0,0 +1,1308 @@
+@@ -0,0 +1,1312 @@
 +-- ------------------
 +-- Flame Leviathane |
 +-- ------------------
@@ -325,8 +325,12 @@ index 0000000..f71183d
 +
 +DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=13 AND `SourceEntry`=63059;
 +INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
-+(13,0,63059,0,29,33430,20,0,0,'','Spell: Polite only target Guardian Lasher (10)'),
-+(13,0,63059,1,29,33732,20,0,0,'','Spell: Polite only target Guardian Lasher (25)');
++(13,1,63059,0,29,33430,20,0,0,'','Spell: Polite only target Guardian Lasher (10)'),
++(13,2,63059,0,29,33430,20,0,0,'','Spell: Polite only target Guardian Lasher (10)'),
++(13,4,63059,0,29,33430,20,0,0,'','Spell: Polite only target Guardian Lasher (10)'),
++(13,1,63059,1,29,33732,20,0,0,'','Spell: Polite only target Guardian Lasher (25)'),
++(13,2,63059,1,29,33732,20,0,0,'','Spell: Polite only target Guardian Lasher (25)'),
++(13,4,63059,1,29,33732,20,0,0,'','Spell: Polite only target Guardian Lasher (25)');
 +-- Guardian of Life
 +UPDATE `creature_template` SET `faction_A`=16,`faction_H`=16,`dmg_multiplier`=10,`AIName`='SmartAI' WHERE `entry`=33528;
 +UPDATE `creature_template` SET `faction_A`=16,`faction_H`=16,`dmg_multiplier`=18 WHERE `entry`=33733;

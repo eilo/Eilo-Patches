@@ -14,7 +14,7 @@ new file mode 100644
 index 0000000..dcde2ae
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_06_100_world_mimiron.sql
-@@ -0,0 +1,112 @@
+@@ -0,0 +1,129 @@
 +-- ##########################################################
 +-- Mimiron
 +-- ##########################################################
@@ -76,25 +76,42 @@ index 0000000..dcde2ae
 +UPDATE `creature_template` SET `exp`=0 WHERE `entry` IN (33432,34071,34106);
 +
 +DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=13 AND `SourceEntry`=63414;
-+INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
-+(13,63414,29,33651,100);
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
++(13,1,63414,31,3,33651),
++(13,2,63414,31,3,33651);
 +
 +DELETE FROM `spell_script_names` WHERE `spell_id`=63382;
 +INSERT INTO `spell_script_names` (`spell_id`,`ScriptName`) VALUES
 +(63382, 'spell_rapid_burst');
 +
 +DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=13 AND `SourceEntry` IN (64570,65192,64626,65333,64619);
-+INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
-+(13,64570,31,3,34121),
-+(13,64570,31,3,34363),
-+(13,65192,31,3,34121),
-+(13,65192,31,3,34363),
-+(13,64626,31,3,34121),
-+(13,64626,31,3,34363),
-+(13,65333,31,3,34121),
-+(13,65333,31,3,34363),
-+(13,64619,31,3,34121),
-+(13,64619,31,3,34363);
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
++(13,1,64570,31,3,34121),
++(13,2,64570,31,3,34121),
++(13,1,64570,31,3,34363),
++(13,2,64570,31,3,34363),
++(13,1,65192,31,3,34121),
++(13,2,65192,31,3,34121),
++(13,1,65192,31,3,34363),
++(13,2,65192,31,3,34363),
++(13,1,64626,31,3,34121),
++(13,2,64626,31,3,34121),
++(13,4,64626,31,3,34121),
++(13,1,64626,31,3,34363),
++(13,2,64626,31,3,34363),
++(13,4,64626,31,3,34363),
++(13,1,65333,31,3,34121),
++(13,2,65333,31,3,34121),
++(13,4,65333,31,3,34121),
++(13,1,65333,31,3,34363),
++(13,2,65333,31,3,34363),
++(13,4,65333,31,3,34363),
++(13,1,64619,31,3,34121),
++(13,2,64619,31,3,34121),
++(13,4,64619,31,3,34121),
++(13,1,64619,31,3,34363),
++(13,2,64619,31,3,34363),
++(13,4,64619,31,3,34363);
 +
 +UPDATE `creature_template` SET `faction_A`=14, `faction_H`=14 WHERE `entry` IN (34149,34361);
 +
@@ -104,13 +121,13 @@ index 0000000..dcde2ae
 +
 +-- not-so-friendly fire + rocket strike targets
 +DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=13 AND `SourceEntry` IN (63041,65040,65346);
-+INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
-+(13,63041,31,3,33836),
-+(13,63041,31,3,34362),
-+(13,63041,31,3,33855),
-+(13,63041,31,3,34057),
-+(13,63041,31,3,34147),
-+(13,63041,31,4,0),
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
++(13,1,63041,29,33836,3),
++(13,1,63041,29,34362,3),
++(13,1,63041,29,33855,3),
++(13,1,63041,29,34057,3),
++(13,1,63041,29,34147,3),
++(13,1,63041,31,4,0),
 +-- only players
 +(13,65040,31,4,0),
 +(13,65346,31,4,0);
@@ -135,14 +152,14 @@ index 98b3a6b..a876046 100644
 @@ -15,9 +15,10 @@
   * with this program. If not, see <http://www.gnu.org/licenses/>.
   */
- 
+
 -#include "ScriptMgr.h"
 -#include "SpellScript.h"
 +#include "ScriptPCH.h"
  #include "ulduar.h"
 +#include "Unit.h"
 +#include "Vehicle.h"
- 
+
  enum Yells
  {
 @@ -40,81 +41,2155 @@ enum Yells
@@ -152,7 +169,7 @@ index 98b3a6b..a876046 100644
 -    SAY_YS_HELP                                 = -1603259,
 +    SAY_YS_HELP                                 = -1603259
  };
- 
+
 +#define SAY_TIME_1                              "This zone will be destroyed in 10 minutes!"
 +#define SAY_TIME_2                              "This zone will be destroyed in 9 minutes!"         //soundid 15416  and below
 +#define SAY_TIME_3                              "This zone will be destroyed in 8 minutes!"
@@ -781,7 +798,7 @@ index 98b3a6b..a876046 100644
 +
 +                                    }
 +                                }
-+                                break;                                 
++                                break;
 +                            default:
 +                                break;
 +                        }
@@ -2348,7 +2365,7 @@ index 98b3a6b..a876046 100644
 +            return false;
 +        }
  };
- 
+
  void AddSC_boss_mimiron()
  {
 -    new spell_ulduar_proximity_mines();
@@ -2370,6 +2387,6 @@ index 98b3a6b..a876046 100644
 +    new npc_frost_bomb();
 +    new achievement_firefighter();
  }
--- 
+--
 1.7.8.msysgit.0
 

@@ -21,7 +21,7 @@ new file mode 100644
 index 0000000..c0e1e36
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_12_25_100_world_toc5.sql
-@@ -0,0 +1,696 @@
+@@ -0,0 +1,698 @@
 +-- Eilo (https://github.com/eilo)
 +-- Recopilacion y adecuacion de querys originales de HyD y varios autores de scripts antiguas y raras
 +-- Algunas querys anadidas y ordenacion/comentarios del sql por Eilo, cabe recalcar que los cpp hubo que retocar tambien.
@@ -382,11 +382,13 @@ index 0000000..c0e1e36
 +-- Condiciones en eventos en medio de la pelea
 +DELETE FROM `conditions` WHERE SourceTypeOrReferenceId = 13 AND SourceEntry IN (66905, 67705, 67715, 66798);
 +INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
-+(13, 0, 66905, 0, 31, 3, 35119, 0, 0, '', 'Eadric Hammer of Rigtheous'), -- Target Eadric with Hammer of Righteous
-+(13, 0, 66798, 0, 31, 3, 35005, 0, 0, '', 'The Black Kinght - Deaths Respite'),
-+(13, 0, 66798, 0, 31, 3, 35004, 0, 0, '', 'The Black Kinght - Deaths Respite'),
-+(13, 0, 67705, 0, 31, 3, 35005, 0, 0, '', 'The Black Kinght - Raise Arelas Brightstar'),
-+(13, 0, 67715, 0, 31, 3, 35004, 0, 0, '', 'The Black Kinght - Raise Arelas Brightstar');
++(13, 1, 66905, 0, 31, 3, 35119, 0, 0, '', 'Eadric Hammer of Rigtheous Interrupt'), -- Target Eadric with Hammer of Righteous
++(13, 2, 66905, 0, 31, 3, 35119, 0, 0, '', 'Eadric Hammer of Rigtheous Interrupt'),
++(13, 4, 66905, 0, 31, 3, 35119, 0, 0, '', 'Eadric Hammer of Rigtheous aura'),
++(13, 1, 66798, 0, 31, 3, 35005, 0, 0, '', 'The Black Kinght - Deaths Respite'),
++(13, 1, 66798, 0, 31, 3, 35004, 0, 0, '', 'The Black Kinght - Deaths Respite'),
++(13, 1, 67705, 0, 31, 3, 35005, 0, 0, '', 'The Black Kinght - Raise Arelas Brightstar'),
++(13, 1, 67715, 0, 31, 3, 35004, 0, 0, '', 'The Black Kinght - Raise Arelas Brightstar');
 +
 +-- ----------------------
 +--       TEXTOS

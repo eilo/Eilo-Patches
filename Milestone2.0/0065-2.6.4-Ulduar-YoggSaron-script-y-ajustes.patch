@@ -15,7 +15,7 @@ new file mode 100644
 index 0000000..3fbf559
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_06_100_world_yoggsaron.sql
-@@ -0,0 +1,223 @@
+@@ -0,0 +1,225 @@
 +-- ##########################################################
 +-- Yogg-Saron
 +-- ##########################################################
@@ -64,8 +64,10 @@ index 0000000..3fbf559
 + ConditionTypeOrReference,ConditionValue1,ConditionValue2,ConditionValue3,
 + ErrorTextId,ScriptName,COMMENT)
 +VALUES
-+(13,0,65209,0,29,33136,15,0,0,'','Effekt only for Guardian of YoggSaron'),
-+(13,0,65209,0,29,33134,15,0,0,'','Effekt only for Sara');
++(13,1,65209,0,29,33136,15,0,0,'','Effect only for Guardian of YoggSaron damage players'),
++(13,2,65209,0,29,33136,15,0,0,'','Effect only for Guardian of YoggSaron damage itself'),
++(13,1,65209,0,29,33134,15,0,0,'','Effect only for Sara damage players'),
++(13,2,65209,0,29,33134,15,0,0,'','Effect only for Sara damage itself');
 +
 +DELETE FROM gameobject WHERE id = 194625;
 +INSERT INTO gameobject 
@@ -111,13 +113,13 @@ index 0000000..3fbf559
 + ConditionTypeOrReference,ConditionValue1,ConditionValue2,ConditionValue3,
 + ErrorTextId,ScriptName,COMMENT)
 +VALUES
-+(13,0,64172,0,31,3,33988,0,0,'','Effekt only for Immortal Guardians'),
-+(13,0,64465,0,31,3,33988,0,0,'','Effekt only for Immortal Guardians');
++(13,1,64172,0,31,3,33988,0,0,'','Effekt only for Immortal Guardians'),
++(13,1,64465,0,31,3,33988,0,0,'','Effekt only for Immortal Guardians');
 +
 +-- Spell Target - Induce Madness
 +DELETE FROM conditions WHERE SourceEntry = 64059;
 +INSERT INTO conditions (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
-+(13,0,64059,0,31,4,0,0,0,'','Induce Madness - on Players');
++(13,1,64059,0,31,4,0,0,0,'','Induce Madness - on Players');
 +
 +-- Hodir Secound Aura Script
 +DELETE FROM spell_script_names WHERE spell_id IN (64174);
@@ -138,8 +140,8 @@ index 0000000..3fbf559
 + ConditionTypeOrReference,ConditionValue1,ConditionValue2,ConditionValue3,
 + ErrorTextId,ScriptName,COMMENT)
 +VALUES
-+(13,0,63882,0,31,3,33882,0,0,'','Effekt on Death Orb'),
-+(13,0,63886,0,31,3,33882,0,0,'','Effekt on Death Orb');
++(13,1,63882,0,31,3,33882,0,0,'','Effekt on Death Orb'),
++(13,1,63886,0,31,3,33882,0,0,'','Effekt on Death Orb');
 +
 +-- Correct Summon Position of Tentacle
 +DELETE FROM spell_script_names WHERE spell_id IN (64139,64143,64133);
@@ -162,7 +164,7 @@ index 0000000..3fbf559
 + ConditionTypeOrReference,ConditionValue1,ConditionValue2,ConditionValue3,
 + ErrorTextId,ScriptName,COMMENT)
 +VALUES
-+(13,0,64184,0,18,1,33288,0,0,'','Effekt on YoggSaron');
++(13,1,64184,0,18,1,33288,0,0,'','Effekt on YoggSaron');
 +
 +-- Missing Says Vision
 +DELETE FROM script_texts WHERE entry BETWEEN -1603360 AND -1603342;

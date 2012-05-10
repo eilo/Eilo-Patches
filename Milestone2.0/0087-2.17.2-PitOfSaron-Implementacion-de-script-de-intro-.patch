@@ -28,11 +28,11 @@ index 0000000..eef2ecc
 +
 +-- Condicionales para las spells!! sii ya se como
 +DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=13 AND `SourceEntry` IN (70132,70464,70512,70513);
-+INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
-+(13,70132,31,3,36796),
-+(13,70464,31,3,36796),
-+(13,70512,31,3,36796),
-+(13,70513,31,3,36796);
++INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`) VALUES
++(13,1,70132,31,3,36796),
++(13,1,70464,31,3,36796),
++(13,1,70512,31,3,36796),
++(13,1,70513,31,3,36796);
 +
 +-- Textos y sonidos
 +DELETE FROM script_texts WHERE entry IN (-1658074, -1658075, -1658076, -1658077, -1658078, -1658080, -1658081, -1658082, -1658084, -1658085, -1658086, -1658087, -1658088);
