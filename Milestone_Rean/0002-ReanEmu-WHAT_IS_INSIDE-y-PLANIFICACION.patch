@@ -110,14 +110,14 @@ index 0000000..45d6e21
 +De esta manera tendremos una branch siempre limpia y organizada de manera que sea fácil consultar todo lo que contiene
 +actualmente Thalassa.
 +
-+ ----------------------
-+| Branch Reino_Pruebas |
-+ ----------------------
-+La branch Reino_Pruebas será sobre la cual el equipo de desarrollo testeará. Aquí se pushearan todos los commits que
-+corresponden a los parches, es decir contiene unicamente commits de acuerdo al esquema de parches. Esta branch debe estar
-+lo más limpia posible, evitando reverts y typos innecesarios (para guarrear están los forks). Además esta branch siempre
-+debe ser funcional para los testeos lo que significa que debe ser compilable todo el tiempo. Esencialmente es una branch
-+de trabajo donde se irá progresando en el desarrollo de los parches del emulador como su compatibilidad.
++ --------------------
++| Branch Experimental |
++ --------------------
++La branch Experimental será donde el equipo de desarrollo trabajará de forma oficial. Ahí se pushearan todos los 
++commits que posteriormente entrarán a formar parte de Master. Esta branch debe estar lo más limpia posible, evitando 
++reverts y typos innecesarios (para guarrear están los forks). Además esta branch siempre debe ser funcional para los 
++testeos lo que significa que debe ser compilable todo el tiempo. Esencialmente es una branch de trabajo donde se irá
++progresando en el desarrollo del emulador a lo largo del tiempo entre cada actualización.
 +
 + ----------------------
 +| Forks y Otras Branchs |
