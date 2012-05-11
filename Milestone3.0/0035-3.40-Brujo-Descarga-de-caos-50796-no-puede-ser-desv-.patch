@@ -1,0 +1,31 @@
+From da1e77e71b4c202fc8dc0190d1b7eae653291050 Mon Sep 17 00:00:00 2001
+From: Hispano <jesus.diaz.gutierrez@gmail.com>
+Date: Thu, 10 May 2012 23:02:59 +0200
+Subject: [PATCH] =?UTF-8?q?3.40=20Brujo:=20Descarga=20de=20caos=20(50796)=20?=
+ =?UTF-8?q?no=20puede=20ser=20desv=C3=ADada=20por=20hechizos=20como=20Disuas?=
+ =?UTF-8?q?i=C3=B3n?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/server/game/Entities/Unit/Unit.cpp |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
+
+diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
+index 0d28cd2..1136d77 100755
+--- a/src/server/game/Entities/Unit/Unit.cpp
++++ b/src/server/game/Entities/Unit/Unit.cpp
+@@ -2520,6 +2520,9 @@ SpellMissInfo Unit::MagicSpellHitResult(Unit* victim, SpellInfo const* spell)
+     if (victim->HasInArc(M_PI, this) || victim->HasAuraType(SPELL_AURA_IGNORE_HIT_DIRECTION))
+     {
+         int32 deflect_chance = victim->GetTotalAuraModifier(SPELL_AURA_DEFLECT_SPELLS) * 100;
++        // spells with SPELL_ATTR3_IGNORE_HIT_RESULT cannot be deflected, but can miss
++        if (spell->AttributesEx3 & SPELL_ATTR3_IGNORE_HIT_RESULT)
++            deflect_chance = 0;
+         tmp += deflect_chance;
+         if (rand < tmp)
+             return SPELL_MISS_DEFLECT;
+-- 
+1.7.8.msysgit.0
+
