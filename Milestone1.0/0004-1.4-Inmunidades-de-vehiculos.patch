@@ -1,7 +1,7 @@
-From 4748cffddaa923fe27aca8be5a828717470e9905 Mon Sep 17 00:00:00 2001
+From 86b27a214b60ae8a3f0773ef8bba0ec8aafaf8d5 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 21 Apr 2012 20:47:34 -0500
-Subject: [PATCH 04/22] 1.4 Inmunidades de vehiculos
+Subject: [PATCH 04/23] 1.4 Inmunidades de vehiculos
 
 ---
  src/server/game/Entities/Vehicle/Vehicle.cpp |   39 ++++++++++++++++++++++++++

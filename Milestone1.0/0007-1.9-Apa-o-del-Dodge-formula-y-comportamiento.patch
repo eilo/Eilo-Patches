@@ -1,7 +1,7 @@
-From 74047afa4d21fa0beaf7cf7edfebbd85b1023783 Mon Sep 17 00:00:00 2001
+From 7b3c6b346ff83f67079a18c16bafd0aa5d9a0806 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 16:49:36 -0500
-Subject: [PATCH 07/22] =?UTF-8?q?1.9=20Apa=C3=B1o=20del=20Dodge=20formula=20?=
+Subject: [PATCH 07/23] =?UTF-8?q?1.9=20Apa=C3=B1o=20del=20Dodge=20formula=20?=
  =?UTF-8?q?y=20comportamiento?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -14,7 +14,7 @@ Content-Transfer-Encoding: 8bit
  3 files changed, 42 insertions(+), 49 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 06fd6a0..82343bc 100755
+index 97b1f2f..bfba110 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -6037,37 +6037,35 @@ float Player::GetMeleeCritFromAgility()
@@ -118,7 +118,7 @@ index fd0b149..feb3616 100755
          float GetSpellCritFromIntellect();
          float OCTRegenHPPerSpirit();
 diff --git a/src/server/game/Entities/Unit/StatSystem.cpp b/src/server/game/Entities/Unit/StatSystem.cpp
-index f8acf53..89cedbe 100755
+index db4952d..b880c5a 100755
 --- a/src/server/game/Entities/Unit/StatSystem.cpp
 +++ b/src/server/game/Entities/Unit/StatSystem.cpp
 @@ -697,6 +697,8 @@ void Player::UpdateParryPercentage()

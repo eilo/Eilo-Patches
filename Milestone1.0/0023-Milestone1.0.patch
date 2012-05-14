@@ -1,14 +1,14 @@
-From 3c9917845685e2f4a06a60996631df683cede773 Mon Sep 17 00:00:00 2001
+From c1fccd6e3e938ca192233b588a88216bc0bb42f7 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 22 Apr 2012 00:08:13 -0500
-Subject: [PATCH 22/22] Milestone1.0
+Subject: [PATCH 23/23] Milestone1.0
 
 ---
- README |   25 +++++++++++++++++++++++++
- 1 files changed, 25 insertions(+), 0 deletions(-)
+ README |   26 ++++++++++++++++++++++++++
+ 1 files changed, 26 insertions(+), 0 deletions(-)
 
 diff --git a/README b/README
-index da048fe..74aac26 100644
+index da048fe..905eae4 100644
 --- a/README
 +++ b/README
 @@ -42,6 +42,8 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
@@ -20,7 +20,7 @@ index da048fe..74aac26 100644
  
  
  ##################################
-@@ -74,6 +76,29 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
+@@ -74,6 +76,30 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
  ###############
  # Jugabilidad #
  ###############
@@ -36,6 +36,7 @@ index da048fe..74aac26 100644
 +1.16 - 13/01/2012: Prevenir exploit login dentro de instances por Tobmaps
 +1.17 - 03/11/2011: Mejora en pesos(probabilidad) de cada bg y min-max pj por Eilo
 +1.18 - 15/10/2011: Deshabilitadas spells de nefarian que usan para exploit por Havenard
++1.20 - 20/12/2011: Mejoras en altura(z) criaturas que vuelan o nadan por Zwerg
 +1.22 - 17/12/2011: IsleOfConquest: Script evitando que puedan matar a los bosses con exploit por Retriman
 +1.24 - 02/01/2012: Absorcion Magica para algunas clases que escalan en base a niveles por Maxxx
 +1.25 - 06/01/2012: El Loot de sangres de icc solo lo podra ver el Master Looter por Strolch

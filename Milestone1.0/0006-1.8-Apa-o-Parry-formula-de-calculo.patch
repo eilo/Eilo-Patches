@@ -1,7 +1,7 @@
-From 3a0feb620bd5e633a5dddb29b6b686dd61b90724 Mon Sep 17 00:00:00 2001
+From 44caf3eaf7fd4d61fe2b1ba74acb0c729fdfccb7 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 24 Dec 2011 16:46:35 -0500
-Subject: [PATCH 06/22] =?UTF-8?q?1.8=20Apa=C3=B1o=20Parry=20formula=20de=20c?=
+Subject: [PATCH 06/23] =?UTF-8?q?1.8=20Apa=C3=B1o=20Parry=20formula=20de=20c?=
  =?UTF-8?q?alculo?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -12,7 +12,7 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 7 insertions(+), 9 deletions(-)
 
 diff --git a/src/server/game/Entities/Unit/StatSystem.cpp b/src/server/game/Entities/Unit/StatSystem.cpp
-index 2da1c1b..f8acf53 100755
+index 5cec0cf..db4952d 100755
 --- a/src/server/game/Entities/Unit/StatSystem.cpp
 +++ b/src/server/game/Entities/Unit/StatSystem.cpp
 @@ -688,16 +688,14 @@ void Player::UpdateParryPercentage()

@@ -1,14 +1,14 @@
-From 1d1b6c715d1c17cd103e44c472361592bcfbef1c Mon Sep 17 00:00:00 2001
+From 951f87664f8b57a6e1fcb291458d5a908d0170fe Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 14 Mar 2012 13:40:16 -0500
-Subject: [PATCH 18/22] 1.37 Low lvl no ganaran exp en Northrend
+Subject: [PATCH 19/23] 1.37 Low lvl no ganaran exp en Northrend
 
 ---
  src/server/game/Entities/Player/Player.cpp |    4 ++++
  1 files changed, 4 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index ef18b22..d5291d7 100755
+index 18a241f..7bb6779 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -3120,6 +3120,10 @@ void Player::GiveXP(uint32 xp, Unit* victim, float group_rate)

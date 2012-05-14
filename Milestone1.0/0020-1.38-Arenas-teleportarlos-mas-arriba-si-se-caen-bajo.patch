@@ -1,7 +1,7 @@
-From 7c2a01f305743584fc4fd471ce831994ae507c2c Mon Sep 17 00:00:00 2001
+From 6948016920110259ef668c5332405478bc2f854c Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 21 Apr 2012 23:11:41 -0500
-Subject: [PATCH 19/22] 1.38 Arenas, teleportarlos mas arriba si se caen bajo
+Subject: [PATCH 20/23] 1.38 Arenas, teleportarlos mas arriba si se caen bajo
  el suelo
 
 ---

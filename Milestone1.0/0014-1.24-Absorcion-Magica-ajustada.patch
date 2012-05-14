@@ -1,14 +1,14 @@
-From a1bd0348741c93e7a0ed60236206c82ff8f05fd3 Mon Sep 17 00:00:00 2001
+From 59a748606cc31541af663d63b7bca1656288a06a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 08:18:56 -0500
-Subject: [PATCH 13/22] 1.24 Absorcion Magica ajustada
+Subject: [PATCH 14/23] 1.24 Absorcion Magica ajustada
 
 ---
  src/server/game/Spells/SpellInfo.cpp |    3 ++-
  1 files changed, 2 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellInfo.cpp b/src/server/game/Spells/SpellInfo.cpp
-index 07ab712..4f73b87 100644
+index e9e1b0e..a0d9ff0 100644
 --- a/src/server/game/Spells/SpellInfo.cpp
 +++ b/src/server/game/Spells/SpellInfo.cpp
 @@ -414,7 +414,8 @@ int32 SpellEffectInfo::CalcValue(Unit const* caster, int32 const* bp, Unit const

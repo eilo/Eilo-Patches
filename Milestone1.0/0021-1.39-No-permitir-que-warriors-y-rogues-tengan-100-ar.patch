@@ -1,7 +1,7 @@
-From 8ef9d3ea079d810ddfcc7dabf8c0233cf1633efe Mon Sep 17 00:00:00 2001
+From ad9ccfcca2f8c5763107649fe22df77223bb0223 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 21 Apr 2012 23:34:04 -0500
-Subject: [PATCH 20/22] 1.39 No permitir que warriors y rogues tengan 100% arp
+Subject: [PATCH 21/23] 1.39 No permitir que warriors y rogues tengan 100% arp
  y 100% crit
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 20/22] 1.39 No permitir que warriors y rogues tengan 100% arp
  1 files changed, 4 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index d5291d7..28f522a 100755
+index 7bb6779..b42a816 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -11809,6 +11809,10 @@ InventoryResult Player::CanEquipItem(uint8 slot, uint16 &dest, Item* pItem, bool

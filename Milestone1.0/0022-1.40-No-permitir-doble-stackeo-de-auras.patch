@@ -1,14 +1,14 @@
-From 1b5464ca81b11ad2de9ed71cc6db3556514efd14 Mon Sep 17 00:00:00 2001
+From 5116b0a4ad91256163e15e1fa1d50f98aa40873a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 22 Apr 2012 00:05:08 -0500
-Subject: [PATCH 21/22] 1.40 No permitir doble stackeo de auras
+Subject: [PATCH 22/23] 1.40 No permitir doble stackeo de auras
 
 ---
  src/server/game/Spells/Auras/SpellAuras.cpp |   14 ++++++++++++++
  1 files changed, 14 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/Auras/SpellAuras.cpp b/src/server/game/Spells/Auras/SpellAuras.cpp
-index 0bf91b1..5299c9c 100755
+index 4dda1c7..543a563 100755
 --- a/src/server/game/Spells/Auras/SpellAuras.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuras.cpp
 @@ -556,6 +556,20 @@ void Aura::UpdateTargetMap(Unit* caster, bool apply)
