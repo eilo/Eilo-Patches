@@ -1,4 +1,4 @@
-From d4102166c0596d37adb0034f5d04e1feeea18bb5 Mon Sep 17 00:00:00 2001
+From 782da8b7da8c84639d230f10fcb64004f621e61c Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 8 May 2012 14:57:21 -0500
 Subject: [PATCH 15/19] 0.23 Arenas anuncios
@@ -85,10 +85,10 @@ index 5cf5afc..f46f18f 100755
          EventProcessor m_events;
  };
 diff --git a/src/server/game/Miscellaneous/Language.h b/src/server/game/Miscellaneous/Language.h
-index 6b9354a..1ca809f 100755
+index 75487a2..e8e8f5c 100755
 --- a/src/server/game/Miscellaneous/Language.h
 +++ b/src/server/game/Miscellaneous/Language.h
-@@ -1102,6 +1102,7 @@ enum TrinityStrings
+@@ -1103,6 +1103,7 @@ enum TrinityStrings
      // Use for custom patches             11000-11999
      LANG_AUTO_BROADCAST                 = 11000,
      LANG_INVALID_REALMID                = 11001,

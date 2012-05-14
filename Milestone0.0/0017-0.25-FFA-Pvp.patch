@@ -1,4 +1,4 @@
-From 72c87f16408dab7979bcbd307505ec9c7ec6a8a4 Mon Sep 17 00:00:00 2001
+From 17d506967e0ae4f956b7c7bb7006e077689a0508 Mon Sep 17 00:00:00 2001
 From: oceanor <admin@oceanor.net>
 Date: Fri, 27 Apr 2012 02:49:49 -0500
 Subject: [PATCH 17/19] 0.25 FFA Pvp
@@ -77,7 +77,7 @@ index 87c732c..987c001 100755
  {
      Player* SelectedPlayer = getSelectedPlayer();
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 950f3e4..5d32bfb 100755
+index 87d9dfa..c2f559d 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -7670,7 +7670,7 @@ void Player::UpdateArea(uint32 newArea)

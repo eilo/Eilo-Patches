@@ -1,4 +1,4 @@
-From ed06bacde51c249944bdf8e97f0df7b816830a91 Mon Sep 17 00:00:00 2001
+From c7d8258af0e28b5729aa78b07a123f301877f3ee Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Apr 2012 14:07:44 -0500
 Subject: [PATCH 03/19] =?UTF-8?q?0.4=20PvpRanks,=20honor=20y=20t=C3=ADtulos?=
@@ -15,7 +15,7 @@ Content-Transfer-Encoding: 8bit
  5 files changed, 142 insertions(+), 3 deletions(-)
 
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 7c70fe9..8c7321a 100755
+index d38489e..67a7614 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -7155,6 +7155,30 @@ void Player::RewardReputation(Quest const* quest)

@@ -1,4 +1,4 @@
-From 212b74c2dbafe86b5b057c22475075aa67729c9d Mon Sep 17 00:00:00 2001
+From f6b0f20e7a6cd543ca6b3dc76bd23de01393a083 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 20 Apr 2012 11:31:10 -0500
 Subject: [PATCH 10/19] 0.18 Wowarmory con chart de arenas y modelos 3d
@@ -184,7 +184,7 @@ index f2b8938..86edfc5 100755
  }
  
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index ee5129c..afe76f3 100755
+index 3347a79..7f1cde2 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -5162,6 +5162,9 @@ void Player::DeleteFromDB(uint64 playerguid, uint32 accountId, bool updateRealmC
@@ -206,7 +206,7 @@ index ee5129c..afe76f3 100755
  
      // overwrite possible wrong/corrupted guid
      SetUInt64Value(OBJECT_FIELD_GUID, MAKE_NEW_GUID(guid, 0, HIGHGUID_PLAYER));
-@@ -19169,6 +19174,30 @@ void Player::SaveToDB(bool create /*=false*/)
+@@ -19191,6 +19196,30 @@ void Player::SaveToDB(bool create /*=false*/)
  
      CharacterDatabase.CommitTransaction(trans);
  
@@ -237,7 +237,7 @@ index ee5129c..afe76f3 100755
      // save pet (hunter pet level and experience and all type pets health/mana).
      if (Pet* pet = GetPet())
          pet->SavePetToDB(PET_SAVE_AS_CURRENT);
-@@ -25830,3 +25859,44 @@ void Player::SendMovementSetFeatherFall(bool apply)
+@@ -25852,3 +25881,44 @@ void Player::SendMovementSetFeatherFall(bool apply)
      data << uint32(0);          //! movement counter
      SendDirectMessage(&data);
  }
@@ -331,7 +331,7 @@ index ef74267..f261f76 100755
          InstanceTimeMap _instanceResetTimes;
          uint32 _pendingBindId;
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index fb91c3f..18e2273 100755
+index f79adb2..5cc347e 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
 @@ -700,9 +700,16 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
@@ -352,7 +352,7 @@ index fb91c3f..18e2273 100755
          killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_DAMAGE_DONE, damage, 0, victim);
          killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_HIGHEST_HIT_DEALT, damage);
      }
-@@ -10146,6 +10153,10 @@ int32 Unit::DealHeal(Unit* victim, uint32 addhealth)
+@@ -10155,6 +10162,10 @@ int32 Unit::DealHeal(Unit* victim, uint32 addhealth)
      {
          player->GetAchievementMgr().UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_TOTAL_HEALING_RECEIVED, gain);
          player->GetAchievementMgr().UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_HIGHEST_HEALING_RECEIVED, addhealth);
@@ -363,7 +363,7 @@ index fb91c3f..18e2273 100755
      }
  
      return gain;
-@@ -15689,7 +15700,10 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
+@@ -15705,7 +15716,10 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
                  if (instanceMap->IsRaidOrHeroicDungeon())
                  {
                      if (creature->GetCreatureTemplate()->flags_extra & CREATURE_FLAG_EXTRA_INSTANCE_BIND)

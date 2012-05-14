@@ -1,4 +1,4 @@
-From 998fc6bc4155a4b4f64d9a86b6397874235da094 Mon Sep 17 00:00:00 2001
+From 0cd77b1811322b94d5f3a409d41f9d2d7a68fae8 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Thu, 26 Apr 2012 23:58:06 -0500
 Subject: [PATCH 14/19] 0.22 BossHistory y RaidInfo
@@ -54,7 +54,7 @@ index 0000000..fae0ca3
 +(11007, '|Cffff0000[RAID INFO] |cff00ffff%s %uH: |Cff00ff00%s |cff00ffffderrotado por la hermandad |Cff00ff00%s|cff00ffff. Jugadores: %u/%u Tiempo: %um %us', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 \ No newline at end of file
 diff --git a/src/server/game/Entities/Creature/Creature.cpp b/src/server/game/Entities/Creature/Creature.cpp
-index acdf2b1..93128f6 100755
+index d120713..be6f305 100755
 --- a/src/server/game/Entities/Creature/Creature.cpp
 +++ b/src/server/game/Entities/Creature/Creature.cpp
 @@ -550,6 +550,8 @@ void Creature::Update(uint32 diff)
@@ -67,10 +67,10 @@ index acdf2b1..93128f6 100755
  
              // creature can be dead after UpdateAI call
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index 18e2273..0d28cd2 100755
+index 5cc347e..2e94443 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -13014,7 +13014,10 @@ void Unit::TauntFadeOut(Unit* taunter)
+@@ -13005,7 +13005,10 @@ void Unit::TauntFadeOut(Unit* taunter)
      if (m_ThreatManager.isThreatListEmpty())
      {
          if (creature->IsAIEnabled)
@@ -81,7 +81,7 @@ index 18e2273..0d28cd2 100755
          return;
      }
  
-@@ -13141,6 +13144,7 @@ Unit* Creature::SelectVictim()
+@@ -13132,6 +13135,7 @@ Unit* Creature::SelectVictim()
              if ((*itr)->GetBase()->IsPermanent())
              {
                  AI()->EnterEvadeMode();
@@ -89,7 +89,7 @@ index 18e2273..0d28cd2 100755
                  break;
              }
          }
-@@ -13149,6 +13153,7 @@ Unit* Creature::SelectVictim()
+@@ -13140,6 +13144,7 @@ Unit* Creature::SelectVictim()
  
      // enter in evade mode in other case
      AI()->EnterEvadeMode();
@@ -97,7 +97,7 @@ index 18e2273..0d28cd2 100755
  
      return NULL;
  }
-@@ -15683,6 +15688,9 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
+@@ -15699,6 +15704,9 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
          if (creature->IsAIEnabled)
              creature->AI()->JustDied(this);
  

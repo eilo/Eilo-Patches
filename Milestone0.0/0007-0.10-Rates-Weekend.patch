@@ -1,4 +1,4 @@
-From 1936c49e6908b819ee4e4909dbca7fa83cd790ef Mon Sep 17 00:00:00 2001
+From 1c77163e1ec66d938aea933beec45786b1c65878 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 4 Mar 2012 02:13:22 -0500
 Subject: [PATCH 07/19] 0.10 Rates Weekend
@@ -44,7 +44,7 @@ index 836fbe8..2263ef8 100755
      // rewarded honor points. Multiply with 10 to satisfy client
      data << 10 * Trinity::Honor::hk_honor_at_level(_session->GetPlayer()->getLevel(), quest->GetRewHonorMultiplier());
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 0e13375..a3617ac 100755
+index cc3ba9c..f35e59d 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -6967,6 +6967,8 @@ void Player::CheckAreaExploreAndOutdoor()

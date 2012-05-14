@@ -1,4 +1,4 @@
-From 41a94c04dcacb81909ff173c29c9eaaea6b440e7 Mon Sep 17 00:00:00 2001
+From bb4bf70b58b3c5758b1e76537ae8e287c4d61998 Mon Sep 17 00:00:00 2001
 From: oceanor <admin@oceanor.net>
 Date: Fri, 27 Apr 2012 02:45:32 -0500
 Subject: [PATCH 16/19] 0.24 Sanctuary
@@ -77,7 +77,7 @@ index 48048b7..87c732c 100755
  bool ChatHandler::HandleMaxSkillCommand(const char* /*args*/)
  {
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index afe76f3..950f3e4 100755
+index 7f1cde2..87d9dfa 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -7677,7 +7677,7 @@ void Player::UpdateArea(uint32 newArea)

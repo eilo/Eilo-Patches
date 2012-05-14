@@ -1,12 +1,13 @@
-From 1dfb6289d2ad2925a8440afde622f505a63ff430 Mon Sep 17 00:00:00 2001
+From 0a8dabe36e122c43fbff51acdfca6fbba11bc109 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Sun, 29 Apr 2012 22:44:28 -0500
+Date: Mon, 14 May 2012 02:15:18 -0500
 Subject: [PATCH 18/19] 0.26 Arena Espectador
 
 ---
  .../2012_01_27_100_world_arena_espectador.sql      |    9 +
  src/server/game/Battlegrounds/Battleground.cpp     |   13 +
  src/server/game/Battlegrounds/BattlegroundMgr.h    |    1 +
+ src/server/game/Entities/Object/Object.cpp         |    5 +
  src/server/game/Entities/Player/Player.cpp         |   79 +++++
  src/server/game/Entities/Player/Player.h           |    7 +
  src/server/game/Handlers/ChatHandler.cpp           |   14 +
@@ -14,7 +15,7 @@ Subject: [PATCH 18/19] 0.26 Arena Espectador
  src/server/game/Scripting/ScriptLoader.cpp         |    2 +
  src/server/scripts/Custom/CMakeLists.txt           |    1 +
  src/server/scripts/Custom/npc_arena_espectador.cpp |  339 ++++++++++++++++++++
- 10 files changed, 468 insertions(+), 0 deletions(-)
+ 11 files changed, 473 insertions(+), 0 deletions(-)
  create mode 100644 sql/updates/world/custom/2012_01_27_100_world_arena_espectador.sql
  create mode 100644 src/server/scripts/Custom/npc_arena_espectador.cpp
 
@@ -69,8 +70,24 @@ index 7afb83d..04e2d83 100755
      private:
          BattleMastersMap    mBattleMastersMap;
  
+diff --git a/src/server/game/Entities/Object/Object.cpp b/src/server/game/Entities/Object/Object.cpp
+index fc1b56c..59447d8 100755
+--- a/src/server/game/Entities/Object/Object.cpp
++++ b/src/server/game/Entities/Object/Object.cpp
+@@ -1696,6 +1696,11 @@ bool WorldObject::canSeeOrDetect(WorldObject const* obj, bool ignoreStealth, boo
+     if (obj->IsAlwaysVisibleFor(this) || CanAlwaysSee(obj))
+         return true;
+ 
++    // Esto es del arena espectador
++    if (ToPlayer())
++        if (ToPlayer()->IsEspectador() && GetMap()->IsBattleArena())
++            return true;
++
+     bool corpseCheck = false;
+     bool corpseVisibility = false;
+     if (distanceCheck)
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 5d32bfb..e53a68c 100755
+index c2f559d..eedb9f9 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -2960,6 +2960,79 @@ void Player::SetGMVisible(bool on)
@@ -163,7 +180,7 @@ index 5d32bfb..e53a68c 100755
      // GM state
      if (!AccountMgr::IsPlayerAccount(GetSession()->GetSecurity()))
      {
-@@ -22058,6 +22134,9 @@ bool Player::IsVisibleGloballyFor(Player* u) const
+@@ -22080,6 +22156,9 @@ bool Player::IsVisibleGloballyFor(Player* u) const
      if (!IsVisible())
          return false;
  
@@ -231,10 +248,10 @@ index 966eae5..d71fdb8 100755
      uint64 guid;
  
 diff --git a/src/server/game/Miscellaneous/Language.h b/src/server/game/Miscellaneous/Language.h
-index 1ca809f..a26b04d 100755
+index e8e8f5c..701d7ef 100755
 --- a/src/server/game/Miscellaneous/Language.h
 +++ b/src/server/game/Miscellaneous/Language.h
-@@ -773,6 +773,9 @@ enum TrinityStrings
+@@ -774,6 +774,9 @@ enum TrinityStrings
      LANG_CHANNEL_CITY                   = 819,
      // Room for in-game strings           820-999 not used
  

@@ -1,4 +1,4 @@
-From b12adeb6e1f8fe4fd21c986b8d483e81ce02828f Mon Sep 17 00:00:00 2001
+From 501534112668e453b68ec80262e290a0ff527ded Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 24 Apr 2012 19:04:09 -0500
 Subject: [PATCH 08/19] =?UTF-8?q?0.12=20TrinityJail=20con=20ajuste=20a=20min?=
@@ -728,7 +728,7 @@ index 919acfb..48048b7 100755
  {
      Player* SelectedPlayer = getSelectedPlayer();
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index a3617ac..ee5129c 100755
+index f35e59d..3347a79 100755
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -643,6 +643,21 @@ Player::Player(WorldSession* session): Unit(true), m_achievementMgr(this), m_rep
@@ -931,7 +931,7 @@ index a3617ac..ee5129c 100755
  bool Player::isAllowedToLoot(const Creature* creature)
  {
      if (!creature->isDead() || !creature->IsDamageEnoughForLootingAndReward())
-@@ -18724,11 +18887,23 @@ bool Player::_LoadHomeBind(PreparedQueryResult result)
+@@ -18746,11 +18909,23 @@ bool Player::_LoadHomeBind(PreparedQueryResult result)
  /***                   SAVE SYSTEM                     ***/
  /*********************************************************/
  
@@ -956,7 +956,7 @@ index a3617ac..ee5129c 100755
      //lets allow only players in world to be saved
      if (IsBeingTeleportedFar())
      {
-@@ -24097,6 +24272,7 @@ void Player::_LoadSkills(PreparedQueryResult result)
+@@ -24119,6 +24294,7 @@ void Player::_LoadSkills(PreparedQueryResult result)
  
                  CharacterDatabase.Execute(stmt);
  
@@ -1156,7 +1156,7 @@ index f81e7f1..6957557 100755
          uint32 GetBaseXP(uint8 level);
          uint32 GetXPForLevel(uint8 level);
 diff --git a/src/server/game/Miscellaneous/Language.h b/src/server/game/Miscellaneous/Language.h
-index 4b07d19..6b9354a 100755
+index aec7283..75487a2 100755
 --- a/src/server/game/Miscellaneous/Language.h
 +++ b/src/server/game/Miscellaneous/Language.h
 @@ -21,6 +21,42 @@
