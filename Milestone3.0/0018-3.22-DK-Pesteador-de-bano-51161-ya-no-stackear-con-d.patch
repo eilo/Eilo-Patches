@@ -1,8 +1,8 @@
-From 7aead3638c965c38b0b356af853fc8fdc52889ea Mon Sep 17 00:00:00 2001
+From 9335bf26e7c58d12d0a74d72408465a619ae8228 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
-Date: Tue, 24 Apr 2012 14:52:35 +0200
-Subject: [PATCH 18/34] =?UTF-8?q?3.22=20DK:=20Pesteador=20de=20=C3=89bano=20?=
- =?UTF-8?q?(51161)=20ya=20no=20stackear=C3=A1=20con=20diferentes=20casters.?=
+Date: Fri, 11 May 2012 23:20:28 +0200
+Subject: [PATCH 18/34] =?UTF-8?q?3.22=20DK:=20Pesteador=20de=20=C3=89bano=20(51161?=
+ =?UTF-8?q?)=20ya=20no=20stackear=C3=A1=20con=20diferentes=20casters?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -10,17 +10,20 @@ Content-Transfer-Encoding: 8bit
 ---
  src/server/game/Entities/Unit/Unit.cpp |   10 +++++++++-
  1 files changed, 9 insertions(+), 1 deletions(-)
+ mode change 100755 => 100644 src/server/game/Entities/Unit/Unit.cpp
 
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index acaf986..403804d 100755
+old mode 100755
+new mode 100644
+index b14a8b2..df6453b
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -11927,10 +11927,18 @@ void Unit::MeleeDamageBonus(Unit* victim, uint32 *pdamage, WeaponAttackType attT
+@@ -11890,10 +11890,18 @@ uint32 Unit::MeleeDamageBonusTaken(uint32 pdamage, WeaponAttackType attType, Spe
  
          if (mechanicMask)
          {
 +            int32 dmgBonusDisease = 0;
-             AuraEffectList const& mDamageDoneMechanic = victim->GetAuraEffectsByType(SPELL_AURA_MOD_MECHANIC_DAMAGE_TAKEN_PERCENT);
+             AuraEffectList const& mDamageDoneMechanic = GetAuraEffectsByType(SPELL_AURA_MOD_MECHANIC_DAMAGE_TAKEN_PERCENT);
              for (AuraEffectList::const_iterator i = mDamageDoneMechanic.begin(); i != mDamageDoneMechanic.end(); ++i)
                  if (mechanicMask & uint32(1<<((*i)->GetMiscValue())))
 -                    AddPctN(TakenTotalMod, (*i)->GetAmount());

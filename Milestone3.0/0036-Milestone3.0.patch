@@ -20,7 +20,7 @@ index 8bb3da1..d9fc970 100644
  
  
  ##################################
-@@ -208,11 +210,54 @@ Milestone2.0: Mejoras en Instances y dungeons, escencialmente para darles funcio
+@@ -208,11 +210,53 @@ Milestone2.0: Mejoras en Instances y dungeons, escencialmente para darles funcio
  #######################
  # Hechizos y Talentos #
  #######################
@@ -29,7 +29,6 @@ index 8bb3da1..d9fc970 100644
 +3.3  - 05/11/2011: Brujo: Mejoras en pet felhunter por Locknes
 +3.4  - 02/09/2011: Druida: Trabazon con la naturaleza: añadido CD interno por Retriman
 +3.5  - 09/09/2011: Cazador: Trampla explosiva corregido el daño periodico por Retriman
-+3.6  - 11/08/2011: Chaman: Escudos de Agua por Jildor
 +3.7  - 10/09/2011: Chaman: Maremoto ahora dará el bonus de critico correspondiente por Retriman
 +3.8  - 11/08/2011: Cazador: Golpes de cobra por Jildor
 +3.12 - 02/09/2011: Guerrero: Reflejar efecto de Multi-Reflect por Retriman
