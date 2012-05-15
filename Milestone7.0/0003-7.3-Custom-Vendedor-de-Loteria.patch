@@ -1,7 +1,7 @@
-From bd004b6f3f008751401d080a42a5f09552e1ab98 Mon Sep 17 00:00:00 2001
+From 879a60172ec2f12ca565f69d3bf8936daa292785 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 8 May 2012 00:56:16 -0500
-Subject: [PATCH 3/4] 7.3 Custom: Vendedor de Loteria
+Subject: [PATCH 3/5] 7.3 Custom: Vendedor de Loteria
 
 ---
  .../custom/2012_05_05_100_world_lottery_vendor.sql |    4 +

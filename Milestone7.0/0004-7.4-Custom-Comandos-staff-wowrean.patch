@@ -1,0 +1,868 @@
+From 40c2faf6c07380f56cef4041148f046ab26be63d Mon Sep 17 00:00:00 2001
+From: Eilo <eilo2518@gmail.com>
+Date: Tue, 15 May 2012 01:14:14 -0500
+Subject: [PATCH 4/5] 7.4 Custom: Comandos staff wowrean
+
+---
+ .../2012_05_15_100_world_commands_wowrean.sql      |  849 ++++++++++++++++++++
+ 1 files changed, 849 insertions(+), 0 deletions(-)
+ create mode 100644 sql/updates/world/custom/2012_05_15_100_world_commands_wowrean.sql
+
+diff --git a/sql/updates/world/custom/2012_05_15_100_world_commands_wowrean.sql b/sql/updates/world/custom/2012_05_15_100_world_commands_wowrean.sql
+new file mode 100644
+index 0000000..e7eafea
+--- /dev/null
++++ b/sql/updates/world/custom/2012_05_15_100_world_commands_wowrean.sql
+@@ -0,0 +1,849 @@
++-- Actualización de los Comandos por Winnie 08/03/2012
++-- Cambios por Eilo 11/05/2012
++-- account: 
++UPDATE `command` SET `security`=4 WHERE `name`='account';
++-- account addon
++UPDATE `command` SET `security`=1 WHERE `name`='account addon';
++-- account create
++UPDATE `command` SET `security`=4 WHERE `name`='account create';
++-- account delete 
++UPDATE `command` SET `security`=4 WHERE `name`='account create';
++-- account lock: 
++UPDATE `command` SET `security`=4 WHERE `name`='account lock';
++-- account onelist 
++UPDATE `command` SET `security`=4 WHERE `name`='account onelist';
++-- account password: 
++UPDATE `command` SET `security`=4 WHERE `name`='account password';
++-- account set: 
++UPDATE `command` SET `security`=4 WHERE `name`='account set';
++-- account set addon: 
++UPDATE `command` SET `security`=4 WHERE `name`='account set addon';
++-- account set gmlevel
++UPDATE `command` SET `security`=4 WHERE `name`='account set gmlevel';
++-- account set password
++UPDATE `command` SET `security`=4 WHERE `name`='account set password';
++-- achievement
++UPDATE `command` SET `security`=2 WHERE `name`='achievement';
++-- achievement add
++UPDATE `command` SET `security`=2 WHERE `name`='achievement add';
++-- additem: 
++UPDATE `command` SET `security`=1 WHERE `name`='additem';
++-- additemset: 
++UPDATE `command` SET `security`=1 WHERE `name`='additemset';
++-- announce:
++UPDATE `command` SET `security`=4 WHERE `name`='announce';
++-- aura: 
++UPDATE `command` SET `security`=2 WHERE `name`='aura';
++-- appear
++UPDATE `command` SET `security`=1 WHERE `name`='appear';
++-- ban
++UPDATE `command` SET `security`=1 WHERE `name`='ban';
++-- ban account: 
++UPDATE `command` SET `security`=2 WHERE `name`='ban account';
++-- ban character: 
++UPDATE `command` SET `security`=1 WHERE `name`='ban character';
++-- ban ip: 
++UPDATE `command` SET `security`=2 WHERE `name`='ban ip';
++-- ban playeraccount
++UPDATE `command` SET `security`=1 WHERE `name`='ban playeraccount';
++-- baninfo: 
++UPDATE `command` SET `security`=1 WHERE `name`='baninfo';
++-- baninfo account: 
++UPDATE `command` SET `security`=1 WHERE `name`='baninfo account';
++-- baninfo character: 
++UPDATE `command` SET `security`=1 WHERE `name`='baninfo character';
++-- baninfo ip: 
++UPDATE `command` SET `security`=1 WHERE `name`='baninfo ip';
++-- bank
++UPDATE `command` SET `security`=2 WHERE `name`='bank';
++-- banlist: 
++UPDATE `command` SET `security`=1 WHERE `name`='banlist';
++-- banlist account: 
++UPDATE `command` SET `security`=1 WHERE `name`='banlist account';
++-- banlist character: 
++UPDATE `command` SET `security`=1 WHERE `name`='banlist character';
++-- banlist ip: 
++UPDATE `command` SET `security`=1 WHERE `name`='banlist ip';
++-- Cast 
++UPDATE `command` SET `security`=3 WHERE `name`='cast';
++-- cast back
++UPDATE `command` SET `security`=3 WHERE `name`='cast back';
++-- cast dest
++UPDATE `command` SET `security`=3 WHERE `name`='cast dest';
++-- cast dist
++UPDATE `command` SET `security`=3 WHERE `name`='cast dist';
++-- cast self
++UPDATE `command` SET `security`=3 WHERE `name`='cast self';
++-- cast target
++UPDATE `command` SET `security`=3 WHERE `name`='cast target';
++-- channel set ownership 
++UPDATE `command` SET `security`=3 WHERE `name`='channel set ownership';
++-- character changefaction
++UPDATE `command` SET `security`=4 WHERE `name`='character changefaction';
++-- change race
++UPDATE `command` SET `security`=4 WHERE `name`='character changerace';
++-- character customize: 
++UPDATE `command` SET `security`=4 WHERE `name`='character customize';
++-- character deleted delete
++UPDATE `command` SET `security`=4 WHERE `name`='character deleted delete';
++-- character deleted list
++UPDATE `command` SET `security`=4 WHERE `name`='character deleted list';
++-- character deleted old
++UPDATE `command` SET `security`=4 WHERE `name`='character deleted old';
++-- character deleted restore
++UPDATE `command` SET `security`=4 WHERE `name`='character deleted restore';
++-- character erase
++UPDATE `command` SET `security`=4 WHERE `name`='character erase';
++-- character level: 
++UPDATE `command` SET `security`=1 WHERE `name`='character level';
++-- character rename:
++UPDATE `command` SET `security`=4 WHERE `name`='character rename';
++-- character reputation
++UPDATE `command` SET `security`=1 WHERE `name`='character reputation';
++-- character titles 
++UPDATE `command` SET `security`=1 WHERE `name`='character titles';
++-- combatstop
++UPDATE `command` SET `security`=1 WHERE `name`='combatstop';
++-- cometome: 
++UPDATE `command` SET `security`=3 WHERE `name`='cometome';
++-- commands: 
++UPDATE `command` SET `security`=1 WHERE `name`='commands';
++-- cooldown
++UPDATE `command` SET `security`=2 WHERE `name`='cooldown';
++-- damage: 
++UPDATE `command` SET `security`=2 WHERE `name`='damage';
++-- debug areatriggers
++UPDATE `command` SET `security`=3 WHERE `name`='debug areatriggers';
++-- debug arena: 
++UPDATE `command` SET `security`=3 WHERE `name`='debug arena';
++-- debug bg: 
++UPDATE `command` SET `security`=3 WHERE `name`='debug bg';
++-- debug mod32value: 
++UPDATE `command` SET `security`=3 WHERE `name`='debug mod32value';
++-- debug play cinematic: 
++UPDATE `command` SET `security`=3 WHERE `name`='debug play cinematic';
++-- debug play movie: 
++UPDATE `command` SET `security`=3 WHERE `name`='debug play movie';
++-- debug play sound: 
++UPDATE `command` SET `security`=3 WHERE `name`='debug play sound';
++-- debug: 
++UPDATE `command` SET `security`=3 WHERE `name`='debug';
++-- dev
++UPDATE `command` SET `security`=3 WHERE `name`='dev';
++-- die: 
++UPDATE `command` SET `security`=1 WHERE `name`='die';
++-- distance
++UPDATE `command` SET `security`=2 WHERE `name`='distance';
++-- dismount: 
++UPDATE `command` SET `security`=2 WHERE `name`='dismount';
++-- event
++UPDATE `command` SET `security`=2 WHERE `name`='event';
++-- event activelist
++UPDATE `command` SET `security`=0 WHERE `name`='event activelist';
++-- event start: 
++UPDATE `command` SET `security`=4 WHERE `name`='event start';
++-- event stop: 
++UPDATE `command` SET `security`=4 WHERE `name`='event stop';
++-- explorecheat
++UPDATE `command` SET `security`=3 WHERE `name`='explorecheat';
++-- flusharenapoints: 
++UPDATE `command` SET `security`=4 WHERE `name`='flusharenapoints';
++-- freeze: 
++UPDATE `command` SET `security`=1 WHERE `name`='freeze';
++-- gm
++UPDATE `command` SET `security`=1 WHERE `name`='gm';
++-- gm chat: 
++UPDATE `command` SET `security`=1 WHERE `name`='gm chat';
++-- gm fly: 
++UPDATE `command` SET `security`=1 WHERE `name`='gm fly';
++-- gm ingame: 
++UPDATE `command` SET `security`=1 WHERE `name`='gm ingame';
++-- gm list: 
++UPDATE `command` SET `security`=1 WHERE `name`='gm list';
++-- gm visible: 
++UPDATE `command` SET `security`=1 WHERE `name`='gm visible';
++-- gmannounce: 
++UPDATE `command` SET `security`=1 WHERE `name`='gmannounce';
++-- gmnameannounce: 
++UPDATE `command` SET `security`=1 WHERE `name`='gmnameannounce';
++-- gmnotify: 
++UPDATE `command` SET `security`=1 WHERE `name`='gmnotify';
++-- go: 
++UPDATE `command` SET `security`=1 WHERE `name`='go';
++-- go creature: 
++UPDATE `command` SET `security`=1 WHERE `name`='go creature';
++-- go graveyard: 
++UPDATE `command` SET `security`=1 WHERE `name`='go graveyard';
++-- go grid: 
++UPDATE `command` SET `security`=1 WHERE `name`='go grid';
++-- go object: 
++UPDATE `command` SET `security`=1 WHERE `name`='go object';
++-- go taxinode: 
++UPDATE `command` SET `security`=1 WHERE `name`='go taxinode';
++-- go ticket: 
++UPDATE `command` SET `security`=1 WHERE `name`='go ticket';
++-- go xyz: 
++UPDATE `command` SET `security`=1 WHERE `name`='go xyz';
++-- go zonexy: 
++UPDATE `command` SET `security`=1 WHERE `name`='go zonexy';
++-- gobject: 
++UPDATE `command` SET `security`=1 WHERE `name`='gobject';
++-- gobject activate: 
++UPDATE `command` SET `security`=2 WHERE `name`='gobject activate';
++-- gobject add: 
++UPDATE `command` SET `security`=3 WHERE `name`='gobject add';
++-- gobject add temp: 
++UPDATE `command` SET `security`=4 WHERE `name`='gobject add temp';
++-- gobject delete: 
++UPDATE `command` SET `security`=3 WHERE `name`='gobject delete';
++-- gobject info
++UPDATE `command` SET `security`=1 WHERE `name`='gobject info';
++-- gobject move: 
++UPDATE `command` SET `security`=3 WHERE `name`='gobject move';
++-- gobject near: 
++UPDATE `command` SET `security`=2 WHERE `name`='gobject near';
++-- gobject set phase: 
++UPDATE `command` SET `security`=3 WHERE `name`='gobject set phase';
++-- gobject target: 
++UPDATE `command` SET `security`=3 WHERE `name`='gobject target';
++-- gobject turn: 
++UPDATE `command` SET `security`=3 WHERE `name`='gobject turn';
++-- gps
++UPDATE `command` SET `security`=1 WHERE `name`='gps';
++-- groupsummon
++UPDATE `command` SET `security`=1 WHERE `name`='groupsummon';
++-- guid
++UPDATE `command` SET `security`=1 WHERE `name`='guid';
++-- guild
++UPDATE `command` SET `security`=3 WHERE `name`='guild';
++-- guild create
++UPDATE `command` SET `security`=4 WHERE `name`='guild create';
++-- guild delete
++UPDATE `command` SET `security`=4 WHERE `name`='guild delete';
++-- guild invite
++UPDATE `command` SET `security`=2 WHERE `name`='guild invite';
++-- guild rank
++UPDATE `command` SET `security`=2 WHERE `name`='guild rank';
++-- guild uninvite
++UPDATE `command` SET `security`=2 WHERE `name`='guild uninvite';
++-- help
++UPDATE `command` SET `security`=1 WHERE `name`='help';
++-- hidearea
++UPDATE `command` SET `security`=3 WHERE `name`='hidearea';
++-- honor
++UPDATE `command` SET `security`=2 WHERE `name`='honor';
++-- honor add
++UPDATE `command` SET `security`=3 WHERE `name`='honor add';
++-- honor add kill
++UPDATE `command` SET `security`=3 WHERE `name`='honor add kill';
++-- honor update
++UPDATE `command` SET `security`=3 WHERE `name`='honor update';
++-- hover
++UPDATE `command` SET `security`=2 WHERE `name`='hover';
++-- instance
++UPDATE `command` SET `security`=1 WHERE `name`='instance';
++-- instance listbinds
++UPDATE `command` SET `security`=1 WHERE `name`='instance listbinds';
++-- instance savedata
++UPDATE `command` SET `security`=3 WHERE `name`='instance savedata';
++-- instance stats
++UPDATE `command` SET `security`=1 WHERE `name`='instance stats';
++-- instance unbind
++UPDATE `command` SET `security`=1 WHERE `name`='instance unbind';
++-- itemmove
++UPDATE `command` SET `security`=1 WHERE `name`='itemmove';
++-- jail
++UPDATE `command` SET `security`=1 WHERE `name`='jail';
++-- jailinfo
++UPDATE `command` SET `security`=0 WHERE `name`='jailinfo';
++-- jailreload
++UPDATE `command` SET `security`=3 WHERE `name`='jailreload';
++-- kick
++UPDATE `command` SET `security`=1 WHERE `name`='kick';
++-- learn
++UPDATE `command` SET `security`=1 WHERE `name`='learn';
++-- learn all crafts
++UPDATE `command` SET `security`=3 WHERE `name`='learn all crafts';
++-- learn all default
++UPDATE `command` SET `security`=3 WHERE `name`='learn all default';
++-- learn all gm
++UPDATE `command` SET `security`=3 WHERE `name`='learn all gm';
++-- learn all lang
++UPDATE `command` SET `security`=3 WHERE `name`='learn all lang';
++-- learn all my class
++UPDATE `command` SET `security`=2 WHERE `name`='learn all my class';
++-- learn all my pettalents
++UPDATE `command` SET `security`=2 WHERE `name`='learn all my pettalents';
++-- learn all my spells
++UPDATE `command` SET `security`=3 WHERE `name`='learn all my spells';
++-- learn all my talents
++UPDATE `command` SET `security`=3 WHERE `name`='learn all my talents';
++-- learn all recipes
++UPDATE `command` SET `security`=3 WHERE `name`='learn all my recipes';
++-- levelup
++UPDATE `command` SET `security`=1 WHERE `name`='levelup';
++-- linkgrave
++UPDATE `command` SET `security`=3 WHERE `name`='linkgrave';
++-- list
++UPDATE `command` SET `security`=1 WHERE `name`='list';
++-- list auras
++UPDATE `command` SET `security`=1 WHERE `name`='list auras';
++-- list creature
++UPDATE `command` SET `security`=1 WHERE `name`='list creature';
++-- list item
++UPDATE `command` SET `security`=1 WHERE `name`='list creature';
++-- list object
++UPDATE `command` SET `security`=1 WHERE `name`='list object';
++-- listfreeze
++UPDATE `command` SET `security`=1 WHERE `name`='listfreeze';
++-- lookup
++UPDATE `command` SET `security`=1 WHERE `name`='lookup';
++-- lookup area
++UPDATE `command` SET `security`=1 WHERE `name`='lookup area';
++-- lookup creature
++UPDATE `command` SET `security`=1 WHERE `name`='lookup creature';
++-- lookup event
++UPDATE `command` SET `security`=1 WHERE `name`='lookup event';
++-- lookup faction
++UPDATE `command` SET `security`=1 WHERE `name`='lookup faction';
++-- lookup item
++UPDATE `command` SET `security`=1 WHERE `name`='lookup item';
++-- lookup itemset
++UPDATE `command` SET `security`=1 WHERE `name`='lookup itemset';
++-- lookup map
++UPDATE `command` SET `security`=1 WHERE `name`='lookup map';
++-- lookup object
++UPDATE `command` SET `security`=1 WHERE `name`='lookup object';
++-- lookup player account
++UPDATE `command` SET `security`=1 WHERE `name`='lookup player account';
++-- lookup player email
++UPDATE `command` SET `security`=1 WHERE `name`='lookup player email';
++-- lookup player ip
++UPDATE `command` SET `security`=1 WHERE `name`='lookup player ip';
++-- lookup quest
++UPDATE `command` SET `security`=1 WHERE `name`='lookup quest';
++-- lookup skill
++UPDATE `command` SET `security`=1 WHERE `name`='lookup skill';
++-- lookup spell
++UPDATE `command` SET `security`=1 WHERE `name`='lookup spell';
++-- lookup taxinode
++UPDATE `command` SET `security`=1 WHERE `name`='lookup taxinode';
++-- lookup tele
++UPDATE `command` SET `security`=1 WHERE `name`='lookup tele';
++-- lookup title
++UPDATE `command` SET `security`=1 WHERE `name`='lookup title';
++-- maxskill
++UPDATE `command` SET `security`=1 WHERE `name`='maxskill';
++-- modify 
++UPDATE `command` SET `security`=1 WHERE `name`='modify';
++-- modify arena
++UPDATE `command` SET `security`=4 WHERE `name`='modify arena';
++-- modify aspeed 
++UPDATE `command` SET `security`=1 WHERE `name`='modify aspeed';
++-- modify bit
++UPDATE `command` SET `security`=3 WHERE `name`='modify bit';
++-- modify bwalk
++UPDATE `command` SET `security`=3 WHERE `name`='modify bwalk';
++-- modify drunk
++UPDATE `command` SET `security`=2 WHERE `name`='modify drunk';
++-- modify energy
++UPDATE `command` SET `security`=2 WHERE `name`='modify energy';
++-- modify faction
++UPDATE `command` SET `security`=3 WHERE `name`='modify faction';
++-- modify fly
++UPDATE `command` SET `security`=1 WHERE `name`='modify fly';
++-- modify gender
++UPDATE `command` SET `security`=1 WHERE `name`='modify gender';
++-- modify honor
++UPDATE `command` SET `security`=3 WHERE `name`='modify honor';
++-- modify hp
++UPDATE `command` SET `security`=1 WHERE `name`='modify hp';
++-- modify mana
++UPDATE `command` SET `security`=1 WHERE `name`='modify mana';
++-- modify money 
++UPDATE `command` SET `security`=2 WHERE `name`='modify money';
++-- modify morph
++UPDATE `command` SET `security`=4 WHERE `name`='modify morph';
++-- modify mount
++UPDATE `command` SET `security`=1 WHERE `name`='modify mount';
++-- modify phase
++UPDATE `command` SET `security`=3 WHERE `name`='modify phase';
++-- modify rage
++UPDATE `command` SET `security`=2 WHERE `name`='modify rage';
++-- modify rep
++UPDATE `command` SET `security`=1 WHERE `name`='modify rep';
++-- modify runicpower
++UPDATE `command` SET `security`=1 WHERE `name`='modify runicpower';
++-- modify scale
++UPDATE `command` SET `security`=1 WHERE `name`='modify scale';
++-- modify speed
++UPDATE `command` SET `security`=1 WHERE `name`='modify speed';
++-- modify spell (NO operativo)
++UPDATE `command` SET `security`=4 WHERE `name`='modify spell';
++-- modify standstate
++UPDATE `command` SET `security`=1 WHERE `name`='modify standstate';
++-- modify swim
++UPDATE `command` SET `security`=1 WHERE `name`='modify swim';
++-- modify tp
++UPDATE `command` SET `security`=3 WHERE `name`='modify tp';
++-- movegens
++UPDATE `command` SET `security`=1 WHERE `name`='movegens';
++-- mute
++UPDATE `command` SET `security`=1 WHERE `name`='mute';
++-- nameannounce
++UPDATE `command` SET `security`=1 WHERE `name`='nameannounce';
++-- neargrave
++UPDATE `command` SET `security`=1 WHERE `name`='neargrave';
++-- notify
++UPDATE `command` SET `security`=1 WHERE `name`='notify';
++-- npc
++UPDATE `command` SET `security`=1 WHERE `name`='npc';
++-- npc add
++UPDATE `command` SET `security`=3 WHERE `name`='npc add';
++-- npc add formation
++UPDATE `command` SET `security`=3 WHERE `name`='npc add formation';
++-- npc add item
++UPDATE `command` SET `security`=3 WHERE `name`='npc add item';
++-- npc add move
++UPDATE `command` SET `security`=3 WHERE `name`='npc add move';
++-- npc add temp
++UPDATE `command` SET `security`=3 WHERE `name`='npc add temp';
++-- npc delete
++UPDATE `command` SET `security`=3 WHERE `name`='npc delete';
++-- npc delete item
++UPDATE `command` SET `security`=3 WHERE `name`='npc delete item';
++-- npc follow 
++UPDATE `command` SET `security`=3 WHERE `name`='npc follow';
++-- npc info
++UPDATE `command` SET `security`=1 WHERE `name`='npc info';
++-- npc move
++UPDATE `command` SET `security`=3 WHERE `name`='npc move';
++-- npc playmote
++UPDATE `command` SET `security`=3 WHERE `name`='npc playmote';
++-- npc say
++UPDATE `command` SET `security`=3 WHERE `name`='npc say';
++-- npc set allowmove (no implementado)
++UPDATE `command` SET `security`=4 WHERE `name`='npc set allowmove';
++-- npc set entry 
++UPDATE `command` SET `security`=4 WHERE `name`='npc set entry';
++-- npc set factionID
++UPDATE `command` SET `security`=3 WHERE `name`='npc set factionid';
++-- npc set flag
++UPDATE `command` SET `security`=4 WHERE `name`='npc set flag';
++-- npc set level
++UPDATE `command` SET `security`=3 WHERE `name`='npc set level';
++-- npc set link
++UPDATE `command` SET `security`=4 WHERE `name`='npc set link';
++-- npc set model
++UPDATE `command` SET `security`=4 WHERE `name`='npc set model';
++-- npc set movetype
++UPDATE `command` SET `security`=4 WHERE `name`='npc set movetype';
++-- npc set phase
++UPDATE `command` SET `security`=4 WHERE `name`='npc set phase';
++-- npc set spawndist
++UPDATE `command` SET `security`=4 WHERE `name`='npc set spawndist';
++-- npc set spawntime
++UPDATE `command` SET `security`=4 WHERE `name`='npc set spawntime';
++-- npc textemote
++UPDATE `command` SET `security`=3 WHERE `name`='npc textemote';
++-- npc whisper
++UPDATE `command` SET `security`=3 WHERE `name`='npc whisper';
++-- npc yell
++UPDATE `command` SET `security`=3 WHERE `name`='npc yell';
++-- pdump
++UPDATE `command` SET `security`=4 WHERE `name`='pdump';
++-- pdump load
++UPDATE `command` SET `security`=4 WHERE `name`='pdump load';
++-- pdump write
++UPDATE `command` SET `security`=4 WHERE `name`='pdump write';
++-- pet
++UPDATE `command` SET `security`=2 WHERE `name`='pet';
++-- pet create
++UPDATE `command` SET `security`=2 WHERE `name`='pet create';
++-- pet learn
++UPDATE `command` SET `security`=2 WHERE `name`='pet learn';
++-- pet unlearn
++UPDATE `command` SET `security`=2 WHERE `name`='pet unlearn';
++-- pinfo
++UPDATE `command` SET `security`=1 WHERE `name`='pinfo';
++-- playall
++UPDATE `command` SET `security`=4 WHERE `name`='playall';
++-- posses
++UPDATE `command` SET `security`=2 WHERE `name`='posses';
++-- quest
++UPDATE `command` SET `security`=1 WHERE `name`='quest';
++-- quest add
++UPDATE `command` SET `security`=1 WHERE `name`='quest add';
++-- quest complete
++UPDATE `command` SET `security`=1 WHERE `name`='quest complete';
++-- quest remove
++UPDATE `command` SET `security`=1 WHERE `name`='quest remove';
++-- recall
++UPDATE `command` SET `security`=1 WHERE `name`='recall';
++-- reload
++UPDATE `command` SET `security`=3 WHERE `name`='reload';
++-- reload acces_requirement
++UPDATE `command` SET `security`=4 WHERE `name`='reload acces_requirement';
++-- reload achievement_criteria_data
++UPDATE `command` SET `security`=4 WHERE `name`='reload achievement_criteria_data';
++-- reload achievement_reward
++UPDATE `command` SET `security`=4 WHERE `name`='reload achievement_reward';
++-- reload all
++UPDATE `command` SET `security`=5 WHERE `name`='reload all';
++-- reload all achievement
++UPDATE `command` SET `security`=3 WHERE `name`='reload achievement';
++-- reload all area
++UPDATE `command` SET `security`=3 WHERE `name`='reload all area';
++-- reload all eventai
++UPDATE `command` SET `security`=3 WHERE `name`='reload all eventai';
++-- reload all gossips
++UPDATE `command` SET `security`=4 WHERE `name`='reload all gossips';
++-- reload all item
++UPDATE `command` SET `security`=3 WHERE `name`='reload all item';
++-- reload all locales
++UPDATE `command` SET `security`=3 WHERE `name`='reload all locales';
++-- reload all loot
++UPDATE `command` SET `security`=3 WHERE `name`='reload all loot';
++-- reload all npc
++UPDATE `command` SET `security`=3 WHERE `name`='reload all npc';
++-- reload all quest
++UPDATE `command` SET `security`=3 WHERE `name`='reload all quest';
++-- reload all scripts
++UPDATE `command` SET `security`=3 WHERE `name`='reload all scripts';
++-- reload all spell
++UPDATE `command` SET `security`=3 WHERE `name`='reload all spell';
++-- reload areatrigger_involvedrelation
++UPDATE `command` SET `security`=4 WHERE `name`='reload areatrigger_involvedrelation';
++-- reload areatrigger_tavern
++UPDATE `command` SET `security`=4 WHERE `name`='reload areatrigger_tavern';
++-- reload areatrigger_teleport
++UPDATE `command` SET `security`=4 WHERE `name`='reload areatrigger_teleport';
++-- reload auctions
++UPDATE `command` SET `security`=4 WHERE `name`='reload auctions';
++-- reload autobroadcast
++UPDATE `command` SET `security`=3 WHERE `name`='reload autobroadcast';
++-- reload command
++UPDATE `command` SET `security`=3 WHERE `name`='reload command';
++-- reload conditions
++UPDATE `command` SET `security`=3 WHERE `name`='reload conditions';
++-- reload config
++UPDATE `command` SET `security`=4 WHERE `name`='reload config';
++-- reload creature_involvedrelation
++UPDATE `command` SET `security`=3 WHERE `name`='reload creature_involvedrelation';
++-- reload creature_linked_respawn
++UPDATE `command` SET `security`=3 WHERE `name`='reload creature_linked_respawn';
++-- reload creature_loot_template
++UPDATE `command` SET `security`=3 WHERE `name`='reload creature_loot_template';
++-- reload creature_onkill_reputation
++UPDATE `command` SET `security`=4 WHERE `name`='reload creature_onkill_reputation';
++-- reload creature_questrelation
++UPDATE `command` SET `security`=3 WHERE `name`='reload creature_questrelation';
++-- reload creature_template
++UPDATE `command` SET `security`=3 WHERE `name`='reload creature_template';
++-- reload creature_text
++UPDATE `command` SET `security`=3 WHERE `name`='reload creature_text';
++-- reload disables
++UPDATE `command` SET `security`=3 WHERE `name`='reload disables';
++-- reload disenchant_loot_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload disenchant_loot_template';
++-- reload event_scripts
++UPDATE `command` SET `security`=4 WHERE `name`='reload event_scripts';
++-- reload fishing_loot_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload fishing_loot_template';
++-- reload gameobject_involvedrelation
++UPDATE `command` SET `security`=3 WHERE `name`='reload gameobject_involvedrelation';
++-- reload gameobject_loot_template
++UPDATE `command` SET `security`=3 WHERE `name`='reload gameobject_loot_template';
++-- reload gameobject_questrelation
++UPDATE `command` SET `security`=3 WHERE `name`='reload gameobject_questrelation';
++-- reload gameobject_scripts
++UPDATE `command` SET `security`=4 WHERE `name`='reload gameobject_scripts';
++-- reload game_graveyard_zone
++UPDATE `command` SET `security`=4 WHERE `name`='reload game_graveyard_zone';
++-- reload game_tele
++UPDATE `command` SET `security`=4 WHERE `name`='reload game_tele';
++-- reload gm_tickets
++UPDATE `command` SET `security`=4 WHERE `name`='reload gm_tickets';
++-- reload gossip_menu
++UPDATE `command` SET `security`=4 WHERE `name`='reload gossip_menu';
++-- reload gossip_menu_option
++UPDATE `command` SET `security`=4 WHERE `name`='reload gossip_menu_option';
++-- reload item_enchantment_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload item_enchantment_template';
++-- reload item_loot_template
++UPDATE `command` SET `security`=3 WHERE `name`='reload item_loot_template';
++-- reload item_set_names
++UPDATE `command` SET `security`=4 WHERE `name`='reload item_set_names';
++-- reload lfg_dungeon_rewards
++UPDATE `command` SET `security`=4 WHERE `name`='reload lfg_dungeon_rewards';
++-- reload locales_creature
++UPDATE `command` SET `security`=4 WHERE `name`='reload locales_creature';
++-- reload locales_gameobject
++UPDATE `command` SET `security`=4 WHERE `name`='reload locales_gameobject';
++-- reload locales_gossip_menu_option
++UPDATE `command` SET `security`=4 WHERE `name`='reload locales_gossip_menu_option';
++-- reload locales_item
++UPDATE `command` SET `security`=4 WHERE `name`='reload locales_item';
++-- reload locales_item_set_name
++UPDATE `command` SET `security`=4 WHERE `name`='reload locales_item_set_name';
++-- reload locales_npc_text
++UPDATE `command` SET `security`=4 WHERE `name`='reload locales_npc_text';
++-- reload locales_page_text
++UPDATE `command` SET `security`=4 WHERE `name`='reload locales_page_text';
++-- reload locales_points_of_interest
++UPDATE `command` SET `security`=4 WHERE `name`='reload locales_points_of_interest';
++-- reload locales_quest
++UPDATE `command` SET `security`=4 WHERE `name`='reload locales_quest';
++-- reload mail_level_reward
++UPDATE `command` SET `security`=4 WHERE `name`='reload mail_level_reward';
++-- reload mail_loot_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload mail_loot_template';
++-- reload milling_loot_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload milling_loot_template';
++-- reload npc_trainer
++UPDATE `command` SET `security`=3 WHERE `name`='reload npc_trainer';
++-- reload npc_vendor
++UPDATE `command` SET `security`=3 WHERE `name`='reload npc_vendor';
++-- reload page_text
++UPDATE `command` SET `security`=4 WHERE `name`='reload page_text';
++-- reload pickpocketing_loot_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload pickpocketing_loot_template';
++-- reload points_of_interest
++UPDATE `command` SET `security`=4 WHERE `name`='reload points_of_interest';
++-- reload prospecting_loot_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload prospecting_loot_template';
++-- reload quest_end_scripts
++UPDATE `command` SET `security`=4 WHERE `name`='reload quest_end_scripts';
++-- reload quest_poi
++UPDATE `command` SET `security`=4 WHERE `name`='reload quest_poi';
++-- reload quest_start_scripts
++UPDATE `command` SET `security`=4 WHERE `name`='reload quest_start_scripts';
++-- reload quest_template
++UPDATE `command` SET `security`=3 WHERE `name`='reload quest_template';
++-- reload reference_loot_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload reference_loot_template';
++-- reload reserved_name
++UPDATE `command` SET `security`=4 WHERE `name`='reload reserved_name';
++-- reload skill_discovery_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload skill_discovery_template';
++-- reload skill_extra_item_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload skill_extra_item_template';
++-- reload skill_fishing_base_level
++UPDATE `command` SET `security`=4 WHERE `name`='reload skill_fishing_base_level';
++-- reload skinning_loot_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload skinning_loot_template';
++-- reload smart_scripts
++UPDATE `command` SET `security`=3 WHERE `name`='reload smart_scripts';
++-- reload spell_area
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_area';
++-- reload spell_bonus_data
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_bonus_data';
++-- reload spell_group
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_group';
++-- reload spell_group_stack_rules
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_group_stack_rules';
++-- reload spell_learn_spell
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_learn_spell';
++-- reload spell_linked_spell
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_linked_spell';
++-- reload spell_loot_template
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_loot_template';
++-- reload spell_pet_auras
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_pet_auras';
++-- reload spell_proc
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_proc';
++-- reload spell_proc_event
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_proc_event';
++-- reload spell_required
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_required';
++-- reload spell_scripts
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_scripts';
++-- reload spell_target_position
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_target_position';
++-- reload spell_threats
++UPDATE `command` SET `security`=4 WHERE `name`='reload spell_threats';
++-- reload trinity_string
++UPDATE `command` SET `security`=4 WHERE `name`='reload trinity_string';
++-- reload vehicle_accessory
++UPDATE `command` SET `security`=4 WHERE `name`='reload vehicle_accessory';
++-- reload vehicle_template_accessory
++UPDATE `command` SET `security`=4 WHERE `name`='reload vehicle_template_accessory';
++-- reload waypoint_scripts
++UPDATE `command` SET `security`=4 WHERE `name`='reload waypoint_scripts';
++-- repairitems
++UPDATE `command` SET `security`=1 WHERE `name`='repairitems';
++-- reset
++UPDATE `command` SET `security`=1 WHERE `name`='reset';
++-- reset achievements
++UPDATE `command` SET `security`=4 WHERE `name`='reset achievements';
++-- reset all
++UPDATE `command` SET `security`=5 WHERE `name`='reset all';
++-- reset honor
++UPDATE `command` SET `security`=3 WHERE `name`='reset honor';
++-- reset level
++UPDATE `command` SET `security`=3 WHERE `name`='reset level';
++-- reset spells
++UPDATE `command` SET `security`=5 WHERE `name`='reset spells';
++-- reset stats
++UPDATE `command` SET `security`=1 WHERE `name`='reset stats';
++-- reset talents
++UPDATE `command` SET `security`=1 WHERE `name`='reset talents';
++-- respawn
++UPDATE `command` SET `security`=2 WHERE `name`='respawn';
++-- revive
++UPDATE `command` SET `security`=1 WHERE `name`='revive';
++-- save
++UPDATE `command` SET `security`=0 WHERE `name`='save';
++-- save all
++UPDATE `command` SET `security`=3 WHERE `name`='save all';
++-- send items
++UPDATE `command` SET `security`=1 WHERE `name`='set items';
++-- send mail
++UPDATE `command` SET `security`=1 WHERE `name`='send mail';
++-- send message
++UPDATE `command` SET `security`=1 WHERE `name`='send message';
++-- send money
++UPDATE `command` SET `security`=2 WHERE `name`='send money';
++-- server
++UPDATE `command` SET `security`=1 WHERE `name`='server';
++-- server corpses
++UPDATE `command` SET `security`=4 WHERE `name`='server corpses';
++-- server exit
++UPDATE `command` SET `security`=4 WHERE `name`='server exit';
++-- server idlerestart
++UPDATE `command` SET `security`=4 WHERE `name`='server idlerestart';
++-- server idlerestart cancel
++UPDATE `command` SET `security`=4 WHERE `name`='server idlerestart cancel';
++-- server idleshutdown
++UPDATE `command` SET `security`=4 WHERE `name`='server idleshutdown';
++-- server idleshutdown cancel
++UPDATE `command` SET `security`=4 WHERE `name`='server idleshutdown cancel';
++-- server info
++UPDATE `command` SET `security`=1 WHERE `name`='server info';
++-- server motd
++UPDATE `command` SET `security`=4 WHERE `name`='server motd';
++-- server plimit
++UPDATE `command` SET `security`=4 WHERE `name`='server plimit';
++-- server restart
++UPDATE `command` SET `security`=4 WHERE `name`='server restart';
++-- server restart cancel
++UPDATE `command` SET `security`=4 WHERE `name`='server restart cancel';
++-- server set closed
++UPDATE `command` SET `security`=4 WHERE `name`='server set closed';
++-- server set loglevel
++UPDATE `command` SET `security`=4 WHERE `name`='server set loglevel';
++-- server set motd
++UPDATE `command` SET `security`=4 WHERE `name`='server set motd';
++-- server shutdown
++UPDATE `command` SET `security`=4 WHERE `name`='server shutdown';
++-- server shutdown cancel
++UPDATE `command` SET `security`=4 WHERE `name`='server shutdown cancel';
++-- server togglequerylog
++UPDATE `command` SET `security`=4 WHERE `name`='server togglequerylog';
++-- setskill
++UPDATE `command` SET `security`=1 WHERE `name`='setskill';
++-- showarea
++UPDATE `command` SET `security`=2 WHERE `name`='showarea';
++-- start
++UPDATE `command` SET `security`=1 WHERE `name`='start';
++-- summon
++UPDATE `command` SET `security`=1 WHERE `name`='summon';
++-- taxicheat
++UPDATE `command` SET `security`=2 WHERE `name`='taxicheat';
++-- tele
++UPDATE `command` SET `security`=1 WHERE `name`='tele';
++-- tele add
++UPDATE `command` SET `security`=3 WHERE `name`='tele add';
++-- tele del
++UPDATE `command` SET `security`=3 WHERE `name`='tele del';
++-- tele group
++UPDATE `command` SET `security`=1 WHERE `name`='tele group';
++-- tele name
++UPDATE `command` SET `security`=1 WHERE `name`='tele name';
++-- ticket
++UPDATE `command` SET `security`=1 WHERE `name`='ticket';
++-- ticket assign
++UPDATE `command` SET `security`=1 WHERE `name`='ticket assign';
++-- ticket close
++UPDATE `command` SET `security`=1 WHERE `name`='ticket close';
++-- ticket closedlist
++UPDATE `command` SET `security`=1 WHERE `name`='ticket closedlist';
++-- ticket comment
++UPDATE `command` SET `security`=1 WHERE `name`='ticket comment';
++-- ticket delete
++UPDATE `command` SET `security`=1 WHERE `name`='ticket delete';
++-- ticket list
++UPDATE `command` SET `security`=1 WHERE `name`='ticket list';
++-- ticket onelist
++UPDATE `command` SET `security`=1 WHERE `name`='ticket onelist';
++-- ticket reset
++UPDATE `command` SET `security`=4 WHERE `name`='ticket reset';
++-- ticket unassign
++UPDATE `command` SET `security`=1 WHERE `name`='ticket unassign';
++-- ticket viewid
++UPDATE `command` SET `security`=1 WHERE `name`='ticket viewid';
++-- ticket viewname
++UPDATE `command` SET `security`=1 WHERE `name`='ticket viewname';
++-- title add
++UPDATE `command` SET `security`=4 WHERE `name`='title add';
++-- title current
++UPDATE `command` SET `security`=4 WHERE `name`='title current';
++-- titles remove
++UPDATE `command` SET `security`=4 WHERE `name`='titles remove';
++-- titles set mask
++UPDATE `command` SET `security`=4 WHERE `name`='titles set mask';
++-- unaura
++UPDATE `command` SET `security`=1 WHERE `name`='unaura';
++-- unban
++UPDATE `command` SET `security`=1 WHERE `name`='unban';
++-- unban account
++UPDATE `command` SET `security`=1 WHERE `name`='unban account';
++-- unban character
++UPDATE `command` SET `security`=1 WHERE `name`='unban character';
++-- unban ip
++UPDATE `command` SET `security`=2 WHERE `name`='unban ip';
++-- unbindsight
++UPDATE `command` SET `security`=3 WHERE `name`='unbindsight';
++-- unfreeze
++UPDATE `command` SET `security`=1 WHERE `name`='unfreeze';
++-- unjail
++UPDATE `command` SET `security`=1 WHERE `name`='unjail';
++-- unlearn
++UPDATE `command` SET `security`=1 WHERE `name`='unlearn';
++-- unmute
++UPDATE `command` SET `security`=1 WHERE `name`='unmute';
++-- unposses
++UPDATE `command` SET `security`=2 WHERE `name`='unposses';
++-- waterwalk
++UPDATE `command` SET `security`=1 WHERE `name`='waterwalk';
++-- wchange
++UPDATE `command` SET `security`=3 WHERE `name`='wchange';
++-- wg
++UPDATE `command` SET `security`=3 WHERE `name`='wg';
++-- wg enable
++UPDATE `command` SET `security`=3 WHERE `name`='wg enable';
++-- wg start
++UPDATE `command` SET `security`=4 WHERE `name`='wg start';
++-- wg status
++UPDATE `command` SET `security`=2 WHERE `name`='wg status';
++-- wg stop
++UPDATE `command` SET `security`=4 WHERE `name`='wg stop';
++-- wg switch
++UPDATE `command` SET `security`=4 WHERE `name`='wg switch';
++-- wg timer
++UPDATE `command` SET `security`=3 WHERE `name`='wg timer';
++-- whispers
++UPDATE `command` SET `security`=1 WHERE `name`='whispers';
++-- wp add
++UPDATE `command` SET `security`=3 WHERE `name`='wp add';
++-- wp event
++UPDATE `command` SET `security`=3 WHERE `name`='wp event';
++-- wp load
++UPDATE `command` SET `security`=3 WHERE `name`='wp load';
++-- wp show
++UPDATE `command` SET `security`=3 WHERE `name`='wp show';
++-- wp unload
++UPDATE `command` SET `security`=3 WHERE `name`='wp unload';
++-- wpgps
++UPDATE `command` SET `security`=3 WHERE `name`='wpgps';
++
+-- 
+1.7.8.msysgit.0
+

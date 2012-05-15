@@ -1,7 +1,7 @@
-From 3af9b0b9fd1d0abbbeb320eb263aa04cac49954a Mon Sep 17 00:00:00 2001
+From c1f87e4048274f61b3973e8c416e3fbc7e41923b Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 8 May 2012 00:50:37 -0500
-Subject: [PATCH 2/4] 7.2 Custom: Subastador Dalaran
+Subject: [PATCH 2/5] 7.2 Custom: Subastador Dalaran
 
 ---
  .../custom/2011_12_08_100_world_subastador.sql     |   18 ++++++++++++++++++

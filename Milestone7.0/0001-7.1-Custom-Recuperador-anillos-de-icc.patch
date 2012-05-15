@@ -1,7 +1,7 @@
-From 90f08c548c88c3765ccebc37028f346d089a0afa Mon Sep 17 00:00:00 2001
+From 69cb2480e6b30087748a93d50ddcd46abd76a706 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 8 May 2012 00:49:22 -0500
-Subject: [PATCH 1/4] 7.1 Custom: Recuperador anillos de icc
+Subject: [PATCH 1/5] 7.1 Custom: Recuperador anillos de icc
 
 ---
  .../2011_10_08_100_world_rings_icc_recovery.sql    |   10 +
