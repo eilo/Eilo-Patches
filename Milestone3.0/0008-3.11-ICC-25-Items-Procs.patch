@@ -1,7 +1,7 @@
-From 21d4e8dea3bb9f866d921283a2838c9d36dc9602 Mon Sep 17 00:00:00 2001
+From 37a27db8c9900576db3eaac59960555506c73c8e Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 27 Nov 2011 18:48:01 +0100
-Subject: [PATCH 09/34] 3.11 ICC 25 Items Procs
+Subject: [PATCH 08/34] 3.11 ICC 25 Items Procs
 
 Arma de Caster Normal y Heroico (71845) y (71846)
 Arma de Healer Normal y Heroico (71865) y (71868)
@@ -41,10 +41,10 @@ index 0000000..c401e5f
 +INSERT INTO `spell_proc_event` VALUES (71873, 0x01, 0x00, 0x00000000, 0x00000000, 0x00000000, 0x00000014, 0x00000018, 0, 37, 35);
 \ No newline at end of file
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index e7ec318..ac988b9 100755
+index 75bc421..6b7f08e 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -5269,10 +5269,38 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
+@@ -5278,10 +5278,38 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                      triggered_spell_id = 33494;
                      break;
                  }
@@ -83,7 +83,7 @@ index e7ec318..ac988b9 100755
                  // Vampiric Aura (boss spell)
                  case 38196:
                  {
-@@ -8589,6 +8617,20 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
+@@ -8598,6 +8626,20 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
                          target = victim;
                          break;
                      }
@@ -105,10 +105,10 @@ index e7ec318..ac988b9 100755
                          // Illumination
                          if (auraSpellInfo->SpellIconID == 241)
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index b507880..4547624 100755
+index 4634b18..396690d 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -692,6 +692,17 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
+@@ -694,6 +694,17 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
                      damage += CalculatePctN(block_value, m_spellInfo->Effects[EFFECT_1].CalcValue());
                      break;
                  }

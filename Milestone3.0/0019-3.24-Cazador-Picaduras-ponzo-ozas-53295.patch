@@ -1,7 +1,7 @@
-From e41e3ef9fc0218f1b9973dc00da64ef47836e42d Mon Sep 17 00:00:00 2001
+From c9554a94821fa028e537d372cff633e64f84cb52 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 22:59:43 +0200
-Subject: [PATCH 20/34] =?UTF-8?q?3.24=20Cazador:=20Picaduras=20ponzo=C3=B1oz?=
+Subject: [PATCH 19/34] =?UTF-8?q?3.24=20Cazador:=20Picaduras=20ponzo=C3=B1oz?=
  =?UTF-8?q?as=20(53295)?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -12,10 +12,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 14 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index 403804d..94e2ef3 100755
+index ea17e7e..9123ec7 100644
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -3703,6 +3703,20 @@ void Unit::RemoveAurasDueToSpellByDispel(uint32 spellId, uint32 dispellerSpellId
+@@ -3712,6 +3712,20 @@ void Unit::RemoveAurasDueToSpellByDispel(uint32 spellId, uint32 dispellerSpellId
                      }
                      break;
                  }

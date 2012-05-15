@@ -1,4 +1,4 @@
-From 76bb077945a523020c273e5bddbf7b071e85d1d2 Mon Sep 17 00:00:00 2001
+From e3984e181a107d6503df252eb24831daa76aa1f3 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Tue, 3 Jan 2012 17:29:21 +0100
 Subject: [PATCH 02/34] =?UTF-8?q?3.2=20Mago:=20Reflejo=20Exacto=20(55342)=20?=
@@ -13,7 +13,7 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 57 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/scripts/World/npcs_special.cpp b/src/server/scripts/World/npcs_special.cpp
-index e1cfd07..cf4334d 100644
+index ecd1a43..9843a83 100644
 --- a/src/server/scripts/World/npcs_special.cpp
 +++ b/src/server/scripts/World/npcs_special.cpp
 @@ -1857,6 +1857,63 @@ public:

@@ -1,7 +1,7 @@
-From 97d94d37dba2c20320464b3b5b34c4a28dd6224c Mon Sep 17 00:00:00 2001
+From 7cf411b265bc5c40c104efccfc6484f7e67b417b Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 20:49:33 -0500
-Subject: [PATCH 14/34] =?UTF-8?q?3.18=20P=C3=ADcaro:=20Distraer=20(1725)=20a?=
+Subject: [PATCH 13/34] =?UTF-8?q?3.18=20P=C3=ADcaro:=20Distraer=20(1725)=20a?=
  =?UTF-8?q?hora=20se=20interrumpen=20efectos=20de=20comer=20beber?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -12,10 +12,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 3 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 5d9cd58..0f5471e 100755
+index a7123b2..fcf79e8 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -2650,6 +2650,9 @@ void Spell::EffectDistract(SpellEffIndex /*effIndex*/)
+@@ -2667,6 +2667,9 @@ void Spell::EffectDistract(SpellEffIndex /*effIndex*/)
      unitTarget->ClearUnitState(UNIT_STATE_MOVING);
  
      if (unitTarget->GetTypeId() == TYPEID_UNIT)

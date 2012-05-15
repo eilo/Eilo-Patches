@@ -1,14 +1,14 @@
-From 96bc5c31c0edb115594bcdea83d41b183357ba5a Mon Sep 17 00:00:00 2001
+From 7721cb34d092215ae29b6abca049bf511bd66785 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Fri, 27 Apr 2012 12:09:08 +0200
-Subject: [PATCH 33/34] 3.39 Pets stamina
+Subject: [PATCH 32/34] 3.39 Pets stamina
 
 ---
  src/server/game/Entities/Pet/Pet.cpp |    6 +++++-
  1 files changed, 5 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Entities/Pet/Pet.cpp b/src/server/game/Entities/Pet/Pet.cpp
-index f368900..daf965b 100755
+index fb78e4b..0acdf11 100755
 --- a/src/server/game/Entities/Pet/Pet.cpp
 +++ b/src/server/game/Entities/Pet/Pet.cpp
 @@ -890,7 +890,11 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)

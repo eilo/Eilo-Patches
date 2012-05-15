@@ -1,7 +1,7 @@
-From 81bb438be03d8c6c626583d3515302f6030bcf35 Mon Sep 17 00:00:00 2001
+From 4aff2340079461434840b770006dcdee8b60d963 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 22:25:45 +0200
-Subject: [PATCH 30/34] =?UTF-8?q?3.36=20P=C3=ADcaro:=20Capa=20de=20las=20Som?=
+Subject: [PATCH 29/34] =?UTF-8?q?3.36=20P=C3=ADcaro:=20Capa=20de=20las=20Som?=
  =?UTF-8?q?bras=20(31224)=20ya=20no=20remueve=20Aullido=20Perforador=20(1232?=
  =?UTF-8?q?3),=20Grito=20Desmoralizador(25203)=20y=20Rugido=20Desmoralizador?=
  =?UTF-8?q?=20(26998)?=
@@ -14,10 +14,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 2 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 45ef625..3c53d94 100755
+index b7a386f..41f4430 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -959,7 +959,8 @@ void Spell::EffectTriggerSpell(SpellEffIndex effIndex)
+@@ -964,7 +964,8 @@ void Spell::EffectTriggerSpell(SpellEffIndex effIndex)
                      if ((spell->DmgClass == SPELL_DAMAGE_CLASS_MAGIC // only affect magic spells
                          || ((spell->GetDispelMask()) & dispelMask))
                          // ignore positive and passive auras

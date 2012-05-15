@@ -1,7 +1,7 @@
-From 65e5ff95a7a3a2e9e3a1d89e2e89d6c9f5469d6c Mon Sep 17 00:00:00 2001
+From 0e35d5beef6ca8c3767f5cc7580aff106e0e69d5 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 11 Mar 2012 20:47:06 +0100
-Subject: [PATCH 11/34] =?UTF-8?q?3.13=20Mago:=20Reflejo=20exacto=20(55342)=20?=
+Subject: [PATCH 10/34] =?UTF-8?q?3.13=20Mago:=20Reflejo=20exacto=20(55342)=20?=
  =?UTF-8?q?ya=20no=20causar=C3=A1=20problemas=20de=20que=20no=20se=20vean=20?=
  =?UTF-8?q?visualmente=20las=20auras=20en=20el=20propietario=20de=20las=20co?=
  =?UTF-8?q?pias?=
@@ -27,7 +27,7 @@ index 0000000..24464bd
 +(-55342, 'spell_mage_mirror_image');
 \ No newline at end of file
 diff --git a/src/server/game/Spells/Auras/SpellAuras.cpp b/src/server/game/Spells/Auras/SpellAuras.cpp
-index 5299c9c..4a71fc6 100755
+index 543a563..b47e43b 100755
 --- a/src/server/game/Spells/Auras/SpellAuras.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuras.cpp
 @@ -922,6 +922,14 @@ bool Aura::CanBeSaved() const

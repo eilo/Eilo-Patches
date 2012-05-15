@@ -1,7 +1,7 @@
-From 41fc3a60e4271ee32538edd5d9750bb852d3ce68 Mon Sep 17 00:00:00 2001
+From 1c842978943868960d74807f412c2803e539812a Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Fri, 27 Apr 2012 12:08:00 +0200
-Subject: [PATCH 32/34] =?UTF-8?q?3.38=20Pets=20tama=C3=B1os?=
+Subject: [PATCH 31/34] =?UTF-8?q?3.38=20Pets=20tama=C3=B1os?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -11,7 +11,7 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 16 insertions(+), 7 deletions(-)
 
 diff --git a/src/server/game/Entities/Pet/Pet.cpp b/src/server/game/Entities/Pet/Pet.cpp
-index 586f09b..f368900 100755
+index f3a736d..fb78e4b 100755
 --- a/src/server/game/Entities/Pet/Pet.cpp
 +++ b/src/server/game/Entities/Pet/Pet.cpp
 @@ -860,16 +860,25 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)

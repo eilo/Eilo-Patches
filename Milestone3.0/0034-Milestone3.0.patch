@@ -1,14 +1,14 @@
-From 37e34f5fdc8c2a668f0d8bae173167a92676ab6f Mon Sep 17 00:00:00 2001
+From 6a70d5618ca71a7db0a64b3cb9f2091dd6b04e8e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 8 May 2012 00:20:55 -0500
 Subject: [PATCH 34/34] Milestone3.0
 
 ---
- README |   45 +++++++++++++++++++++++++++++++++++++++++++++
- 1 files changed, 45 insertions(+), 0 deletions(-)
+ README |   44 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 44 insertions(+), 0 deletions(-)
 
 diff --git a/README b/README
-index 8bb3da1..d9fc970 100644
+index e7c35c1..3a1a194 100644
 --- a/README
 +++ b/README
 @@ -47,6 +47,8 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
@@ -20,7 +20,7 @@ index 8bb3da1..d9fc970 100644
  
  
  ##################################
-@@ -208,11 +210,53 @@ Milestone2.0: Mejoras en Instances y dungeons, escencialmente para darles funcio
+@@ -212,11 +214,53 @@ Milestone2.0: Mejoras en Instances y dungeons, escencialmente para darles funcio
  #######################
  # Hechizos y Talentos #
  #######################

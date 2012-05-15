@@ -1,17 +1,17 @@
-From ef6b4f72c56d4f39b2e14e4f124698bf4415ccc1 Mon Sep 17 00:00:00 2001
+From 760f952f2ae26de347f4271459ca36068d2efa1f Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 16:54:51 +0200
-Subject: [PATCH 23/34] 3.29 ItemSet: Druida T10 Equilibrio 2p bonus (70718)
+Subject: [PATCH 22/34] 3.29 ItemSet: Druida T10 Equilibrio 2p bonus (70718)
 
 ---
  src/server/game/Spells/SpellEffects.cpp |    4 ++++
  1 files changed, 4 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 0f5471e..45ef625 100755
+index fcf79e8..b7a386f 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -558,6 +558,10 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
+@@ -560,6 +560,10 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
                          if (unitTarget->GetAuraEffect(SPELL_AURA_PERIODIC_DAMAGE, SPELLFAMILY_DRUID, 0x00200000, 0, 0))
                              AddPctN(damage, aurEff->GetAmount());
                  }

@@ -1,7 +1,7 @@
-From 5fdaf4d0d257e4e60d3457458ec677c1cec3838f Mon Sep 17 00:00:00 2001
+From c63798dcd58601aa9c4a7d66b976ec7c764c6920 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Mon, 2 Jan 2012 15:37:15 +0100
-Subject: [PATCH 17/34] 3.21 Items: Efectos de Gemas Meta reduccion de
+Subject: [PATCH 16/34] 3.21 Items: Efectos de Gemas Meta reduccion de
  duracion de silencio(55366), reduccion de duracion de
  snare/root(55378), reduccion de duracion de
  miedo(55357) y reduccion de duracion de stun(55358)
@@ -11,10 +11,10 @@ Subject: [PATCH 17/34] 3.21 Items: Efectos de Gemas Meta reduccion de
  1 files changed, 34 insertions(+), 1 deletions(-)
 
 diff --git a/src/server/game/Spells/Auras/SpellAuras.cpp b/src/server/game/Spells/Auras/SpellAuras.cpp
-index 4a71fc6..34071ad 100755
+index b47e43b..9f68f2b 100755
 --- a/src/server/game/Spells/Auras/SpellAuras.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuras.cpp
-@@ -1769,8 +1769,41 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
+@@ -1775,8 +1775,41 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
              }
              break;
      }

@@ -1,7 +1,7 @@
-From 233b0d71fcd347e2f43e544f6f12d70f220fa8e8 Mon Sep 17 00:00:00 2001
+From 485750bf7b8ee6a74ceb0642a005b0983df3f731 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Tue, 1 May 2012 16:57:04 +0200
-Subject: [PATCH 19/34] 3.23 Sistema de Stats para Pets basado en spells
+Subject: [PATCH 18/34] 3.23 Sistema de Stats para Pets basado en spells
 
 ---
  ...012_02_06_100_world_spell_gen_pet_calculate.sql |   16 ++

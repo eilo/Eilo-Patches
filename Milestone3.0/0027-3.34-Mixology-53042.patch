@@ -1,7 +1,7 @@
-From c297d5f97408b9ae0517d0c85be4cd78c72878cd Mon Sep 17 00:00:00 2001
+From 5299c5b81d2301e260bc761557a43bf200e99e35 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 16:42:34 +0200
-Subject: [PATCH 28/34] 3.34 Mixology (53042)
+Subject: [PATCH 27/34] 3.34 Mixology (53042)
 
 ---
  src/server/game/Spells/Auras/SpellAuraEffects.cpp |   29 +++++++++++++++++++++
@@ -9,10 +9,10 @@ Subject: [PATCH 28/34] 3.34 Mixology (53042)
  2 files changed, 45 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/Auras/SpellAuraEffects.cpp b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
-index e32bff4..2ca7b4d 100755
+index 61ec29b..33b5dd1 100755
 --- a/src/server/game/Spells/Auras/SpellAuraEffects.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
-@@ -757,6 +757,35 @@ int32 AuraEffect::CalculateAmount(Unit* caster)
+@@ -753,6 +753,35 @@ int32 AuraEffect::CalculateAmount(Unit* caster)
          default:
              break;
      }
@@ -49,7 +49,7 @@ index e32bff4..2ca7b4d 100755
      {
          DoneActualBenefit *= caster->CalculateLevelPenalty(GetSpellInfo());
 diff --git a/src/server/game/Spells/Auras/SpellAuras.cpp b/src/server/game/Spells/Auras/SpellAuras.cpp
-index 34071ad..a8d1e47 100755
+index 9f68f2b..cac07ba 100755
 --- a/src/server/game/Spells/Auras/SpellAuras.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuras.cpp
 @@ -357,6 +357,22 @@ void Aura::_InitEffects(uint8 effMask, Unit* caster, int32 *baseAmount)

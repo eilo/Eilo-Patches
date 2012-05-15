@@ -1,9 +1,9 @@
-From da1e77e71b4c202fc8dc0190d1b7eae653291050 Mon Sep 17 00:00:00 2001
+From 74c7b02abc9d5f4e63455a84b738f533d2c0c73a Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Thu, 10 May 2012 23:02:59 +0200
-Subject: [PATCH 35/40] =?UTF-8?q?3.40=20Brujo:=20Descarga=20de=20caos=20(50796)=20?=
- =?UTF-8?q?no=20puede=20ser=20desv=C3=ADada=20por=20hechizos=20como=20Disuas?=
- =?UTF-8?q?i=C3=B3n?=
+Subject: [PATCH 33/34] =?UTF-8?q?3.40=20Brujo:=20Descarga=20de=20caos=20(507?=
+ =?UTF-8?q?96)=20no=20puede=20ser=20desv=C3=ADada=20por=20hechizos=20como=20?=
+ =?UTF-8?q?Disuasi=C3=B3n?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -13,10 +13,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 3 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index 0d28cd2..1136d77 100755
+index 51f0089..1e8adab 100644
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -2520,6 +2520,9 @@ SpellMissInfo Unit::MagicSpellHitResult(Unit* victim, SpellInfo const* spell)
+@@ -2526,6 +2526,9 @@ SpellMissInfo Unit::MagicSpellHitResult(Unit* victim, SpellInfo const* spell)
      if (victim->HasInArc(M_PI, this) || victim->HasAuraType(SPELL_AURA_IGNORE_HIT_DIRECTION))
      {
          int32 deflect_chance = victim->GetTotalAuraModifier(SPELL_AURA_DEFLECT_SPELLS) * 100;

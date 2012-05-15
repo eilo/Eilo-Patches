@@ -1,8 +1,8 @@
-From 9335bf26e7c58d12d0a74d72408465a619ae8228 Mon Sep 17 00:00:00 2001
+From ad9247f2562a47c6f5259d6199285af6971af0a3 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Fri, 11 May 2012 23:20:28 +0200
-Subject: [PATCH 18/34] =?UTF-8?q?3.22=20DK:=20Pesteador=20de=20=C3=89bano=20(51161?=
- =?UTF-8?q?)=20ya=20no=20stackear=C3=A1=20con=20diferentes=20casters?=
+Subject: [PATCH 17/34] =?UTF-8?q?3.22=20DK:=20Pesteador=20de=20=C3=89bano=20?=
+ =?UTF-8?q?(51161)=20ya=20no=20stackear=C3=A1=20con=20diferentes=20casters?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -15,10 +15,10 @@ Content-Transfer-Encoding: 8bit
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
 old mode 100755
 new mode 100644
-index b14a8b2..df6453b
+index bf7eaa6..ea17e7e
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -11890,10 +11890,18 @@ uint32 Unit::MeleeDamageBonusTaken(uint32 pdamage, WeaponAttackType attType, Spe
+@@ -11927,10 +11927,18 @@ uint32 Unit::MeleeDamageBonusTaken(Unit* attacker, uint32 pdamage, WeaponAttackT
  
          if (mechanicMask)
          {

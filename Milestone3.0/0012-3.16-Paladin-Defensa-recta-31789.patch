@@ -1,7 +1,7 @@
-From 213ba9d1644ce8b2286598d99e0f6c23e73819bd Mon Sep 17 00:00:00 2001
+From ec42025b7d04ed1d569972d4fc89b2b7bdea111e Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 6 Feb 2012 20:45:18 -0500
-Subject: [PATCH 13/34] 3.16 Paladin: Defensa recta (31789)
+Subject: [PATCH 12/34] 3.16 Paladin: Defensa recta (31789)
 
 ---
  .../2011_10_28_100_world_paladin_defensa_recta.sql |    4 ++
@@ -22,10 +22,10 @@ index 0000000..6c51b05
 +(31789,'spell_pal_righteous_defense');
 \ No newline at end of file
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 4547624..5d9cd58 100755
+index 396690d..a7123b2 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -943,12 +943,6 @@ void Spell::EffectTriggerSpell(SpellEffIndex effIndex)
+@@ -948,12 +948,6 @@ void Spell::EffectTriggerSpell(SpellEffIndex effIndex)
                      m_caster->CastSpell(unitTarget, spell->Id, true);
                  return;
              }

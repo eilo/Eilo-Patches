@@ -1,7 +1,7 @@
-From 27e46d1f1fb136e1496e8f99dd6561990c5fad49 Mon Sep 17 00:00:00 2001
+From 3b0c6324b5aac7273845ca8a1880478c8a3b3db7 Mon Sep 17 00:00:00 2001
 From: Hispano <jesus.diaz.gutierrez@gmail.com>
 Date: Sun, 22 Apr 2012 16:51:50 +0200
-Subject: [PATCH 22/34] =?UTF-8?q?3.28=20ItemSet:=20Cham=C3=A1n=20T10=20Resta?=
+Subject: [PATCH 21/34] =?UTF-8?q?3.28=20ItemSet:=20Cham=C3=A1n=20T10=20Resta?=
  =?UTF-8?q?uraci=C3=B3n=204p=20bonus=20(70808)?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -12,10 +12,10 @@ Content-Transfer-Encoding: 8bit
  1 files changed, 2 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index 94e2ef3..8c71339 100755
+index 9123ec7..51f0089 100644
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -7333,6 +7333,8 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
+@@ -7342,6 +7342,8 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                          if (!triggeredSpell)
                              return false;
                          basepoints0 = CalculatePctN(int32(damage), triggerAmount) / (triggeredSpell->GetMaxDuration() / triggeredSpell->Effects[0].Amplitude);
