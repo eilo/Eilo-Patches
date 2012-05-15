@@ -370,7 +370,7 @@ index 1301acf..58609c2 100644
 +                        if (GetBossState(DATA_GARFROST) == DONE && GetBossState(DATA_ICK) == DONE)
 +                            HandleGameObject(NULL,true,go);
 +                         break;
-+                    case GO_HALLS_OF_REFLECT_PORT:
++                    case GO_HALLS_OF_REFLECT_PORTCULLIS:
 +                         _uiHorp = go->GetGUID();
 +                         break;
 +                }
@@ -453,7 +453,7 @@ index 1301acf..58609c2 100644
 +                        return _victusOrGorkunFreedGUID;
 +                    case DATA_SINDRAGOSA:
 +                         return _sindragosaGUID;
-+                    case GO_HALLS_OF_REFLECT_PORT:
++                    case GO_HALLS_OF_REFLECT_PORTCULLIS:
 +                         return _uiHorp;
                      default:
                          break;
@@ -1684,7 +1684,7 @@ index b6c821e..4da3d67 100644
 +                            uiIntroTimer1 = 20000;
 +                            break;
 +                        case 8:
-+                            instance->HandleGameObject(instance->GetData64(GO_HALLS_OF_REFLECT_PORT), true);
++                            instance->HandleGameObject(instance->GetData64(GO_HALLS_OF_REFLECT_PORTCULLIS), true);
 +                            ++uiIntroPhase1;
 +                            uiIntroTimer1 = 25000;
 +                            break;
