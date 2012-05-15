@@ -1,4 +1,4 @@
-From f5c37530f7488d4328ebf43938ea61fe4ebeeda3 Mon Sep 17 00:00:00 2001
+From f067f954a7a503f2530396ec642ee3a4bdcc6de6 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 7 May 2012 16:10:20 -0500
 Subject: [PATCH 64/93] 2.6.3 Ulduar: Thorim script, ajustes y mejoras
@@ -12,7 +12,7 @@ Subject: [PATCH 64/93] 2.6.3 Ulduar: Thorim script, ajustes y mejoras
 
 diff --git a/sql/updates/world/reanemu/2012_05_06_100_world_thorim.sql b/sql/updates/world/reanemu/2012_05_06_100_world_thorim.sql
 new file mode 100644
-index 0000000..d343d9a
+index 0000000..177c10e
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_06_100_world_thorim.sql
 @@ -0,0 +1,100 @@

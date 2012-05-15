@@ -1,4 +1,4 @@
-From bd4187f9c55d0a2dccf1594078ea53fc91989e66 Mon Sep 17 00:00:00 2001
+From 1161007bfdfc60e69d10c159ee821d9df2b761ea Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 6 May 2012 10:28:17 -0500
 Subject: [PATCH 63/93] 2.6.2 Ulduar: Mimiron script
@@ -11,7 +11,7 @@ Subject: [PATCH 63/93] 2.6.2 Ulduar: Mimiron script
 
 diff --git a/sql/updates/world/reanemu/2012_05_06_100_world_mimiron.sql b/sql/updates/world/reanemu/2012_05_06_100_world_mimiron.sql
 new file mode 100644
-index 0000000..1ac2f02
+index 0000000..858a753
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_06_100_world_mimiron.sql
 @@ -0,0 +1,129 @@

@@ -1,6 +1,6 @@
-From f157ee633b93c18a2d51b8c8324fd4c2fd7dc119 Mon Sep 17 00:00:00 2001
+From a270a1bf3692720378f55302f6ee5c58615008b3 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Tue, 15 May 2012 00:53:52 -0500
+Date: Tue, 15 May 2012 10:07:40 -0500
 Subject: [PATCH 87/93] 2.17.2 PitOfSaron: Implementacion de script de intro,
  outro y varios
 
@@ -8,10 +8,10 @@ Subject: [PATCH 87/93] 2.17.2 PitOfSaron: Implementacion de script de intro,
  .../reanemu/2012_04_04_100_world_pit_of_saron.sql  |   99 ++
  .../FrozenHalls/PitOfSaron/boss_krickandick.cpp    |   13 +-
  .../PitOfSaron/boss_scourgelord_tyrannus.cpp       |  102 ++-
- .../PitOfSaron/instance_pit_of_saron.cpp           |  138 +++-
+ .../PitOfSaron/instance_pit_of_saron.cpp           |  137 +++-
  .../FrozenHalls/PitOfSaron/pit_of_saron.cpp        | 1161 +++++++++++++++++++-
  .../FrozenHalls/PitOfSaron/pit_of_saron.h          |   16 +
- 6 files changed, 1474 insertions(+), 55 deletions(-)
+ 6 files changed, 1468 insertions(+), 60 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2012_04_04_100_world_pit_of_saron.sql
 
 diff --git a/sql/updates/world/reanemu/2012_04_04_100_world_pit_of_saron.sql b/sql/updates/world/reanemu/2012_04_04_100_world_pit_of_saron.sql
@@ -288,7 +288,7 @@ index 8d015ad..7c6e092 100644
                          case EVENT_OVERLORD_BRAND:
                              if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1, 0.0f, true))
 diff --git a/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/instance_pit_of_saron.cpp b/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/instance_pit_of_saron.cpp
-index 1301acf..58609c2 100644
+index 1301acf..6948db0 100644
 --- a/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/instance_pit_of_saron.cpp
 +++ b/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/instance_pit_of_saron.cpp
 @@ -18,10 +18,34 @@
@@ -345,7 +345,7 @@ index 1301acf..58609c2 100644
              }
  
              void OnPlayerEnter(Player* player)
-@@ -157,10 +190,32 @@ class instance_pit_of_saron : public InstanceMapScript
+@@ -157,19 +190,30 @@ class instance_pit_of_saron : public InstanceMapScript
                          if (_teamInInstance == ALLIANCE)
                              creature->UpdateEntry(NPC_MARTIN_VICTUS_2, ALLIANCE);
                          break;
@@ -360,25 +360,28 @@ index 1301acf..58609c2 100644
                          break;
                  }
              }
+-
 +            
-+            void OnGameObjectCreate(GameObject* go)
-+            {
+             void OnGameObjectCreate(GameObject* go)
+             {
+-                switch (go->GetEntry())
+-                {
 +               switch (go->GetEntry())
 +               {
-+                    case GO_ICE_WALL:
+                     case GO_ICE_WALL:
 +                        uiIceWall = go->GetGUID();
 +                        if (GetBossState(DATA_GARFROST) == DONE && GetBossState(DATA_ICK) == DONE)
 +                            HandleGameObject(NULL,true,go);
 +                         break;
-+                    case GO_HALLS_OF_REFLECT_PORTCULLIS:
+                     case GO_HALLS_OF_REFLECTION_PORTCULLIS:
+-                        AddDoor(go, true);
+-                        break;
 +                         _uiHorp = go->GetGUID();
 +                         break;
-+                }
-+            }
+                 }
+             }
  
-             void OnGameObjectCreate(GameObject* go)
-             {
-@@ -191,16 +246,44 @@ class instance_pit_of_saron : public InstanceMapScript
+@@ -191,16 +235,44 @@ class instance_pit_of_saron : public InstanceMapScript
  
                  switch (type)
                  {
@@ -426,7 +429,7 @@ index 1301acf..58609c2 100644
                          }
                          break;
                      case DATA_TYRANNUS:
-@@ -228,6 +311,18 @@ class instance_pit_of_saron : public InstanceMapScript
+@@ -228,6 +300,18 @@ class instance_pit_of_saron : public InstanceMapScript
                  {
                      case DATA_TEAM_IN_INSTANCE:
                          return _teamInInstance;
@@ -445,7 +448,7 @@ index 1301acf..58609c2 100644
                      default:
                          break;
                  }
-@@ -255,13 +350,34 @@ class instance_pit_of_saron : public InstanceMapScript
+@@ -255,13 +339,34 @@ class instance_pit_of_saron : public InstanceMapScript
                          return _jainaOrSylvanas1GUID;
                      case DATA_JAINA_SYLVANAS_2:
                          return _jainaOrSylvanas2GUID;
@@ -453,7 +456,7 @@ index 1301acf..58609c2 100644
 +                        return _victusOrGorkunFreedGUID;
 +                    case DATA_SINDRAGOSA:
 +                         return _sindragosaGUID;
-+                    case GO_HALLS_OF_REFLECT_PORTCULLIS:
++                    case GO_HALLS_OF_REFLECTION_PORTCULLIS:
 +                         return _uiHorp;
                      default:
                          break;
@@ -481,7 +484,7 @@ index 1301acf..58609c2 100644
              std::string GetSaveData()
              {
                  OUT_SAVE_INST_DATA;
-@@ -316,8 +432,18 @@ class instance_pit_of_saron : public InstanceMapScript
+@@ -316,8 +421,18 @@ class instance_pit_of_saron : public InstanceMapScript
              uint64 _tyrannusEventGUID;
              uint64 _jainaOrSylvanas1GUID;
              uint64 _jainaOrSylvanas2GUID;
@@ -501,7 +504,7 @@ index 1301acf..58609c2 100644
  
          InstanceScript* GetInstanceScript(InstanceMap* map) const
 diff --git a/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/pit_of_saron.cpp b/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/pit_of_saron.cpp
-index b6c821e..4da3d67 100644
+index b6c821e..3fb1461 100644
 --- a/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/pit_of_saron.cpp
 +++ b/src/server/scripts/Northrend/FrozenHalls/PitOfSaron/pit_of_saron.cpp
 @@ -35,6 +35,97 @@ enum eEvents
@@ -1684,7 +1687,7 @@ index b6c821e..4da3d67 100644
 +                            uiIntroTimer1 = 20000;
 +                            break;
 +                        case 8:
-+                            instance->HandleGameObject(instance->GetData64(GO_HALLS_OF_REFLECT_PORTCULLIS), true);
++                            instance->HandleGameObject(instance->GetData64(GO_HALLS_OF_REFLECTION_PORTCULLIS), true);
 +                            ++uiIntroPhase1;
 +                            uiIntroTimer1 = 25000;
 +                            break;

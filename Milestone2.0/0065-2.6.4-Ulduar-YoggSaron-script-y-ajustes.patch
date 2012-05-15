@@ -1,21 +1,21 @@
-From 058cc08b706c5433ad57c2efcd3145a8da15ca3a Mon Sep 17 00:00:00 2001
+From 4651e690bb7a545a37f69e50c5a0792b2cdb1a5a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
-Date: Mon, 7 May 2012 16:14:11 -0500
+Date: Tue, 15 May 2012 10:18:05 -0500
 Subject: [PATCH 65/93] 2.6.4 Ulduar: YoggSaron script y ajustes
 
 ---
- .../reanemu/2012_05_06_100_world_yoggsaron.sql     |  225 ++
+ .../reanemu/2012_05_06_100_world_yoggsaron.sql     |  236 ++
  src/server/game/Scripting/ScriptLoader.cpp         |    2 +
- .../Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp     | 3240 +++++++++++++++++++-
- 3 files changed, 3460 insertions(+), 7 deletions(-)
+ .../Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp     | 3263 +++++++++++++++++++-
+ 3 files changed, 3481 insertions(+), 20 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2012_05_06_100_world_yoggsaron.sql
 
 diff --git a/sql/updates/world/reanemu/2012_05_06_100_world_yoggsaron.sql b/sql/updates/world/reanemu/2012_05_06_100_world_yoggsaron.sql
 new file mode 100644
-index 0000000..cba81fd
+index 0000000..344f5d9
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_06_100_world_yoggsaron.sql
-@@ -0,0 +1,225 @@
+@@ -0,0 +1,236 @@
 +-- ##########################################################
 +-- Yogg-Saron
 +-- ##########################################################
@@ -27,11 +27,22 @@ index 0000000..cba81fd
 +INSERT INTO `creature` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`) VALUES('603003','33242','603','3','1','0','0','2036.67','-73.2069','411.355','2.36615','300','0','0','14433076','0','0','0','0','0');
 +INSERT INTO `creature` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`) VALUES('603004','33213','603','3','1','0','0','1939.91','-90.005','411.357','0.976747','300','0','0','14433076','0','0','0','0','0');
 +
-+-- General scriptnames and some stuff
++-- Sara Texts
++DELETE FROM `script_texts` WHERE `entry` BETWEEN -1603319 AND -1603310;
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603317','Weak-minded fools!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15780','5','0','0','Sara WHISP_INSANITY');
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603316','Could they have been saved?',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15779','1','0','0','Sara SAY_SLAY_2');
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603315','Powerless to act...',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15778','1','0','0','Sara SAY_SLAY_1');
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603314','Let hatred and rage guide your blows!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15774','1','0','0','Sara SAY_AGGRO_3');
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603313','Yes! YES! Show them no mercy! Give no pause to your attacks!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15773','1','0','0','Sara SAY_AGGRO_2');
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603312','The time to strike at the head of the beast will soon be upon us! Focus your anger and hatred on his minions!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15775','1','0','0','Sara SAY_AGGRO_1');
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603310','Help me! Please get them off me!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15771','1','0','0','Sara SAY_PREFIGHT_1');
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603311','What do you want from me? Leave me alone!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15772','1','0','0','Sara SAY_PREFIGHT_2');
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603318','Suffocate upon your own hate!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15776','1','0','0','Sara SAY_PHASE2_1');
++INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_loc1`, `content_loc2`, `content_loc3`, `content_loc4`, `content_loc5`, `content_loc6`, `content_loc7`, `content_loc8`, `sound`, `type`, `language`, `emote`, `comment`) values('33134','-1603319','Tremble, mortals, before the coming of the end!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15777','1','0','0','Sara SAY_PHASE2_2');
++
++-- Scriptnames and some stuff
 +UPDATE creature_template SET scriptname = 'boss_sara' WHERE entry = 33134;
 +UPDATE script_texts SET npc_entry = 33134 WHERE npc_entry = 33288 AND entry IN (-1603330,-1603331,-1603332,-1603333);
-+UPDATE script_texts SET content_default = "Help me! Please get them off me!" WHERE npc_entry = 33134 AND entry = -1603310;
-+UPDATE script_texts SET content_default = "What do you want from me? Leave me alone!" WHERE npc_entry = 33134 AND entry = -1603311;
 +UPDATE `creature_template` SET `InhabitType`=4 WHERE `entry` = 33134;
 +UPDATE creature_template SET scriptname = 'npc_ominous_cloud' WHERE entry = 33292;
 +UPDATE creature_template SET scriptname = 'npc_guardian_of_yogg_saron' WHERE entry = 33136;
@@ -262,10 +273,10 @@ index f6ef597..7379344 100755
      AddSC_boss_assembly_of_iron();
      AddSC_boss_kologarn();
 diff --git a/src/server/scripts/Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp b/src/server/scripts/Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp
-index 948ca58..d9c44dc 100644
+index 58ba125..e0e5d95 100644
 --- a/src/server/scripts/Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp
 +++ b/src/server/scripts/Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp
-@@ -15,7 +15,7 @@
+@@ -15,30 +15,35 @@
   * with this program. If not, see <http://www.gnu.org/licenses/>.
   */
  
@@ -274,22 +285,48 @@ index 948ca58..d9c44dc 100644
  #include "ulduar.h"
  
  enum Sara
-@@ -41,6 +41,14 @@ enum Sara
-     SPELL_BRAIN_LINK                            = 63802, // Target Self
- };
+ {
++    SAY_SARA_PREFIGHT_1                         = -1603310,
++    SAY_SARA_PREFIGHT_2                         = -1603311,
++    SAY_SARA_AGGRO_1                            = -1603312,
++    SAY_SARA_AGGRO_2                            = -1603313,
++    SAY_SARA_AGGRO_3                            = -1603314,
++    SAY_SARA_SLAY_1                             = -1603315,
++    SAY_SARA_SLAY_2                             = -1603316,
++    WHISP_SARA_INSANITY                         = -1603317,
++    SAY_SARA_PHASE2_1                           = -1603318,
++    SAY_SARA_PHASE2_2                           = -1603319,
++
+     // text
+     YELL_SARA_PREFIGHT                          = 0,
+     YELL_COMBAT_PHASE_1                         = 1,
+     YELL_COMBAT_PHASE_2                         = 2,
+     YELL_SLAY                                   = 3,
++};
  
+-    // Phase 1 spells
+-    SPELL_SARAS_ANGER_1                         = 63147, // Target Entry 33136
+-    SPELL_SARAS_ANGER_2                         = 63744, // Target Entry 33136
+-    SPELL_SARAS_FEVOR_1                         = 63138, // Target Player
+-    SPELL_SARAS_FEVOR_2                         = 63747, // Target Player
+-    SPELL_SARAS_BLESSING_1                      = 63134, // Target Player
+-    SPELL_SARAS_BLESSING_2                      = 63745, // Target Self
+-
+-    // Phase 2 spells
+-    SPELL_PHYCHOSIS                             = 63795, // Target Self
+-    SPELL_MALADY_OF_THE_MIND                    = 63830, // Target Self
+-    SPELL_DEATH_RAY                             = 63891, // Target Self
+-    SPELL_BRAIN_LINK                            = 63802, // Target Self
 +enum KeepersHelpSays
 +{
 +    SAY_FREYA_HELP                              = -1603189,
 +    SAY_MIMIRON_HELP                            = -1603259,
 +    SAY_THORIM_HELP                             = -1603287,
 +    SAY_HODIR_HELP                              = -1603217,
-+};
-+
+ };
+ 
  enum YoggSaron_Yells
- {
-     SAY_PHASE2_1                                = -1603330,
-@@ -50,18 +58,3236 @@ enum YoggSaron_Yells
+@@ -50,18 +55,3236 @@ enum YoggSaron_Yells
      SAY_PHASE2_5                                = -1603334,
      SAY_PHASE3                                  = -1603335,
      SAY_VISION                                  = -1603336,
