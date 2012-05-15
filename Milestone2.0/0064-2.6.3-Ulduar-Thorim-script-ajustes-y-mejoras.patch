@@ -1,18 +1,18 @@
-From 32cdd3d768d2970a506bd87d294193ee352a9a6a Mon Sep 17 00:00:00 2001
+From f5c37530f7488d4328ebf43938ea61fe4ebeeda3 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 7 May 2012 16:10:20 -0500
 Subject: [PATCH 64/93] 2.6.3 Ulduar: Thorim script, ajustes y mejoras
 
 ---
- .../world/reanemu/2012_05_06_100_world_thorim.sql  |   88 ++
+ .../world/reanemu/2012_05_06_100_world_thorim.sql  |  100 ++
  src/server/game/Scripting/ScriptLoader.cpp         |    2 +
  .../Northrend/Ulduar/Ulduar/boss_thorim.cpp        | 1210 +++++++++++++++++++-
- 3 files changed, 1284 insertions(+), 16 deletions(-)
+ 3 files changed, 1296 insertions(+), 16 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2012_05_06_100_world_thorim.sql
 
 diff --git a/sql/updates/world/reanemu/2012_05_06_100_world_thorim.sql b/sql/updates/world/reanemu/2012_05_06_100_world_thorim.sql
 new file mode 100644
-index 0000000..5cc03fc
+index 0000000..d343d9a
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_06_100_world_thorim.sql
 @@ -0,0 +1,100 @@

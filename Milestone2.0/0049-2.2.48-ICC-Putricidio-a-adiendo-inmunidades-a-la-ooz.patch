@@ -1,4 +1,4 @@
-From 1886b62082ead7a819a1b3152c446de8809cf3dc Mon Sep 17 00:00:00 2001
+From 2b345a019e9b723034634c90784b93cc072f834b Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Fri, 4 May 2012 06:02:09 -0500
 Subject: [PATCH 49/93] =?UTF-8?q?2.2.48=20ICC:=20Putricidio=20a=C3=B1adiendo?=
@@ -14,7 +14,7 @@ Content-Transfer-Encoding: 8bit
  2 files changed, 12 insertions(+), 0 deletions(-)
 
 diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
-index 28b089f..7d4f668 100755
+index 48aa40a..f181e8a 100755
 --- a/src/server/game/Spells/Spell.cpp
 +++ b/src/server/game/Spells/Spell.cpp
 @@ -3039,6 +3039,10 @@ void Spell::cancel()

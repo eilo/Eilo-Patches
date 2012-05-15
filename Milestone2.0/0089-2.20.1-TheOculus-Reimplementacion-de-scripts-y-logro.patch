@@ -1,4 +1,4 @@
-From 92e780b99042b5fc7dd43ad389317d6b150166f7 Mon Sep 17 00:00:00 2001
+From f6207a8afe1eaa6f999bc531e1de176f8cafb0ba Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 12:18:08 -0500
 Subject: [PATCH 89/93] 2.20.1 TheOculus: Reimplementacion de scripts y logros
@@ -23,7 +23,7 @@ Subject: [PATCH 89/93] 2.20.1 TheOculus: Reimplementacion de scripts y logros
 
 diff --git a/sql/updates/world/reanemu/2011_12_19_100_world_oculus.sql b/sql/updates/world/reanemu/2011_12_19_100_world_oculus.sql
 new file mode 100644
-index 0000000..b2f1c56
+index 0000000..38fc0d5
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_12_19_100_world_oculus.sql
 @@ -0,0 +1,372 @@
@@ -416,10 +416,10 @@ index 47c298d..9dbbadc 100755
      if (!reward)
          return;
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index 0d28cd2..719b5d6 100755
+index 2e94443..683a0c0 100755
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
-@@ -8004,6 +8004,13 @@ bool Unit::HandleAuraProc(Unit* victim, uint32 damage, Aura* triggeredByAura, Sp
+@@ -8013,6 +8013,13 @@ bool Unit::HandleAuraProc(Unit* victim, uint32 damage, Aura* triggeredByAura, Sp
          case SPELLFAMILY_GENERIC:
              switch (dummySpell->Id)
              {
@@ -433,7 +433,7 @@ index 0d28cd2..719b5d6 100755
                  // Nevermelting Ice Crystal
                  case 71564:
                      RemoveAuraFromStack(71564);
-@@ -8809,6 +8816,13 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
+@@ -8818,6 +8825,13 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
                  return false;
              break;
          }
@@ -447,7 +447,7 @@ index 0d28cd2..719b5d6 100755
          // Deflection
          case 52420:
          {
-@@ -10171,7 +10185,7 @@ Unit* Unit::GetMagicHitRedirectTarget(Unit* victim, SpellInfo const* spellInfo)
+@@ -10180,7 +10194,7 @@ Unit* Unit::GetMagicHitRedirectTarget(Unit* victim, SpellInfo const* spellInfo)
      Unit::AuraEffectList const& magnetAuras = victim->GetAuraEffectsByType(SPELL_AURA_SPELL_MAGNET);
      for (Unit::AuraEffectList::const_iterator itr = magnetAuras.begin(); itr != magnetAuras.end(); ++itr)
      {
@@ -457,10 +457,10 @@ index 0d28cd2..719b5d6 100755
                  && spellInfo->CheckTarget(this, magnet, false) == SPELL_CAST_OK
                  && _IsValidAttackTarget(magnet, spellInfo)
 diff --git a/src/server/game/Spells/Auras/SpellAuraEffects.cpp b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
-index 31a8e57..e0a17df 100755
+index d28ba9e..61ec29b 100755
 --- a/src/server/game/Spells/Auras/SpellAuraEffects.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
-@@ -6056,6 +6056,11 @@ void AuraEffect::HandlePeriodicTriggerSpellAuraTick(Unit* target, Unit* caster)
+@@ -6060,6 +6060,11 @@ void AuraEffect::HandlePeriodicTriggerSpellAuraTick(Unit* target, Unit* caster)
              case 46284:
                  target->CastCustomSpell(triggerSpellId, SPELLVALUE_MAX_TARGETS, m_tickNumber / 10 + 1, NULL, true, NULL, this);
                  return;
@@ -473,7 +473,7 @@ index 31a8e57..e0a17df 100755
              case 28158:
              case 54362:
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index ee02d20..b507880 100755
+index 8029ca5..4634b18 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
 @@ -390,6 +390,12 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
@@ -490,7 +490,7 @@ index ee02d20..b507880 100755
                      case 51963:
                      {
 diff --git a/src/server/game/Spells/SpellInfo.cpp b/src/server/game/Spells/SpellInfo.cpp
-index 4f73b87..148bb86 100644
+index a0d9ff0..6e83a81 100644
 --- a/src/server/game/Spells/SpellInfo.cpp
 +++ b/src/server/game/Spells/SpellInfo.cpp
 @@ -1735,6 +1735,7 @@ AuraStateType SpellInfo::GetAuraState() const

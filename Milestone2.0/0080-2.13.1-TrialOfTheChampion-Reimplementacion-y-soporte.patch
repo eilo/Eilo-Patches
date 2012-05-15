@@ -1,10 +1,10 @@
-From 70dd346d9c2178825cfe427ded4fd959b6981644 Mon Sep 17 00:00:00 2001
+From 85d41a69539eb81f99cee8829b5aa55a2fe81309 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Wed, 2 May 2012 01:03:11 -0500
 Subject: [PATCH 80/93] 2.13.1 TrialOfTheChampion: Reimplementacion y soporte
 
 ---
- .../world/reanemu/2011_12_25_100_world_toc5.sql    |  696 +++++++++
+ .../world/reanemu/2011_12_25_100_world_toc5.sql    |  698 +++++++++
  src/server/game/Spells/SpellEffects.cpp            |   62 +
  src/server/game/Texts/CreatureTextMgr.cpp          |    4 +
  .../TrialOfTheChampion/boss_argent_challenge.cpp   |  769 +++++++---
@@ -13,12 +13,12 @@ Subject: [PATCH 80/93] 2.13.1 TrialOfTheChampion: Reimplementacion y soporte
  .../instance_trial_of_the_champion.cpp             |  420 ++++--
  .../TrialOfTheChampion/trial_of_the_champion.cpp   | 1632 ++++++++++++++++----
  .../TrialOfTheChampion/trial_of_the_champion.h     |  210 +++-
- 9 files changed, 4226 insertions(+), 1375 deletions(-)
+ 9 files changed, 4228 insertions(+), 1375 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2011_12_25_100_world_toc5.sql
 
 diff --git a/sql/updates/world/reanemu/2011_12_25_100_world_toc5.sql b/sql/updates/world/reanemu/2011_12_25_100_world_toc5.sql
 new file mode 100644
-index 0000000..c0e1e36
+index 0000000..17cb74c
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2011_12_25_100_world_toc5.sql
 @@ -0,0 +1,698 @@
@@ -722,10 +722,10 @@ index 0000000..c0e1e36
 +WHERE `entry` IN (36088, 36089, 36085, 36082, 36083, 36090, 36091, 36086, 36084, 36087, 35306, 35308, 35310, 35518, 35517, 35568, 35546, 35717, 35490);
 \ No newline at end of file
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index d3566c2..ee02d20 100755
+index c306da9..8029ca5 100755
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -3806,6 +3806,68 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
+@@ -3827,6 +3827,68 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
                  case 26465:
                      unitTarget->RemoveAuraFromStack(26464);
                      return;

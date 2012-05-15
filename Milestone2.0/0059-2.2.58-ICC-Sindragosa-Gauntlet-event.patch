@@ -1,4 +1,4 @@
-From 970a7214da77e69f7c45b0104b3eb3ed1194a3a4 Mon Sep 17 00:00:00 2001
+From 723f461ef95f53c7c1b6a13ae89b9784929b79c5 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Tue, 8 May 2012 02:52:32 -0300
 Subject: [PATCH 59/93] 2.2.58 ICC: Sindragosa Gauntlet event
@@ -66,7 +66,7 @@ index 0000000..246e150
 +(37502, 0, 1, 0, 0, 0, 100, 30, 10000, 15000, 10000, 20000, 11, 71327, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Webweaver - Cast Web'),
 +(37502, 0, 2, 0, 6, 0, 100, 30, 0, 0, 0, 0, 11, 71203, 2, 0, 0, 0, 0, 18, 50000, 0, 0, 0, 0, 0, 0, 'Nerub\'ar Webweaver - Cast Soul Feast On Death');
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp b/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
-index 7f0c568..46b34de 100644
+index 53d07e3..f83e574 100644
 --- a/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
 @@ -355,6 +355,11 @@ enum EventTypes

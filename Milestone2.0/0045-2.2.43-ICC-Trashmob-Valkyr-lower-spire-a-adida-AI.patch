@@ -1,4 +1,4 @@
-From e30e1f2444583a7878cb97482fb1f0c303d641f0 Mon Sep 17 00:00:00 2001
+From 7fa46757b83727ea8ee3cd64fc2ed1f96f63507a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sat, 10 Mar 2012 21:30:21 -0500
 Subject: [PATCH 45/93] =?UTF-8?q?2.2.43=20ICC:=20Trashmob=20Valkyr=20lower=20?=
@@ -26,7 +26,7 @@ index 0000000..4560fa0
 +UPDATE `creature_template` SET `scriptname`='npc_valkyr_herald' WHERE `entry`=37098;
 +UPDATE `creature_template` SET `scriptname`='npc_severed_essence' WHERE `entry`=38410;
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp b/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
-index 064b675..7f0c568 100644
+index d137d07..53d07e3 100644
 --- a/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/icecrown_citadel.cpp
 @@ -26,6 +26,8 @@

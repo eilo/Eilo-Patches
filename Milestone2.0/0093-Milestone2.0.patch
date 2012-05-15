@@ -1,4 +1,4 @@
-From 6ea47e21f7820c5ee68da77e08bf6f006d6cd8cf Mon Sep 17 00:00:00 2001
+From 409709ad774a8b89c7909d3d5dc93a5979c84607 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 7 May 2012 21:19:58 -0500
 Subject: [PATCH 93/93] Milestone2.0
@@ -8,7 +8,7 @@ Subject: [PATCH 93/93] Milestone2.0
  1 files changed, 87 insertions(+), 0 deletions(-)
 
 diff --git a/README b/README
-index 74aac26..7c75011 100644
+index 905eae4..e7c35c1 100644
 --- a/README
 +++ b/README
 @@ -44,6 +44,9 @@ Milestone0.0: Reiniciando el repo y readaptando cosas varias, inclusion de nuevo
@@ -21,7 +21,7 @@ index 74aac26..7c75011 100644
  
  
  ##################################
-@@ -104,21 +107,105 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
+@@ -105,21 +108,105 @@ Milestone1.0: Jugabilidad en general, adecuaciones de codigo vario en mapas
  ###############################
  # Dungeons e Instances Varias #
  ###############################

@@ -1,11 +1,11 @@
-From fac1e7b6f4269a1cf1cc2eb95d043f533f0d3af0 Mon Sep 17 00:00:00 2001
+From 44fa1e1d1bf9f8bc4a7c5fd5d7a6e40d3d79d551 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 7 May 2012 12:36:51 -0500
 Subject: [PATCH 66/93] 2.6.5 Ulduar: Soporte de scripts, trashmob y varios
 
 ---
  .../reanemu/2012_05_07_100_world_ulduar_intro.sql  |   47 +
- .../reanemu/2012_05_07_100_world_ulduar_trash.sql  | 1308 ++++++++++++++++++++
+ .../reanemu/2012_05_07_100_world_ulduar_trash.sql  | 1312 ++++++++++++++++++++
  .../reanemu/2012_05_07_100_world_ulduar_varios.sql |   62 +
  src/server/game/Scripting/ScriptLoader.cpp         |    2 +
  src/server/scripts/Northrend/CMakeLists.txt        |    1 +
@@ -14,7 +14,7 @@ Subject: [PATCH 66/93] 2.6.5 Ulduar: Soporte de scripts, trashmob y varios
  .../scripts/Northrend/Ulduar/Ulduar/ulduar.cpp     |  918 ++++++++++++++
  .../scripts/Northrend/Ulduar/Ulduar/ulduar.h       |  160 +++-
  .../Northrend/Ulduar/Ulduar/ulduar_teleporter.cpp  |   14 +
- 10 files changed, 2833 insertions(+), 19 deletions(-)
+ 10 files changed, 2837 insertions(+), 19 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2012_05_07_100_world_ulduar_intro.sql
  create mode 100644 sql/updates/world/reanemu/2012_05_07_100_world_ulduar_trash.sql
  create mode 100644 sql/updates/world/reanemu/2012_05_07_100_world_ulduar_varios.sql
@@ -75,7 +75,7 @@ index 0000000..5f7f109
 +('12053585', '34054', '603', '3', '1', '0', '0', '130.321', '-127.606', '410.968', '5.25824', '300', '0', '0', '75600', '0', '0', '0', '0', '0');
 diff --git a/sql/updates/world/reanemu/2012_05_07_100_world_ulduar_trash.sql b/sql/updates/world/reanemu/2012_05_07_100_world_ulduar_trash.sql
 new file mode 100644
-index 0000000..f71183d
+index 0000000..d8c2171
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_07_100_world_ulduar_trash.sql
 @@ -0,0 +1,1312 @@

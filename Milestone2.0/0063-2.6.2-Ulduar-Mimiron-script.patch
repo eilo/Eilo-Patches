@@ -1,17 +1,17 @@
-From ca9dc85ebf0e2db96eccc942c82a60f017c897a5 Mon Sep 17 00:00:00 2001
+From bd4187f9c55d0a2dccf1594078ea53fc91989e66 Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Sun, 6 May 2012 10:28:17 -0500
 Subject: [PATCH 63/93] 2.6.2 Ulduar: Mimiron script
 
 ---
- .../world/reanemu/2012_05_06_100_world_mimiron.sql |  112 +
+ .../world/reanemu/2012_05_06_100_world_mimiron.sql |  129 ++
  .../Northrend/Ulduar/Ulduar/boss_mimiron.cpp       | 2217 +++++++++++++++++++-
- 2 files changed, 2258 insertions(+), 71 deletions(-)
+ 2 files changed, 2275 insertions(+), 71 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2012_05_06_100_world_mimiron.sql
 
 diff --git a/sql/updates/world/reanemu/2012_05_06_100_world_mimiron.sql b/sql/updates/world/reanemu/2012_05_06_100_world_mimiron.sql
 new file mode 100644
-index 0000000..dcde2ae
+index 0000000..1ac2f02
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_06_100_world_mimiron.sql
 @@ -0,0 +1,129 @@
@@ -146,20 +146,20 @@ index 0000000..dcde2ae
 +DELETE FROM `creature_addon` WHERE `guid` between 137621 and 137629;
 \ No newline at end of file
 diff --git a/src/server/scripts/Northrend/Ulduar/Ulduar/boss_mimiron.cpp b/src/server/scripts/Northrend/Ulduar/Ulduar/boss_mimiron.cpp
-index 98b3a6b..a876046 100644
+index 98b3a6b..4dc58e0 100644
 --- a/src/server/scripts/Northrend/Ulduar/Ulduar/boss_mimiron.cpp
 +++ b/src/server/scripts/Northrend/Ulduar/Ulduar/boss_mimiron.cpp
 @@ -15,9 +15,10 @@
   * with this program. If not, see <http://www.gnu.org/licenses/>.
   */
-
+ 
 -#include "ScriptMgr.h"
 -#include "SpellScript.h"
 +#include "ScriptPCH.h"
  #include "ulduar.h"
 +#include "Unit.h"
 +#include "Vehicle.h"
-
+ 
  enum Yells
  {
 @@ -40,81 +41,2155 @@ enum Yells
@@ -169,7 +169,7 @@ index 98b3a6b..a876046 100644
 -    SAY_YS_HELP                                 = -1603259,
 +    SAY_YS_HELP                                 = -1603259
  };
-
+ 
 +#define SAY_TIME_1                              "This zone will be destroyed in 10 minutes!"
 +#define SAY_TIME_2                              "This zone will be destroyed in 9 minutes!"         //soundid 15416  and below
 +#define SAY_TIME_3                              "This zone will be destroyed in 8 minutes!"
@@ -2365,7 +2365,7 @@ index 98b3a6b..a876046 100644
 +            return false;
 +        }
  };
-
+ 
  void AddSC_boss_mimiron()
  {
 -    new spell_ulduar_proximity_mines();
@@ -2387,6 +2387,6 @@ index 98b3a6b..a876046 100644
 +    new npc_frost_bomb();
 +    new achievement_firefighter();
  }
---
+-- 
 1.7.8.msysgit.0
 

@@ -1,18 +1,18 @@
-From 0196b36481a5997af3db75695b9d19fc2c5419d1 Mon Sep 17 00:00:00 2001
+From 058cc08b706c5433ad57c2efcd3145a8da15ca3a Mon Sep 17 00:00:00 2001
 From: Eilo <eilo2518@gmail.com>
 Date: Mon, 7 May 2012 16:14:11 -0500
 Subject: [PATCH 65/93] 2.6.4 Ulduar: YoggSaron script y ajustes
 
 ---
- .../reanemu/2012_05_06_100_world_yoggsaron.sql     |  223 ++
+ .../reanemu/2012_05_06_100_world_yoggsaron.sql     |  225 ++
  src/server/game/Scripting/ScriptLoader.cpp         |    2 +
  .../Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp     | 3240 +++++++++++++++++++-
- 3 files changed, 3458 insertions(+), 7 deletions(-)
+ 3 files changed, 3460 insertions(+), 7 deletions(-)
  create mode 100644 sql/updates/world/reanemu/2012_05_06_100_world_yoggsaron.sql
 
 diff --git a/sql/updates/world/reanemu/2012_05_06_100_world_yoggsaron.sql b/sql/updates/world/reanemu/2012_05_06_100_world_yoggsaron.sql
 new file mode 100644
-index 0000000..3fbf559
+index 0000000..cba81fd
 --- /dev/null
 +++ b/sql/updates/world/reanemu/2012_05_06_100_world_yoggsaron.sql
 @@ -0,0 +1,225 @@
@@ -262,7 +262,7 @@ index f6ef597..7379344 100755
      AddSC_boss_assembly_of_iron();
      AddSC_boss_kologarn();
 diff --git a/src/server/scripts/Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp b/src/server/scripts/Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp
-index 3f01f21..04d1e2a 100644
+index 948ca58..d9c44dc 100644
 --- a/src/server/scripts/Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp
 +++ b/src/server/scripts/Northrend/Ulduar/Ulduar/boss_yoggsaron.cpp
 @@ -15,7 +15,7 @@
@@ -273,9 +273,9 @@ index 3f01f21..04d1e2a 100644
 +#include "ScriptPCH.h"
  #include "ulduar.h"
  
- enum Sara_Yells
-@@ -32,6 +32,14 @@ enum Sara_Yells
-     SAY_SARA_PHASE2_2                           = -1603319,
+ enum Sara
+@@ -41,6 +41,14 @@ enum Sara
+     SPELL_BRAIN_LINK                            = 63802, // Target Self
  };
  
 +enum KeepersHelpSays
@@ -289,7 +289,7 @@ index 3f01f21..04d1e2a 100644
  enum YoggSaron_Yells
  {
      SAY_PHASE2_1                                = -1603330,
-@@ -41,18 +49,3236 @@ enum YoggSaron_Yells
+@@ -50,18 +58,3236 @@ enum YoggSaron_Yells
      SAY_PHASE2_5                                = -1603334,
      SAY_PHASE3                                  = -1603335,
      SAY_VISION                                  = -1603336,
