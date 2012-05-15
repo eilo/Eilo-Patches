@@ -33,7 +33,7 @@ index 0000000..1f0584c
 +UPDATE `creature_template` SET `minlevel`=80  , `maxlevel`=80, `Health_mod`=5 WHERE `entry` IN (30882,31204);
 +UPDATE `creature_template` SET `Health_mod`=15 WHERE `entry` IN (31539,31547);
 +-- Add Script to Trash
-+UPDATE `creature_template` SET `ScriptName` = 'mob_obsidian_sanctum_trash' WHERE `entry` IN (30681,30680,30682,30453);
++UPDATE `creature_template` SET `ScriptName` = 'npc_obsidian_sanctum_trash' WHERE `entry` IN (30681,30680,30682,30453);
 +-- Fix some Immunitys
 +UPDATE `creature_template` SET `mechanic_immune_mask`=650854235 WHERE `entry` IN (30451,31520,28860,31311);
 +-- More Terrible Terrible Damage
@@ -110,9 +110,9 @@ index 0000000..50e4133
 +    SPELL_SHOCKWAVE_H           = 58947
 +};
 +
-+struct trash_obsidian_sanctum_trashAI : public ScriptedAI
++struct npc_obsidian_sanctum_trashAI : public ScriptedAI
 +{
-+    trash_obsidian_sanctum_trashAI(Creature *c) : ScriptedAI(c)
++    npc_obsidian_sanctum_trashAI(Creature *c) : ScriptedAI(c)
 +    {
 +        if(c->GetMap()->IsDungeon())
 +            pInstance = c->GetInstanceScript();
@@ -230,10 +230,10 @@ index 0000000..50e4133
 +    }
 +};
 +
-+class trash_obsidian_sanctum_trash : public CreatureScript
++class npc_obsidian_sanctum_trash : public CreatureScript
 +{
 +public:
-+    trash_obsidian_sanctum_trash() : CreatureScript("trash_obsidian_sanctum_trash") { }
++    npc_obsidian_sanctum_trash() : CreatureScript("npc_obsidian_sanctum_trash") { }
 +
 +    CreatureAI* GetAI(Creature* pCreature) const
 +    {
@@ -247,9 +247,9 @@ index 0000000..50e4133
 +        }
 +    }
 +
-+    struct mob_onyx_blaze_mistressAI: public trash_obsidian_sanctum_trashAI
++    struct mob_onyx_blaze_mistressAI: public npc_obsidian_sanctum_trashAI
 +    {
-+        mob_onyx_blaze_mistressAI(Creature *c) : trash_obsidian_sanctum_trashAI(c) { }
++        mob_onyx_blaze_mistressAI(Creature *c) : npc_obsidian_sanctum_trashAI(c) { }
 +
 +        uint32 ui_Shock_Timer;
 +        uint32 ui_Rain_Timer;
@@ -287,13 +287,13 @@ index 0000000..50e4133
 +            }else ui_FlameOrb_Timer -= diff;
 +
 +
-+            trash_obsidian_sanctum_trashAI::UpdateAI(diff);
++            npc_obsidian_sanctum_trashAI::UpdateAI(diff);
 +        }
 +    };
 +
-+    struct mob_onyx_brood_generalAI: public trash_obsidian_sanctum_trashAI
++    struct mob_onyx_brood_generalAI: public npc_obsidian_sanctum_trashAI
 +    {
-+        mob_onyx_brood_generalAI(Creature *c) : trash_obsidian_sanctum_trashAI(c) { }
++        mob_onyx_brood_generalAI(Creature *c) : npc_obsidian_sanctum_trashAI(c) { }
 +
 +        uint32 ui_Strike_Timer;
 +        uint32 ui_Fury_Timer;
@@ -308,7 +308,7 @@ index 0000000..50e4133
 +
 +        void EnterCombat(Unit *who)
 +        {
-+            trash_obsidian_sanctum_trashAI::EnterCombat(who);
++            npc_obsidian_sanctum_trashAI::EnterCombat(who);
 +
 +            DoCastAOE(RAID_MODE(SPELL_DEVOTION_AURA,SPELL_DEVOTION_AURA_H));
 +        }
@@ -336,13 +336,13 @@ index 0000000..50e4133
 +                    ui_Fury_Timer = urand(15000,25000);
 +            }else ui_Fury_Timer -= diff;
 +
-+            trash_obsidian_sanctum_trashAI::UpdateAI(diff);
++            npc_obsidian_sanctum_trashAI::UpdateAI(diff);
 +        }
 +    };
 +
-+    struct mob_onyx_flight_captainAI: public trash_obsidian_sanctum_trashAI
++    struct mob_onyx_flight_captainAI: public npc_obsidian_sanctum_trashAI
 +    {
-+        mob_onyx_flight_captainAI(Creature *c) : trash_obsidian_sanctum_trashAI(c) { }
++        mob_onyx_flight_captainAI(Creature *c) : npc_obsidian_sanctum_trashAI(c) { }
 +
 +        uint32 ui_HammerDrop_Timer;
 +        uint32 ui_Pummel_Timer;
@@ -355,7 +355,7 @@ index 0000000..50e4133
 +
 +        void EnterCombat(Unit *who)
 +        {
-+            trash_obsidian_sanctum_trashAI::EnterCombat(who);
++            npc_obsidian_sanctum_trashAI::EnterCombat(who);
 +        }
 +
 +        void UpdateAI(const uint32 diff)
@@ -375,13 +375,13 @@ index 0000000..50e4133
 +                    ui_Pummel_Timer =  urand(5000,10000);
 +            }else ui_Pummel_Timer -= diff;
 +
-+            trash_obsidian_sanctum_trashAI::UpdateAI(diff);
++            npc_obsidian_sanctum_trashAI::UpdateAI(diff);
 +        }
 +    };
 +
-+    struct mob_onyx_sanctum_guardianAI: public trash_obsidian_sanctum_trashAI
++    struct mob_onyx_sanctum_guardianAI: public npc_obsidian_sanctum_trashAI
 +    {
-+        mob_onyx_sanctum_guardianAI(Creature *c) : trash_obsidian_sanctum_trashAI(c) { }
++        mob_onyx_sanctum_guardianAI(Creature *c) : npc_obsidian_sanctum_trashAI(c) { }
 +
 +        uint32 ui_Frenzy_Timer;
 +        uint32 ui_Shockwave_Timer;
@@ -394,7 +394,7 @@ index 0000000..50e4133
 +
 +        void EnterCombat(Unit *who)
 +        {
-+            trash_obsidian_sanctum_trashAI::EnterCombat(who);
++            npc_obsidian_sanctum_trashAI::EnterCombat(who);
 +
 +            DoCastAOE(RAID_MODE(SPELL_CURSE_OF_MENDING,SPELL_CURSE_OF_MENDING_H));
 +        }
@@ -416,15 +416,15 @@ index 0000000..50e4133
 +                    ui_Frenzy_Timer =  urand(20000,30000);
 +            }else ui_Frenzy_Timer -= diff;
 +
-+            trash_obsidian_sanctum_trashAI::UpdateAI(diff);
++            npc_obsidian_sanctum_trashAI::UpdateAI(diff);
 +        }
 +    };
 +};
 +
-+// UPDATE creature_template SET scriptname = 'trash_obsidian_sanctum_trash' WHERE entry in (30681,30680,30682,30453);
++// UPDATE creature_template SET scriptname = 'npc_obsidian_sanctum_trash' WHERE entry in (30681,30680,30682,30453);
 +void AddSC_trash_obsidian_sanctum()
 +{
-+    new trash_obsidian_sanctum_trash();
++    new npc_obsidian_sanctum_trash();
 +}
 \ No newline at end of file
 -- 
