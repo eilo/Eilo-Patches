@@ -30,7 +30,7 @@ index 0000000..d343d9a
 +('62042','62470','1','Thorim: Deafening Thunder');
 +
 +-- Charge Orb
-+DELETE FROM conditions WHERE SourceEntry = 62016;
++DELETE FROM conditions WHERE SourceEntry IN (62016,62017);
 +INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES
 +('13','1','62016','0','31','3','33378','0','0','',NULL),
 +('13','1','62017','0','31','3','33378','0','0','',NULL),

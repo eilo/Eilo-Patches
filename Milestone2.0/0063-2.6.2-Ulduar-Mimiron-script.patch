@@ -129,8 +129,8 @@ index 0000000..1ac2f02
 +(13,1,63041,29,34147,3),
 +(13,1,63041,31,4,0),
 +-- only players
-+(13,65040,31,4,0),
-+(13,65346,31,4,0);
++(13,1,65040,31,4,0),
++(13,1,65346,31,4,0);
 +
 +-- not-so-friendly fire
 +DELETE FROM `achievement_criteria_data` WHERE `criteria_id` IN (10405,10406) AND `type`=18;
